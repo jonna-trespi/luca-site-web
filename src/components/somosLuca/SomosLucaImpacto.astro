@@ -1,0 +1,266 @@
+---
+/**
+ * Somos Luca — Impacto: cuatro tarjetas azules; visuales en una sola imagen por tarjeta (rutas mock).
+ */
+const cards = [
+  {
+    title: '#1 en LATAM Top 3 del mundo.',
+    body: 'Reconocida por Google como una de las EdTech más innovadora.',
+    visualSrc: '/images/somosLuca/impacto-1.png',
+    visualW: 437,
+    visualH: 141,
+  },
+  {
+    title: '+20% de mejora en el aprendizaje.',
+    body: 'Impacto académico medido y validado por el Tecnológico de Monterrey.',
+    visualSrc: '/images/somosLuca/impacto-2.png',
+    visualW: 374,
+    visualH: 142,
+  },
+  {
+    title: 'Equipo clase mundial.',
+    body: 'Talento proveniente de Rappi, Uber, Crehana y Netflix.',
+    visualSrc: '/images/somosLuca/impacto-3.png',
+    visualW: 466,
+    visualH: 202,
+  },
+  {
+    title: 'Inversionistas de talla mundial.',
+    body: 'Con el respaldo de fondos de inversión de Dinamarca, Reino Unido y Portugal.',
+    visualSrc: '/images/somosLuca/impacto-4.png',
+    visualW: 388,
+    visualH: 185,
+  },
+] as const;
+---
+
+<section class="somos-luca-impacto" aria-labelledby="somos-luca-impacto-heading">
+  <img
+    class="somos-luca-impacto__deco"
+    src="/images/somosLuca/geo-3.png"
+    alt=""
+    width="250"
+    height="250"
+    loading="lazy"
+    decoding="async"
+    aria-hidden="true"
+  />
+  <div class="somos-luca-impacto__inner layout-container">
+    <header class="somos-luca-impacto__header">
+      <p class="programas__label">
+        <span class="programas__label-dot" aria-hidden="true"></span>
+        Impacto
+      </p>
+      <h2 id="somos-luca-impacto-heading" class="text-h4 somos-luca-impacto__title">
+        Somos expertos en tecnología educativa, pedagogía e innovación digital<span class="somos-luca-impacto__title-dot" aria-hidden="true">.</span>
+      </h2>
+    </header>
+    <ul class="somos-luca-impacto__grid">
+      {cards.map((card, i) => (
+        <li class="somos-luca-impacto__item">
+          <article class="somos-luca-impacto__card">
+            <h3 class="somos-luca-impacto__card-title">{card.title}</h3>
+            <p class="somos-luca-impacto__card-body">{card.body}</p>
+            <div class="somos-luca-impacto__card-visual">
+              <img
+                src={card.visualSrc}
+                alt=""
+                width={card.visualW}
+                height={card.visualH}
+                loading="lazy"
+                decoding="async"
+                class="somos-luca-impacto__card-img"
+                data-impacto-card-visual={String(i + 1)}
+              />
+            </div>
+          </article>
+        </li>
+      ))}
+    </ul>
+  </div>
+</section>
+
+<style>
+  .somos-luca-impacto {
+    position: relative;
+    width: 100%;
+    padding: clamp(3rem, 6vw, 5rem) 0 clamp(3.5rem, 7vw, 5.5rem);
+    background: var(--color-white);
+    overflow: hidden;
+    box-sizing: border-box;
+  }
+
+  .somos-luca-impacto__deco {
+    position: absolute;
+    top: clamp(0.25rem, 2vw, 1.25rem);
+    right: clamp(0.25rem, 3vw, 1.5rem);
+    z-index: 0;
+    display: block;
+    width: min(250px, 42vw);
+    max-width: 250px;
+    height: auto;
+    object-fit: contain;
+    object-position: top right;
+    pointer-events: none;
+    user-select: none;
+  }
+
+  .somos-luca-impacto__inner {
+    position: relative;
+    z-index: 1;
+  }
+
+  .somos-luca-impacto__header {
+    text-align: center;
+    margin-bottom: clamp(2rem, 4vw, 3rem);
+  }
+
+  .somos-luca-impacto__title {
+    margin: 0 auto;
+    max-width: 550px;
+    color: #1d1d1d;
+  }
+
+  .somos-luca-impacto__title-dot {
+    color: var(--color-red);
+  }
+
+  .somos-luca-impacto__grid {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    display: grid;
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+    gap: clamp(1.25rem, 2.5vw, 1.75rem);
+    justify-items: center;
+    align-items: stretch;
+  }
+
+  .somos-luca-impacto__item {
+    width: 100%;
+    max-width: 300px;
+    display: flex;
+    justify-content: center;
+  }
+
+  .somos-luca-impacto__card {
+    position: relative;
+    overflow: hidden;
+    width: 100%;
+    max-width: 300px;
+    margin: 0;
+    padding: 2rem;
+    border-radius: 18px;
+    background-color: var(--color-blue-primary);
+    box-shadow: 0 12px 32px rgba(40, 48, 148, 0.18);
+    display: flex;
+    flex-direction: column;
+    gap: 1.25rem;
+    box-sizing: border-box;
+    text-align: left;
+    color: var(--color-white);
+  }
+
+  .somos-luca-impacto__card::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    border-radius: inherit;
+    background-color: var(--color-blue-secondary);
+    transform: scaleY(0);
+    transform-origin: top center;
+    transition: transform 0.5s cubic-bezier(0.33, 1, 0.68, 1);
+    z-index: 0;
+    pointer-events: none;
+  }
+
+  .somos-luca-impacto__card:hover::before {
+    transform: scaleY(1);
+  }
+
+  .somos-luca-impacto__card > * {
+    position: relative;
+    z-index: 1;
+  }
+
+  .somos-luca-impacto__card-title {
+    margin: 0;
+    font-family: var(--font-family-base);
+    font-weight: 600;
+    font-size: 1.5rem;
+    line-height: 1.25;
+    letter-spacing: 0;
+    color: inherit;
+  }
+
+  .somos-luca-impacto__card-body {
+    margin: 0;
+    font-family: var(--font-family-base);
+    font-weight: 400;
+    font-size: 1.25rem;
+    line-height: 1.4;
+    letter-spacing: 0.01em;
+    color: inherit;
+    opacity: 0.98;
+    flex: 1;
+  }
+
+  .somos-luca-impacto__card-visual {
+    margin-top: auto;
+    padding-top: 0.25rem;
+    min-height: 63px;
+    display: flex;
+    align-items: flex-end;
+    justify-content: flex-start;
+  }
+
+  .somos-luca-impacto__card-img {
+    display: block;
+    max-width: 100%;
+    width: auto;
+    height: auto;
+    object-fit: contain;
+    object-position: left bottom;
+  }
+
+  @media (max-width: 1100px) {
+    .somos-luca-impacto__grid {
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+
+    .somos-luca-impacto__item {
+      max-width: none;
+    }
+
+    .somos-luca-impacto__card {
+      max-width: 300px;
+      margin: 0 auto;
+    }
+  }
+
+  @media (max-width: 600px) {
+    .somos-luca-impacto__grid {
+      grid-template-columns: 1fr;
+    }
+
+    .somos-luca-impacto__card {
+      max-width: 300px;
+      margin: 0 auto;
+      padding: 1.75rem 1.5rem;
+    }
+
+    .somos-luca-impacto__card-title {
+      font-size: 1.375rem;
+    }
+
+    .somos-luca-impacto__card-body {
+      font-size: 1.125rem;
+    }
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .somos-luca-impacto__card::before {
+      transition-duration: 0.01ms;
+    }
+  }
+</style>

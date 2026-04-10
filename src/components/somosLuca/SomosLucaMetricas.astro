@@ -1,0 +1,276 @@
+---
+/**
+ * Somos Luca — Métricas + video YouTube; contadores al estilo Diferencia.
+ * Decoración tras el video: geo-4 (Somos Luca), max-width 250px.
+ */
+const youtubeId = 'Lcnl41Xy5Qg';
+const youtubeEmbedUrl = `https://www.youtube.com/embed/${youtubeId}?rel=0`;
+
+const stats = [
+  {
+    target: 8000,
+    suffix: '',
+    formatDots: true,
+    showPlus: true,
+    label: 'Dinámicas y recursos interactivos',
+  },
+  {
+    target: 250,
+    suffix: 'mil',
+    formatDots: false,
+    showPlus: true,
+    label: 'Accesos de alumnos a la plataforma cada mes',
+  },
+  {
+    target: 33,
+    suffix: '%',
+    formatDots: false,
+    showPlus: false,
+    label: 'Aumento de matrícula',
+  },
+] as const;
+---
+
+<section class="somos-luca-metricas" aria-label="Métricas y video">
+  <div class="somos-luca-metricas__inner layout-container">
+    <ul class="somos-luca-metricas__stats" id="somos-luca-metricas-stats">
+      {stats.map((stat) => (
+        <li class="somos-luca-metricas__stat">
+          <span class="somos-luca-metricas__stat-value">
+            <span class="somos-luca-metricas__value-wrap">
+              {stat.showPlus ? (
+                <span class="somos-luca-metricas__plus" aria-hidden="true">
+                  +
+                </span>
+              ) : null}
+              <span
+                class="somos-luca-metricas__num"
+                data-somos-metrica-counter
+                data-target={String(stat.target)}
+                data-suffix={stat.suffix}
+                {...(stat.formatDots ? { 'data-format-dots': '1' } : {})}
+              >
+                0{stat.suffix}
+              </span>
+            </span>
+          </span>
+          <span class="somos-luca-metricas__stat-label">{stat.label}</span>
+        </li>
+      ))}
+    </ul>
+
+    <div class="somos-luca-metricas__video-block">
+      <img
+        class="somos-luca-metricas__video-deco"
+        src="/images/somosLuca/geo-4.png"
+        alt=""
+        width="530"
+        height="480"
+        loading="lazy"
+        decoding="async"
+        aria-hidden="true"
+        data-somos-metricas-deco
+      />
+      <div class="somos-luca-metricas__video-shell">
+        <iframe
+          class="somos-luca-metricas__iframe"
+          src={youtubeEmbedUrl}
+          title="Video Luca en YouTube"
+          allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+          allowfullscreen
+          loading="lazy"
+        ></iframe>
+      </div>
+    </div>
+  </div>
+</section>
+
+<script>
+  (function () {
+    const root = document.getElementById('somos-luca-metricas-stats');
+    if (!root) return;
+
+    const counters = root.querySelectorAll<HTMLElement>('[data-somos-metrica-counter]');
+    if (!counters.length) return;
+
+    const reduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+    const durationMs = 1400;
+
+    function formatDots(n: number) {
+      return String(Math.round(n)).replace(/\B(?=(\d{3})+(?!\d))/g, '.');
+    }
+
+    function display(el: HTMLElement, value: number) {
+      const suffix = el.dataset.suffix ?? '';
+      const useDots = el.dataset.formatDots === '1';
+      const body = useDots ? formatDots(value) : String(Math.round(value));
+      el.textContent = body + suffix;
+    }
+
+    function setFinal(el: HTMLElement) {
+      const target = Number(el.dataset.target);
+      if (Number.isNaN(target)) return;
+      display(el, target);
+    }
+
+    function runCounter(el: HTMLElement) {
+      if (el.dataset.somosMetricaAnimated === '1') return;
+      el.dataset.somosMetricaAnimated = '1';
+
+      const target = Number(el.dataset.target);
+      if (Number.isNaN(target)) return;
+
+      if (reduced) {
+        setFinal(el);
+        return;
+      }
+
+      const start = performance.now();
+
+      function frame(now: number) {
+        const t = Math.min(1, (now - start) / durationMs);
+        const eased = 1 - Math.pow(1 - t, 3);
+        const current = eased * target;
+        display(el, current);
+        if (t < 1) {
+          requestAnimationFrame(frame);
+        } else {
+          setFinal(el);
+        }
+      }
+
+      requestAnimationFrame(frame);
+    }
+
+    const obs = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((entry) => {
+          if (!entry.isIntersecting) return;
+          counters.forEach((el) => runCounter(el));
+          obs.disconnect();
+        });
+      },
+      { threshold: 0.2, rootMargin: '0px 0px -40px 0px' }
+    );
+
+    obs.observe(root);
+  })();
+</script>
+
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Roboto:wght@600&display=swap');
+
+  .somos-luca-metricas {
+    width: 100%;
+    padding: clamp(2.5rem, 5vw, 4rem) 0 clamp(3rem, 6vw, 5rem);
+    background: var(--color-white);
+    box-sizing: border-box;
+  }
+
+  .somos-luca-metricas__stats {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 1.75rem;
+  }
+
+  .somos-luca-metricas__stat {
+    text-align: center;
+  }
+
+  .somos-luca-metricas__stat-value {
+    display: block;
+    font-family: 'Roboto', sans-serif;
+    font-weight: 600;
+    font-size: clamp(2.75rem, 10vw, 5.5rem);
+    line-height: 1;
+    color: var(--color-text-base);
+  }
+
+  .somos-luca-metricas__value-wrap {
+    display: inline-flex;
+    align-items: baseline;
+    justify-content: center;
+    flex-wrap: wrap;
+    gap: 0;
+  }
+
+  .somos-luca-metricas__plus {
+    color: var(--color-blue-primary);
+    margin-right: 0.02em;
+  }
+
+  .somos-luca-metricas__num {
+    color: inherit;
+  }
+
+  .somos-luca-metricas__stat-label {
+    display: block;
+    margin: 1rem auto 0;
+    max-width: min(20rem, 92vw);
+    font-family: var(--font-family-base);
+    font-size: 1.25rem;
+    font-weight: var(--text-subtitle-2-weight);
+    letter-spacing: var(--text-subtitle-2-spacing);
+    line-height: 1.4;
+    color: #3d3d3d;
+    text-align: center;
+  }
+
+  .somos-luca-metricas__video-block {
+    position: relative;
+    margin: clamp(2.5rem, 5vw, 4rem) auto 0;
+    max-width: min(920px, 100%);
+    padding: 0;
+  }
+
+  .somos-luca-metricas__video-deco {
+    position: absolute;
+    right: -4%;
+    bottom: -8%;
+    width: min(250px, 42vw);
+    max-width: 250px;
+    height: auto;
+    z-index: 0;
+    pointer-events: none;
+    object-fit: contain;
+    opacity: 0.95;
+  }
+
+  .somos-luca-metricas__video-shell {
+    position: relative;
+    z-index: 1;
+    border-radius: 24px;
+    overflow: hidden;
+    box-shadow: 0 20px 48px rgba(40, 48, 148, 0.15);
+    aspect-ratio: 16 / 9;
+    background: #1a1a2e;
+  }
+
+  .somos-luca-metricas__iframe {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    border: none;
+  }
+
+  @media (min-width: 640px) {
+    .somos-luca-metricas__stats {
+      grid-template-columns: repeat(3, 1fr);
+      gap: 1.25rem 1.5rem;
+    }
+  }
+
+  @media (max-width: 639px) {
+    .somos-luca-metricas__video-deco {
+      right: -6%;
+      bottom: -6%;
+      width: min(250px, 48vw);
+      max-width: 250px;
+      opacity: 0.85;
+    }
+  }
+</style>

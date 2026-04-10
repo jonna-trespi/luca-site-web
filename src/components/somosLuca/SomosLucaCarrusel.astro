@@ -1,0 +1,135 @@
+---
+/**
+ * Somos Luca — Carrusel full-bleed, desplazamiento automático (marquee), solapado sobre prefooter.
+ */
+const slides = [
+  { src: '/images/somosLuca/carrusel-1.webp', width: 1142, height: 1284 },
+  { src: '/images/somosLuca/carrusel-2.webp', width: 878, height: 768 },
+  { src: '/images/somosLuca/carrusel-3.webp', width: 565, height: 714 },
+  { src: '/images/somosLuca/carrusel-4.webp', width: 878, height: 638 },
+  { src: '/images/somosLuca/carrusel-5.webp', width: 878, height: 638 },
+] as const;
+---
+
+<section
+  class="somos-luca-carrusel"
+  aria-label="Carrusel de fotos del equipo y eventos Luca"
+>
+  <div class="somos-luca-carrusel__viewport">
+    <div class="somos-luca-carrusel__track">
+      <div class="somos-luca-carrusel__group">
+        {slides.map((slide) => (
+          <div
+            class="somos-luca-carrusel__slide"
+            style={`--slide-ar: ${slide.width} / ${slide.height}`}
+          >
+            <img
+              class="somos-luca-carrusel__img"
+              src={slide.src}
+              alt=""
+              width={slide.width}
+              height={slide.height}
+              loading="lazy"
+              decoding="async"
+            />
+          </div>
+        ))}
+      </div>
+      <div class="somos-luca-carrusel__group" aria-hidden="true">
+        {slides.map((slide) => (
+          <div
+            class="somos-luca-carrusel__slide"
+            style={`--slide-ar: ${slide.width} / ${slide.height}`}
+          >
+            <img
+              class="somos-luca-carrusel__img"
+              src={slide.src}
+              alt=""
+              width={slide.width}
+              height={slide.height}
+              loading="lazy"
+              decoding="async"
+            />
+          </div>
+        ))}
+      </div>
+    </div>
+  </div>
+</section>
+
+<style>
+  .somos-luca-carrusel {
+    position: relative;
+    z-index: 3;
+    width: 100%;
+    margin-bottom: clamp(-4.5rem, -10vw, -7.5rem);
+    padding-top: clamp(1.5rem, 3vw, 2.5rem);
+    padding-bottom: clamp(2.5rem, 5vw, 3.5rem);
+    background-color: #ffffff;
+    box-sizing: border-box;
+    overflow: hidden;
+  }
+
+  .somos-luca-carrusel__viewport {
+    width: 100%;
+    overflow: hidden;
+  }
+
+  .somos-luca-carrusel__track {
+    display: flex;
+    width: max-content;
+    animation: somos-luca-carrusel-marquee 55s linear infinite;
+    will-change: transform;
+  }
+
+  .somos-luca-carrusel__group {
+    display: flex;
+    flex-shrink: 0;
+    align-items: center;
+    gap: clamp(0.75rem, 2vw, 1.25rem);
+    padding-inline: clamp(0.5rem, 1.5vw, 0.75rem);
+  }
+
+  .somos-luca-carrusel__slide {
+    flex-shrink: 0;
+    height: clamp(200px, 28vw, 300px);
+    aspect-ratio: var(--slide-ar);
+    max-width: min(480px, 78vw);
+    border-radius: 28px;
+    overflow: hidden;
+    box-shadow: 0 16px 40px rgba(40, 48, 148, 0.14);
+  }
+
+  .somos-luca-carrusel__img {
+    display: block;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    object-position: center;
+  }
+
+  @keyframes somos-luca-carrusel-marquee {
+    from {
+      transform: translateX(0);
+    }
+    to {
+      transform: translateX(-50%);
+    }
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .somos-luca-carrusel__viewport {
+      overflow-x: auto;
+      -webkit-overflow-scrolling: touch;
+    }
+
+    .somos-luca-carrusel__track {
+      animation: none;
+      padding-bottom: 0.5rem;
+    }
+
+    .somos-luca-carrusel__group[aria-hidden='true'] {
+      display: none;
+    }
+  }
+</style>

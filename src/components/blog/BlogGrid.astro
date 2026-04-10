@@ -1,0 +1,144 @@
+---
+import type { BlogPost } from '../../lib/blog';
+import BlogCard from './BlogCard.astro';
+
+interface Props {
+  posts: BlogPost[];
+}
+
+const { posts } = Astro.props;
+---
+
+<section class="blog-grid-section" aria-label="Artículos del blog">
+  <div class="blog-grid__inner layout-container">
+    <p class="blog-grid__count text-body-secondary" aria-live="polite">
+      <span data-blog-result-count>{posts.length}</span> artículos
+    </p>
+    <ul class="blog-grid" data-blog-grid>
+      {
+        posts.map((post) => (
+          <li class="blog-grid__item">
+            <BlogCard post={post} />
+          </li>
+        ))
+      }
+    </ul>
+  </div>
+</section>
+
+<script is:inline>
+  (function () {
+    function applyFilters() {
+      var grid = document.querySelector('[data-blog-grid]');
+      var toolbar = document.querySelector('[data-blog-toolbar]');
+      if (!grid || !toolbar) return;
+
+      var searchEl = toolbar.querySelector('[data-blog-search]');
+      var term = ((searchEl && searchEl.value) || '').toLowerCase().trim();
+      var activeChip = toolbar.querySelector('.blog-toolbar__chip--active');
+      var cat = activeChip ? activeChip.getAttribute('data-blog-category') || '__all__' : '__all__';
+
+      var visible = 0;
+      grid.querySelectorAll('[data-blog-card]').forEach(function (card) {
+        var cardCat = card.getAttribute('data-blog-category') || '';
+        var okCat = cat === '__all__' || cardCat === cat;
+        var titleEl = card.querySelector('[data-blog-card-title]');
+        var sumEl = card.querySelector('[data-blog-card-summary]');
+        var blob =
+          ((titleEl && titleEl.textContent) || '') + ' ' + ((sumEl && sumEl.textContent) || '');
+        var okSearch = !term || blob.toLowerCase().indexOf(term) !== -1;
+        var show = okCat && okSearch;
+        var cell = card.closest('.blog-grid__item');
+        if (cell) cell.hidden = !show;
+        else card.hidden = !show;
+        if (show) visible += 1;
+      });
+
+      var countEl = document.querySelector('[data-blog-result-count]');
+      if (countEl) countEl.textContent = String(visible);
+    }
+
+    function bind() {
+      var toolbar = document.querySelector('[data-blog-toolbar]');
+      var grid = document.querySelector('[data-blog-grid]');
+      if (!toolbar || !grid) return;
+      if (grid.getAttribute('data-blog-filters-bound') === '1') return;
+      grid.setAttribute('data-blog-filters-bound', '1');
+
+      toolbar.querySelectorAll('[data-blog-category]').forEach(function (btn) {
+        btn.addEventListener('click', function () {
+          toolbar.querySelectorAll('[data-blog-category]').forEach(function (b) {
+            var on = b === btn;
+            b.classList.toggle('blog-toolbar__chip--active', on);
+            b.setAttribute('aria-pressed', on ? 'true' : 'false');
+          });
+          applyFilters();
+        });
+      });
+
+      var searchEl = toolbar.querySelector('[data-blog-search]');
+      if (searchEl) {
+        searchEl.addEventListener('input', applyFilters);
+        searchEl.addEventListener('search', applyFilters);
+      }
+      applyFilters();
+    }
+
+    if (document.readyState === 'loading') document.addEventListener('DOMContentLoaded', bind);
+    else bind();
+    document.addEventListener('astro:page-load', bind);
+  })();
+</script>
+
+<style>
+  .blog-grid-section {
+    width: 100%;
+    background-color: #ffffff;
+    padding: 0 0 clamp(2.5rem, 6vw, 4rem);
+    box-sizing: border-box;
+  }
+
+  .blog-grid__inner.layout-container {
+    max-width: 1100px;
+    margin-left: auto;
+    margin-right: auto;
+    padding-left: var(--layout-padding-x);
+    padding-right: var(--layout-padding-x);
+  }
+
+  @media (min-width: 1920px) {
+    .blog-grid__inner.layout-container {
+      max-width: 1400px;
+    }
+  }
+
+  .blog-grid__count {
+    margin: 0 0 1.25rem;
+    color: #6b7280;
+  }
+
+  .blog-grid {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 64px 24px;
+  }
+
+  @media (min-width: 600px) {
+    .blog-grid {
+      grid-template-columns: repeat(2, 1fr);
+    }
+  }
+
+  @media (min-width: 900px) {
+    .blog-grid {
+      grid-template-columns: repeat(3, 1fr);
+    }
+  }
+
+  .blog-grid__item {
+    min-width: 0;
+  }
+</style>

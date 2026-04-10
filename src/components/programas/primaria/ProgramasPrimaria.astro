@@ -1,0 +1,517 @@
+---
+/**
+ * Programas (Primaria): misma estructura, diagramación y responsive que ProgramasPreescolar.
+ */
+const DEFAULT_TAB = 'matematicas';
+
+const tabPanels = [
+  {
+    id: 'matematicas',
+    label: 'Matemáticas',
+    book: {
+      src: '/images/programas/primaria/book-1.webp',
+      alt: 'Libro de matemáticas Universo Luca',
+      width: 892,
+      height: 822,
+    },
+    paragraphsHtml: [
+      'En Luca, las <strong class="text-body-primary text-body-primary--highlight">matemáticas</strong> convierten el aprendizaje en una experiencia dinámica, guiada y efectiva.',
+      'El <strong class="text-body-primary text-body-primary--highlight">método Singapur</strong>, junto con las <strong class="text-body-primary text-body-primary--highlight">series Nova Fibonacci e Internacional</strong>, integra materiales impresos, manipulativos y un ecosistema digital para fortalecer la comprensión profunda y la resolución de problemas desde el aula.',
+    ],
+  },
+  {
+    id: 'lenguajes',
+    label: 'Lenguajes',
+    book: {
+      src: '/images/programas/primaria/book-2.webp',
+      alt: 'Libro de lenguajes Universo Luca',
+      width: 904,
+      height: 806,
+    },
+    paragraphsHtml: [
+      '<strong class="text-body-primary text-body-primary--highlight">Lenguajes</strong> en Luca fortalece la comunicación, comprensión y expresión a partir de experiencias cercanas a la vida del estudiante.',
+      'Con la <strong class="text-body-primary text-body-primary--highlight">serie NOVA</strong>, libros de lectura y trazos, videolecciones y actividades interactivas, impulsa habilidades lingüísticas clave.',
+    ],
+  },
+  {
+    id: 'ingles',
+    label: 'Inglés',
+    book: {
+      src: '/images/programas/primaria/book-3.webp',
+      alt: 'Libro de inglés Thrive Series',
+      width: 794,
+      height: 736,
+    },
+    paragraphsHtml: [
+      'Nuestra propuesta de <strong class="text-body-primary text-body-primary--highlight">inglés</strong> impulsa resultados académicos y habilidades para el mundo real.',
+      'Con <strong class="text-body-primary text-body-primary--highlight">Astra y Thrive</strong>, en rutas flexibles de 3 a 10 horas semanales, los alumnos desarrollan las 4 habilidades del idioma de forma integral, como una experiencia dinámica, inmersiva y práctica.',
+    ],
+  },
+  {
+    id: 'ciencias',
+    label: 'Ciencias',
+    book: {
+      src: '/images/programas/primaria/book-4.webp',
+      alt: 'Libro de ciencias Universo Luca',
+      width: 834,
+      height: 772,
+    },
+    paragraphsHtml: [
+      'La propuesta de <strong class="text-body-primary text-body-primary--highlight">Ciencias</strong> despierta la curiosidad y facilita la comprensión de la vida desde una mirada científica, combinando contenido alineado al currículo, metodología ágil, videolecciones y actividades interactivas para un aprendizaje claro, guiado y significativo.',
+    ],
+  },
+  {
+    id: 'etica',
+    label: 'Ética, Naturaleza y Sociedades',
+    book: {
+      src: '/images/programas/primaria/book-5.webp',
+      alt: 'Libro Ética, naturaleza y sociedad NOVA',
+      width: 882,
+      height: 802,
+    },
+    paragraphsHtml: [
+      'A través de una propuesta que integra valores, pensamiento crítico y comprensión del mundo actual, Luca ofrece una perspectiva fresca de la <strong class="text-body-primary text-body-primary--highlight">tecnología educativa para fortalecer el aprendizaje ético</strong>, profundo y conectado con la realidad.',
+    ],
+  },
+  {
+    id: 'humano',
+    label: 'De lo humano y lo comunitario',
+    book: {
+      src: '/images/programas/primaria/book-6.webp',
+      alt: 'Libro de lo humano y lo comunitario NOVA',
+      width: 750,
+      height: 696,
+    },
+    paragraphsHtml: [
+      'Luca lleva el <strong class="text-body-primary text-body-primary--highlight">aprendizaje del aula a la vida</strong>, al promover valores éticos y comunitarios, con materiales que guían paso a paso, además de actividades digitales para desarrollar autonomía, colaboración y sentido de comunidad.',
+    ],
+  },
+];
+---
+
+<section class="programas-primaria" data-programas-primaria>
+  <div class="programas-primaria__inner layout-container">
+    <header class="programas-primaria__header">
+      <p class="programas__label">
+        <span class="programas__label-dot" aria-hidden="true"></span>
+        Programas de 1o. a 6o
+      </p>
+      <h3 class="programas-primaria__title text-h3">
+        Innovación educativa para primaria<span class="programas-primaria__title-dot">.</span>
+      </h3>
+      <p class="programas-primaria__intro text-subtitle-2">
+        Todo lo que necesitas para hacer del <strong class="programas-primaria__intro-strong">aprendizaje algo extraordinario</strong>, cubriendo todos los campos formativos.
+      </p>
+    </header>
+
+    <div class="programas-primaria__tabs-wrap">
+      <nav class="programas-primaria__tabs" role="tablist" aria-label="Materias de primaria">
+        {tabPanels.map((panel) => (
+          <button
+            type="button"
+            role="tab"
+            id={`programas-tab-${panel.id}`}
+            class={`btn-base btn-cta-animated programas-primaria__tab ${panel.id === DEFAULT_TAB ? 'btn-primary programas-primaria__tab--active' : ''}`}
+            data-tab={panel.id}
+            aria-selected={panel.id === DEFAULT_TAB}
+            aria-controls={`programas-panel-${panel.id}`}
+            tabindex={panel.id === DEFAULT_TAB ? 0 : -1}
+          >
+            <span class="programas-primaria__tab-label">{panel.label}</span>
+          </button>
+        ))}
+      </nav>
+    </div>
+
+    <div class="programas-primaria__panels">
+      {tabPanels.map((panel) => (
+        <div
+          class="programas-primaria__cards programas-primaria__panel"
+          id={`programas-panel-${panel.id}`}
+          data-panel={panel.id}
+          role="tabpanel"
+          aria-labelledby={`programas-tab-${panel.id}`}
+          hidden={panel.id !== DEFAULT_TAB}
+        >
+          <div class="programas-primaria__card programas-primaria__card--showcase">
+            <img
+              class="programas-primaria__card-geo"
+              src="/images/programas/primaria/geo-4.png"
+              alt=""
+              width="510"
+              height="456"
+              loading="lazy"
+              decoding="async"
+              aria-hidden="true"
+            />
+            <img
+              class="programas-primaria__card-books"
+              src={panel.book.src}
+              alt={panel.book.alt}
+              width={panel.book.width}
+              height={panel.book.height}
+              loading={panel.id === DEFAULT_TAB ? 'eager' : 'lazy'}
+              decoding="async"
+            />
+            <img
+              class="programas-primaria__card-mascot"
+              src="/images/programas/primaria/bot-programas.png"
+              alt="Luca, asistente educativo"
+              width="410"
+              height="410"
+              loading="lazy"
+              decoding="async"
+            />
+          </div>
+          <div class="programas-primaria__card programas-primaria__card--materials">
+            {panel.paragraphsHtml.map((html) => (
+              <p class="text-body-primary programas-primaria__card-text" set:html={html} />
+            ))}
+          </div>
+        </div>
+      ))}
+    </div>
+  </div>
+</section>
+
+<script is:inline>
+  (function () {
+    function activateTab(/** @type {HTMLElement} */ root, /** @type {string} */ tabId) {
+      root.querySelectorAll('[data-tab]').forEach((/** @type {Element} */ btn) => {
+        const el = /** @type {HTMLElement} */ (btn);
+        const isOn = el.dataset.tab === tabId;
+        el.classList.toggle('btn-primary', isOn);
+        el.classList.toggle('programas-primaria__tab--active', isOn);
+        el.setAttribute('aria-selected', String(isOn));
+        el.tabIndex = isOn ? 0 : -1;
+      });
+
+      root.querySelectorAll('[data-panel]').forEach((/** @type {Element} */ panel) => {
+        const el = /** @type {HTMLElement} */ (panel);
+        const isOn = el.dataset.panel === tabId;
+        el.hidden = !isOn;
+      });
+    }
+
+    function init() {
+      const root = document.querySelector('[data-programas-primaria]');
+      if (!(root instanceof HTMLElement)) return;
+      if (root.dataset.programasTabsBound === 'true') return;
+      root.dataset.programasTabsBound = 'true';
+
+      root.addEventListener('click', (e) => {
+        const t = e.target;
+        if (!(t instanceof Element)) return;
+        const btn = t.closest('[data-tab]');
+        if (!(btn instanceof HTMLElement) || !root.contains(btn)) return;
+        const id = btn.dataset.tab;
+        if (!id) return;
+        activateTab(root, id);
+      });
+    }
+
+    if (document.readyState === 'loading') {
+      document.addEventListener('DOMContentLoaded', init);
+    } else {
+      init();
+    }
+
+    document.addEventListener('astro:page-load', init);
+  })();
+</script>
+
+<style>
+  .programas-primaria {
+    width: 100%;
+    background-color: var(--color-bg-base);
+    padding: 1.75rem 0 2rem;
+    overflow-x: clip;
+    box-sizing: border-box;
+  }
+
+  .programas-primaria__inner {
+    width: 100%;
+    max-width: var(--layout-max-width);
+    margin-left: auto;
+    margin-right: auto;
+    padding-left: var(--layout-padding-x);
+    padding-right: var(--layout-padding-x);
+  }
+
+  .programas-primaria__header {
+    margin-bottom: 0;
+    text-align: left;
+  }
+
+  .programas-primaria__header .programas__label {
+    justify-content: flex-start;
+    margin-bottom: clamp(1rem, 3vw, 26px);
+  }
+
+  .programas-primaria__title {
+    max-width: 550px;
+    margin: 0 0 clamp(1.25rem, 4vw, 36px);
+    color: var(--color-text-base);
+  }
+
+  .programas-primaria__title-dot {
+    color: var(--color-red);
+  }
+
+  .programas-primaria__intro {
+    max-width: 550px;
+    margin: 0 0 clamp(2rem, 6vw, 64px);
+    color: var(--color-text-base);
+  }
+
+  .programas-primaria__intro-strong {
+    font-weight: 700;
+  }
+
+  .programas-primaria__tabs-wrap {
+    margin-bottom: 1.5rem;
+    overflow-x: auto;
+    -webkit-overflow-scrolling: touch;
+    padding-bottom: 0.5rem;
+    display: flex;
+    justify-content: center;
+  }
+
+  .programas-primaria__tabs {
+    display: flex;
+    flex-wrap: nowrap;
+    align-items: stretch;
+    gap: 11px;
+    min-width: min-content;
+    justify-content: center;
+  }
+
+  /*
+   * Mismo comportamiento que Hero CTA: .btn-base.btn-primary.btn-cta-animated
+   * Tab activa = primario; inactiva = #D2E6FF
+   */
+  .programas-primaria__tab.btn-base {
+    box-sizing: border-box;
+    max-width: 200px;
+    min-width: 0;
+    flex: 0 1 auto;
+    padding: 8px 12px;
+    border-radius: 10px;
+    font-weight: var(--text-body-primary-weight);
+    font-size: var(--text-body-primary-size);
+    letter-spacing: var(--text-body-primary-spacing);
+    line-height: 1.25;
+    white-space: normal;
+    border: 2px solid transparent;
+    gap: 0.5rem;
+    text-align: center;
+  }
+
+  .programas-primaria__tab-label {
+    display: block;
+    max-width: 100%;
+    text-align: center;
+    overflow-wrap: break-word;
+    word-wrap: break-word;
+  }
+
+  .programas-primaria__tab.btn-base:not(.btn-primary) {
+    background-color: #d2e6ff;
+    color: var(--color-black);
+    background-image: none;
+  }
+
+  .programas-primaria__tab.btn-base:not(.btn-primary):hover {
+    background-image: linear-gradient(to right, var(--color-blue-primary) 50%, var(--color-blue-secondary) 50%);
+    background-size: 200% 100%;
+    background-position: right bottom;
+    color: #ffffff;
+    box-shadow: 0 4px 12px rgba(40, 48, 148, 0.25);
+  }
+
+  .programas-primaria__panels {
+    width: 100%;
+  }
+
+  .programas-primaria__panel[hidden] {
+    display: none !important;
+  }
+
+  .programas-primaria__cards {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 24px;
+    width: 100%;
+    max-width: 1100px;
+    margin-left: auto;
+    margin-right: auto;
+  }
+
+  .programas-primaria__card {
+    border-radius: 24px;
+    padding: 1.5rem;
+    min-height: 200px;
+  }
+
+  .programas-primaria__card--showcase {
+    position: relative;
+    background-color: #fff8ea;
+    overflow: visible;
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+    min-height: 220px;
+  }
+
+  .programas-primaria__card-geo {
+    position: absolute;
+    right: 0;
+    bottom: 0;
+    max-width: 250px;
+    width: min(250px, 58vw);
+    height: auto;
+    display: block;
+    pointer-events: none;
+    user-select: none;
+    z-index: 0;
+  }
+
+  .programas-primaria__card-books {
+    position: relative;
+    z-index: 1;
+    width: 100%;
+    max-width: 220px;
+    height: auto;
+    display: block;
+    border-radius: 12px;
+    object-fit: contain;
+  }
+
+  .programas-primaria__card-mascot {
+    position: absolute;
+    right: max(-4%, -1rem);
+    bottom: max(-10%, -1.5rem);
+    max-width: 168px;
+    width: min(168px, 44vw);
+    height: auto;
+    display: block;
+    object-fit: contain;
+    z-index: 2;
+    pointer-events: none;
+  }
+
+  .programas-primaria__card--materials {
+    max-width: 430px;
+    width: 100%;
+    background-color: #f5f5f5;
+  }
+
+  .programas-primaria__card-text {
+    margin: 0;
+    color: var(--color-text-base);
+    text-align: left;
+  }
+
+  .programas-primaria__card-text + .programas-primaria__card-text {
+    margin-top: 1.25rem;
+  }
+
+  @media (max-width: 767px) {
+    .programas-primaria__tabs-wrap {
+      overflow-x: visible;
+      padding-bottom: 0;
+      justify-content: stretch;
+      width: 100%;
+    }
+
+    .programas-primaria__tabs {
+      flex-direction: column;
+      flex-wrap: nowrap;
+      align-items: stretch;
+      justify-content: flex-start;
+      width: 100%;
+      max-width: 100%;
+      min-width: 0;
+      gap: 10px;
+    }
+
+    .programas-primaria__tab.btn-base {
+      width: 100%;
+      max-width: 100%;
+      white-space: normal;
+      text-align: center;
+      justify-content: center;
+    }
+  }
+
+  @media (min-width: 768px) {
+    .programas-primaria {
+      padding: 2.5rem 0 2.75rem;
+    }
+
+    .programas-primaria__tabs-wrap {
+      overflow-x: visible;
+      margin-bottom: 1.75rem;
+    }
+
+    .programas-primaria__tabs {
+      flex-direction: row;
+      flex-wrap: wrap;
+      align-items: stretch;
+      justify-content: flex-start;
+    }
+
+    .programas-primaria__card {
+      padding: 1.75rem;
+      min-height: 220px;
+    }
+
+    .programas-primaria__card--showcase {
+      min-height: 248px;
+    }
+
+    .programas-primaria__card-mascot {
+      right: -5%;
+      bottom: -12%;
+    }
+  }
+
+  @media (min-width: 900px) {
+    .programas-primaria__cards {
+      grid-template-columns: minmax(0, 1fr) minmax(0, 430px);
+      gap: clamp(1rem, 2vw, 24px);
+    }
+
+    .programas-primaria__card {
+      padding: 2rem;
+      min-height: 240px;
+    }
+
+    .programas-primaria__card--showcase {
+      min-height: 260px;
+    }
+
+    .programas-primaria__card-books {
+      max-width: 260px;
+    }
+
+    .programas-primaria__card-mascot {
+      max-width: 200px;
+      width: min(200px, 36vw);
+    }
+  }
+
+  @media (min-width: 1024px) {
+    .programas-primaria {
+      padding: 4rem 0;
+    }
+
+    .programas-primaria__tabs-wrap {
+      margin-bottom: 2rem;
+    }
+
+    .programas-primaria__tabs {
+      justify-content: center;
+    }
+  }
+</style>

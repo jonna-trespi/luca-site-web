@@ -1,0 +1,182 @@
+---
+/**
+ * Clientes: sección de logos de instituciones.
+ * Fondo blanco full width; contenido centrado con .layout-container.
+ */
+const logosColegios = [
+  { file: "1_100px_Colegio Frances del Pedregal.png", alt: "Colegio Francés del Pedregal" },
+  { file: "2_100px_Colegio Loyola.png", alt: "Colegio Loyola" },
+  { file: "3_100px_Colegio Cervantes.png", alt: "Colegio Cervantes" },
+  { file: "4_100px_Colegio Estefania.png", alt: "Colegio Estefanía" },
+  { file: "5s_100px_Marie Curie.png", alt: "Marie Curie" },
+  { file: "6_100px_Colegio Del Caribe.png", alt: "Colegio Del Caribe" },
+  { file: "7_100px_Anglo Frances.png", alt: "Anglo Francés" },
+  { file: "8_100px_CEL.png", alt: "CEL" },
+  { file: "9_100px_Colegio Karol Wojtyla.png", alt: "Colegio Karol Wojtyla" },
+  { file: "10_100px_Asuncion.png", alt: "Asunción" },
+  { file: "11_100px_Lafayette.png", alt: "Lafayette" },
+  { file: "12_100px_Naciones unidas Albatros.png", alt: "Naciones Unidas Albatros" },
+  { file: "13_100px_Sigmund Freud.png", alt: "Sigmund Freud" },
+  { file: "14_100px_Leonor Baqueriza.png", alt: "Leonor Baqueriza" },
+  { file: "15_100px_Oakfield CDMX.png", alt: "Oakfield CDMX" },
+  { file: "16_100px_IMA.png", alt: "IMA" },
+  { file: "17_100px_colegio del pilar.png", alt: "Colegio del Pilar" },
+  { file: "18_100px_cedros norte.png", alt: "Cedros Norte" },
+] as const;
+
+const logosBasePath = "/logos/home/logos-colegios/";
+---
+
+<section class="clientes">
+  <div class="clientes__inner layout-container">
+    <p class="clientes__title">
+      Elegida por instituciones que lideran la educación en México.
+    </p>
+    <div class="clientes__carousel" aria-hidden="true">
+      <div class="clientes__track">
+        <ul class="clientes__list" aria-label="Instituciones que confían en Luca">
+          {logosColegios.map(({ file, alt }) => (
+            <li class="clientes__item">
+              <img
+                class="clientes__logo"
+                src={`${logosBasePath}${encodeURIComponent(file)}`}
+                alt={alt}
+                height="56"
+                loading="lazy"
+                decoding="async"
+              />
+            </li>
+          ))}
+        </ul>
+        <!-- Duplicado para loop infinito -->
+        <ul class="clientes__list" aria-hidden="true">
+          {logosColegios.map(({ file, alt }) => (
+            <li class="clientes__item">
+              <img
+                class="clientes__logo"
+                src={`${logosBasePath}${encodeURIComponent(file)}`}
+                alt=""
+                height="56"
+                loading="lazy"
+                decoding="async"
+              />
+            </li>
+          ))}
+        </ul>
+      </div>
+    </div>
+  </div>
+</section>
+
+<style>
+  .clientes {
+    width: 100%;
+    background-color: var(--color-bg-base);
+    /* Espacio fijo hasta el bloque Impacto (primer texto: .impacto__label) */
+    --clientes-gap-before-impacto: 110px;
+    padding: 0 0 var(--clientes-gap-before-impacto);
+  }
+
+  .clientes__inner {
+    text-align: center;
+  }
+
+  .clientes__title {
+    font-family: var(--font-family-base);
+    font-weight: 600;
+    font-size: var(--text-body-primary-size);
+    letter-spacing: var(--text-body-primary-spacing);
+    line-height: var(--text-body-primary-line);
+    color: var(--color-black);
+    margin: 0 0 32px;
+    max-width: 36rem;
+    margin-left: auto;
+    margin-right: auto;
+  }
+
+  .clientes__carousel {
+    width: 100%;
+    overflow: hidden;
+    margin: 0 -var(--layout-padding-x);
+  }
+
+  .clientes__track {
+    display: flex;
+    width: max-content;
+    animation: clientesScroll 80s linear infinite;
+  }
+
+  .clientes__track:hover {
+    animation-play-state: paused;
+  }
+
+  @keyframes clientesScroll {
+    0% {
+      transform: translateX(0);
+    }
+    100% {
+      transform: translateX(-50%);
+    }
+  }
+
+  .clientes__list {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    flex-wrap: nowrap;
+    align-items: center;
+    gap: 64px;
+    flex-shrink: 0;
+    padding: 0 var(--layout-padding-x);
+  }
+
+  .clientes__item {
+    flex: 0 0 auto;
+  }
+
+  .clientes__logo {
+    display: block;
+    width: auto;
+    height: 48px;
+    object-fit: contain;
+    object-position: center;
+    flex-shrink: 0;
+  }
+
+  @media (max-width: 767px) {
+    .clientes {
+      margin-top: 54px;
+    }
+  }
+
+  @media (min-width: 768px) {
+    .clientes {
+      padding: 0 0 var(--clientes-gap-before-impacto);
+    }
+
+    .clientes__title {
+      margin-bottom: 32px;
+    }
+
+    .clientes__logo {
+      height: 52px;
+    }
+  }
+
+  @media (min-width: 1024px) {
+    .clientes {
+      padding: 0 0 var(--clientes-gap-before-impacto);
+    }
+
+    .clientes__logo {
+      height: 56px;
+    }
+  }
+
+  @media (max-width: 480px) {
+    .clientes__logo {
+      height: 40px;
+    }
+  }
+</style>

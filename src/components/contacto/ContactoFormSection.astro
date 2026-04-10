@@ -1,0 +1,953 @@
+---
+/**
+ * Formulario Web-to-Lead (mismo esquema que DemoModal). Panel azul + geo-2/3;
+ * desktop: tarjeta absolute superpuesta; ≤768px: flujo en columna + margin negativo para no solapar secciones siguientes.
+ */
+---
+
+<section class="contacto-form-section" aria-labelledby="contacto-form-heading">
+  <h2 id="contacto-form-heading" class="visually-hidden">Formulario de contacto</h2>
+  <div class="contacto-form-section__shell">
+    <div class="contacto-form-section__blue">
+      <div class="contacto-form-section__deco" aria-hidden="true">
+        <img
+          class="contacto-form-section__deco-img contacto-form-section__deco-img--geo2"
+          src="/images/contacto/geo-2.png"
+          alt=""
+          width="400"
+          height="415"
+          loading="lazy"
+          decoding="async"
+        />
+        <img
+          class="contacto-form-section__deco-img contacto-form-section__deco-img--geo3"
+          src="/images/contacto/geo-3.png"
+          alt=""
+          width="150"
+          height="166"
+          loading="lazy"
+          decoding="async"
+        />
+      </div>
+    </div>
+    <div class="contacto-form-section__wrap layout-container">
+      <div class="contacto-form-section__card-stack">
+        <img
+          class="contacto-form-section__geo-behind"
+          src="/images/contacto/geo-4.png"
+          alt=""
+          width="200"
+          height="190"
+          loading="lazy"
+          decoding="async"
+          aria-hidden="true"
+        />
+        <div class="contacto-form-section__card" id="contacto-webtolead-root">
+          <div class="contacto-form-section__form-inner">
+            <form
+              class="luca-form"
+              id="luca-contacto-webtolead-form"
+              action="https://webto.salesforce.com/servlet/servlet.WebToLead?encoding=UTF-8&orgId=00Dal000013TFyw"
+              method="POST"
+              target="_blank"
+            >
+            <input
+              type="hidden"
+              name="captcha_settings"
+              value='{"keyname":"NEWKAP2","fallback":"true","orgId":"00Dal000013TFyw","ts":""}'
+            />
+            <input type="hidden" name="oid" value="00Dal000013TFyw" />
+            <input type="hidden" name="retURL" value="https://info.lucaedu.co/pagina-de-agradecimiento-lucaedu" />
+
+            <div class="form-row">
+              <div class="form-group">
+                <label for="luca-contacto-first_name">Nombres <span>*</span></label>
+                <input
+                  id="luca-contacto-first_name"
+                  name="first_name"
+                  type="text"
+                  placeholder="Tu nombre"
+                  required
+                  minlength="2"
+                  autocomplete="given-name"
+                />
+              </div>
+              <div class="form-group">
+                <label for="luca-contacto-last_name">Apellidos <span>*</span></label>
+                <input
+                  id="luca-contacto-last_name"
+                  name="last_name"
+                  type="text"
+                  placeholder="Tus apellidos"
+                  required
+                  minlength="2"
+                  autocomplete="family-name"
+                />
+              </div>
+            </div>
+
+            <div class="form-row">
+              <div class="form-group">
+                <label for="luca-contacto-email">Email <span>*</span></label>
+                <input
+                  id="luca-contacto-email"
+                  name="email"
+                  type="email"
+                  placeholder="email@ejemplo.com"
+                  required
+                  pattern="^[^\s@]+@[^\s@]+\.[^\s@]+$"
+                  autocomplete="email"
+                />
+                <small class="help-text">Ej: usuario@dominio.com</small>
+              </div>
+              <div class="form-group">
+                <label for="luca-contacto-phone">Teléfono <span>*</span></label>
+                <input
+                  id="luca-contacto-phone"
+                  name="phone"
+                  type="tel"
+                  placeholder="Número"
+                  required
+                  pattern="^\d{7,15}$"
+                  inputmode="numeric"
+                  autocomplete="tel"
+                />
+              </div>
+            </div>
+
+            <div class="form-row">
+              <div class="form-group">
+                <label for="luca-contacto-company">Institución <span>*</span></label>
+                <input
+                  id="luca-contacto-company"
+                  name="company"
+                  type="text"
+                  placeholder="Nombre"
+                  required
+                  minlength="2"
+                  autocomplete="organization"
+                />
+              </div>
+              <div class="form-group">
+                <label for="luca-contacto-title">Cargo</label>
+                <input
+                  id="luca-contacto-title"
+                  name="title"
+                  type="text"
+                  placeholder="Tu cargo"
+                  autocomplete="organization-title"
+                />
+              </div>
+            </div>
+
+            <div class="form-row">
+              <div class="form-group custom-multiselect">
+                <span class="form-group-label" id="contacto-nivel-label">Nivel educativo</span>
+                <button
+                  type="button"
+                  class="multi-header"
+                  id="contacto-multi-toggle"
+                  aria-expanded="false"
+                  aria-haspopup="listbox"
+                  aria-controls="contacto-multi-content"
+                >
+                  <span id="contacto-multi-label">Selecciona niveles...</span>
+                </button>
+                <div
+                  class="multi-options"
+                  id="contacto-multi-content"
+                  role="listbox"
+                  aria-multiselectable="true"
+                  hidden
+                >
+                  <label class="option-item">
+                    <input type="checkbox" class="level-checkbox contacto-level-checkbox" value="Kinder" /> Kinder
+                  </label>
+                  <label class="option-item">
+                    <input type="checkbox" class="level-checkbox contacto-level-checkbox" value="Primaria" /> Primaria
+                  </label>
+                  <label class="option-item">
+                    <input type="checkbox" class="level-checkbox contacto-level-checkbox" value="Secundaria" /> Secundaria
+                  </label>
+                  <label class="option-item">
+                    <input type="checkbox" class="level-checkbox contacto-level-checkbox" value="Preparatoria" /> Preparatoria
+                  </label>
+                </div>
+                <select
+                  id="contacto-salesforce-nivel"
+                  name="00NVs00000NhYXJ"
+                  multiple="multiple"
+                  class="visually-hidden-select"
+                  aria-hidden="true"
+                  tabindex="-1"
+                >
+                  <option value="Kinder">Kinder</option>
+                  <option value="Primaria">Primaria</option>
+                  <option value="Secundaria">Secundaria</option>
+                  <option value="Preparatoria">Preparatoria</option>
+                </select>
+              </div>
+              <div class="form-group">
+                <label for="luca-contacto-alumnos">Cant. Alumnos</label>
+                <input
+                  id="luca-contacto-alumnos"
+                  name="00NVs00000Nhiwc"
+                  type="number"
+                  placeholder="Cantidad"
+                  min="1"
+                  step="1"
+                  inputmode="numeric"
+                />
+              </div>
+            </div>
+
+            <div class="form-row form-row--interest">
+              <div class="form-group">
+                <label for="luca-contacto-interes">Interés Principal</label>
+                <input
+                  id="luca-contacto-interes"
+                  name="00NVs00000NhrnZ"
+                  type="text"
+                  placeholder="¿En qué podemos ayudarte?"
+                />
+              </div>
+              <div class="form-group recaptcha-wrapper">
+                <div
+                  class="g-recaptcha"
+                  data-sitekey="6LeooTssAAAAAFQtKU81E09Gciz5jZDlgt9JS3cd"
+                  data-callback="recaptchaCallbackContacto"
+                >
+                </div>
+              </div>
+            </div>
+            </form>
+
+            <div class="form-footer">
+              <input type="submit" id="contacto-submit-btn" form="luca-contacto-webtolead-form" value="Enviar" />
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<script is:inline>
+  (function () {
+    var root = document.getElementById('contacto-webtolead-root');
+    if (!root) return;
+
+    function q(sel) {
+      return root.querySelector(sel);
+    }
+    function qa(sel) {
+      return root.querySelectorAll(sel);
+    }
+
+    function contactoRecaptchaFilled() {
+      var box = root.querySelector('.g-recaptcha');
+      if (!box) return false;
+      var ta = box.querySelector('textarea[name="g-recaptcha-response"]');
+      return Boolean(ta && ta.value.trim() !== '');
+    }
+
+    function timestampContacto() {
+      var ta = root.querySelector('textarea[name="g-recaptcha-response"]');
+      if (ta && ta.value.trim() !== '') return;
+      var cap = root.querySelector('input[name="captcha_settings"]');
+      if (!cap) return;
+      var elems = JSON.parse(cap.value);
+      elems['ts'] = JSON.stringify(new Date().getTime());
+      cap.value = JSON.stringify(elems);
+    }
+    setInterval(timestampContacto, 500);
+
+    function toggleMultiselect() {
+      var content = document.getElementById('contacto-multi-content');
+      var btn = document.getElementById('contacto-multi-toggle');
+      if (!content) return;
+      var open = content.hasAttribute('hidden');
+      if (open) {
+        content.removeAttribute('hidden');
+        if (btn) btn.setAttribute('aria-expanded', 'true');
+      } else {
+        content.setAttribute('hidden', '');
+        if (btn) btn.setAttribute('aria-expanded', 'false');
+      }
+    }
+
+    function updateSalesforceField() {
+      var checkboxes = qa('.contacto-level-checkbox');
+      var realSelect = document.getElementById('contacto-salesforce-nivel');
+      var displayLabel = document.getElementById('contacto-multi-label');
+      if (!realSelect || !displayLabel) return;
+      var selectedValues = [];
+      checkboxes.forEach(function (cb) {
+        var option = Array.from(realSelect.options).find(function (opt) {
+          return opt.value === cb.value;
+        });
+        if (option) {
+          if (cb.checked) {
+            option.selected = true;
+            selectedValues.push(cb.value);
+          } else {
+            option.selected = false;
+          }
+        }
+      });
+      if (selectedValues.length > 0) {
+        displayLabel.innerText = selectedValues.join(', ');
+        displayLabel.style.color = '#333';
+      } else {
+        displayLabel.innerText = 'Selecciona niveles...';
+        displayLabel.style.color = '#999';
+      }
+    }
+
+    document.addEventListener('click', function (event) {
+      var content = document.getElementById('contacto-multi-content');
+      if (!content) return;
+      if (event.target.closest('#contacto-webtolead-root .custom-multiselect')) return;
+      content.setAttribute('hidden', '');
+      var btn = document.getElementById('contacto-multi-toggle');
+      if (btn) btn.setAttribute('aria-expanded', 'false');
+    });
+
+    function validateFieldVisual(input) {
+      if (!input) return true;
+      var value = input.value.trim();
+      var isRequired = input.hasAttribute('required');
+      if (!value) {
+        input.classList.remove('valid', 'invalid');
+        return !isRequired;
+      }
+      var isValid = true;
+      if (input.type === 'email') {
+        isValid = /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(value);
+      } else if (input.name === 'phone') {
+        isValid = /^\d{7,15}$/.test(value);
+      } else if (input.hasAttribute('minlength')) {
+        isValid = value.length >= parseInt(input.getAttribute('minlength'), 10);
+      }
+      if (isValid) {
+        input.classList.remove('invalid');
+        input.classList.add('valid');
+      } else {
+        input.classList.remove('valid');
+        input.classList.add('invalid');
+      }
+      return isValid;
+    }
+
+    function validateForm() {
+      var firstNameInput = q('input[name="first_name"]');
+      var lastNameInput = q('input[name="last_name"]');
+      var emailInput = q('input[name="email"]');
+      var phoneInput = q('input[name="phone"]');
+      var companyInput = q('input[name="company"]');
+      var submitBtn = document.getElementById('contacto-submit-btn');
+      if (!submitBtn) return;
+
+      var firstNameValid = validateFieldVisual(firstNameInput);
+      var lastNameValid = validateFieldVisual(lastNameInput);
+      var emailValid = validateFieldVisual(emailInput);
+      var phoneValid = validateFieldVisual(phoneInput);
+      var companyValid = validateFieldVisual(companyInput);
+      var recaptchaValid = contactoRecaptchaFilled();
+
+      if (firstNameValid && lastNameValid && emailValid && phoneValid && companyValid && recaptchaValid) {
+        submitBtn.disabled = false;
+        submitBtn.classList.remove('disabled');
+      } else {
+        submitBtn.disabled = true;
+        submitBtn.classList.add('disabled');
+      }
+    }
+
+    window.recaptchaCallbackContacto = function () {
+      validateForm();
+    };
+
+    function preventNonNumeric(e) {
+      if (
+        [46, 8, 9, 27, 13].indexOf(e.keyCode) !== -1 ||
+        (e.keyCode === 65 && e.ctrlKey === true) ||
+        (e.keyCode === 67 && e.ctrlKey === true) ||
+        (e.keyCode === 86 && e.ctrlKey === true) ||
+        (e.keyCode === 88 && e.ctrlKey === true) ||
+        (e.keyCode === 65 && e.metaKey === true) ||
+        (e.keyCode === 67 && e.metaKey === true) ||
+        (e.keyCode === 86 && e.metaKey === true) ||
+        (e.keyCode === 88 && e.metaKey === true) ||
+        (e.keyCode >= 35 && e.keyCode <= 39)
+      ) {
+        return;
+      }
+      if ((e.shiftKey || e.keyCode < 48 || e.keyCode > 57) && (e.keyCode < 96 || e.keyCode > 105)) {
+        e.preventDefault();
+      }
+    }
+
+    function filterNumericInput(input) {
+      var value = input.value;
+      var numericValue = value.replace(/[^0-9]/g, '');
+      if (value !== numericValue) {
+        input.value = numericValue;
+      }
+    }
+
+    function initFormBindings() {
+      if (root.dataset.contactoWtlBound === '1') return;
+      root.dataset.contactoWtlBound = '1';
+
+      var submitBtn = document.getElementById('contacto-submit-btn');
+      if (submitBtn) {
+        submitBtn.disabled = true;
+        submitBtn.classList.add('disabled');
+      }
+
+      var phoneInput = q('input[name="phone"]');
+      var alumnosInput = q('input[name="00NVs00000Nhiwc"]');
+
+      if (phoneInput) {
+        phoneInput.addEventListener('keydown', preventNonNumeric);
+        phoneInput.addEventListener('input', function () {
+          filterNumericInput(phoneInput);
+          validateForm();
+        });
+        phoneInput.addEventListener('paste', function () {
+          setTimeout(function () {
+            filterNumericInput(phoneInput);
+            validateForm();
+          }, 10);
+        });
+      }
+
+      if (alumnosInput) {
+        alumnosInput.addEventListener('keydown', preventNonNumeric);
+        alumnosInput.addEventListener('input', function () {
+          filterNumericInput(alumnosInput);
+        });
+        alumnosInput.addEventListener('paste', function () {
+          setTimeout(function () {
+            filterNumericInput(alumnosInput);
+          }, 10);
+        });
+      }
+
+      var requiredFields = [
+        'input[name="first_name"]',
+        'input[name="last_name"]',
+        'input[name="email"]',
+        'input[name="phone"]',
+        'input[name="company"]',
+      ];
+      requiredFields.forEach(function (selector) {
+        var field = q(selector);
+        if (field) {
+          field.addEventListener('input', validateForm);
+          field.addEventListener('blur', validateForm);
+        }
+      });
+
+      qa('.contacto-level-checkbox').forEach(function (cb) {
+        cb.addEventListener('change', function () {
+          updateSalesforceField();
+          validateForm();
+        });
+      });
+
+      var toggleBtn = document.getElementById('contacto-multi-toggle');
+      if (toggleBtn) {
+        toggleBtn.addEventListener('click', function (e) {
+          e.stopPropagation();
+          toggleMultiselect();
+        });
+      }
+
+      setInterval(validateForm, 500);
+
+      var formEl = q('.luca-form');
+      if (formEl) {
+        formEl.addEventListener('submit', function (e) {
+          var btn = document.getElementById('contacto-submit-btn');
+          if (btn && btn.disabled) {
+            e.preventDefault();
+            var missingFields = [];
+            if (!q('input[name="first_name"]').value.trim()) missingFields.push('Nombres');
+            if (!q('input[name="last_name"]').value.trim()) missingFields.push('Apellidos');
+            var email = q('input[name="email"]').value.trim();
+            if (!email || !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) {
+              missingFields.push('Email válido (ejemplo@mail.com)');
+            }
+            var phone = q('input[name="phone"]').value.trim();
+            if (!phone || !/^\d{7,15}$/.test(phone)) {
+              missingFields.push('Teléfono válido (mínimo 7 números)');
+            }
+            if (!q('input[name="company"]').value.trim()) missingFields.push('Institución');
+            if (!contactoRecaptchaFilled()) {
+              missingFields.push('Verificación reCAPTCHA');
+            }
+            alert('Por favor completa los siguientes campos:\n\n• ' + missingFields.join('\n• '));
+            return false;
+          }
+        });
+      }
+    }
+
+    if (document.readyState === 'loading') {
+      document.addEventListener('DOMContentLoaded', initFormBindings);
+    } else {
+      initFormBindings();
+    }
+  })();
+</script>
+
+<style>
+  .visually-hidden {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    padding: 0;
+    margin: -1px;
+    overflow: hidden;
+    clip: rect(0, 0, 0, 0);
+    white-space: nowrap;
+    border: 0;
+  }
+
+  .contacto-form-section {
+    width: 100%;
+    margin-top: 0;
+    padding: 0 0 2.5rem;
+    position: relative;
+    z-index: 2;
+    box-sizing: border-box;
+  }
+
+  .contacto-form-section__shell {
+    position: relative;
+    width: 100%;
+    max-width: min(1180px, calc(100% - 2 * var(--layout-padding-x)));
+    margin-left: auto;
+    margin-right: auto;
+    padding-bottom: clamp(10rem, 26vw, 18rem);
+    box-sizing: border-box;
+  }
+
+  .contacto-form-section__blue {
+    position: relative;
+    width: 100%;
+    height: 500px;
+    margin: 0 auto;
+    background: linear-gradient(165deg, #283094 0%, #3843d0 45%, #2f3ab8 100%);
+    border-radius: 40px;
+    overflow: hidden;
+    box-shadow: 0 20px 50px rgba(40, 48, 148, 0.25);
+  }
+
+  .contacto-form-section__deco {
+    position: absolute;
+    inset: 0;
+    pointer-events: none;
+    z-index: 0;
+    overflow: hidden;
+  }
+
+  .contacto-form-section__deco-img {
+    position: absolute;
+    object-fit: contain;
+    display: block;
+  }
+
+  .contacto-form-section__deco-img--geo2 {
+    left: 0;
+    bottom: 0;
+    max-width: 400px;
+    width: min(400px, 92vw);
+    height: auto;
+    transform: translate(-6%, 10%);
+  }
+
+  .contacto-form-section__deco-img--geo3 {
+    right: 0;
+    top: 0;
+    max-width: 150px;
+    width: min(150px, 36vw);
+    height: auto;
+    transform: translate(6%, -12%) rotate(-8deg);
+  }
+
+  .contacto-form-section__wrap {
+    position: absolute;
+    left: 0;
+    right: 0;
+    top: 70px;
+    z-index: 2;
+    width: 100%;
+    margin: 0;
+    box-sizing: border-box;
+  }
+
+  .contacto-form-section__card-stack {
+    position: relative;
+    max-width: 760px;
+    margin: 0 auto;
+    width: 100%;
+    overflow: visible;
+  }
+
+  .contacto-form-section__geo-behind {
+    position: absolute;
+    right: -60px;
+    bottom: -100px;
+    max-width: 150px;
+    width: min(150px, 44vw);
+    height: auto;
+    z-index: 0;
+    pointer-events: none;
+    object-fit: contain;
+  }
+
+  .contacto-form-section__card {
+    position: relative;
+    z-index: 1;
+    width: 100%;
+    max-width: 760px;
+    margin: 0 auto;
+    background: var(--color-white);
+    border-radius: 24px;
+    box-shadow: 0 16px 48px rgba(0, 0, 0, 0.12);
+    padding: clamp(1.25rem, 3vw, 2rem);
+    box-sizing: border-box;
+  }
+
+  .contacto-form-section__form-inner {
+    width: 100%;
+    max-width: 700px;
+    margin: 0 auto;
+    display: flex;
+    flex-direction: column;
+    box-sizing: border-box;
+  }
+
+  #contacto-webtolead-root .luca-form {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    padding: 0 4px;
+  }
+
+  #contacto-webtolead-root .form-row {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 20px;
+  }
+
+  #contacto-webtolead-root .form-row--interest {
+    align-items: end;
+  }
+
+  #contacto-webtolead-root .form-group {
+    display: flex;
+    flex-direction: column;
+  }
+
+  #contacto-webtolead-root .form-group-label {
+    font-family: var(--font-family-base);
+    font-weight: 400;
+    font-size: 14px;
+    color: #3d3d3d;
+    margin-bottom: 4px;
+    display: block;
+  }
+
+  #contacto-webtolead-root .luca-form label {
+    font-family: var(--font-family-base);
+    font-weight: 400;
+    font-size: 14px;
+    color: #3d3d3d;
+    margin-bottom: 4px;
+    display: block;
+  }
+
+  #contacto-webtolead-root .luca-form input[type='text'],
+  #contacto-webtolead-root .luca-form input[type='email'],
+  #contacto-webtolead-root .luca-form input[type='tel'],
+  #contacto-webtolead-root .luca-form input[type='number'],
+  #contacto-webtolead-root .luca-form select,
+  #contacto-webtolead-root .multi-header {
+    font-family: var(--font-family-base);
+    font-weight: 400;
+    font-size: 14px;
+    padding: 10px 16px;
+    border: 1px solid #c3c3c3;
+    border-radius: 8px;
+    transition: all 0.3s ease;
+    color: #3d3d3d;
+    background: white;
+    box-sizing: border-box;
+    width: 100%;
+  }
+
+  #contacto-webtolead-root .multi-header {
+    text-align: left;
+    cursor: pointer;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    color: #c3c3c3;
+  }
+
+  #contacto-webtolead-root .multi-header::after {
+    content: '';
+    border: solid #c3c3c3;
+    border-width: 0 2px 2px 0;
+    display: inline-block;
+    padding: 3px;
+    transform: rotate(45deg);
+  }
+
+  #contacto-webtolead-root .luca-form input::placeholder {
+    font-family: var(--font-family-base);
+    font-weight: 400;
+    font-size: 14px;
+    color: #c3c3c3;
+  }
+
+  #contacto-webtolead-root .luca-form input:focus,
+  #contacto-webtolead-root .luca-form select:focus,
+  #contacto-webtolead-root .multi-header:focus {
+    outline: none;
+    border-color: #3843d0;
+    box-shadow: 0 0 0 3px rgba(56, 67, 208, 0.1);
+  }
+
+  #contacto-webtolead-root .luca-form input[type='number']::-webkit-inner-spin-button,
+  #contacto-webtolead-root .luca-form input[type='number']::-webkit-outer-spin-button {
+    -webkit-appearance: none;
+    margin: 0;
+  }
+
+  #contacto-webtolead-root .luca-form input[type='number'] {
+    -moz-appearance: textfield;
+  }
+
+  #contacto-webtolead-root .custom-multiselect {
+    position: relative;
+    cursor: pointer;
+  }
+
+  #contacto-webtolead-root .multi-options {
+    position: absolute;
+    top: calc(100% + 5px);
+    left: 0;
+    width: 100%;
+    background: white;
+    border: 1px solid #c3c3c3;
+    border-radius: 8px;
+    z-index: 100;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+    padding: 5px 0;
+    max-height: 200px;
+    overflow-y: auto;
+  }
+
+  #contacto-webtolead-root .multi-options[hidden] {
+    display: none !important;
+  }
+
+  #contacto-webtolead-root .option-item {
+    padding: 10px 16px;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    font-size: 16px;
+    font-family: var(--font-family-base);
+    cursor: pointer;
+  }
+
+  #contacto-webtolead-root .visually-hidden-select {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    padding: 0;
+    margin: -1px;
+    overflow: hidden;
+    clip: rect(0, 0, 0, 0);
+    white-space: nowrap;
+    border: 0;
+  }
+
+  #contacto-webtolead-root input[name='00NVs00000NhrnZ'] {
+    width: 115%;
+    max-width: none;
+  }
+
+  #contacto-webtolead-root .recaptcha-wrapper {
+    display: flex;
+    align-items: flex-end;
+    justify-content: flex-end;
+  }
+
+  #contacto-webtolead-root .recaptcha-wrapper .g-recaptcha {
+    transform: scale(0.8);
+    transform-origin: bottom right;
+  }
+
+  #contacto-webtolead-root .form-footer {
+    background: white;
+    padding: 8px 4px 0;
+    margin-top: 20px;
+  }
+
+  #contacto-webtolead-root input[type='submit']#contacto-submit-btn,
+  #contacto-webtolead-root .luca-form input[type='submit'] {
+    font-family: var(--font-family-base);
+    font-weight: 600;
+    font-size: 18px;
+    color: white;
+    background: #3843d0;
+    border: none;
+    border-radius: 8px;
+    padding: 16px 32px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    width: 100%;
+  }
+
+  #contacto-webtolead-root input[type='submit']#contacto-submit-btn:hover:not(:disabled),
+  #contacto-webtolead-root .luca-form input[type='submit']:hover:not(:disabled) {
+    background: #283094;
+    transform: translateY(-2px);
+    box-shadow: 0 4px 12px rgba(40, 48, 148, 0.3);
+  }
+
+  #contacto-webtolead-root input[type='submit']#contacto-submit-btn:active:not(:disabled),
+  #contacto-webtolead-root .luca-form input[type='submit']:active:not(:disabled) {
+    transform: translateY(0);
+  }
+
+  #contacto-webtolead-root input[type='submit']#contacto-submit-btn:disabled,
+  #contacto-webtolead-root input[type='submit']#contacto-submit-btn.disabled,
+  #contacto-webtolead-root .luca-form input[type='submit']:disabled,
+  #contacto-webtolead-root .luca-form input[type='submit'].disabled {
+    background: #ececec;
+    color: #999999;
+    cursor: not-allowed;
+  }
+
+  #contacto-webtolead-root .form-group label span {
+    color: #ff8283;
+    font-weight: 600;
+  }
+
+  #contacto-webtolead-root .help-text {
+    font-size: 13px;
+    color: #999;
+    margin-top: 5px;
+    font-family: var(--font-family-base);
+    display: none;
+  }
+
+  #contacto-webtolead-root .form-group:focus-within .help-text {
+    display: block;
+  }
+
+  #contacto-webtolead-root .luca-form input.valid,
+  #contacto-webtolead-root .luca-form select.valid {
+    border-color: #10b981 !important;
+  }
+
+  #contacto-webtolead-root .luca-form input.invalid,
+  #contacto-webtolead-root .luca-form select.invalid {
+    border-color: #ff8283 !important;
+  }
+
+  @media (max-width: 768px) {
+    .contacto-form-section {
+      margin-top: 0;
+    }
+
+    /*
+      Flujo en columna: la franja azul tiene altura fija; el formulario va en el documento
+      (no absolute) con margin-top negativo para mantener ~70px desde el borde superior
+      del azul. Así el shell crece con el alto del formulario y no tapa ContactoChannels.
+    */
+    .contacto-form-section__shell {
+      --cf-blue-h-mobile: 280px;
+      max-width: calc(100% - 2 * var(--layout-padding-x));
+      display: flex;
+      flex-direction: column;
+      padding-bottom: 1.5rem;
+    }
+
+    .contacto-form-section__blue {
+      border-radius: 28px;
+      height: var(--cf-blue-h-mobile);
+      flex-shrink: 0;
+    }
+
+    .contacto-form-section__wrap {
+      position: relative;
+      top: auto;
+      left: auto;
+      right: auto;
+      flex: 0 0 auto;
+      width: 100%;
+      margin-top: calc(-1 * var(--cf-blue-h-mobile) + 70px);
+    }
+
+    .contacto-form-section__deco-img--geo2 {
+      max-width: min(280px, 78vw);
+      transform: translate(-10%, 14%);
+    }
+
+    .contacto-form-section__deco-img--geo3 {
+      max-width: min(120px, 30vw);
+      transform: translate(4%, -10%) rotate(-8deg);
+    }
+
+    .contacto-form-section__geo-behind {
+      max-width: min(168px, 40vw);
+      right: -4px;
+      bottom: 14px;
+    }
+
+    #contacto-webtolead-root .form-row {
+      grid-template-columns: 1fr;
+    }
+
+    #contacto-webtolead-root .recaptcha-wrapper .g-recaptcha {
+      transform: scale(0.75);
+      transform-origin: bottom right;
+    }
+
+    #contacto-webtolead-root input[name='00NVs00000NhrnZ'] {
+      width: 100% !important;
+    }
+  }
+
+  @media (max-width: 480px) {
+    .contacto-form-section__card {
+      border-radius: 18px;
+      padding: 1rem;
+    }
+
+    #contacto-webtolead-root input[type='submit']#contacto-submit-btn,
+    #contacto-webtolead-root .luca-form input[type='submit'] {
+      font-size: 16px;
+      padding: 14px 24px;
+    }
+
+    #contacto-webtolead-root .recaptcha-wrapper .g-recaptcha {
+      transform: scale(0.7);
+      transform-origin: bottom left;
+    }
+
+    #contacto-webtolead-root .recaptcha-wrapper {
+      justify-content: flex-start;
+      align-items: center;
+    }
+  }
+</style>

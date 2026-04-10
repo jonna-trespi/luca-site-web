@@ -1,0 +1,345 @@
+---
+/**
+ * Perfiles — Directores: copia de programas/primaria/Faq.astro para esta ruta.
+ */
+const faqs = [
+  {
+    question: '¿Qué necesito para implementar Luca en mi colegio?',
+    answer:
+      'Solo claridad sobre el proceso, las materias incluidas y cómo Luca se integra a tu modelo educativo. Nosotros nos encargamos del resto, con respaldo pedagógico y académico desde el inicio.',
+  },
+  {
+    question: '¿Por qué elegir Luca frente a otras plataformas?',
+    answer:
+      'Porque Luca pone al estudiante en el centro. Integra pedagogía de alto nivel, tecnología educativa e innovación continua para generar aprendizajes reales, medibles y con impacto a largo plazo.',
+  },
+  {
+    question: '¿La implementación es compleja o requiere mucho tiempo?',
+    answer:
+      'No. La plataforma es intuitiva y la implementación es guiada paso a paso, con capacitación flexible y acompañamiento cercano para docentes y directivos.',
+  },
+  {
+    question: '¿Qué materias cubre Luca en primaria?',
+    answer:
+      'Luca cubre las áreas fundamentales del aprendizaje en primaria: Español, Matemáticas, Ciencias e Inglés, con libros, materiales manipulativos y recursos digitales integrados para aprender haciendo.',
+  },
+];
+---
+
+<section class="faq-docentes" id="faq-docentes">
+  <div class="blog-faqs__faq">
+    <img
+      class="blog-faqs__faq-deco"
+      src="/images/home/geometrico-10.png"
+      alt=""
+      width="450"
+      height="450"
+      loading="lazy"
+      decoding="async"
+      aria-hidden="true"
+    />
+    <div class="blog-faqs__inner layout-container">
+      <header class="blog-faqs__faq-header">
+        <p class="blog-faqs__label blog-faqs__label--center">
+          <span class="blog-faqs__label-dot" aria-hidden="true"></span>
+          FAQ
+        </p>
+        <h2 class="blog-faqs__title blog-faqs__title--center">
+          Todo lo que quieres saber sobre Luca<span class="blog-faqs__title-dot">.</span>
+        </h2>
+      </header>
+      <ul class="blog-faqs__grid blog-faqs__grid--faq">
+        {faqs.map((faq, i) => (
+          <li class="blog-faqs__faq-item">
+            <div class="blog-faqs__faq-card">
+              <button
+                type="button"
+                class="blog-faqs__faq-trigger"
+                aria-expanded="false"
+                aria-controls={`docentes-faq-answer-${i}`}
+                id={`docentes-faq-trigger-${i}`}
+              >
+                <span class="blog-faqs__faq-question">{faq.question}</span>
+                <span class="blog-faqs__faq-icon" aria-hidden="true"></span>
+              </button>
+              <div
+                class="blog-faqs__faq-answer-wrap"
+                id={`docentes-faq-answer-${i}`}
+                role="region"
+                aria-labelledby={`docentes-faq-trigger-${i}`}
+              >
+                <div class="blog-faqs__faq-answer">
+                  <p>{faq.answer}</p>
+                </div>
+              </div>
+            </div>
+          </li>
+        ))}
+      </ul>
+      <div class="blog-faqs__faq-cta-wrap">
+        <a href="#faq-docentes" class="btn-base btn-primary btn-cta-animated blog-faqs__cta blog-faqs__cta--faq">
+          <span>Encuentra más respuestas</span>
+          <span class="blog-faqs__cta-icon" aria-hidden="true">
+            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+              <path fill-rule="evenodd" clip-rule="evenodd" d="M11.235 16.089C11.105 16.178 10.958 16.221 10.811 16.221C10.572 16.221 10.338 16.108 10.192 15.896C9.958 15.555 10.044 15.088 10.385 14.853C11.969 13.763 13.445 12.415 13.542 11.969C13.445 11.583 11.969 10.236 10.385 9.148C10.045 8.913 9.958 8.446 10.192 8.105C10.426 7.763 10.892 7.677 11.235 7.911C12.656 8.887 15.04 10.716 15.04 11.999C15.04 13.282 12.656 15.112 11.235 16.089ZM12.25 2.25C5.051 2.25 2.5 4.802 2.5 12C2.5 19.198 5.051 21.75 12.25 21.75C19.448 21.75 22 19.198 22 12C22 4.802 19.448 2.25 12.25 2.25Z" fill="currentColor" />
+            </svg>
+          </span>
+        </a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<script>
+  function initFaqDocentes() {
+    document.querySelectorAll('#faq-docentes .blog-faqs__faq-trigger').forEach((btn) => {
+      if ((btn as HTMLButtonElement).dataset.faqBound === '1') return;
+      (btn as HTMLButtonElement).dataset.faqBound = '1';
+      btn.addEventListener('click', () => {
+        const card = btn.closest('.blog-faqs__faq-card');
+        const expanded = btn.getAttribute('aria-expanded') === 'true';
+        btn.setAttribute('aria-expanded', String(!expanded));
+        card?.classList.toggle('blog-faqs__faq-card--expanded', !expanded);
+      });
+    });
+  }
+
+  initFaqDocentes();
+  document.addEventListener('astro:page-load', initFaqDocentes);
+</script>
+
+<style>
+  /* Bloque FAQ alineado a BlogFaqs.astro (sección FAQ) */
+  .faq-docentes {
+    width: 100%;
+  }
+
+  .blog-faqs__faq {
+    width: 100%;
+    background-color: #edf5ff;
+    padding: 3rem 0;
+    position: relative;
+    overflow: visible;
+  }
+
+  .blog-faqs__inner {
+    position: relative;
+    z-index: 1;
+  }
+
+  .blog-faqs__label {
+    font-family: var(--font-family-base);
+    font-weight: var(--text-micro-weight);
+    font-size: var(--text-section-label-size);
+    color: #6b5fc9;
+    margin: 0 0 0.25rem;
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+  }
+
+  .blog-faqs__label-dot {
+    width: 8px;
+    height: 8px;
+    border-radius: 50%;
+    background-color: var(--color-red);
+    flex-shrink: 0;
+  }
+
+  .blog-faqs__label--center {
+    justify-content: center;
+  }
+
+  .blog-faqs__title {
+    font-family: var(--font-family-base);
+    font-weight: var(--text-h3-weight);
+    font-size: clamp(1.25rem, 3vw, var(--text-h3-size));
+    letter-spacing: var(--text-h3-spacing);
+    line-height: var(--text-h3-line);
+    color: var(--color-text-base);
+    margin: 0;
+  }
+
+  .blog-faqs__title-dot {
+    color: var(--color-red);
+  }
+
+  .blog-faqs__title--center {
+    text-align: center;
+  }
+
+  .blog-faqs__cta.btn-primary {
+    color: var(--color-white);
+  }
+
+  .blog-faqs__cta.btn-primary .blog-faqs__cta-icon {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    color: var(--color-white);
+  }
+
+  .blog-faqs__cta.btn-primary .blog-faqs__cta-icon svg {
+    width: 1.25rem;
+    height: 1.25rem;
+  }
+
+  .blog-faqs__faq-deco {
+    position: absolute;
+    top: 0;
+    right: 0;
+    max-width: 450px;
+    width: 100%;
+    height: auto;
+    z-index: 0;
+    pointer-events: none;
+    object-fit: contain;
+    object-position: top right;
+  }
+
+  .blog-faqs__faq-header {
+    text-align: center;
+    margin-bottom: 48px;
+  }
+
+  .blog-faqs__faq-header .blog-faqs__label {
+    justify-content: center;
+    margin: 0 0 24px;
+  }
+
+  .blog-faqs__grid--faq {
+    list-style: none;
+    margin: 0 auto 55px;
+    padding: 0;
+    max-width: 1050px;
+    width: 100%;
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 1rem;
+  }
+
+  .blog-faqs__faq-card {
+    border-radius: 14px;
+    overflow: hidden;
+    background-color: #ffffff;
+    box-shadow: 0 2px 12px rgba(0, 0, 0, 0.06);
+    transition: background-color 0.35s ease, box-shadow 0.35s ease;
+  }
+
+  .blog-faqs__faq-card--expanded {
+    background-color: var(--color-blue-secondary);
+    box-shadow: 0 8px 24px rgba(40, 48, 148, 0.2);
+  }
+
+  .blog-faqs__faq-trigger {
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 1rem;
+    padding: 1.25rem 1.5rem;
+    background: transparent;
+    border: none;
+    font-family: var(--font-family-base);
+    font-weight: 600;
+    font-size: var(--text-body-secondary-size);
+    color: var(--color-text-base);
+    text-align: left;
+    cursor: pointer;
+    transition: color 0.35s ease;
+  }
+
+  .blog-faqs__faq-card--expanded .blog-faqs__faq-trigger {
+    color: #ffffff;
+  }
+
+  .blog-faqs__faq-trigger:hover {
+    outline: none;
+  }
+
+  .blog-faqs__faq-question {
+    flex: 1;
+    min-width: 0;
+  }
+
+  .blog-faqs__faq-icon {
+    flex-shrink: 0;
+    width: 24px;
+    height: 24px;
+    background-color: var(--color-blue-primary);
+    transform: rotate(90deg);
+    transition:
+      transform 0.35s ease,
+      background-color 0.35s ease;
+    -webkit-mask-image: url('/icons/transversal/array-right-icon.svg');
+    mask-image: url('/icons/transversal/array-right-icon.svg');
+    -webkit-mask-repeat: no-repeat;
+    mask-repeat: no-repeat;
+    -webkit-mask-position: center;
+    mask-position: center;
+    -webkit-mask-size: contain;
+    mask-size: contain;
+  }
+
+  .blog-faqs__faq-card--expanded .blog-faqs__faq-icon {
+    transform: rotate(-90deg);
+    background-color: #ffffff;
+  }
+
+  .blog-faqs__faq-answer-wrap {
+    overflow: hidden;
+    max-height: 0;
+    transition: max-height 0.4s ease;
+  }
+
+  .blog-faqs__faq-card--expanded .blog-faqs__faq-answer-wrap {
+    max-height: 900px;
+  }
+
+  .blog-faqs__faq-answer {
+    padding: 0 1.5rem 1.5rem;
+  }
+
+  .blog-faqs__faq-answer p {
+    margin: 0;
+    padding-top: 0.25rem;
+    font-family: var(--font-family-base);
+    font-weight: 400;
+    font-size: var(--text-body-secondary-size);
+    line-height: 1.5;
+    color: var(--color-text-base);
+    transition: color 0.35s ease;
+  }
+
+  .blog-faqs__faq-card--expanded .blog-faqs__faq-answer p {
+    color: rgba(255, 255, 255, 0.95);
+  }
+
+  .blog-faqs__faq-cta-wrap {
+    text-align: center;
+  }
+
+  .blog-faqs__cta--faq {
+    margin: 0 auto;
+  }
+
+  @media (min-width: 600px) {
+    .blog-faqs__grid--faq {
+      grid-template-columns: repeat(2, 1fr);
+    }
+  }
+
+  @media (min-width: 768px) {
+    .blog-faqs__faq {
+      padding: 4rem 0;
+    }
+  }
+
+  @media (min-width: 1024px) {
+    .blog-faqs__title--center {
+      max-width: 30rem;
+      margin-left: auto;
+      margin-right: auto;
+    }
+  }
+</style>

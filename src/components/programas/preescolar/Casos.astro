@@ -1,0 +1,407 @@
+---
+/**
+ * Casos de éxito (Preescolar): carrusel de testimoniales.
+ * Similar al Casos del HOME; título y decoración adaptados a Preescolar.
+ * Fondo full width; contenido centrado con .layout-container.
+ */
+---
+
+<section class="casos-preescolar">
+  <div class="casos-preescolar__blob casos-preescolar__blob--left" aria-hidden="true"></div>
+  <div class="casos-preescolar__blob casos-preescolar__blob--right" aria-hidden="true"></div>
+  <div class="casos-preescolar__bubble" aria-hidden="true">
+    <span class="casos-preescolar__bubble-avatar" role="img" aria-label="Perfil"></span>
+  </div>
+
+  <div class="casos-preescolar__inner layout-container">
+    <h2 class="casos-preescolar__title">
+      Casos de éxito<span class="casos-preescolar__title-dot">.</span>
+    </h2>
+
+    <div class="casos-preescolar__carousel">
+      <button type="button" class="casos-preescolar__nav casos-preescolar__nav--prev" aria-label="Testimonio anterior">
+        <span class="casos-preescolar__nav-icon" aria-hidden="true"></span>
+      </button>
+
+      <article class="casos-preescolar__card">
+        <div class="casos-preescolar__card-stack" aria-hidden="true"></div>
+        <div class="casos-preescolar__card-inner">
+          <div class="casos-preescolar__card-media">
+            <div class="casos-preescolar__card-portrait" role="img" aria-label="Foto del testimonio"></div>
+          </div>
+          <div class="casos-preescolar__card-content">
+            <div class="casos-preescolar__card-logo" role="img" aria-label="Logo institución"></div>
+            <blockquote class="casos-preescolar__quote">
+              Desde que conocimos la plataforma, siempre hemos estado apoyando y promoviendo lo que es Luca.
+            </blockquote>
+            <div class="casos-preescolar__stats">
+              <div class="casos-preescolar__stat">
+                <span class="casos-preescolar__stat-value">97%</span>
+                <span class="casos-preescolar__stat-label">lorem ipsum</span>
+              </div>
+              <div class="casos-preescolar__stat">
+                <span class="casos-preescolar__stat-value">97%</span>
+                <span class="casos-preescolar__stat-label">lorem ipsum</span>
+              </div>
+              <div class="casos-preescolar__stat">
+                <span class="casos-preescolar__stat-value">97%</span>
+                <span class="casos-preescolar__stat-label">lorem ipsum</span>
+              </div>
+            </div>
+            <hr class="casos-preescolar__divider" />
+            <div class="casos-preescolar__footer">
+              <div class="casos-preescolar__author">
+                <span class="casos-preescolar__author-name">Gabriel Paredes Dueñas</span>
+                <span class="casos-preescolar__author-role">Director Académico.</span>
+              </div>
+              <a href="#testimonio" class="casos-preescolar__link">
+                Ver testimonio
+                <span class="casos-preescolar__link-icon" role="img" aria-label="Vídeo"></span>
+              </a>
+            </div>
+          </div>
+        </div>
+      </article>
+
+      <button type="button" class="casos-preescolar__nav casos-preescolar__nav--next" aria-label="Siguiente testimonio">
+        <span class="casos-preescolar__nav-icon" aria-hidden="true"></span>
+      </button>
+    </div>
+  </div>
+</section>
+
+<style>
+  .casos-preescolar {
+    width: 100%;
+    background-color: var(--color-bg-base);
+    padding: 3rem 0;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .casos-preescolar__blob {
+    position: absolute;
+    border-radius: 50%;
+    pointer-events: none;
+  }
+
+  .casos-preescolar__blob--left {
+    width: min(320px, 55vw);
+    height: min(320px, 55vw);
+    top: -80px;
+    left: -80px;
+    background: var(--color-yellow);
+    opacity: 0.35;
+  }
+
+  .casos-preescolar__blob--right {
+    width: min(280px, 50vw);
+    height: min(280px, 50vw);
+    bottom: -60px;
+    right: -60px;
+    background: var(--color-red);
+    opacity: 0.12;
+  }
+
+  .casos-preescolar__bubble {
+    position: absolute;
+    top: 2rem;
+    right: 10%;
+    z-index: 2;
+    width: 48px;
+    height: 48px;
+    border-radius: 50%;
+    background: var(--color-bg-base);
+    box-shadow: 0 4px 16px rgba(0, 0, 0, 0.1);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .casos-preescolar__bubble-avatar {
+    width: 36px;
+    height: 36px;
+    border-radius: 50%;
+    background: rgba(56, 67, 208, 0.15);
+  }
+
+  .casos-preescolar__inner {
+    position: relative;
+    z-index: 1;
+  }
+
+  .casos-preescolar__title {
+    font-family: var(--font-family-base);
+    font-weight: 700;
+    font-size: clamp(1.25rem, 3vw, 1.75rem);
+    line-height: 1.3;
+    color: var(--color-text-base);
+    text-align: center;
+    margin: 0 0 2rem;
+  }
+
+  .casos-preescolar__title-dot {
+    color: var(--color-blue);
+  }
+
+  .casos-preescolar__carousel {
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+  }
+
+  .casos-preescolar__nav {
+    flex-shrink: 0;
+    width: 48px;
+    height: 48px;
+    border-radius: 50%;
+    border: none;
+    background: var(--color-blue);
+    color: #ffffff;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: opacity 0.2s ease;
+  }
+
+  .casos-preescolar__nav:hover {
+    opacity: 0.9;
+  }
+
+  .casos-preescolar__nav-icon {
+    width: 12px;
+    height: 12px;
+    border-left: 2px solid currentColor;
+    border-bottom: 2px solid currentColor;
+  }
+
+  .casos-preescolar__nav--prev .casos-preescolar__nav-icon {
+    transform: rotate(-45deg);
+    margin-left: 4px;
+  }
+
+  .casos-preescolar__nav--next .casos-preescolar__nav-icon {
+    transform: rotate(135deg);
+    margin-right: 4px;
+  }
+
+  .casos-preescolar__card {
+    position: relative;
+    flex: 1;
+    min-width: 0;
+  }
+
+  .casos-preescolar__card-stack {
+    position: absolute;
+    top: -4px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: calc(100% - 8px);
+    height: calc(100% + 8px);
+    border-radius: 24px;
+    border: 2px solid var(--color-yellow);
+    opacity: 0.6;
+    z-index: 0;
+    pointer-events: none;
+  }
+
+  .casos-preescolar__card-inner {
+    position: relative;
+    z-index: 1;
+    display: grid;
+    grid-template-columns: 1fr;
+    background: var(--color-bg-base);
+    border-radius: 24px;
+    box-shadow: 0 12px 40px rgba(0, 0, 0, 0.08);
+    overflow: hidden;
+  }
+
+  .casos-preescolar__card-media {
+    min-height: 220px;
+  }
+
+  .casos-preescolar__card-portrait {
+    width: 100%;
+    height: 100%;
+    min-height: 220px;
+    background: rgba(56, 67, 208, 0.08);
+    border-radius: 24px 24px 0 0;
+  }
+
+  .casos-preescolar__card-content {
+    padding: 1.5rem;
+  }
+
+  .casos-preescolar__card-logo {
+    width: 80px;
+    height: 32px;
+    background: rgba(51, 51, 51, 0.1);
+    border-radius: 6px;
+    margin-bottom: 1rem;
+  }
+
+  .casos-preescolar__quote {
+    font-family: var(--font-family-base);
+    font-weight: 500;
+    font-size: 1rem;
+    line-height: 1.6;
+    color: var(--color-text-base);
+    margin: 0 0 1.25rem;
+  }
+
+  .casos-preescolar__stats {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 1rem;
+    margin-bottom: 1.25rem;
+  }
+
+  .casos-preescolar__stat {
+    text-align: center;
+  }
+
+  .casos-preescolar__stat-value {
+    display: block;
+    font-family: var(--font-family-base);
+    font-weight: 700;
+    font-size: 1.5rem;
+    color: var(--color-text-base);
+    margin-bottom: 0.25rem;
+  }
+
+  .casos-preescolar__stat-label {
+    font-family: var(--font-family-base);
+    font-weight: 400;
+    font-size: 0.8125rem;
+    color: #666666;
+  }
+
+  .casos-preescolar__divider {
+    border: none;
+    border-top: 1px solid #eee;
+    margin: 0 0 1rem;
+  }
+
+  .casos-preescolar__footer {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: space-between;
+    gap: 1rem;
+  }
+
+  .casos-preescolar__author {
+    display: flex;
+    flex-direction: column;
+  }
+
+  .casos-preescolar__author-name {
+    font-family: var(--font-family-base);
+    font-weight: 700;
+    font-size: 0.9375rem;
+    color: var(--color-text-base);
+  }
+
+  .casos-preescolar__author-role {
+    font-family: var(--font-family-base);
+    font-weight: 400;
+    font-size: 0.8125rem;
+    color: #666666;
+  }
+
+  .casos-preescolar__link {
+    font-family: var(--font-family-base);
+    font-weight: 600;
+    font-size: 0.9375rem;
+    color: var(--color-blue);
+    text-decoration: none;
+    display: inline-flex;
+    align-items: center;
+    gap: 0.35rem;
+    transition: opacity 0.2s ease;
+  }
+
+  .casos-preescolar__link:hover {
+    opacity: 0.85;
+  }
+
+  .casos-preescolar__link-icon {
+    width: 20px;
+    height: 20px;
+    border-radius: 4px;
+    background: var(--color-blue);
+    opacity: 0.3;
+  }
+
+  @media (min-width: 768px) {
+    .casos-preescolar {
+      padding: 4rem 0;
+    }
+
+    .casos-preescolar__carousel {
+      gap: 1rem;
+    }
+
+    .casos-preescolar__nav {
+      width: 56px;
+      height: 56px;
+    }
+
+    .casos-preescolar__card-inner {
+      grid-template-columns: 320px 1fr;
+    }
+
+    .casos-preescolar__card-media {
+      min-height: 360px;
+    }
+
+    .casos-preescolar__card-portrait {
+      min-height: 100%;
+      border-radius: 24px 0 0 24px;
+    }
+
+    .casos-preescolar__card-content {
+      padding: 2rem;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+    }
+  }
+
+  @media (min-width: 1024px) {
+    .casos-preescolar {
+      padding: 5rem 0;
+    }
+
+    .casos-preescolar__title {
+      margin-bottom: 2.5rem;
+    }
+  }
+
+  @media (max-width: 480px) {
+    .casos-preescolar__carousel {
+      flex-direction: column;
+      gap: 1rem;
+    }
+
+    .casos-preescolar__nav {
+      align-self: center;
+    }
+
+    .casos-preescolar__nav--prev,
+    .casos-preescolar__nav--next {
+      order: 2;
+    }
+
+    .casos-preescolar__card {
+      order: 1;
+      width: 100%;
+    }
+
+    .casos-preescolar__bubble {
+      right: 5%;
+      top: 1rem;
+    }
+  }
+</style>

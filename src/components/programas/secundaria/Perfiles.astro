@@ -1,0 +1,688 @@
+---
+/**
+ * Perfiles: Directores / Docentes / Estudiantes / Padres con tabs (mismo patrón que Primaria / Preescolar).
+ */
+type Benefit = string | { html: string };
+
+const DEFAULT_TAB = 'directores';
+
+const tabPanels: ReadonlyArray<{
+  id: string;
+  label: string;
+  iconSrc: string;
+  title: string;
+  benefits: readonly Benefit[];
+  image: { src: string; alt: string; width: number; height: number };
+  geo: { src: string; nativeWidth: number; nativeHeight: number };
+  ctaHref: string;
+}> = [
+  {
+    id: 'directores',
+    label: 'Directores',
+    iconSrc: '/images/programas/secundaria/per-icon-directores.png',
+    title: 'Directores',
+    benefits: [
+      'Todo el proceso académico en un solo lugar.',
+      'Seguimiento sencillo del progreso de alumnos y docentes.',
+      'Reportes claros que muestran logros y áreas de mejora.',
+      'Información fácil de entender para tomar mejores decisiones.',
+    ],
+    image: {
+      src: '/images/programas/secundaria/per-image-1.png',
+      alt: 'Panel de reportes y métricas Luca en pantalla',
+      width: 1214,
+      height: 808,
+    },
+    geo: {
+      src: '/images/programas/secundaria/per-geo-1.png',
+      nativeWidth: 740,
+      nativeHeight: 759,
+    },
+    ctaHref: '/perfiles/directores',
+  },
+  {
+    id: 'docentes',
+    label: 'Docentes',
+    iconSrc: '/images/programas/secundaria/per-icon-docentes.png',
+    title: 'Docentes',
+    benefits: [
+      {
+        html: 'Reducen <strong>hasta un 80% la carga administrativa</strong> con herramientas de inteligencia artificial.',
+      },
+      'Cuentan con apoyo para elaborar proyectos, exámenes y evaluaciones de alta calidad.',
+      'Reciben acompañamiento y capacitación continua.',
+      'Se enfocan más en enseñar y acompañar, menos en tareas operativas.',
+    ],
+    image: {
+      src: '/images/programas/secundaria/per-image-2.jpg',
+      alt: 'Docente con tablet frente a estudiantes en el aula',
+      width: 964,
+      height: 744,
+    },
+    geo: {
+      src: '/images/programas/secundaria/per-geo-2.png',
+      nativeWidth: 884,
+      nativeHeight: 918,
+    },
+    ctaHref: '/perfiles/docentes',
+  },
+  {
+    id: 'estudiantes',
+    label: 'Estudiantes',
+    iconSrc: '/images/programas/secundaria/per-icon-estudiantes.png',
+    title: 'Estudiantes',
+    benefits: [
+      'Aprenden con contenidos dinámicos que realmente los motivan.',
+      'Juegan, avanzan y participan gracias a la gamificación.',
+      'Reciben apoyo personalizado con tutoría IA y practican a su propio ritmo.',
+      'Desarrollan autonomía y conectan lo aprendido con su vida diaria.',
+    ],
+    image: {
+      src: '/images/programas/secundaria/per-image-3.jpg',
+      alt: 'Estudiantes colaborando en el aula',
+      width: 964,
+      height: 744,
+    },
+    geo: {
+      src: '/images/programas/secundaria/per-geo-3.png',
+      nativeWidth: 727,
+      nativeHeight: 642,
+    },
+    ctaHref: '/perfiles/estudiantes',
+  },
+  {
+    id: 'padres',
+    label: 'Padres',
+    iconSrc: '/images/programas/secundaria/per-icon-padres.png',
+    title: 'Padres',
+    benefits: [
+      'Pueden ver el progreso y las actividades de sus hijos en todo momento.',
+      'Tranquilidad al seguir sus avances de forma clara y sencilla.',
+      'Comunicación directa y apoyo cercano por WhatsApp cuando lo necesiten.',
+      'La confianza de contar con una solución que los acompaña en cada etapa.',
+    ],
+    image: {
+      src: '/images/programas/secundaria/per-image-4.jpg',
+      alt: 'Familia revisando el aprendizaje en casa',
+      width: 964,
+      height: 744,
+    },
+    geo: {
+      src: '/images/programas/secundaria/per-geo-4.png',
+      nativeWidth: 594,
+      nativeHeight: 582,
+    },
+    ctaHref: '/perfiles/padres',
+  },
+];
+---
+
+<section class="perfiles perfiles--secundaria" data-perfiles-secundaria>
+  <img
+    class="perfiles__deco-geo"
+    src="/images/programas/secundaria/geo-1.png"
+    alt=""
+    width="413"
+    height="498"
+    loading="lazy"
+    decoding="async"
+    aria-hidden="true"
+  />
+
+  <div class="perfiles__inner layout-container">
+    <header class="perfiles__header">
+      <p class="programas__label">
+        <span class="programas__label-dot" aria-hidden="true"></span>
+        Perfiles educativos
+      </p>
+      <h3 id="perfiles-secundaria-heading" class="perfiles__title text-h3">
+        Beneficios de ser una escuela Luca<span class="perfiles__title-dot">.</span>
+      </h3>
+    </header>
+
+    <div class="perfiles__tabs-wrap">
+      <nav class="perfiles__tabs" role="tablist" aria-label="Seleccionar perfil">
+        {tabPanels.map((panel) => (
+          <button
+            type="button"
+            role="tab"
+            id={`perfiles-secundaria-tab-${panel.id}`}
+            class={`btn-base btn-cta-animated perfiles__tab ${panel.id === DEFAULT_TAB ? 'btn-primary perfiles__tab--active' : ''}`}
+            data-tab={panel.id}
+            aria-selected={panel.id === DEFAULT_TAB}
+            aria-controls={`perfiles-secundaria-panel-${panel.id}`}
+            tabindex={panel.id === DEFAULT_TAB ? 0 : -1}
+          >
+            <span class="perfiles__tab-inner">
+              <img
+                class="perfiles__tab-icon-img"
+                src={panel.iconSrc}
+                alt=""
+                width="76"
+                height="76"
+                loading="lazy"
+                decoding="async"
+                aria-hidden="true"
+              />
+              <span class="perfiles__tab-label text-body-primary">{panel.label}</span>
+            </span>
+          </button>
+        ))}
+      </nav>
+    </div>
+
+    <div class="perfiles__panels">
+      {tabPanels.map((panel) => (
+        <div
+          class="perfiles__panel"
+          id={`perfiles-secundaria-panel-${panel.id}`}
+          data-panel={panel.id}
+          role="tabpanel"
+          aria-labelledby={`perfiles-secundaria-tab-${panel.id}`}
+          hidden={panel.id !== DEFAULT_TAB}
+        >
+          <div class="perfiles__card">
+            <img
+              class="perfiles__card-geo"
+              src={panel.geo.src}
+              alt=""
+              width={Math.round(panel.geo.nativeWidth / 2)}
+              height={Math.round(panel.geo.nativeHeight / 2)}
+              style={`max-width: min(100%, ${Math.round(panel.geo.nativeWidth / 2)}px);`}
+              loading="lazy"
+              decoding="async"
+              aria-hidden="true"
+            />
+            <div class="perfiles__card-grid">
+              <div class="perfiles__card-content">
+                <h3 class="perfiles__panel-title text-h3">{panel.title}</h3>
+                <ul class="perfiles__list">
+                  {panel.benefits.map((benefit) => (
+                    <li class="perfiles__item">
+                      <span class="perfiles__item-icon" aria-hidden="true"></span>
+                      {typeof benefit === 'string' ? (
+                        <span class="perfiles__item-text text-body-primary">{benefit}</span>
+                      ) : (
+                        <span class="perfiles__item-text text-body-primary" set:html={benefit.html} />
+                      )}
+                    </li>
+                  ))}
+                </ul>
+                <a href={panel.ctaHref} class="perfiles__cta btn-terciary">
+                  Conoce más beneficios
+                  <span class="btn-terciary-icon" aria-hidden="true"></span>
+                </a>
+              </div>
+              <div class="perfiles__card-media">
+                <img
+                  class="perfiles__panel-img"
+                  src={panel.image.src}
+                  alt={panel.image.alt}
+                  width={panel.image.width}
+                  height={panel.image.height}
+                  loading={panel.id === DEFAULT_TAB ? 'eager' : 'lazy'}
+                  decoding="async"
+                />
+              </div>
+            </div>
+          </div>
+        </div>
+      ))}
+    </div>
+  </div>
+</section>
+
+<script is:inline>
+  (function () {
+    function activateTab(/** @type {HTMLElement} */ root, /** @type {string} */ tabId) {
+      root.querySelectorAll('[data-tab]').forEach((/** @type {Element} */ btn) => {
+        const el = /** @type {HTMLElement} */ (btn);
+        const isOn = el.dataset.tab === tabId;
+        el.classList.toggle('btn-primary', isOn);
+        el.classList.toggle('perfiles__tab--active', isOn);
+        el.setAttribute('aria-selected', String(isOn));
+        el.tabIndex = isOn ? 0 : -1;
+      });
+
+      root.querySelectorAll('[data-panel]').forEach((/** @type {Element} */ panel) => {
+        const el = /** @type {HTMLElement} */ (panel);
+        const isOn = el.dataset.panel === tabId;
+        el.hidden = !isOn;
+      });
+    }
+
+    function init() {
+      const root = document.querySelector('[data-perfiles-secundaria]');
+      if (!(root instanceof HTMLElement)) return;
+      if (root.dataset.perfilesSecundariaTabsBound === 'true') return;
+      root.dataset.perfilesSecundariaTabsBound = 'true';
+
+      root.addEventListener('click', (e) => {
+        const t = e.target;
+        if (!(t instanceof Element)) return;
+        const btn = t.closest('[data-tab]');
+        if (!(btn instanceof HTMLElement) || !root.contains(btn)) return;
+        const id = btn.dataset.tab;
+        if (!id) return;
+        activateTab(root, id);
+      });
+    }
+
+    if (document.readyState === 'loading') {
+      document.addEventListener('DOMContentLoaded', init);
+    } else {
+      init();
+    }
+
+    document.addEventListener('astro:page-load', init);
+  })();
+</script>
+
+<style>
+  .perfiles--secundaria {
+    width: 100%;
+    background: linear-gradient(to bottom, #eef4ff 0%, #e3ecfb 50%, #d9e6f8 100%);
+    padding: clamp(4.5rem, 24vw, 10rem) 0 clamp(1.75rem, 4vw, 2.5rem);
+    position: relative;
+    overflow: hidden;
+    box-sizing: border-box;
+  }
+
+  .perfiles__deco-geo {
+    position: absolute;
+    top: 8%;
+    right: 0;
+    width: auto;
+    max-width: min(220px, 40vw);
+    height: auto;
+    max-height: min(50vh, 380px);
+    object-fit: contain;
+    object-position: left center;
+    pointer-events: none;
+    user-select: none;
+    z-index: 0;
+  }
+
+  .perfiles__inner {
+    position: relative;
+    z-index: 1;
+    width: 100%;
+    max-width: var(--layout-max-width);
+    margin-left: auto;
+    margin-right: auto;
+    padding-left: var(--layout-padding-x);
+    padding-right: var(--layout-padding-x);
+  }
+
+  .perfiles__header {
+    text-align: center;
+    margin-bottom: 0;
+  }
+
+  .perfiles__header .programas__label {
+    justify-content: center;
+    margin-bottom: clamp(1rem, 3vw, 24px);
+  }
+
+  .perfiles__title {
+    max-width: min(600px, 100%);
+    margin: 0 auto clamp(1.75rem, 5vw, 48px);
+    padding-inline: 0;
+    color: var(--color-text-base);
+  }
+
+  .perfiles__title-dot {
+    color: var(--color-red);
+  }
+
+  .perfiles__tabs-wrap {
+    margin-bottom: clamp(1.15rem, 3vw, 28px);
+    overflow-x: auto;
+    -webkit-overflow-scrolling: touch;
+    padding-bottom: 0.25rem;
+    display: flex;
+    justify-content: center;
+  }
+
+  .perfiles__tabs {
+    display: flex;
+    flex-wrap: nowrap;
+    align-items: stretch;
+    gap: 12px;
+    min-width: min-content;
+    justify-content: center;
+  }
+
+  .perfiles__tab.btn-cta-animated::before,
+  .perfiles__tab.btn-cta-animated::after {
+    display: none;
+  }
+
+  .perfiles__tab.btn-cta-animated:hover {
+    transform: none;
+    box-shadow: none;
+  }
+
+  .perfiles__tab.btn-base {
+    box-sizing: border-box;
+    max-width: 200px;
+    min-width: 0;
+    flex: 0 1 auto;
+    min-height: 45px;
+    height: auto;
+    padding: 8px 12px 8px 8px;
+    border-radius: 10px;
+    justify-content: flex-start;
+    align-items: center;
+    font-family: var(--font-family-base);
+    font-weight: var(--text-body-primary-weight);
+    font-size: var(--text-body-primary-size);
+    letter-spacing: var(--text-body-primary-spacing);
+    line-height: 1.25;
+    white-space: normal;
+    border: 2px solid transparent;
+    gap: 0;
+    text-align: left;
+  }
+
+  .perfiles__tab-inner {
+    display: inline-flex;
+    align-items: center;
+    justify-content: flex-start;
+    gap: 10px;
+    width: 100%;
+    min-width: 0;
+  }
+
+  .perfiles__tab-icon-img {
+    flex-shrink: 0;
+    width: 22px;
+    height: 22px;
+    object-fit: contain;
+    display: block;
+  }
+
+  .perfiles__tab-label {
+    position: relative;
+    z-index: 1;
+    flex: 1;
+    min-width: 0;
+    overflow-wrap: break-word;
+  }
+
+  .perfiles__tab.btn-primary {
+    background-color: var(--color-blue-primary);
+    background-image: linear-gradient(
+      to right,
+      var(--color-blue-secondary) 0%,
+      var(--color-blue-secondary) 100%
+    );
+    background-size: 0% 100%;
+    background-repeat: no-repeat;
+    background-position: right center;
+    color: #ffffff;
+    border-color: transparent;
+    transition:
+      background-size 0.5s cubic-bezier(0.25, 1, 0.5, 1),
+      color 0.35s ease;
+  }
+
+  .perfiles__tab.btn-primary:hover {
+    background-size: 100% 100%;
+    color: #ffffff;
+    box-shadow: none;
+    background-position: right center;
+  }
+
+  .perfiles__tab.btn-base:not(.btn-primary) {
+    background-color: #ffffff;
+    background-image: linear-gradient(
+      to right,
+      var(--color-blue-secondary) 0%,
+      var(--color-blue-secondary) 100%
+    );
+    background-size: 0% 100%;
+    background-repeat: no-repeat;
+    background-position: right center;
+    color: var(--color-black);
+    border: 1px solid rgba(56, 67, 208, 0.18);
+    box-shadow: 0 1px 2px rgba(0, 0, 0, 0.04);
+    transition:
+      background-size 0.5s cubic-bezier(0.25, 1, 0.5, 1),
+      color 0.35s ease,
+      border-color 0.3s ease,
+      box-shadow 0.3s ease;
+  }
+
+  .perfiles__tab.btn-base:not(.btn-primary):hover {
+    background-size: 100% 100%;
+    color: #ffffff;
+    border-color: transparent;
+    box-shadow: none;
+  }
+
+  .perfiles__panel[hidden] {
+    display: none !important;
+  }
+
+  .perfiles__card {
+    position: relative;
+    background: var(--color-bg-base);
+    border-radius: 40px;
+    padding: 0;
+    box-shadow: 0 4px 24px rgba(0, 0, 0, 0.06);
+    overflow: hidden;
+  }
+
+  .perfiles__card-geo {
+    position: absolute;
+    bottom: 0;
+    right: 0;
+    width: auto;
+    height: auto;
+    display: block;
+    pointer-events: none;
+    user-select: none;
+    z-index: 0;
+    object-fit: contain;
+    object-position: right bottom;
+  }
+
+  .perfiles__card-grid {
+    position: relative;
+    z-index: 2;
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: clamp(1.15rem, 3vw, 1.5rem);
+    align-items: center;
+    min-width: 0;
+  }
+
+  .perfiles__card-content {
+    padding: clamp(1.35rem, 4vw, 2rem) clamp(1.1rem, 3vw, 1.5rem) clamp(1.15rem, 3vw, 1.5rem);
+    text-align: left;
+    min-width: 0;
+  }
+
+  .perfiles__panel-title {
+    margin: 0;
+    color: var(--color-blue);
+  }
+
+  .perfiles__list {
+    list-style: none;
+    margin: clamp(1.35rem, 4vw, 2.75rem) 0;
+    padding: 0;
+  }
+
+  .perfiles__item {
+    display: flex;
+    align-items: flex-start;
+    gap: 0.65rem;
+    margin-bottom: 0.65rem;
+  }
+
+  .perfiles__item:last-child {
+    margin-bottom: 0;
+  }
+
+  .perfiles__item-icon {
+    flex-shrink: 0;
+    width: 22px;
+    height: 22px;
+    border-radius: 6px;
+    background: var(--color-blue);
+    position: relative;
+    margin-top: 2px;
+  }
+
+  .perfiles__item-icon::after {
+    content: '';
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    width: 6px;
+    height: 10px;
+    margin: -6px 0 0 -3px;
+    border-right: 2px solid #ffffff;
+    border-bottom: 2px solid #ffffff;
+    transform: rotate(45deg);
+  }
+
+  .perfiles__item-text {
+    color: var(--color-text-base);
+    min-width: 0;
+    word-wrap: break-word;
+    overflow-wrap: break-word;
+  }
+
+  .perfiles__item-text strong {
+    font-weight: 700;
+    color: inherit;
+  }
+
+  .perfiles__cta.btn-terciary {
+    margin-top: 0;
+  }
+
+  .perfiles__card-media {
+    position: relative;
+    padding: 0 clamp(1.1rem, 3vw, 1.5rem) clamp(1.15rem, 3vw, 1.5rem);
+    line-height: 0;
+    min-width: 0;
+  }
+
+  .perfiles__panel-img {
+    display: block;
+    width: 100%;
+    max-width: 450px;
+    height: auto;
+    margin-inline: auto;
+    border-radius: 16px;
+    object-fit: cover;
+  }
+
+  @media (max-width: 767px) {
+    .perfiles__deco-geo {
+      top: 0%;
+      max-width: min(110px, 40vw);
+    }
+
+    .perfiles__card-geo {
+      display: none;
+    }
+
+    .perfiles__tabs-wrap {
+      overflow-x: visible;
+      padding-bottom: 0;
+      justify-content: stretch;
+      width: 100%;
+    }
+
+    .perfiles__tabs {
+      flex-direction: column;
+      flex-wrap: nowrap;
+      align-items: stretch;
+      justify-content: flex-start;
+      width: 100%;
+      max-width: 100%;
+      min-width: 0;
+      gap: 10px;
+    }
+
+    .perfiles__tab.btn-base {
+      width: 100%;
+      max-width: 100%;
+      white-space: normal;
+      text-align: center;
+      justify-content: center;
+    }
+
+    .perfiles__tab-inner {
+      justify-content: center;
+      text-align: center;
+    }
+
+    .perfiles__tab-label {
+      text-align: center;
+    }
+  }
+
+  @media (min-width: 768px) {
+    .perfiles--secundaria {
+      padding: clamp(5.5rem, 22vw, 10rem) 0 clamp(2.25rem, 4vw, 3rem);
+    }
+
+    .perfiles__tabs-wrap {
+      overflow-x: visible;
+      flex-wrap: wrap;
+    }
+
+    .perfiles__tabs {
+      flex-direction: row;
+      flex-wrap: wrap;
+      justify-content: center;
+    }
+
+    .perfiles__card-content {
+      padding: clamp(2.25rem, 6vw, 76px) clamp(1.25rem, 3vw, 2rem) clamp(1.75rem, 4vw, 3rem)
+        clamp(1.25rem, 6vw, 85px);
+    }
+
+    .perfiles__card-grid {
+      grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
+      gap: clamp(1.25rem, 3vw, 2rem);
+    }
+
+    .perfiles__card-media {
+      padding: clamp(1.25rem, 3vw, 2rem) clamp(1.25rem, 6vw, 85px) clamp(1.75rem, 4vw, 3rem)
+        clamp(1rem, 2vw, 1.5rem);
+    }
+
+    .perfiles__list {
+      margin: clamp(1.75rem, 4vw, 2.75rem) 0;
+    }
+  }
+
+  @media (min-width: 1024px) {
+    .perfiles--secundaria {
+      padding: 160px 0 4rem;
+    }
+
+    .perfiles__card {
+      border-radius: 48px;
+    }
+
+    .perfiles__card-content {
+      padding: 76px 2rem 3rem 85px;
+    }
+
+    .perfiles__card-media {
+      padding: 2rem 85px 3rem 1.5rem;
+    }
+
+    .perfiles__list {
+      margin: 45px 0;
+    }
+  }
+</style>

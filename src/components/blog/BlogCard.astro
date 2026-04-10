@@ -1,0 +1,162 @@
+---
+import type { BlogPost } from '../../lib/blog';
+
+interface Props {
+  post: BlogPost;
+}
+
+const { post } = Astro.props;
+const img = post.thumbnail || post.mainImage;
+---
+
+<article class="blog-card" data-blog-card data-blog-category={post.category || ''}>
+  <a href={`/blog/${post.slug}/`} class="blog-card__link">
+    <div class="blog-card__media">
+      {
+        img ? (
+          <img
+            class="blog-card__img"
+            src={img}
+            alt=""
+            width="400"
+            height="225"
+            loading="lazy"
+            decoding="async"
+          />
+        ) : (
+          <div class="blog-card__img blog-card__img--placeholder" aria-hidden="true" />
+        )
+      }
+      {post.category ? <span class="blog-card__tag">{post.category}</span> : null}
+    </div>
+    <div class="blog-card__body">
+      {post.dateLabel ? <p class="blog-card__date">{post.dateLabel}</p> : null}
+      <h3 class="blog-card__title text-body-primary" data-blog-card-title>
+        {post.name}
+      </h3>
+      <span class="blog-card__cta btn-terciary">
+        ver artículo
+        <span class="btn-terciary-icon" aria-hidden="true" />
+      </span>
+    </div>
+  </a>
+  {post.summary ? (
+    <p class="blog-card__search-only" data-blog-card-summary aria-hidden="true">
+      {post.summary}
+    </p>
+  ) : null}
+</article>
+
+<style>
+  .blog-card {
+    position: relative;
+    height: 100%;
+    background: #f4f6fa;
+    border-radius: clamp(16px, 3vw, 22px);
+    box-shadow: 0 4px 18px rgba(40, 48, 148, 0.07);
+    overflow: hidden;
+    box-sizing: border-box;
+    transition:
+      box-shadow 0.2s ease,
+      transform 0.2s ease;
+  }
+
+  .blog-card:hover {
+    box-shadow: 0 8px 28px rgba(40, 48, 148, 0.12);
+    transform: translateY(-2px);
+  }
+
+  .blog-card__link {
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+    text-decoration: none;
+    color: inherit;
+  }
+
+  .blog-card__link:focus-visible {
+    outline: 2px solid var(--color-blue-primary);
+    outline-offset: 3px;
+  }
+
+  .blog-card__media {
+    position: relative;
+    aspect-ratio: 16 / 10;
+    background: #e8ecf2;
+    overflow: hidden;
+  }
+
+  .blog-card__img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+  }
+
+  .blog-card__img--placeholder {
+    background: linear-gradient(135deg, #dce8fc 0%, #edf5ff 100%);
+  }
+
+  .blog-card__tag {
+    position: absolute;
+    top: 0.65rem;
+    right: 0.65rem;
+    padding: 0.35rem 0.65rem;
+    border-radius: 999px;
+    font-family: var(--font-family-base);
+    font-size: var(--text-micro-size, 0.75rem);
+    font-weight: 600;
+    line-height: 1.2;
+    background-color: var(--color-blue-secondary);
+    color: #ffffff;
+    max-width: calc(100% - 1.3rem);
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+  }
+
+  .blog-card__body {
+    padding: 32px;
+    display: flex;
+    flex-direction: column;
+    gap: 0;
+    flex: 1;
+    text-align: left;
+  }
+
+  .blog-card__date {
+    margin: 0 0 20px;
+    font-family: var(--font-family-base);
+    font-weight: 400;
+    font-size: 13px;
+    line-height: 1.35;
+    color: #6b7280;
+  }
+
+  .blog-card__title {
+    margin: 0 0 20px;
+    font-weight: 600;
+    color: var(--color-text-base);
+    display: -webkit-box;
+    -webkit-line-clamp: 3;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+  }
+
+  .blog-card__cta.btn-terciary {
+    align-self: flex-start;
+  }
+
+  /* Texto solo para filtro/búsqueda en el índice (no visible) */
+  .blog-card__search-only {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    padding: 0;
+    margin: -1px;
+    overflow: hidden;
+    clip: rect(0, 0, 0, 0);
+    white-space: nowrap;
+    border: 0;
+  }
+</style>

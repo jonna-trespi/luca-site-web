@@ -1,0 +1,460 @@
+---
+/**
+ * Hero: sección principal con headline, subtítulo e imagen central.
+ * Fondo hero-bg.jpg (degradado azul–púrpura), ola blanca inferior,
+ * imagen de sujetos (hero-image.png) y geometrico-1 al borde izquierdo (solo desde tablet).
+ */
+---
+
+<section class="hero">
+  <div class="hero__bg" aria-hidden="true"></div>
+  <!-- Decorativo: mismo anclaje horizontal que el fondo (borde izquierdo del hero) -->
+  <!-- Solo tablet/desktop: en móvil el copy va centrado y este recurso chocaba con el título -->
+  <div class="hero__bg-geo" aria-hidden="true">
+    <picture>
+      <source media="(min-width: 768px)" srcset="/images/home/geometrico-1.png" />
+      <img
+        src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg'/%3E"
+        alt=""
+        width="1"
+        height="1"
+        class="hero__bg-geo-img"
+        loading="lazy"
+        decoding="async"
+      />
+    </picture>
+  </div>
+
+  <div class="hero__inner layout-container">
+    <div class="hero__content">
+      <h1 class="hero__title">
+        El sistema educativo híbrido que está cambiando las reglas del juego en los colegios<span class="hero__title-dot">.</span>
+      </h1>
+      <p class="hero__subtitle">
+        Combina <strong>libros</strong>, <strong>materiales manipulativos</strong> y <strong>tecnología con IA</strong> en una solución integral diseñada para colegios en México, desde preescolar hasta secundaria.
+      </p>
+    </div>
+
+    <div class="hero__image-block">
+      <img
+        src="/gif/home/hero-icon-3.gif"
+        alt=""
+        width="50"
+        height="50"
+        class="hero__image-icon hero__image-icon--left"
+        loading="eager"
+        decoding="async"
+        aria-hidden="true"
+      />
+      <img
+        src="/gif/home/hero-icon-2.gif"
+        alt=""
+        width="50"
+        height="50"
+        class="hero__image-icon hero__image-icon--center"
+        loading="eager"
+        decoding="async"
+        aria-hidden="true"
+      />
+      <img
+        src="/gif/home/hero-icon-1.gif"
+        alt=""
+        width="50"
+        height="50"
+        class="hero__image-icon hero__image-icon--right"
+        loading="eager"
+        decoding="async"
+        aria-hidden="true"
+      />
+      <img
+        src="/images/home/hero-image.png"
+        alt="Dos estudiantes: un joven con gafas y mochila sosteniendo libros, una niña con trenzas sosteniendo una tablet, sonriendo"
+        width="800"
+        height="600"
+        class="hero__main-image"
+        loading="eager"
+      />
+    </div>
+  </div>
+
+  <!-- Ola blanca inferior: la imagen "flota" sobre este borde -->
+  <div class="hero__wave" aria-hidden="true">
+    <svg class="hero__wave-svg" viewBox="0 0 1440 120" fill="none" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="none">
+      <path d="M0 120L60 105C120 90 240 60 360 45C480 30 600 30 720 37.5C840 45 960 60 1080 67.5C1200 75 1320 75 1380 75L1440 75V120H1380C1320 120 1200 120 1080 120C960 120 840 120 720 120C600 120 480 120 360 120C240 120 120 120 60 120H0Z" fill="white"/>
+    </svg>
+  </div>
+</section>
+
+<style>
+  .hero {
+    /* Móvil primero: pastilla fija ~64–80px + aire bajo el header */
+    --hero-pad-top: calc(80px + 2rem);
+    /* Desplazamiento del geométrico respecto al inicio del bloque de copy */
+    --hero-geo-shift: clamp(0.35rem, 3.5vw, 1.5rem);
+    position: relative;
+    width: 100%;
+    padding: 0;
+    overflow: hidden;
+    /* Altura por contenido en móvil (ver @media 767); desktop/tablet puede forzar 100vh */
+    min-height: auto;
+    display: flex;
+    flex-direction: column;
+    background-color: var(--color-white);
+  }
+
+  /* El azul solo cubre la parte alta; abajo queda blanco para que la imagen flote entre ambos */
+  .hero__bg {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 76%;
+    z-index: 0;
+    background-image: url('/images/home/hero-bg.jpg');
+    background-size: cover;
+    background-position: center top;
+    background-repeat: no-repeat;
+  }
+
+  /* Geometrico: borde izquierdo + alineado al copy (solo ≥768px; en móvil oculto) */
+  .hero__bg-geo {
+    display: none;
+    position: absolute;
+    left: 0;
+    top: 40%;
+    bottom: auto;
+    z-index: 1;
+    width: clamp(88px, 15vw, 168px);
+    max-width: min(168px, 32vw);
+    pointer-events: none;
+    line-height: 0;
+  }
+
+  @media (min-width: 768px) {
+    .hero__bg-geo {
+      display: block;
+    }
+  }
+
+  .hero__bg-geo-img {
+    width: 100%;
+    height: auto;
+    display: block;
+    object-fit: contain;
+    object-position: left top;
+  }
+
+  /* Contenido arriba, imagen anclada al borde inferior (flotando sobre la ola) */
+  .hero__inner {
+    position: relative;
+    z-index: 2;
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: flex-start;
+    text-align: center;
+    padding-top: var(--hero-pad-top);
+    padding-bottom: 0;
+    min-width: 0;
+    width: 100%;
+    box-sizing: border-box;
+  }
+
+  .hero__content {
+    position: relative;
+    width: 100%;
+    max-width: 1100px;
+    min-width: 0;
+    margin-left: auto;
+    margin-right: auto;
+    margin-bottom: 48px;
+  }
+
+  .hero__title,
+  .hero__subtitle {
+    position: relative;
+    z-index: 1;
+  }
+
+  .hero__title {
+    font-family: var(--font-family-base);
+    font-weight: var(--text-h1-weight);
+    font-size: clamp(1.75rem, 5vw, var(--text-h1-size));
+    letter-spacing: var(--text-h1-spacing);
+    line-height: var(--text-h1-line);
+    color: var(--color-white);
+    margin: 0 0 54px;
+  }
+
+  .hero__title-dot {
+    color: var(--color-red);
+  }
+
+  .hero__subtitle {
+    font-family: var(--font-family-base);
+    font-weight: var(--text-subtitle-2-weight);
+    font-size: clamp(1rem, 2vw, var(--text-subtitle-2-size));
+    letter-spacing: var(--text-subtitle-2-spacing);
+    line-height: var(--text-subtitle-2-line);
+    color: rgba(255, 255, 255, 0.95);
+    margin: 0 auto;
+    max-width: 800px;
+  }
+
+  .hero__subtitle strong {
+    font-weight: var(--text-body-primary-highlight-weight);
+  }
+
+  .hero__image-block {
+    position: relative;
+    width: 100%;
+    max-width: 600px;
+    min-width: 0;
+    margin: 0 auto;
+    margin-top: auto;
+    margin-bottom: -40px; /* solapa la ola para efecto "flotando" en el borde */
+    box-sizing: border-box;
+  }
+
+  .hero__image-icon {
+    position: absolute;
+    z-index: 2;
+    width: clamp(32px, 15vw, 50px);
+    height: auto;
+    object-fit: contain;
+    pointer-events: none;
+  }
+
+  /* Estrellas: zona superior izquierda (frente al niño) */
+  .hero__image-icon--left {
+    top: 72%;
+    left: 18%;
+    transform: translate(-8%, -5%);
+  }
+
+  /* Lápiz en círculo: centrado arriba, entre ambas figuras */
+  .hero__image-icon--center {
+    top: 15%;
+    left: 45%;
+    transform: translate(-50%, 0);
+  }
+
+  /* Nube / creatividad: zona superior derecha (frente a la niña) */
+  .hero__image-icon--right {
+    top: 72%;
+    right: 28%;
+    transform: translate(8%, -5%);
+  }
+
+  .hero__main-image {
+    position: relative;
+    z-index: 1;
+    width: 100%;
+    max-width: 100%;
+    height: auto;
+    display: block;
+    object-fit: contain;
+    object-position: center bottom;
+  }
+
+  .hero__wave {
+    position: relative;
+    width: 100%;
+    height: clamp(60px, 10vw, 120px);
+    margin-top: -1px;
+    z-index: 3;
+    flex-shrink: 0;
+  }
+
+  .hero__wave-svg {
+    width: 100%;
+    height: 420%;
+    display: block;
+  }
+
+  @media (min-width: 768px) {
+    .hero {
+      min-height: 100vh;
+      --hero-pad-top: calc(95px + 4.5rem);
+      --hero-geo-shift: clamp(2.5rem, 6vw, 4.75rem);
+    }
+
+    .hero__inner {
+      padding-bottom: 0;
+    }
+
+    .hero__content {
+      margin-bottom: 48px;
+    }
+
+    .hero__image-block {
+      max-width: 600px;
+    }
+  }
+
+  /* Tablet (~800px): menos altura mínima, titular e imagen proporcionados al ancho */
+  @media (min-width: 768px) and (max-width: 1023px) {
+    .hero {
+      --hero-pad-top: calc(88px + 2.25rem);
+      --hero-geo-shift: clamp(1.65rem, 4.5vw, 3.25rem);
+      min-height: auto;
+      padding-bottom: clamp(2rem, 5vw, 3.5rem);
+    }
+
+    .hero__bg {
+      height: 70%;
+    }
+
+    .hero__title {
+      margin-bottom: 28px;
+      font-size: clamp(1.65rem, 3.8vw, 2.65rem);
+    }
+
+    .hero__subtitle {
+      max-width: 34rem;
+      font-size: clamp(0.95rem, 1.85vw, 1.05rem);
+    }
+
+    .hero__content {
+      margin-bottom: 32px;
+    }
+
+    .hero__image-block {
+      max-width: min(480px, 90vw);
+    }
+
+    .hero__main-image {
+      max-width: min(480px, 90vw);
+    }
+
+    .hero__bg-geo {
+      width: clamp(80px, 13vw, 140px);
+      max-width: min(140px, 30vw);
+    }
+
+    .hero__image-icon--left {
+      left: 15%;
+    }
+
+    .hero__image-icon--right {
+      right: 25%;
+    }
+
+    .hero__wave {
+      height: clamp(52px, 8vw, 88px);
+    }
+  }
+
+  @media (min-width: 1024px) {
+    .hero {
+      --hero-pad-top: calc(95px + 5rem);
+      --hero-geo-shift: clamp(2.75rem, 5vw, 5.25rem);
+    }
+
+    .hero__inner {
+      padding-bottom: 0;
+    }
+
+    .hero__image-block {
+      max-width: 600px;
+    }
+  }
+
+  /* Pantallas grandes (1920px+): mantener la curva visible limitando la altura del azul */
+  @media (min-width: 1600px) {
+    .hero__bg {
+      height: 72%;
+    }
+
+    .hero__wave {
+      height: clamp(80px, 6vw, 140px);
+    }
+  }
+
+  @media (min-width: 1920px) {
+    .hero__bg {
+      height: 70%;
+    }
+
+    .hero__wave {
+      height: clamp(100px, 7vw, 160px);
+    }
+  }
+
+  @media (max-width: 767px) {
+    .hero {
+      --hero-pad-top: calc(76px + 1.75rem);
+    }
+
+    /* Sin crecer: evita hueco enorme entre collage y ola (antes flex:1 + 100vh) */
+    .hero__inner {
+      flex: 0 0 auto;
+      align-self: stretch;
+    }
+
+    /* Ligeramente menos altura de azul para acercar la transición visual a la ola */
+    .hero__bg {
+      height: 72%;
+    }
+
+    .hero__title {
+      margin-bottom: clamp(1rem, 4vw, 1.35rem);
+    }
+
+    .hero__content {
+      margin-bottom: clamp(1.75rem, 7vw, 2.75rem);
+    }
+
+    /*
+     * Evita recorte horizontal: el flex item debe poder medir menos que el ancho intrínseco del PNG.
+     * max-width 100% respecto al layout-container (padding lateral vía --layout-padding-x).
+     */
+    .hero__image-block {
+      margin-top: 0;
+      max-width: 100%;
+      width: 100%;
+      transform: translateY(clamp(0.5rem, 2.5vw, 1.25rem));
+      margin-bottom: clamp(-52px, -12vw, -32px);
+    }
+
+    .hero__main-image {
+      width: 100%;
+      max-width: 100%;
+      object-fit: contain;
+      object-position: center bottom;
+    }
+
+    .hero__image-icon {
+      width: clamp(32px, 18vw, 45px);
+    }
+
+    .hero__image-icon--left {
+      left: 10%;
+      right: auto;
+      top: 72%;
+      transform: translate(-4%, -2%);
+    }
+
+    .hero__image-icon--center {
+      top: 10%;
+    }
+
+    .hero__image-icon--right {
+      right: 10%;
+      left: auto;
+      top: 72%;
+      transform: translate(4%, -2%);
+    }
+  }
+
+  @media (max-width: 480px) {
+    .hero {
+      --hero-pad-top: calc(72px + 1.5rem);
+    }
+
+    .hero__content {
+      margin-bottom: clamp(1.5rem, 6vw, 2.25rem);
+    }
+  }
+</style>

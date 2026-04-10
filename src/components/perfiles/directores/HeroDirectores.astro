@@ -1,0 +1,258 @@
+---
+/**
+ * Hero Directores: franja 80% (#D2E6FF), dos columnas (copy + imagen), CTAs primario/secundario.
+ * Estructura / diagramación / responsive alineados a HeroPreescolar (sin carrusel).
+ * Imagen: public/images/perfiles/directores/image-hero.png
+ */
+const heroImageSrc = '/images/perfiles/directores/image-hero.png';
+---
+
+<section class="perfil-directores-hero">
+  <div class="perfil-directores-hero__strip">
+    <div class="perfil-directores-hero__inner layout-container">
+      <div class="perfil-directores-hero__row">
+        <header class="perfil-directores-hero__content">
+          <p class="programas__label programas__label--align-start">
+            <span class="programas__label-dot" aria-hidden="true"></span>
+            Directores
+          </p>
+          <h1 id="perfil-directores-hero-title" class="perfil-directores-hero__title text-h1">
+            Toma mejores decisiones, todos los días con Luca<span class="perfil-directores-hero__title-dot" aria-hidden="true">.</span>
+          </h1>
+          <p class="perfil-directores-hero__subtitle text-subtitle-1">
+            Solución educativa para colegios en México
+          </p>
+          <div class="perfil-directores-hero__ctas">
+            <a href="#" class="btn-base btn-primary btn-cta-animated" data-open-demo-modal>
+              <span>Solicita tu demo</span>
+              <span class="perfil-directores-hero__btn-icon" aria-hidden="true"></span>
+            </a>
+            <a href="#" class="btn-base btn-secondary btn-cta-animated">
+              <span>Ingresa a la plataforma</span>
+              <span class="perfil-directores-hero__btn-icon" aria-hidden="true"></span>
+            </a>
+          </div>
+        </header>
+        <div class="perfil-directores-hero__media">
+          <img
+            class="perfil-directores-hero__image"
+            src={heroImageSrc}
+            alt="Director escolar con carpeta de documentos"
+            width="500"
+            height="560"
+            loading="eager"
+            decoding="async"
+          />
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<style>
+  .perfil-directores-hero {
+    width: 100%;
+    background-color: #ffffff;
+    padding: 0;
+    position: relative;
+    overflow-x: hidden;
+    box-sizing: border-box;
+  }
+
+  .perfil-directores-hero__strip {
+    width: 80%;
+    max-width: 100%;
+    margin-left: auto;
+    margin-right: auto;
+    background-color: #d2e6ff;
+    position: relative;
+    overflow: hidden;
+    padding-top: calc(1rem + 64px + 128px);
+    padding-bottom: clamp(2.5rem, 6vw, 4rem);
+    padding-left: 0;
+    padding-right: 0;
+    border-radius: 32px;
+    box-sizing: border-box;
+  }
+
+  .perfil-directores-hero__inner {
+    position: relative;
+    z-index: 1;
+  }
+
+  .programas__label--align-start {
+    justify-content: flex-start;
+  }
+
+  .perfil-directores-hero__content .programas__label {
+    margin-bottom: 24px;
+  }
+
+  .perfil-directores-hero__row {
+    position: relative;
+    z-index: 1;
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 2rem;
+    align-items: center;
+    width: 100%;
+    box-sizing: border-box;
+  }
+
+  .perfil-directores-hero__content {
+    text-align: left;
+    margin: 0;
+    min-width: 0;
+    padding-left: 0;
+    padding-right: 0;
+    box-sizing: border-box;
+  }
+
+  .perfil-directores-hero__title {
+    margin: 0 0 clamp(1rem, 3vw, 1.5rem);
+    max-width: 950px;
+    color: var(--color-black);
+  }
+
+  .perfil-directores-hero__title-dot {
+    color: var(--color-red);
+  }
+
+  .perfil-directores-hero__subtitle {
+    margin: 0 0 clamp(1.25rem, 4vw, 2.25rem);
+    max-width: 950px;
+    color: var(--color-text-base);
+  }
+
+  .perfil-directores-hero__ctas {
+    display: flex;
+    flex-wrap: nowrap;
+    align-items: center;
+    justify-content: flex-start;
+    gap: clamp(0.5rem, 2vw, 1rem);
+    max-width: 100%;
+    min-width: 0;
+    overflow-x: auto;
+    overflow-y: hidden;
+    padding-bottom: 2px;
+    scrollbar-width: thin;
+    -webkit-overflow-scrolling: touch;
+  }
+
+  .perfil-directores-hero__ctas .btn-base {
+    flex: 0 0 auto;
+    white-space: nowrap;
+  }
+
+  /* Mismo asset que .btn-terciary / Tecnología: sin círculo extra */
+  .perfil-directores-hero__btn-icon {
+    display: block;
+    width: 1.25rem;
+    height: 1.25rem;
+    flex-shrink: 0;
+    background-color: currentColor;
+    -webkit-mask-image: url('/icons/transversal/array-right-icon.svg');
+    mask-image: url('/icons/transversal/array-right-icon.svg');
+    -webkit-mask-repeat: no-repeat;
+    mask-repeat: no-repeat;
+    -webkit-mask-position: center;
+    mask-position: center;
+    -webkit-mask-size: contain;
+    mask-size: contain;
+    transition: transform 0.2s ease;
+  }
+
+  .perfil-directores-hero__ctas .btn-base:hover .perfil-directores-hero__btn-icon {
+    transform: translateX(3px);
+  }
+
+  .perfil-directores-hero__media {
+    position: relative;
+    z-index: 1;
+    min-width: 0;
+    width: 100%;
+    display: flex;
+    justify-content: flex-end;
+    align-items: flex-end;
+  }
+
+  .perfil-directores-hero__image {
+    width: auto;
+    max-width: min(500px, 100%);
+    height: auto;
+    max-height: clamp(260px, 52vw, 560px);
+    display: block;
+    object-fit: contain;
+    object-position: right bottom;
+    margin-left: auto;
+    margin-right: 0;
+  }
+
+  @media (min-width: 768px) {
+    .perfil-directores-hero__strip {
+      padding-top: calc(1.5rem + 80px + 128px);
+    }
+
+    .perfil-directores-hero__row {
+      grid-template-columns: minmax(0, 52fr) minmax(0, 48fr);
+      gap: clamp(1.5rem, 4vw, 2.75rem);
+      align-items: center;
+    }
+
+    .perfil-directores-hero__title {
+      margin-bottom: clamp(1rem, 2.5vw, 1.5rem);
+    }
+
+    .perfil-directores-hero__subtitle {
+      margin-bottom: clamp(1.25rem, 3.5vw, 2.25rem);
+    }
+
+    .perfil-directores-hero__image {
+      max-height: clamp(320px, 42vw, 560px);
+    }
+  }
+
+  @media (min-width: 1025px) {
+    .perfil-directores-hero__strip {
+      padding-top: calc(2rem + 80px + 128px);
+    }
+  }
+
+  @media (max-width: 767px) {
+    .perfil-directores-hero__strip {
+      width: 100%;
+      max-width: none;
+      margin-left: 0;
+      margin-right: 0;
+      border-radius: 0 0 28px 28px;
+    }
+
+    .perfil-directores-hero__inner.layout-container {
+      max-width: none;
+      padding-left: clamp(1rem, 4vw, 1.25rem);
+      padding-right: clamp(1rem, 4vw, 1.25rem);
+    }
+
+    .perfil-directores-hero__row {
+      align-items: start;
+    }
+
+    .perfil-directores-hero__title,
+    .perfil-directores-hero__subtitle {
+      max-width: none;
+    }
+
+    .perfil-directores-hero__title {
+      margin-bottom: clamp(1rem, 3vw, 1.25rem);
+    }
+
+    .perfil-directores-hero__subtitle {
+      margin-bottom: clamp(1rem, 3vw, 1.5rem);
+    }
+
+    .perfil-directores-hero__media {
+      justify-content: flex-end;
+      align-items: flex-end;
+    }
+  }
+</style>

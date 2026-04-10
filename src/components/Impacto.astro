@@ -1,0 +1,253 @@
+---
+/**
+ * Impacto: logros, badges y reproductor de video.
+ * Fondo blanco full width; contenido centrado con .layout-container.
+ */
+---
+
+<section class="impacto">
+  <div class="impacto__inner layout-container">
+    <div class="impacto__content">
+      <p class="impacto__label">
+        <span class="impacto__label-dot" aria-hidden="true"></span>
+        Impacto
+      </p>
+      <div class="impacto__badges">
+        <div class="impacto__badge impacto__badge--round">
+          <img src="/logos/home/logo-premio-innovacion.png" alt="World's Most Innovative EdTech Startups - 3rd Place GSV Cup 2023" width="80" height="80" loading="lazy" />
+        </div>
+        <div class="impacto__badge impacto__badge--rect">
+          <img src="/logos/home/logo-premio-100.png" alt="2022 LATAM EdTech 100 - HolonIQ" width="80" height="80" loading="lazy" />
+        </div>
+      </div>
+      <h4 class="impacto__title">
+        <span class="impacto__title-line">#1 en LATAM</span>
+        <span class="impacto__title-line">Top 3 del mundo.</span>
+        <span class="impacto__title-line impacto__title-line--black">Reconocida por Google como una de las EdTech más innovadora.</span>
+      </h4>
+      <a href="/somosLuca" class="btn-base btn-primary btn-cta-animated impacto__cta">
+        <span>Descubre más</span>
+        <span class="impacto__cta-icon" aria-hidden="true">
+          <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+            <path fill-rule="evenodd" clip-rule="evenodd" d="M11.235 16.089C11.105 16.178 10.958 16.221 10.811 16.221C10.572 16.221 10.338 16.108 10.192 15.896C9.958 15.555 10.044 15.088 10.385 14.853C11.969 13.763 13.445 12.415 13.542 11.969C13.445 11.583 11.969 10.236 10.385 9.148C10.045 8.913 9.958 8.446 10.192 8.105C10.426 7.763 10.892 7.677 11.235 7.911C12.656 8.887 15.04 10.716 15.04 11.999C15.04 13.282 12.656 15.112 11.235 16.089ZM12.25 2.25C5.051 2.25 2.5 4.802 2.5 12C2.5 19.198 5.051 21.75 12.25 21.75C19.448 21.75 22 19.198 22 12C22 4.802 19.448 2.25 12.25 2.25Z" fill="currentColor"/>
+          </svg>
+        </span>
+      </a>
+    </div>
+    <div class="impacto__media">
+      <div class="impacto__video-wrap">
+        <iframe
+          class="impacto__video-iframe"
+          src="https://www.youtube.com/embed/0RRvk9ku-uo?autoplay=1&mute=1&loop=1&playlist=0RRvk9ku-uo&controls=0"
+          title="Vídeo Luca"
+          allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+          allowfullscreen
+        ></iframe>
+      </div>
+    </div>
+  </div>
+  <div class="impacto__shape" aria-hidden="true">
+    <img src="/images/home/geometrico-2.png" alt="" width="350" height="280" loading="lazy" />
+  </div>
+</section>
+
+<style>
+  .impacto {
+    position: relative;
+    width: 100%;
+    background-color: var(--color-bg-base);
+    /* El aire respecto al carrusel de Clientes lo marca .clientes (110px) */
+    padding: 0 0 3rem;
+    overflow: hidden;
+  }
+
+  .impacto__inner {
+    display: grid;
+    gap: 2.5rem;
+    align-items: center;
+  }
+
+  .impacto__label {
+    font-family: var(--font-family-base);
+    font-weight: var(--text-micro-weight);
+    font-size: var(--text-section-label-size);
+    letter-spacing: var(--text-micro-spacing);
+    line-height: var(--text-micro-line);
+    color: var(--color-blue-secondary);
+    margin: 0 0 20px;
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+  }
+
+  .impacto__label-dot {
+    width: 8px;
+    height: 8px;
+    border-radius: 50%;
+    background-color: var(--color-red);
+    flex-shrink: 0;
+  }
+
+  .impacto__badges {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 16px;
+    margin-bottom: 20px;
+  }
+
+  .impacto__badge {
+    flex-shrink: 0;
+  }
+
+  .impacto__badge--round {
+    max-width: 100px;
+    line-height: 0;
+  }
+
+  .impacto__badge--round img {
+    width: 100%;
+    height: auto;
+    display: block;
+    max-width: 100px;
+  }
+
+  .impacto__badge--rect {
+    max-width: 100px;
+    line-height: 0;
+  }
+
+  .impacto__badge--rect img {
+    width: 100%;
+    height: auto;
+    display: block;
+    max-width: 100px;
+  }
+
+  .impacto__title {
+    font-family: var(--font-family-base);
+    font-weight: var(--text-h4-weight);
+    font-size: clamp(1.25rem, 2.5vw, var(--text-h4-size));
+    letter-spacing: var(--text-h4-spacing);
+    line-height: var(--text-h4-line);
+    color: #333DBD;
+    margin: 0 0 40px;
+  }
+
+  .impacto__title-line {
+    display: block;
+  }
+
+  .impacto__title-line--black {
+    color: var(--color-black);
+  }
+
+  .impacto__cta {
+    color: var(--color-white);
+  }
+
+  .impacto__cta .impacto__cta-icon {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    color: var(--color-white);
+  }
+
+  .impacto__cta .impacto__cta-icon svg {
+    width: 1.25rem;
+    height: 1.25rem;
+  }
+
+  .impacto__media {
+    position: relative;
+    order: -1;
+  }
+
+  .impacto__shape {
+    position: absolute;
+    right: 0;
+    top: 50%;
+    transform: translateY(-50%);
+    width: 100%;
+    max-width: 350px;
+    z-index: 0;
+    pointer-events: none;
+  }
+
+  .impacto__shape img {
+    width: 100%;
+    height: auto;
+    display: block;
+    max-width: 350px;
+    margin-left: auto;
+  }
+
+  @media (max-width: 767px) {
+    .impacto__shape {
+      display: none;
+    }
+  }
+
+  .impacto__video-wrap {
+    position: relative;
+    z-index: 1;
+    border-radius: 24px;
+    overflow: hidden;
+    aspect-ratio: 16 / 9;
+    background: var(--color-black);
+    border: 1px solid var(--color-blue-primary);
+  }
+
+  .impacto__video-iframe {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    border: none;
+  }
+
+  @media (min-width: 768px) {
+    .impacto {
+      padding: 0 0 4rem;
+    }
+
+    .impacto__inner {
+      gap: 3rem;
+    }
+
+    .impacto__media {
+      order: 0;
+    }
+  }
+
+  @media (min-width: 768px) and (max-width: 1023px) {
+    .impacto__inner {
+      gap: 2rem;
+    }
+
+    .impacto__title {
+      margin-bottom: 28px;
+      font-size: clamp(1.2rem, 2.4vw, 1.65rem);
+    }
+
+    .impacto__badges {
+      gap: 24px;
+      margin-bottom: 16px;
+    }
+  }
+
+  @media (min-width: 1024px) {
+    .impacto {
+      padding: 0 0 5rem;
+    }
+
+    .impacto__inner {
+      grid-template-columns: 1fr 1.1fr;
+      gap: 4rem;
+      align-items: center;
+    }
+
+    .impacto__content {
+      max-width: 28rem;
+    }
+  }
+</style>

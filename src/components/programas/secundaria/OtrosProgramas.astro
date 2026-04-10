@@ -1,0 +1,305 @@
+---
+/**
+ * Otros programas (Primaria, Preescolar): misma estructura, diagramación y responsive que Primaria/OtrosProgramas.
+ * Página Secundaria.
+ */
+---
+
+<section class="otros-programas">
+  <div class="otros-programas__inner layout-container">
+    <div class="stacked-cards-wrapper" id="otros-programas-secundaria-stacked">
+      <article class="card-item" data-card>
+        <div class="card-item__inner">
+          <div class="card-item__content">
+            <p class="programas__label programas__label--align-start">
+              <span class="programas__label-dot" aria-hidden="true"></span>
+              Programas
+            </p>
+            <h3 class="card-item__heading">
+              Descubre cómo se construye el conocimiento haciendo, jugando y explorando en <span class="card-item__heading--accent">Primaria.</span>
+            </h3>
+            <a href="/programas/primaria" class="card-item__link btn-terciary">
+              Primaria
+              <span class="btn-terciary-icon" aria-hidden="true"></span>
+            </a>
+          </div>
+          <div class="card-item__media">
+            <img
+              src="/images/programas/secundaria/programas-1.jpg"
+              alt="Ilustración programa Primaria"
+              class="card-item__image"
+              width="800"
+              height="600"
+              loading="lazy"
+            />
+          </div>
+        </div>
+      </article>
+      <article class="card-item" data-card>
+        <div class="card-item__inner">
+          <div class="card-item__content">
+            <p class="programas__label programas__label--align-start">
+              <span class="programas__label-dot" aria-hidden="true"></span>
+              Programas
+            </p>
+            <h3 class="card-item__heading">
+              Descubre cómo el aprendizaje cobra vida a través del movimiento en <span class="card-item__heading--accent">Preescolar.</span>
+            </h3>
+            <a href="/programas/preescolar" class="card-item__link btn-terciary">
+              Preescolar
+              <span class="btn-terciary-icon" aria-hidden="true"></span>
+            </a>
+          </div>
+          <div class="card-item__media">
+            <img
+              src="/images/programas/primaria/programas-1.jpg"
+              alt="Ilustración programa Preescolar"
+              class="card-item__image"
+              width="800"
+              height="600"
+              loading="lazy"
+            />
+          </div>
+        </div>
+      </article>
+    </div>
+  </div>
+</section>
+
+<script is:inline>
+  (function stackedCardsOtrosProgramasSecundaria() {
+    function init() {
+      var wrapper = document.getElementById('otros-programas-secundaria-stacked');
+      if (!wrapper) return;
+      if (wrapper.getAttribute('data-otros-stack-init') === '1') return;
+      wrapper.setAttribute('data-otros-stack-init', '1');
+
+      var cards = Array.prototype.slice.call(wrapper.querySelectorAll('.card-item[data-card]'));
+      if (cards.length === 0) return;
+
+      var stickyTopPx = function () {
+        return window.innerHeight * 0.1;
+      };
+      var overlapRange = 250;
+
+      function updateStack() {
+        if (window.innerWidth <= 1023) {
+          cards.forEach(function (card) {
+            card.style.setProperty('--stack', '0');
+          });
+          return;
+        }
+        var top = stickyTopPx();
+        cards.forEach(function (card, i) {
+          var next = cards[i + 1];
+          if (!next) {
+            card.style.setProperty('--stack', '0');
+            return;
+          }
+          var nextRect = next.getBoundingClientRect();
+          var progress = 1 - (nextRect.top - top) / overlapRange;
+          var value = Math.max(0, Math.min(1, progress));
+          card.style.setProperty('--stack', String(value));
+        });
+      }
+
+      var ticking = false;
+      function onScroll() {
+        if (!ticking) {
+          requestAnimationFrame(function () {
+            updateStack();
+            ticking = false;
+          });
+          ticking = true;
+        }
+      }
+
+      window.addEventListener('scroll', onScroll, { passive: true });
+      window.addEventListener('resize', onScroll);
+      updateStack();
+      requestAnimationFrame(updateStack);
+    }
+
+    if (document.readyState === 'loading') {
+      document.addEventListener('DOMContentLoaded', init);
+    } else {
+      init();
+    }
+    document.addEventListener('astro:page-load', init);
+  })();
+</script>
+
+<style>
+  .otros-programas {
+    width: 100%;
+    background-color: transparent;
+    padding: 2rem 0 0;
+    overflow-x: visible;
+    overflow-y: visible;
+  }
+
+  .otros-programas__inner {
+    width: 100%;
+    max-width: var(--layout-max-width);
+    margin-left: auto;
+    margin-right: auto;
+    padding-left: var(--layout-padding-x);
+    padding-right: var(--layout-padding-x);
+  }
+
+  /* Diagramación, sombras y animación — mismo criterio que EdTech en Programas.astro (home) */
+  .stacked-cards-wrapper {
+    position: relative;
+    padding-bottom: 10vh;
+    margin-top: 2rem;
+  }
+
+  .card-item {
+    --stack: 0;
+    position: sticky;
+    top: 10vh;
+    height: auto;
+    margin-bottom: 2rem;
+  }
+
+  .card-item:nth-child(1) {
+    z-index: 1;
+  }
+
+  .card-item:nth-child(2) {
+    z-index: 2;
+  }
+
+  .card-item__inner {
+    max-width: 1080px;
+    margin: 0 auto;
+    height: auto;
+    min-height: 0;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 8rem;
+    padding: 54px;
+    border-radius: 32px;
+    align-items: center;
+    box-sizing: border-box;
+    transform-origin: top center;
+    transition: transform 0.5s ease, box-shadow 0.5s ease;
+    transform: perspective(1200px) scale(calc(1 - 0.05 * var(--stack))) rotateX(calc(-4deg * var(--stack)));
+    box-shadow:
+      0 1px 3px rgba(0, 0, 0, 0.03),
+      0 8px 24px rgba(40, 48, 148, 0.065),
+      0 18px 48px rgba(0, 0, 0, 0.05);
+  }
+
+  .card-item:nth-child(1) .card-item__inner {
+    background-color: #fff8ea;
+  }
+
+  .card-item:nth-child(2) .card-item__inner {
+    background-color: #bfeeeb;
+    box-shadow:
+      0 2px 6px rgba(0, 0, 0, 0.035),
+      0 10px 30px rgba(40, 48, 148, 0.078),
+      0 22px 52px rgba(0, 0, 0, 0.055);
+  }
+
+  .card-item__content {
+    min-width: 0;
+  }
+
+  .card-item__heading {
+    font-family: var(--font-family-base);
+    font-weight: var(--text-h4-weight);
+    font-size: clamp(1.25rem, 2.5vw, var(--text-h4-size));
+    letter-spacing: var(--text-h4-spacing);
+    line-height: var(--text-h4-line);
+    color: var(--color-black);
+    margin: 0;
+  }
+
+  .card-item__heading--accent {
+    color: var(--color-blue-primary);
+  }
+
+  .card-item__link {
+    margin-top: 45px;
+    color: var(--color-blue-primary);
+  }
+
+  .card-item__link:hover {
+    color: var(--color-blue-secondary);
+  }
+
+  .card-item__link .btn-terciary-icon {
+    width: 22px;
+    height: 22px;
+    background-color: var(--color-blue-primary);
+  }
+
+  .card-item__link:hover .btn-terciary-icon {
+    background-color: var(--color-blue-secondary);
+  }
+
+  .card-item__media {
+    position: relative;
+    min-width: 0;
+  }
+
+  .card-item__image {
+    width: 100%;
+    max-width: 385px;
+    height: auto;
+    border-radius: 20px 20px 0 20px;
+    object-fit: cover;
+    display: block;
+  }
+
+  @media (min-width: 768px) {
+    .otros-programas {
+      padding: 2.5rem 0 0;
+    }
+
+    .card-item__inner {
+      gap: 8rem;
+    }
+  }
+
+  @media (min-width: 1024px) {
+    .otros-programas {
+      padding: 3rem 0 0;
+    }
+  }
+
+  @media (max-width: 1023px) {
+    .card-item__inner {
+      grid-template-columns: 1fr;
+    }
+
+    .card-item__media {
+      order: 0;
+    }
+
+    .card-item__content {
+      order: 1;
+    }
+
+    .stacked-cards-wrapper {
+      padding-bottom: 0;
+    }
+
+    .card-item {
+      position: static;
+      margin-bottom: 1.5rem;
+    }
+
+    .card-item__inner {
+      transform: none;
+      padding: 1.5rem;
+      gap: 1.25rem;
+    }
+
+    .card-item__image {
+      max-width: 100%;
+    }
+  }
+</style>

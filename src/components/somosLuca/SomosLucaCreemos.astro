@@ -1,0 +1,103 @@
+---
+/**
+ * Somos Luca — Manifiesto: franja azul primario, geo-5 arriba-derecha, geo-6 abajo-izquierda, h2 centrado.
+ */
+---
+
+<section class="somos-luca-creemos" aria-labelledby="somos-luca-creemos-heading">
+  <img
+    class="somos-luca-creemos__deco somos-luca-creemos__deco--tr"
+    src="/images/somosLuca/geo-5.png"
+    alt=""
+    width="342"
+    height="447"
+    loading="lazy"
+    decoding="async"
+    aria-hidden="true"
+  />
+  <img
+    class="somos-luca-creemos__deco somos-luca-creemos__deco--bl"
+    src="/images/somosLuca/geo-6.png"
+    alt=""
+    width="200"
+    height="200"
+    loading="lazy"
+    decoding="async"
+    aria-hidden="true"
+  />
+  <div class="somos-luca-creemos__inner layout-container">
+    <h2 id="somos-luca-creemos-heading" class="text-h2 somos-luca-creemos__title">
+      Creemos en transformar la educación tradicional y convertir el aprendizaje en experiencias
+      extraordinarias que despiertan el potencial de cada estudiante.
+    </h2>
+  </div>
+</section>
+
+<style>
+  .somos-luca-creemos {
+    position: relative;
+    width: 100%;
+    overflow: hidden;
+    background-color: var(--color-blue-primary);
+    padding: clamp(3rem, 8vw, 5.5rem) 0;
+    box-sizing: border-box;
+  }
+
+  .somos-luca-creemos__deco {
+    position: absolute;
+    z-index: 0;
+    display: block;
+    height: auto;
+    object-fit: contain;
+    pointer-events: none;
+    user-select: none;
+  }
+
+  .somos-luca-creemos__deco--tr {
+    top: 0;
+    right: 0;
+    width: min(200px, 38vw);
+    max-width: 200px;
+    object-position: top right;
+    transform-origin: top right;
+    transform: translate(12%, -10%);
+  }
+
+  @media (max-width: 480px) {
+    .somos-luca-creemos__deco--tr {
+      transform: translate(8%, -6%);
+    }
+  }
+
+  .somos-luca-creemos__deco--bl {
+    bottom: 0;
+    left: 0;
+    max-width: 300px;
+    width: min(300px, 55vw);
+    object-position: bottom left;
+    transform-origin: bottom left;
+    transform: translate(-8%, 12%);
+  }
+
+  @media (max-width: 480px) {
+    .somos-luca-creemos__deco--bl {
+      transform: translate(-6%, 8%);
+    }
+  }
+
+  .somos-luca-creemos__inner {
+    position: relative;
+    z-index: 1;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+  }
+
+  .somos-luca-creemos__title {
+    margin: 0 auto;
+    max-width: 1000px;
+    color: var(--color-white);
+    text-wrap: balance;
+  }
+</style>

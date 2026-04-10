@@ -1,0 +1,574 @@
+---
+/**
+ * Mucho más que Preescolar: columna visual + grid de tarjetas por edad (3, 4 y 5 años).
+ */
+const visualImage = {
+  src: '/images/programas/preescolar/mas-image.png',
+  alt: 'Niño explorando y pintando con las manos en el aula',
+  width: 800,
+  height: 1200,
+};
+
+const cardsTop = [
+  {
+    id: 'tres',
+    ageLabel: '3 años',
+    titleLine1: 'Aprender',
+    titleLine2: 'explorando',
+    iconSrc: '/images/programas/preescolar/icon-1.png',
+    bullets: [
+      'Exploran el mundo con libertad y curiosidad.',
+      'Fortalecen el pensamiento lógico jugando y explorando.',
+      'Desarrollan lenguaje y motricidad con experiencias guiadas.',
+      'Construyen confianza y autonomía en un entorno seguro.',
+    ],
+    arrowLabel: 'Más sobre aprendizaje a los 3 años',
+  },
+  {
+    id: 'cuatro',
+    ageLabel: '4 años',
+    titleLine1: 'Aprender',
+    titleLine2: 'jugando',
+    iconSrc: '/images/programas/preescolar/icon-2.png',
+    bullets: [
+      'Aprenden reglas y turnos a través del juego compartido.',
+      'Refuerzan memoria, atención y coordinación con dinámicas lúdicas.',
+      'Conectan ideas y emociones en retos acordes a su edad.',
+      'Disfrutan el proceso y mantienen la motivación por descubrir.',
+    ],
+    arrowLabel: 'Más sobre aprendizaje a los 4 años',
+  },
+] as const;
+
+const cardsWide = [
+  {
+    id: 'cinco',
+    ageLabel: '5 años',
+    titleLine1: 'Aprender',
+    titleLine2: 'con intención',
+    iconSrc: '/images/programas/preescolar/icon-3.png',
+    bullets: [
+      'Resuelven retos diseñados para su edad.',
+      'Toman decisiones y desarrollan confianza.',
+      'Fortalecen las bases de lectura y matemáticas.',
+      'Construyen autonomía para avanzar a la siguiente etapa escolar.',
+    ],
+    arrowLabel: 'Más sobre aprendizaje a los 5 años',
+  },
+] as const;
+---
+
+<section class="mucho-mas-preescolar" aria-labelledby="mucho-mas-preescolar-heading">
+  <div class="mucho-mas-preescolar__inner layout-container">
+    <img
+      class="mucho-mas-preescolar__deco-geo"
+      src="/images/programas/preescolar/mas-geo-1.png"
+      alt=""
+      width="250"
+      height="250"
+      loading="lazy"
+      decoding="async"
+      aria-hidden="true"
+    />
+    <header class="mucho-mas-preescolar__header">
+      <div class="mucho-mas-preescolar__header-main">
+        <p class="programas__label programas__label--align-start">
+          <span class="programas__label-dot" aria-hidden="true"></span>
+          Mucho más que Preescolar
+        </p>
+        <h3 id="mucho-mas-preescolar-heading" class="mucho-mas-preescolar__title text-h3">
+          Neurodesarrollo, juego guiado y tecnología<span class="mucho-mas-preescolar__title-dot">.</span>
+        </h3>
+      </div>
+    </header>
+
+    <div class="mucho-mas-preescolar__layout">
+      <div class="mucho-mas-preescolar__visual">
+        <div class="mucho-mas-preescolar__visual-frame">
+          <img
+            class="mucho-mas-preescolar__visual-img"
+            src={visualImage.src}
+            alt={visualImage.alt}
+            width={visualImage.width}
+            height={visualImage.height}
+            loading="lazy"
+            decoding="async"
+          />
+          <img
+            class="mucho-mas-preescolar__visual-geo"
+            src="/images/programas/preescolar/mas-geo-2.png"
+            alt=""
+            width="90"
+            height="90"
+            loading="lazy"
+            decoding="async"
+            aria-hidden="true"
+          />
+        </div>
+      </div>
+
+      <div class="mucho-mas-preescolar__cards">
+        <div class="mucho-mas-preescolar__cards-row">
+          {cardsTop.map((card) => (
+            <article class="mucho-mas-preescolar__card mucho-mas-preescolar__card--top">
+              <div class="mucho-mas-preescolar__card-head">
+                <span class="mucho-mas-preescolar__card-icon" aria-hidden="true">
+                  <img
+                    class="mucho-mas-preescolar__card-icon-img"
+                    src={card.iconSrc}
+                    alt=""
+                    width="52"
+                    height="52"
+                    loading="lazy"
+                    decoding="async"
+                  />
+                </span>
+                <a href="#" class="mucho-mas-preescolar__card-link" aria-label={card.arrowLabel}>
+                  <img
+                    class="mucho-mas-preescolar__card-arrow"
+                    src="/icons/transversal/array-right-icon.svg"
+                    alt=""
+                    width="35"
+                    height="35"
+                    loading="lazy"
+                    decoding="async"
+                    aria-hidden="true"
+                  />
+                </a>
+              </div>
+              <p class="mucho-mas-preescolar__card-age">{card.ageLabel}</p>
+              <h4 class="mucho-mas-preescolar__card-title text-h4">
+                {card.titleLine1}
+                <br />
+                {card.titleLine2}
+              </h4>
+              <div class="mucho-mas-preescolar__card-desc">
+                <div class="mucho-mas-preescolar__card-desc-inner">
+                  <ul class="mucho-mas-preescolar__card-list">
+                    {card.bullets.map((item) => (
+                      <li class="mucho-mas-preescolar__card-li">{item}</li>
+                    ))}
+                  </ul>
+                </div>
+              </div>
+            </article>
+          ))}
+        </div>
+        {cardsWide.map((card) => (
+          <article class="mucho-mas-preescolar__card mucho-mas-preescolar__card--wide">
+            <div class="mucho-mas-preescolar__card-head">
+              <span class="mucho-mas-preescolar__card-icon" aria-hidden="true">
+                <img
+                  class="mucho-mas-preescolar__card-icon-img"
+                  src={card.iconSrc}
+                  alt=""
+                  width="52"
+                  height="52"
+                  loading="lazy"
+                  decoding="async"
+                />
+              </span>
+              <a href="#" class="mucho-mas-preescolar__card-link" aria-label={card.arrowLabel}>
+                <img
+                  class="mucho-mas-preescolar__card-arrow"
+                  src="/icons/transversal/array-right-icon.svg"
+                  alt=""
+                  width="35"
+                  height="35"
+                  loading="lazy"
+                  decoding="async"
+                  aria-hidden="true"
+                />
+              </a>
+            </div>
+            <p class="mucho-mas-preescolar__card-age">{card.ageLabel}</p>
+            <h4 class="mucho-mas-preescolar__card-title text-h4">
+              {card.titleLine1}
+              <br />
+              {card.titleLine2}
+            </h4>
+            <div class="mucho-mas-preescolar__card-desc">
+              <div class="mucho-mas-preescolar__card-desc-inner">
+                <ul class="mucho-mas-preescolar__card-list">
+                  {card.bullets.map((item) => (
+                    <li class="mucho-mas-preescolar__card-li">{item}</li>
+                  ))}
+                </ul>
+              </div>
+            </div>
+          </article>
+        ))}
+      </div>
+    </div>
+  </div>
+</section>
+
+<style>
+  .mucho-mas-preescolar {
+    width: 100%;
+    background-color: var(--color-bg-base);
+    padding: 1.75rem 0 2rem;
+    box-sizing: border-box;
+    overflow-x: clip;
+  }
+
+  .mucho-mas-preescolar__inner {
+    position: relative;
+    width: 100%;
+    max-width: var(--layout-max-width);
+    margin-left: auto;
+    margin-right: auto;
+    padding-left: var(--layout-padding-x);
+    padding-right: var(--layout-padding-x);
+  }
+
+  .mucho-mas-preescolar__deco-geo {
+    position: absolute;
+    top: 0;
+    right: 0;
+    max-width: 250px;
+    width: min(180px, 42vw);
+    height: auto;
+    object-fit: contain;
+    object-position: top right;
+    pointer-events: none;
+    user-select: none;
+    z-index: 0;
+    transform: translate(0, -4%);
+  }
+
+  .mucho-mas-preescolar__header {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 0.75rem;
+    margin-bottom: clamp(1.5rem, 4vw, 3rem);
+    position: relative;
+    z-index: 1;
+    padding-right: min(28vw, 7rem);
+  }
+
+  @media (min-width: 768px) {
+    .mucho-mas-preescolar__header {
+      flex-direction: row;
+      flex-wrap: wrap;
+      justify-content: flex-start;
+      align-items: flex-start;
+      gap: 1rem;
+      padding-right: 0;
+    }
+
+    .mucho-mas-preescolar__deco-geo {
+      width: min(250px, 40vw);
+      transform: translate(2%, -6%);
+    }
+  }
+
+  .mucho-mas-preescolar__header-main {
+    max-width: 36rem;
+    width: 100%;
+    text-align: left;
+  }
+
+  .mucho-mas-preescolar__title {
+    margin: 0;
+    color: var(--color-black);
+    text-align: left;
+  }
+
+  .mucho-mas-preescolar__title-dot {
+    color: var(--color-red);
+  }
+
+  .mucho-mas-preescolar__layout {
+    position: relative;
+    z-index: 1;
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: clamp(1.15rem, 3vw, 1.5rem);
+    align-items: start;
+  }
+
+  @media (min-width: 900px) {
+    /* Imagen como máx. 400px; tarjetas ocupan el resto del ancho (sin hueco muerto a la izquierda). */
+    .mucho-mas-preescolar__layout {
+      grid-template-columns: minmax(0, 400px) minmax(0, 1fr);
+      gap: clamp(1.25rem, 2.5vw, 2rem);
+      align-items: start;
+    }
+  }
+
+  .mucho-mas-preescolar__visual {
+    display: flex;
+    justify-content: center;
+    width: 100%;
+    max-width: 400px;
+    margin-left: auto;
+    margin-right: auto;
+  }
+
+  @media (min-width: 900px) {
+    .mucho-mas-preescolar__visual {
+      justify-content: flex-start;
+      margin-left: 0;
+      margin-right: 0;
+      width: 100%;
+      max-width: none;
+    }
+  }
+
+  .mucho-mas-preescolar__visual-frame {
+    position: relative;
+    width: 100%;
+    max-width: 400px;
+    border-radius: 28px;
+    overflow: hidden;
+    line-height: 0;
+  }
+
+  .mucho-mas-preescolar__visual-img {
+    display: block;
+    width: 100%;
+    max-width: 400px;
+    height: auto;
+  }
+
+  .mucho-mas-preescolar__visual-geo {
+    position: absolute;
+    top: 0;
+    left: -2%;
+    max-width: 160px;
+    width: min(160px, 22vw);
+    height: auto;
+    object-fit: contain;
+    pointer-events: none;
+    user-select: none;
+    z-index: 2;
+  }
+
+  .mucho-mas-preescolar__cards {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+    width: 100%;
+    min-width: 0;
+  }
+
+  .mucho-mas-preescolar__cards-row {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+    width: 100%;
+    min-width: 0;
+  }
+
+  @media (min-width: 600px) {
+    .mucho-mas-preescolar__cards {
+      gap: 1.25rem;
+    }
+
+    .mucho-mas-preescolar__cards-row {
+      flex-direction: row;
+      align-items: stretch;
+      gap: 1.25rem;
+    }
+  }
+
+  .mucho-mas-preescolar__card {
+    background-color: #3466d1;
+    border-radius: clamp(18px, 3vw, 24px);
+    padding: 1.2rem clamp(0.9rem, 3vw, 1.5rem) 1.35rem clamp(0.9rem, 4vw, 1.5rem);
+    color: #ffffff;
+    box-sizing: border-box;
+    box-shadow: 0 8px 28px rgba(52, 102, 209, 0.22);
+    position: relative;
+    z-index: 1;
+    transition:
+      flex-grow 0.4s cubic-bezier(0.4, 0, 0.2, 1),
+      flex-shrink 0.4s cubic-bezier(0.4, 0, 0.2, 1),
+      box-shadow 0.35s ease;
+  }
+
+  @media (min-width: 600px) {
+    .mucho-mas-preescolar__card {
+      padding-top: 1.5rem;
+      padding-right: 1.5rem;
+      padding-bottom: 1.75rem;
+      padding-left: clamp(1.25rem, 5vw, 50px);
+    }
+
+    .mucho-mas-preescolar__card--wide {
+      padding-bottom: 2rem;
+      width: 100%;
+    }
+
+    .mucho-mas-preescolar__card--top {
+      flex: 1 1 0;
+      min-width: 0;
+    }
+
+    .mucho-mas-preescolar__cards-row:has(.mucho-mas-preescolar__card--top:hover)
+      .mucho-mas-preescolar__card--top:not(:hover),
+    .mucho-mas-preescolar__cards-row:has(.mucho-mas-preescolar__card--top:focus-within)
+      .mucho-mas-preescolar__card--top:not(:focus-within) {
+      flex: 0.68 1 0;
+    }
+
+    .mucho-mas-preescolar__card--top:hover,
+    .mucho-mas-preescolar__card--top:focus-within {
+      flex: 1.42 1 0;
+      z-index: 2;
+      box-shadow: 0 14px 36px rgba(52, 102, 209, 0.35);
+    }
+
+    /* El alto extra va en el flujo (hacia abajo); sin margin negativo ni z-index para no tapar la fila superior */
+    .mucho-mas-preescolar__card--wide:hover,
+    .mucho-mas-preescolar__card--wide:focus-within {
+      box-shadow: 0 14px 36px rgba(52, 102, 209, 0.35);
+    }
+
+    .mucho-mas-preescolar__cards:has(.mucho-mas-preescolar__card--wide:hover),
+    .mucho-mas-preescolar__cards:has(.mucho-mas-preescolar__card--wide:focus-within) {
+      gap: 1.5rem;
+    }
+  }
+
+  /* Descripción: oculta por defecto; se muestra en hover / focus-within */
+  .mucho-mas-preescolar__card-desc {
+    display: grid;
+    grid-template-rows: 0fr;
+    transition: grid-template-rows 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+  }
+
+  .mucho-mas-preescolar__card-desc-inner {
+    overflow: hidden;
+    min-height: 0;
+  }
+
+  .mucho-mas-preescolar__card:hover .mucho-mas-preescolar__card-desc,
+  .mucho-mas-preescolar__card:focus-within .mucho-mas-preescolar__card-desc {
+    grid-template-rows: 1fr;
+  }
+
+  @media (hover: none), (prefers-reduced-motion: reduce) {
+    .mucho-mas-preescolar__card-desc {
+      grid-template-rows: 1fr;
+    }
+
+    .mucho-mas-preescolar__card {
+      transition: none;
+    }
+
+    @media (min-width: 600px) {
+      .mucho-mas-preescolar__card--top,
+      .mucho-mas-preescolar__cards-row:has(.mucho-mas-preescolar__card--top:hover)
+        .mucho-mas-preescolar__card--top:not(:hover),
+      .mucho-mas-preescolar__cards-row:has(.mucho-mas-preescolar__card--top:focus-within)
+        .mucho-mas-preescolar__card--top:not(:focus-within) {
+        flex: 1 1 0;
+      }
+
+    }
+  }
+
+  .mucho-mas-preescolar__card-head {
+    display: flex;
+    align-items: flex-start;
+    justify-content: space-between;
+    gap: 0.75rem;
+    margin-bottom: clamp(1.15rem, 3vw, 32px);
+  }
+
+  .mucho-mas-preescolar__card-icon {
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+    flex-shrink: 0;
+    line-height: 0;
+  }
+
+  .mucho-mas-preescolar__card-icon-img {
+    display: block;
+    max-width: 52px;
+    width: min(52px, 14vw);
+    height: auto;
+  }
+
+  .mucho-mas-preescolar__card-link {
+    flex-shrink: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    line-height: 0;
+    text-decoration: none;
+    transition:
+      opacity 0.2s ease,
+      transform 0.2s ease;
+  }
+
+  .mucho-mas-preescolar__card-link:hover {
+    opacity: 0.88;
+    transform: translateX(3px);
+  }
+
+  .mucho-mas-preescolar__card-link:focus-visible {
+    outline: 2px solid #ffffff;
+    outline-offset: 3px;
+    border-radius: 4px;
+  }
+
+  /* SVG del repo viene en negro; sobre tarjeta azul se muestra blanco */
+  .mucho-mas-preescolar__card-arrow {
+    display: block;
+    max-width: 35px;
+    width: min(35px, 9vw);
+    height: auto;
+    filter: brightness(0) invert(1);
+  }
+
+  .mucho-mas-preescolar__card-age {
+    margin: 0 0 0.35rem;
+    font-size: 0.875rem;
+    font-weight: 500;
+    opacity: 0.95;
+  }
+
+  .mucho-mas-preescolar__card-title.text-h4 {
+    margin: 0;
+    color: #ffffff;
+    text-align: left;
+  }
+
+  .mucho-mas-preescolar__card-desc-inner {
+    padding-top: 1.25rem;
+  }
+
+  .mucho-mas-preescolar__card-list {
+    margin: 0;
+    padding: 0 0 0 clamp(0.9rem, 3vw, 1.15rem);
+    text-align: left;
+  }
+
+  .mucho-mas-preescolar__card-li {
+    margin: 0 0 0.55rem;
+    font-size: var(--text-body-primary-size, 1rem);
+    line-height: 1.55;
+    color: rgba(255, 255, 255, 0.95);
+  }
+
+  .mucho-mas-preescolar__card-li:last-child {
+    margin-bottom: 0;
+  }
+
+  @media (min-width: 768px) {
+    .mucho-mas-preescolar {
+      padding: 2.5rem 0 2.75rem;
+    }
+  }
+
+  @media (min-width: 1024px) {
+    .mucho-mas-preescolar {
+      padding: 4rem 0;
+    }
+  }
+</style>

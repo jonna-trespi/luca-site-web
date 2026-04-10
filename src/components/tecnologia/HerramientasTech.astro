@@ -1,0 +1,620 @@
+---
+/**
+ * Tecnología — sección Herramientas: grid de tarjetas con vídeos en autoplay.
+ * Vídeos: public/videos/tecnologia/video-1.mp4 … video-10.mp4 (orden de las tarjetas).
+ */
+const videoBase = '/videos/tecnologia';
+const videos = Array.from({ length: 10 }, (_, i) => `${videoBase}/video-${i + 1}.mp4`);
+
+const storeApp = '/logos/transversal/appstore.png';
+const storePlay = '/logos/transversal/googleplay.png';
+---
+
+<section class="herramientas-tech" aria-labelledby="herramientas-tech-heading">
+  <div class="herramientas-tech__inner layout-container">
+    <header class="herramientas-tech__header">
+      <p class="programas__label herramientas-tech__label">
+        <span class="programas__label-dot" aria-hidden="true"></span>
+        Herramientas
+      </p>
+      <h4 id="herramientas-tech-heading" class="text-h4 herramientas-tech__title">
+        Descubre la tecnología que impulsa el aprendizaje.
+      </h4>
+    </header>
+
+    <div class="herramientas-tech__grid">
+      <!-- Fila 1 -->
+      <article class="herramientas-tech__card herramientas-tech__card--stack herramientas-tech__card--tone-ia">
+        <div class="herramientas-tech__copy herramientas-tech__copy--center">
+          <h4 class="text-h4">Inteligencia artificial</h4>
+          <p class="text-body-secondary">
+            Tecnología de última generación, diseñada para que el proceso de enseñanza sea fluido y sencillo.
+          </p>
+        </div>
+        <div class="herramientas-tech__media">
+          <video
+            class="herramientas-tech__video"
+            muted
+            playsinline
+            autoplay
+            loop
+            preload="metadata"
+            aria-label="Vista previa de inteligencia artificial en Luca"
+          >
+            <source src={videos[0]} type="video/mp4" />
+          </video>
+        </div>
+      </article>
+
+      <article class="herramientas-tech__card herramientas-tech__card--stack herramientas-tech__card--tone-gam">
+        <div class="herramientas-tech__copy herramientas-tech__copy--center">
+          <h4 class="text-h4">Gamificación</h4>
+          <p class="text-body-secondary">
+            Aprender es una experiencia motivadora, que despierta la curiosidad a través del juego.
+          </p>
+        </div>
+        <div class="herramientas-tech__media">
+          <video
+            class="herramientas-tech__video"
+            muted
+            playsinline
+            autoplay
+            loop
+            preload="metadata"
+            aria-label="Vista previa de gamificación en Luca"
+          >
+            <source src={videos[1]} type="video/mp4" />
+          </video>
+        </div>
+      </article>
+
+      <article class="herramientas-tech__card herramientas-tech__card--stack herramientas-tech__card--tone-video">
+        <div class="herramientas-tech__copy herramientas-tech__copy--center">
+          <h4 class="text-h4">Video lecciones</h4>
+          <p class="text-body-secondary">
+            Transforma el currículo en historias inmersivas con videos que conectan lecciones con la vida real.
+          </p>
+        </div>
+        <div class="herramientas-tech__media">
+          <video
+            class="herramientas-tech__video"
+            muted
+            playsinline
+            autoplay
+            loop
+            preload="metadata"
+            aria-label="Vista previa de video lecciones en Luca"
+          >
+            <source src={videos[2]} type="video/mp4" />
+          </video>
+        </div>
+      </article>
+
+      <!-- Fila 2 -->
+      <article class="herramientas-tech__card herramientas-tech__card--stack herramientas-tech__card--tone-exam">
+        <div class="herramientas-tech__copy herramientas-tech__copy--center">
+          <h4 class="text-h4">Generador de exámenes</h4>
+          <p class="text-body-secondary">
+            Reduce la carga operativa al generar exámenes completos y personalizados en minutos.
+          </p>
+        </div>
+        <div class="herramientas-tech__media">
+          <video
+            class="herramientas-tech__video"
+            muted
+            playsinline
+            autoplay
+            loop
+            preload="metadata"
+            aria-label="Vista previa del generador de exámenes"
+          >
+            <source src={videos[3]} type="video/mp4" />
+          </video>
+        </div>
+      </article>
+
+      <article class="herramientas-tech__card herramientas-tech__card--invert herramientas-tech__card--tone-proy">
+        <div class="herramientas-tech__media herramientas-tech__media--top">
+          <video
+            class="herramientas-tech__video"
+            muted
+            playsinline
+            autoplay
+            loop
+            preload="metadata"
+            aria-label="Vista previa del generador de proyectos"
+          >
+            <source src={videos[4]} type="video/mp4" />
+          </video>
+        </div>
+        <div class="herramientas-tech__copy herramientas-tech__copy--center">
+          <h4 class="text-h4">Generador de proyectos</h4>
+          <p class="text-body-secondary">
+            Personaliza proyectos educativos y realiza planeaciones de calidad, alineados a tu visión!
+          </p>
+        </div>
+      </article>
+
+      <article class="herramientas-tech__card herramientas-tech__card--stack herramientas-tech__card--tone-essay">
+        <div class="herramientas-tech__copy herramientas-tech__copy--center">
+          <h4 class="text-h4">Calificación de ensayos</h4>
+          <p class="text-body-secondary">
+            Asigna ensayos con corrección automática de ortografía y sintaxis con apoyo de IA.
+          </p>
+        </div>
+        <div class="herramientas-tech__media">
+          <video
+            class="herramientas-tech__video"
+            muted
+            playsinline
+            autoplay
+            loop
+            preload="metadata"
+            aria-label="Vista previa de calificación de ensayos"
+          >
+            <source src={videos[5]} type="video/mp4" />
+          </video>
+        </div>
+      </article>
+
+      <!-- Fila 3: 1/3 + 2/3 -->
+      <article class="herramientas-tech__card herramientas-tech__card--bot herramientas-tech__card--tone-bot">
+        <div class="herramientas-tech__copy herramientas-tech__copy--left">
+          <h4 class="text-h4">Luca Bot</h4>
+          <p class="text-body-secondary">
+            Acompaña al alumno con un chat de tutoría educativa, en un entorno seguro que impulsa el aprendizaje.
+          </p>
+        </div>
+        <div class="herramientas-tech__media herramientas-tech__media--badge">
+          <span class="herramientas-tech__ai-badge" aria-hidden="true">
+            <svg width="48" height="48" viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <circle cx="24" cy="24" r="24" fill="#6B46C1"></circle>
+              <path
+                d="M24 12l2.4 7.2h7.6l-6.1 4.5 2.3 7.1L24 29.2l-6.2 4.6 2.3-7.1-6.1-4.5h7.6L24 12z"
+                fill="white"></path>
+            </svg>
+          </span>
+          <div class="herramientas-tech__media-inner">
+            <video
+              class="herramientas-tech__video"
+              muted
+              playsinline
+              autoplay
+              loop
+              preload="metadata"
+              aria-label="Vista previa de Luca Bot"
+            >
+              <source src={videos[6]} type="video/mp4" />
+            </video>
+          </div>
+        </div>
+      </article>
+
+      <article class="herramientas-tech__card herramientas-tech__card--app herramientas-tech__card--span-2 herramientas-tech__card--tone-app">
+        <div class="herramientas-tech__app-media">
+          <video
+            class="herramientas-tech__video"
+            muted
+            playsinline
+            autoplay
+            loop
+            preload="metadata"
+            aria-label="Vista previa de la app Luca"
+          >
+            <source src={videos[7]} type="video/mp4" />
+          </video>
+        </div>
+        <div class="herramientas-tech__app-aside">
+          <div class="herramientas-tech__stores">
+            <img src={storeApp} alt="" width="120" height="40" loading="lazy" decoding="async" />
+            <img src={storePlay} alt="" width="120" height="40" loading="lazy" decoding="async" />
+          </div>
+          <h4 class="text-h4">App Luca</h4>
+          <p class="text-body-secondary">
+            Consulta y asigna contenido a tus alumnos , incluso sin conexión a internet.
+          </p>
+        </div>
+      </article>
+
+      <!-- Fila 4: 1/3 + 2/3 -->
+      <article class="herramientas-tech__card herramientas-tech__card--stack herramientas-tech__card--tone-song">
+        <div class="herramientas-tech__copy herramientas-tech__copy--center">
+          <h4 class="text-h4">Generador de canciones</h4>
+          <p class="text-body-secondary">
+            Crea canciones didácticas para que los alumnos desarrollen motricidad, memoria y atención, de forma natural.
+          </p>
+        </div>
+        <div class="herramientas-tech__media">
+          <video
+            class="herramientas-tech__video"
+            muted
+            playsinline
+            autoplay
+            loop
+            preload="metadata"
+            aria-label="Vista previa del generador de canciones"
+          >
+            <source src={videos[8]} type="video/mp4" />
+          </video>
+        </div>
+      </article>
+
+      <article
+        class="herramientas-tech__card herramientas-tech__card--story herramientas-tech__card--span-2 herramientas-tech__card--tone-story"
+      >
+        <div class="herramientas-tech__copy herramientas-tech__copy--left">
+          <h4 class="text-h4">Generador de historias</h4>
+          <p class="text-body-secondary">
+            Alimenta la imaginación de tus alumnos creando historias narradas de forma sencilla y con la voz que elijas.
+          </p>
+        </div>
+        <div class="herramientas-tech__media herramientas-tech__media--wide">
+          <video
+            class="herramientas-tech__video"
+            muted
+            playsinline
+            autoplay
+            loop
+            preload="metadata"
+            aria-label="Vista previa del generador de historias"
+          >
+            <source src={videos[9]} type="video/mp4" />
+          </video>
+        </div>
+      </article>
+    </div>
+  </div>
+</section>
+
+<style>
+  .herramientas-tech {
+    width: 100%;
+    background-color: var(--color-bg-base);
+    padding: clamp(3rem, 6vw, 5rem) 0 clamp(4rem, 8vw, 6rem);
+    box-sizing: border-box;
+  }
+
+  .herramientas-tech__header {
+    text-align: center;
+    max-width: 52rem;
+    margin-left: auto;
+    margin-right: auto;
+  }
+
+  /* 24px label → título; 40px título → grid */
+  .herramientas-tech__label {
+    margin: 0 auto 24px;
+  }
+
+  .herramientas-tech__title {
+    margin: 0 auto 40px;
+    color: var(--color-black);
+  }
+
+  .herramientas-tech__grid {
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 20px;
+    align-items: stretch;
+    overflow: visible;
+    isolation: isolate;
+  }
+
+  .herramientas-tech__card {
+    border-radius: 24px;
+    padding: 24px;
+    box-sizing: border-box;
+    min-height: 0;
+    position: relative;
+    z-index: 0;
+    transform-origin: center center;
+    transition:
+      transform 0.55s cubic-bezier(0.22, 1, 0.36, 1),
+      box-shadow 0.55s ease,
+      z-index 0s linear 0.55s;
+  }
+
+  .herramientas-tech__card--span-2 {
+    grid-column: span 2;
+  }
+
+  /* Fondos pastel por tarjeta */
+  .herramientas-tech__card--tone-ia {
+    background: #e3e9fb;
+  }
+  .herramientas-tech__card--tone-gam {
+    background: #dff5f2;
+  }
+  .herramientas-tech__card--tone-video {
+    background: #fff5e8;
+  }
+  .herramientas-tech__card--tone-exam {
+    background: #d4f0ed;
+  }
+  .herramientas-tech__card--tone-proy {
+    background: #e0efff;
+  }
+  .herramientas-tech__card--tone-essay {
+    background: #ffe8ec;
+  }
+  .herramientas-tech__card--tone-bot {
+    background: #ffe8d4;
+  }
+  .herramientas-tech__card--tone-app {
+    background: #fff9e0;
+  }
+  .herramientas-tech__card--tone-song {
+    background: #f0f6ff;
+  }
+  .herramientas-tech__card--tone-story {
+    background: #e8f5ee;
+  }
+
+  .herramientas-tech__card .text-h4 {
+    margin: 0 0 10px;
+    color: var(--color-black);
+  }
+
+  .herramientas-tech__card .text-body-secondary {
+    margin: 0;
+    color: var(--color-text-base);
+    opacity: 0.92;
+  }
+
+  /* Stack: texto arriba centrado, vídeo abajo */
+  .herramientas-tech__card--stack {
+    display: flex;
+    flex-direction: column;
+    align-items: stretch;
+    min-height: clamp(320px, 38vw, 420px);
+  }
+
+  .herramientas-tech__copy {
+    flex-shrink: 0;
+  }
+
+  .herramientas-tech__copy--center {
+    text-align: center;
+    max-width: 100%;
+  }
+
+  .herramientas-tech__copy--left {
+    text-align: left;
+  }
+
+  .herramientas-tech__media {
+    margin-top: auto;
+    width: 100%;
+    max-width: 100%;
+    border-radius: 16px;
+    overflow: hidden;
+    background: var(--color-black);
+    box-shadow: inset 0 0 0 1px rgba(0, 0, 0, 0.04);
+  }
+
+  .herramientas-tech__video {
+    display: block;
+    width: 100%;
+    height: auto;
+    aspect-ratio: 16 / 9;
+    object-fit: cover;
+    transform-origin: center center;
+    transition: transform 0.55s cubic-bezier(0.22, 1, 0.36, 1);
+  }
+
+  /* Hover: Δvídeo = 2 × Δtarjeta (referencia el vídeo). Ej. vídeo +0.38 → tarjeta +0.19 */
+  @media (hover: hover) and (pointer: fine) {
+    .herramientas-tech__card:hover {
+      z-index: 2;
+      transform: scale(1.19);
+      box-shadow: 0 22px 48px rgba(0, 0, 0, 0.12);
+      transition:
+        transform 0.55s cubic-bezier(0.22, 1, 0.36, 1),
+        box-shadow 0.55s ease,
+        z-index 0s;
+    }
+
+    .herramientas-tech__card:hover .herramientas-tech__video {
+      transform: scale(1.38);
+    }
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .herramientas-tech__card {
+      transition: none;
+    }
+
+    .herramientas-tech__video {
+      transition: none;
+    }
+
+    @media (hover: hover) and (pointer: fine) {
+      .herramientas-tech__card:hover {
+        transform: none;
+        box-shadow: none;
+      }
+
+      .herramientas-tech__card:hover .herramientas-tech__video {
+        transform: none;
+      }
+    }
+  }
+
+  /* Invertido: vídeo arriba, texto abajo centrado */
+  .herramientas-tech__card--invert {
+    display: flex;
+    flex-direction: column;
+    min-height: clamp(320px, 38vw, 420px);
+  }
+
+  .herramientas-tech__media--top {
+    flex: 1 1 auto;
+    min-height: 0;
+    margin: 0;
+    border-radius: 16px;
+    overflow: hidden;
+    background: var(--color-black);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .herramientas-tech__card--invert .herramientas-tech__copy {
+    flex-shrink: 0;
+    padding-top: 20px;
+  }
+
+  .herramientas-tech__card--invert .herramientas-tech__video {
+    aspect-ratio: 16 / 9;
+    width: 100%;
+    height: 100%;
+    max-height: 100%;
+    object-fit: cover;
+  }
+
+  /* Luca Bot: texto izquierda, badge sobre vídeo */
+  .herramientas-tech__card--bot {
+    display: flex;
+    flex-direction: column;
+    min-height: clamp(320px, 38vw, 420px);
+  }
+
+  .herramientas-tech__media--badge {
+    position: relative;
+    margin-top: auto;
+    width: 100%;
+  }
+
+  .herramientas-tech__media-inner {
+    border-radius: 16px;
+    overflow: hidden;
+    background: var(--color-black);
+  }
+
+  .herramientas-tech__ai-badge {
+    position: absolute;
+    top: -14px;
+    left: -14px;
+    z-index: 2;
+    width: 48px;
+    height: 48px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    filter: drop-shadow(0 6px 14px rgba(0, 0, 0, 0.12));
+    pointer-events: none;
+  }
+
+  .herramientas-tech__ai-badge svg {
+    display: block;
+    width: 48px;
+    height: 48px;
+  }
+
+  /* App Luca: fila horizontal */
+  .herramientas-tech__card--app {
+    display: flex;
+    flex-direction: row;
+    align-items: stretch;
+    gap: 28px;
+    min-height: clamp(280px, 32vw, 380px);
+    padding: 24px 28px;
+  }
+
+  .herramientas-tech__app-media {
+    flex: 1 1 56%;
+    min-width: 0;
+    border-radius: 16px;
+    overflow: hidden;
+    background: var(--color-black);
+    align-self: center;
+  }
+
+  .herramientas-tech__app-media .herramientas-tech__video {
+    width: 100%;
+    height: 100%;
+    min-height: 200px;
+    aspect-ratio: 16 / 9;
+    object-fit: cover;
+  }
+
+  .herramientas-tech__app-aside {
+    flex: 1 1 44%;
+    min-width: 0;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: flex-start;
+    text-align: left;
+    gap: 0;
+  }
+
+  .herramientas-tech__stores {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px 12px;
+    margin-bottom: 16px;
+  }
+
+  .herramientas-tech__stores img {
+    height: 40px;
+    width: auto;
+    max-width: 120px;
+  }
+
+  .herramientas-tech__app-aside .text-h4 {
+    margin-bottom: 10px;
+  }
+
+  /* Historias: texto arriba izquierda, vídeo ancho abajo */
+  .herramientas-tech__card--story {
+    display: flex;
+    flex-direction: column;
+    min-height: clamp(300px, 34vw, 400px);
+  }
+
+  .herramientas-tech__media--wide {
+    margin-top: auto;
+    width: 100%;
+    border-radius: 16px;
+    overflow: hidden;
+    background: var(--color-black);
+  }
+
+  @media (max-width: 1023px) {
+    .herramientas-tech__grid {
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+
+    .herramientas-tech__card--span-2 {
+      grid-column: span 2;
+    }
+  }
+
+  @media (max-width: 767px) {
+    .herramientas-tech__grid {
+      grid-template-columns: 1fr;
+      gap: 16px;
+    }
+
+    .herramientas-tech__card--span-2 {
+      grid-column: span 1;
+    }
+
+    .herramientas-tech__card--app {
+      flex-direction: column;
+      align-items: stretch;
+      gap: 20px;
+    }
+
+    .herramientas-tech__app-media {
+      flex: none;
+      width: 100%;
+    }
+
+    .herramientas-tech__app-aside {
+      align-items: flex-start;
+    }
+  }
+</style>

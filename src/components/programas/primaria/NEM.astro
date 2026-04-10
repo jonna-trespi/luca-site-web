@@ -1,0 +1,208 @@
+---
+/**
+ * NEM: alineación con Nueva Escuela Mexicana (Primaria).
+ */
+---
+
+<section class="nem">
+  <img
+    class="nem__geo"
+    src="/images/programas/primaria/geo-3.png"
+    alt=""
+    width="350"
+    height="350"
+    aria-hidden="true"
+    loading="lazy"
+    decoding="async"
+  />
+
+  <div class="nem__inner layout-container">
+    <header class="nem__header">
+      <p class="programas__label">
+        <span class="programas__label-dot" aria-hidden="true"></span>
+        NEM
+      </p>
+      <h3 class="nem__title text-h3">
+        Educación alineada con la Nueva Escuela Mexicana<span class="nem__title-dot">.</span>
+      </h3>
+    </header>
+
+    <div class="nem__content">
+      <div class="nem__text">
+        <p class="nem__lead text-subtitle-1">¿Cómo se integran la NEM y Luca?</p>
+        <ul class="nem__list">
+          <li class="nem__item">
+            <strong class="nem__item-strong">Enfoque humanista e inclusivo,</strong> enfocado en aprendizajes con sentido.
+          </li>
+          <li class="nem__item">
+            <strong class="nem__item-strong">Estudiante como protagonista</strong> del proceso educativo.
+          </li>
+          <li class="nem__item">
+            <strong class="nem__item-strong">Evaluación formativa</strong> continua que guía el progreso.
+          </li>
+          <li class="nem__item">
+            <strong class="nem__item-strong">Aprendizaje por proyectos</strong> conectados con el contexto real.
+          </li>
+          <li class="nem__item">
+            <strong class="nem__item-strong">Herramientas digitales</strong> aplicadas al aula.
+          </li>
+        </ul>
+      </div>
+      <div class="nem__media">
+        <img
+          class="nem__media-img"
+          src="/images/programas/primaria/nem.webp"
+          alt="Docente con estudiantes en el aula"
+          width="520"
+          height="390"
+          loading="lazy"
+          decoding="async"
+        />
+      </div>
+    </div>
+  </div>
+</section>
+
+<style>
+  .nem {
+    position: relative;
+    width: 100%;
+    background-color: var(--color-bg-base);
+    padding-top: 120px;
+    padding-bottom: clamp(2.5rem, 5vw, 4rem);
+    overflow: visible;
+    box-sizing: border-box;
+  }
+
+  /* Figura geométrica del fondo (derecha) */
+  .nem__geo {
+    position: absolute;
+    right: 0;
+    top: 50%;
+    transform: translateY(-50%);
+    max-width: 350px;
+    width: min(350px, 42vw);
+    height: auto;
+    pointer-events: none;
+    user-select: none;
+    object-fit: contain;
+    z-index: 0;
+  }
+
+  .nem__inner {
+    position: relative;
+    z-index: 1;
+    width: 100%;
+    max-width: var(--layout-max-width);
+    margin-left: auto;
+    margin-right: auto;
+    padding-left: var(--layout-padding-x);
+    padding-right: var(--layout-padding-x);
+  }
+
+  .nem__header {
+    text-align: center;
+    margin-bottom: 64px;
+  }
+
+  /* Tipografía: .text-h3 (global.css) */
+  .nem__title {
+    color: var(--color-text-base);
+    max-width: 800px;
+    margin: 0 auto;
+  }
+
+  .nem__title-dot {
+    color: var(--color-red);
+  }
+
+  .nem__content {
+    width: 100%;
+    max-width: 1100px;
+    margin-left: auto;
+    margin-right: auto;
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 2rem;
+    align-items: start;
+    box-sizing: border-box;
+  }
+
+  /* .text-subtitle-1 en global; solo color y márgenes locales */
+  .nem__lead {
+    color: var(--color-text-base);
+    margin: 0 0 45px;
+  }
+
+  .nem__list {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+  }
+
+  .nem__item {
+    font-family: var(--font-family-base);
+    font-weight: 400;
+    font-size: var(--text-body-secondary-size);
+    line-height: 1.6;
+    color: var(--color-text-base);
+    padding-left: 1.25rem;
+    margin-bottom: 32px;
+    position: relative;
+  }
+
+  .nem__item:last-child {
+    margin-bottom: 0;
+  }
+
+  .nem__item::before {
+    content: '';
+    position: absolute;
+    left: 0;
+    top: 0.6em;
+    width: 6px;
+    height: 6px;
+    border-radius: 50%;
+    background: var(--color-text-base);
+  }
+
+  .nem__item-strong {
+    font-weight: 700;
+    color: var(--color-text-base);
+  }
+
+  .nem__media {
+    position: relative;
+    width: 100%;
+    display: flex;
+    justify-content: center;
+  }
+
+  .nem__media-img {
+    display: block;
+    width: 100%;
+    max-width: 520px;
+    height: auto;
+    border-radius: 24px;
+    position: relative;
+    z-index: 1;
+  }
+
+  @media (min-width: 768px) {
+    .nem__content {
+      grid-template-columns: 1fr 1fr;
+      gap: clamp(2rem, 4vw, 3rem);
+      align-items: center;
+    }
+
+    .nem__media {
+      justify-content: flex-end;
+    }
+  }
+
+  @media (min-width: 1024px) {
+    .nem__media-img {
+      border-radius: 28px;
+    }
+  }
+</style>

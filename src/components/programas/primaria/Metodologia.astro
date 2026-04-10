@@ -1,0 +1,381 @@
+---
+/**
+ * Metodología Primaria: grid como Preescolar — GIF en círculo con `iconBg`; assets en /gif/programas/primaria/metodologia-*.gif.
+ */
+const cards = [
+  {
+    gif: '/gif/programas/primaria/metodologia-1.gif',
+    iconBg: '#FF8BA7',
+    title: 'Singapur',
+    text: 'Aprendizaje profundo de conceptos matemáticos.',
+  },
+  {
+    gif: '/gif/programas/primaria/metodologia-2.gif',
+    iconBg: '#3843D0',
+    title: 'Finlandia + TPRS',
+    text: 'Lecturas con enfoque humano que dan vida al aprendizaje.',
+  },
+  {
+    gif: '/gif/programas/primaria/metodologia-3.gif',
+    iconBg: '#FFBA31',
+    title: 'PISA',
+    text: 'Formación en 3 competencias: Lectora, Matemática y Científica.',
+  },
+  {
+    gif: '/gif/programas/primaria/metodologia-4.gif',
+    iconBg: '#32CBBD',
+    title: 'Inglés',
+    text: 'Preparación para certificaciones Cambridge o TOEFL.',
+  },
+  {
+    gif: '/gif/programas/primaria/metodologia-5.gif',
+    iconBg: '#283094',
+    title: 'Constructivismo',
+    text: 'El alumno genera su propio conocimiento.',
+  },
+  {
+    gif: '/gif/programas/primaria/metodologia-6.gif',
+    iconBg: '#A67C52',
+    title: 'Microlearning',
+    text: 'Retención de lo aprendido con cápsulas breves y prácticas.',
+  },
+];
+---
+
+<section class="metodologia">
+  <div class="metodologia__strip">
+    <img
+      class="metodologia__deco metodologia__deco--right"
+      src="/images/programas/primaria/geo-5.png"
+      alt=""
+      width="236"
+      height="335"
+      loading="lazy"
+      decoding="async"
+      aria-hidden="true"
+    />
+    <img
+      class="metodologia__deco metodologia__deco--left"
+      src="/images/programas/primaria/geo-6.png"
+      alt=""
+      width="694"
+      height="1005"
+      loading="lazy"
+      decoding="async"
+      aria-hidden="true"
+    />
+
+    <div class="metodologia__inner layout-container">
+      <header class="metodologia__header">
+        <p class="programas__label">
+          <span class="programas__label-dot" aria-hidden="true"></span>
+          Con Luca aprender es divertido
+        </p>
+        <div class="metodologia__title-row">
+          <h3 class="metodologia__title text-h3">
+            Metodologías que facilitan el aprendizaje<span class="metodologia__title-dot">.</span>
+          </h3>
+        </div>
+      </header>
+
+      <div class="metodologia__grid-wrap">
+        <ul class="metodologia__grid">
+          {cards.map((card) => (
+            <li class="metodologia__card">
+              <span class="metodologia__card-icon" style={`background-color: ${card.iconBg}`}>
+                <img
+                  class="metodologia__card-icon-gif"
+                  src={card.gif}
+                  alt=""
+                  width="40"
+                  height="40"
+                  loading="lazy"
+                  decoding="async"
+                />
+              </span>
+              <h4 class="metodologia__card-title text-subtitle-1">{card.title}</h4>
+              <p class="metodologia__card-text text-body-primary">{card.text}</p>
+            </li>
+          ))}
+        </ul>
+        <img
+          class="metodologia__mascot"
+          src="/images/programas/primaria/avatar.png"
+          alt=""
+          width="240"
+          height="240"
+          loading="lazy"
+          decoding="async"
+          aria-hidden="true"
+        />
+      </div>
+
+      <div class="metodologia__cta-wrap">
+        <a href="/contacto" class="btn-base btn-primary btn-cta-animated metodologia__cta">
+          <span>Solicita tu demo</span>
+          <span class="metodologia__cta-icon" aria-hidden="true">
+            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+              <path
+                fill-rule="evenodd"
+                clip-rule="evenodd"
+                d="M11.235 16.089C11.105 16.178 10.958 16.221 10.811 16.221C10.572 16.221 10.338 16.108 10.192 15.896C9.958 15.555 10.044 15.088 10.385 14.853C11.969 13.763 13.445 12.415 13.542 11.969C13.445 11.583 11.969 10.236 10.385 9.148C10.045 8.913 9.958 8.446 10.192 8.105C10.426 7.763 10.892 7.677 11.235 7.911C12.656 8.887 15.04 10.716 15.04 11.999C15.04 13.282 12.656 15.112 11.235 16.089ZM12.25 2.25C5.051 2.25 2.5 4.802 2.5 12C2.5 19.198 5.051 21.75 12.25 21.75C19.448 21.75 22 19.198 22 12C22 4.802 19.448 2.25 12.25 2.25Z"
+                fill="currentColor"></path>
+            </svg>
+          </span>
+        </a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<style>
+  .metodologia {
+    width: 100%;
+    background-color: transparent;
+    padding: 1.75rem 0 2rem;
+    box-sizing: border-box;
+    overflow-x: clip;
+  }
+
+  /* Franja: casi ancho completo en móvil; 80% desde tablet */
+  .metodologia__strip {
+    width: min(100%, 94%);
+    max-width: 100%;
+    margin-left: auto;
+    margin-right: auto;
+    background-color: #edf5ff;
+    border-radius: clamp(22px, 5vw, 50px);
+    position: relative;
+    overflow: visible;
+    padding: clamp(1.5rem, 4vw, 84px) 0;
+    box-sizing: border-box;
+  }
+
+  .metodologia__deco {
+    position: absolute;
+    display: block;
+    pointer-events: none;
+    user-select: none;
+    z-index: 0;
+  }
+
+  .metodologia__deco--right {
+    top: 5%;
+    right: 0;
+    max-width: 140px;
+    width: min(140px, 22vw);
+    height: auto;
+  }
+
+  .metodologia__deco--left {
+    left: 0;
+    bottom: 0;
+    max-width: 350px;
+    width: min(350px, 55vw);
+    height: auto;
+  }
+
+  .metodologia__grid-wrap {
+    position: relative;
+    margin: 0 0 clamp(1.25rem, 4vw, 2rem);
+  }
+
+  .metodologia__mascot {
+    position: absolute;
+    left: max(-3%, -0.75rem);
+    bottom: max(-4%, -0.75rem);
+    max-width: 120px;
+    width: min(120px, 28vw);
+    height: auto;
+    object-fit: contain;
+    z-index: 4;
+    pointer-events: none;
+  }
+
+  @media (max-width: 767px) {
+    .metodologia__deco--right,
+    .metodologia__mascot {
+      display: none;
+    }
+  }
+
+  .metodologia__inner {
+    position: relative;
+    z-index: 2;
+    width: 100%;
+    max-width: var(--layout-max-width);
+    margin-left: auto;
+    margin-right: auto;
+    padding-left: var(--layout-padding-x);
+    padding-right: var(--layout-padding-x);
+  }
+
+  .metodologia__header {
+    text-align: center;
+    margin: 0;
+  }
+
+  .metodologia__header .programas__label {
+    justify-content: center;
+    margin-bottom: 20px;
+  }
+
+  .metodologia__title-row {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 1rem;
+    margin: 0 0 clamp(1.75rem, 5vw, 3rem);
+    max-width: 100%;
+  }
+
+  @media (min-width: 768px) {
+    .metodologia__strip {
+      width: 80%;
+      border-radius: 50px;
+      overflow: visible;
+    }
+
+    .metodologia__title-row {
+      flex-direction: row;
+      flex-wrap: wrap;
+      justify-content: center;
+      align-items: center;
+      gap: 1.25rem 1.5rem;
+      margin-bottom: clamp(2.5rem, 5vw, 4rem);
+    }
+  }
+
+  @media (min-width: 1024px) {
+    .metodologia__title-row {
+      margin-bottom: 5rem;
+    }
+  }
+
+  .metodologia__title {
+    margin: 0;
+    max-width: 42rem;
+    color: var(--color-text-base);
+    text-align: center;
+  }
+
+  .metodologia__title-dot {
+    color: var(--color-red);
+  }
+
+  .metodologia__grid {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: clamp(0.75rem, 2vw, 1rem);
+    position: relative;
+    z-index: 1;
+  }
+
+  .metodologia__card {
+    background: var(--color-white);
+    border-radius: clamp(20px, 4vw, 30px);
+    padding: clamp(1.75rem, 5vw, 3.375rem) clamp(1.15rem, 4vw, 2rem);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: clamp(1.1rem, 3.5vw, 2.2rem);
+    text-align: center;
+    box-sizing: border-box;
+    box-shadow: 0 4px 20px rgba(40, 48, 148, 0.08);
+    min-width: 0;
+  }
+
+  .metodologia__card-icon {
+    width: 56px;
+    height: 56px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: 0;
+    flex-shrink: 0;
+    overflow: hidden;
+  }
+
+  .metodologia__card-icon-gif {
+    width: 40px;
+    height: 40px;
+    object-fit: contain;
+    display: block;
+    flex-shrink: 0;
+  }
+
+  .metodologia__card-title {
+    margin: 0;
+    color: var(--color-text-base);
+  }
+
+  .metodologia__card-text {
+    margin: 0;
+    color: var(--color-text-base);
+  }
+
+  .metodologia__cta-wrap {
+    text-align: center;
+  }
+
+  .metodologia__cta {
+    color: var(--color-white);
+  }
+
+  .metodologia__cta .metodologia__cta-icon {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    color: var(--color-white);
+  }
+
+  .metodologia__cta .metodologia__cta-icon svg {
+    width: 1.25rem;
+    height: 1.25rem;
+  }
+
+  @media (min-width: 600px) {
+    .metodologia__grid {
+      grid-template-columns: repeat(2, 1fr);
+      gap: 1.25rem;
+    }
+  }
+
+  @media (min-width: 900px) {
+    .metodologia__grid {
+      grid-template-columns: repeat(3, 1fr);
+      gap: 1.25rem;
+    }
+  }
+
+  @media (min-width: 768px) {
+    .metodologia {
+      padding: 2.5rem 0 2.75rem;
+    }
+
+    .metodologia__grid-wrap {
+      margin-bottom: clamp(1.75rem, 3vw, 2.5rem);
+    }
+
+    .metodologia__grid {
+      gap: 1.35rem;
+    }
+
+    .metodologia__mascot {
+      left: -5%;
+      bottom: -5%;
+      max-width: 140px;
+      width: min(140px, 24vw);
+    }
+  }
+
+  @media (min-width: 1024px) {
+    .metodologia {
+      padding: 4rem 0;
+    }
+  }
+</style>

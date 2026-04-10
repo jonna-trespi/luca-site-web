@@ -1,0 +1,23 @@
+---
+import Layout from '../layouts/Layout.astro';
+import Header from '../components/Header.astro';
+import Footer from '../components/Footer.astro';
+import ContactoHero from '../components/contacto/ContactoHero.astro';
+import ContactoFormSection from '../components/contacto/ContactoFormSection.astro';
+import ContactoChannels from '../components/contacto/ContactoChannels.astro';
+import ContactoFaq from '../components/contacto/ContactoFaq.astro';
+---
+
+<Layout
+  title="Contacto - Luca"
+  description="Contacta al equipo de Luca: consultas comerciales, implementación en tu escuela, soporte y alianzas. Estamos para ayudarte a transformar la educación."
+>
+  <Header />
+  <main>
+    <ContactoHero />
+    <ContactoFormSection />
+    <ContactoChannels />
+    <ContactoFaq />
+  </main>
+  <Footer />
+</Layout>

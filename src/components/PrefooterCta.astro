@@ -1,0 +1,141 @@
+---
+/**
+ * CTA previo al footer: tarjeta blanca con mascota (GIF) y botón primario,
+ * sobrepuesta ~64px sobre el footer (z-index + margen inferior negativo).
+ */
+---
+
+<section class="prefooter-cta" aria-labelledby="prefooter-cta-heading">
+  <div class="prefooter-cta__inner layout-container">
+    <div class="prefooter-cta__card">
+      <div class="prefooter-cta__content">
+        <h4 class="prefooter-cta__title text-h4" id="prefooter-cta-heading">
+          Hacemos de <span class="prefooter-cta__title-accent">la educación una misión</span> fácil, emocionante y al alcance de todos.
+        </h4>
+        <a href="/contacto" class="btn-base btn-primary btn-cta-animated prefooter-cta__cta">
+          <span>Solicita demo gratis</span>
+          <span class="prefooter-cta__cta-icon" aria-hidden="true">
+            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+              <path
+                fill-rule="evenodd"
+                clip-rule="evenodd"
+                d="M11.235 16.089C11.105 16.178 10.958 16.221 10.811 16.221C10.572 16.221 10.338 16.108 10.192 15.896C9.958 15.555 10.044 15.088 10.385 14.853C11.969 13.763 13.445 12.415 13.542 11.969C13.445 11.583 11.969 10.236 10.385 9.148C10.045 8.913 9.958 8.446 10.192 8.105C10.426 7.763 10.892 7.677 11.235 7.911C12.656 8.887 15.04 10.716 15.04 11.999C15.04 13.282 12.656 15.112 11.235 16.089ZM12.25 2.25C5.051 2.25 2.5 4.802 2.5 12C2.5 19.198 5.051 21.75 12.25 21.75C19.448 21.75 22 19.198 22 12C22 4.802 19.448 2.25 12.25 2.25Z"
+                fill="currentColor"></path>
+            </svg>
+          </span>
+        </a>
+      </div>
+      <div class="prefooter-cta__mascot-wrap" aria-hidden="true">
+        <img
+          class="prefooter-cta__mascot"
+          src="/gif/home/footer-icon.gif"
+          alt=""
+          width="150"
+          height="161"
+          loading="lazy"
+          decoding="async"
+        />
+      </div>
+    </div>
+  </div>
+</section>
+
+<style>
+  .prefooter-cta {
+    position: relative;
+    z-index: 2;
+    width: 100%;
+    background-color: #edf5ff;
+    /* Solapa 64px el bloque del footer (debajo, z-index menor) */
+    margin-bottom: -45px;
+    padding-top: 80px;
+    padding-bottom: 60px;
+  }
+
+  .prefooter-cta__inner {
+    max-width: 800px;
+    margin: 0 auto;
+  }
+
+  .prefooter-cta__card {
+    position: relative;
+    background: var(--color-white);
+    border-radius: 32px;
+    box-shadow: 0 20px 56px rgba(40, 48, 148, 0.12);
+    padding: clamp(1.75rem, 4vw, 2.5rem) clamp(1.25rem, 3vw, 2rem) clamp(2.5rem, 5vw, 3.25rem);
+    overflow: visible;
+  }
+
+  .prefooter-cta__content {
+    position: relative;
+    z-index: 1;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    gap: 1.75rem;
+  }
+
+  .prefooter-cta__title {
+    margin: 0;
+    max-width: 38rem;
+    color: var(--color-text-base);
+  }
+
+  .prefooter-cta__title-accent {
+    color: var(--color-blue-primary);
+  }
+
+  /* Mismo patrón que Impacto: icono blanco sin icon-circle */
+  .prefooter-cta__cta {
+    color: var(--color-white);
+  }
+
+  .prefooter-cta__cta .prefooter-cta__cta-icon {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    color: var(--color-white);
+  }
+
+  .prefooter-cta__cta .prefooter-cta__cta-icon svg {
+    width: 1.25rem;
+    height: 1.25rem;
+  }
+
+  /* Mascota: esquina inferior izquierda, fuera del flujo */
+  .prefooter-cta__mascot-wrap {
+    position: absolute;
+    z-index: 2;
+    left: clamp(-20px, -3vw, -8px);
+    bottom: clamp(-36px, -6vw, -20px);
+    pointer-events: none;
+    top: 80%;
+    line-height: 0;
+  }
+
+  .prefooter-cta__mascot {
+    display: block;
+    max-width: 120px;
+    width: auto;
+    height: auto;
+    object-fit: contain;
+  }
+
+  @media (min-width: 768px) {
+    .prefooter-cta__card {
+      padding-left: clamp(2rem, 4vw, 2.75rem);
+      padding-right: clamp(2rem, 4vw, 2.75rem);
+    }
+
+    .prefooter-cta__mascot-wrap {
+      left: clamp(-28px, -3.5vw, -12px);
+      bottom: clamp(-40px, -5vw, -24px);
+      top: 50%;
+    }
+
+    .prefooter-cta__mascot {
+      max-width: 210px;
+    }
+  }
+</style>

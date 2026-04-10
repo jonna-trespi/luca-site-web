@@ -1,0 +1,492 @@
+---
+/**
+ * Diferencia: dashboard simulado, características y estadísticas.
+ * Fondo full width; contenido centrado con .layout-container.
+ */
+const features = [
+  { label: 'Educación con IA', icon: '/icons/home/edu-ia.png' },
+  { label: 'Contenido visual', icon: '/icons/home/book.png' },
+  { label: 'Manipulativos de Matemáticas', icon: '/icons/home/math.png' },
+  { label: 'Aprendizaje gamificado', icon: '/icons/home/game.png' },
+  { label: 'Microlearning', icon: '/icons/home/video.png' },
+];
+
+const stats = [
+  {
+    n: 50,
+    suffix: '%',
+    line1: 'de ahorro en tiempo',
+    line2: 'administrativo docente.',
+  },
+  {
+    n: 4,
+    suffix: 'X',
+    line1: 'más uso que otras',
+    line2: 'plataformas.',
+  },
+  {
+    n: 25,
+    suffix: '%',
+    line1: 'de mejora académica',
+    line2: 'comprobada.',
+  },
+] as const;
+
+const demoVideoSrc = '/videos/demo-general.mp4';
+---
+
+<section class="diferencia">
+
+  <div class="diferencia__inner layout-container">
+    <header class="diferencia__header">
+      <p class="diferencia__label">
+        <span class="diferencia__label-dot" aria-hidden="true"></span>
+        Lo que nos diferencia
+      </p>
+      <h2 class="diferencia__title">
+        Cada clase, una aventura divertida.
+      </h2>
+    </header>
+
+    <div class="diferencia__video-container">
+      <img
+        class="diferencia__video-deco"
+        src="/images/home/geometrico-6.png"
+        alt=""
+        width="320"
+        height="320"
+        aria-hidden="true"
+      />
+      <div class="diferencia__video-wrap">
+        <video
+          class="diferencia__screen-video"
+          muted
+          playsinline
+          autoplay
+          loop
+          preload="metadata"
+          aria-label="Demostración general de la plataforma Luca"
+        >
+          <source src={demoVideoSrc} type="video/mp4" />
+        </video>
+      </div>
+    </div>
+
+    <!-- Bloque de características -->
+    <div class="diferencia__features">
+      <div class="diferencia__features-grid">
+        {features.map((feature) => (
+          <div class="diferencia__feature">
+            <img
+              class="diferencia__feature-icon"
+              src={feature.icon}
+              alt=""
+              width="42"
+              height="42"
+              aria-hidden="true"
+            />
+            <span class="diferencia__feature-label">{feature.label}</span>
+          </div>
+        ))}
+      </div>
+      <img
+        class="diferencia__feature-illus"
+        src="/images/home/diferencia-personaje.png"
+        alt=""
+        width="230"
+        height="230"
+        aria-hidden="true"
+      />
+    </div>
+
+    <div class="diferencia__cta-wrap">
+      <a href="/contacto" class="btn-base btn-primary btn-cta-animated diferencia__cta">
+        <span>Solicita una demo</span>
+        <span class="diferencia__cta-icon" aria-hidden="true">
+          <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+            <path fill-rule="evenodd" clip-rule="evenodd" d="M11.235 16.089C11.105 16.178 10.958 16.221 10.811 16.221C10.572 16.221 10.338 16.108 10.192 15.896C9.958 15.555 10.044 15.088 10.385 14.853C11.969 13.763 13.445 12.415 13.542 11.969C13.445 11.583 11.969 10.236 10.385 9.148C10.045 8.913 9.958 8.446 10.192 8.105C10.426 7.763 10.892 7.677 11.235 7.911C12.656 8.887 15.04 10.716 15.04 11.999C15.04 13.282 12.656 15.112 11.235 16.089ZM12.25 2.25C5.051 2.25 2.5 4.802 2.5 12C2.5 19.198 5.051 21.75 12.25 21.75C19.448 21.75 22 19.198 22 12C22 4.802 19.448 2.25 12.25 2.25Z" fill="currentColor"/>
+          </svg>
+        </span>
+      </a>
+    </div>
+
+    <ul class="diferencia__stats" id="diferencia-stats">
+      {stats.map((stat) => (
+        <li class="diferencia__stat">
+          <span
+            class="diferencia__stat-value"
+            data-diferencia-counter
+            data-target={String(stat.n)}
+            data-suffix={stat.suffix}
+          >
+            0{stat.suffix}
+          </span>
+          <span class="diferencia__stat-label">
+            <span class="diferencia__stat-label-line">{stat.line1}</span>
+            <span class="diferencia__stat-label-line">{stat.line2}</span>
+          </span>
+        </li>
+      ))}
+    </ul>
+  </div>
+</section>
+
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@600&display=swap');
+
+  .diferencia {
+    width: 100%;
+    background-color: #ffffff;
+    padding: 3rem 0;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .diferencia__blob {
+    position: absolute;
+    border-radius: 50%;
+    opacity: 0.25;
+    pointer-events: none;
+  }
+
+  .diferencia__blob--left {
+    width: min(280px, 50vw);
+    height: min(280px, 50vw);
+    top: -60px;
+    left: -60px;
+    background: var(--color-green);
+  }
+
+  /* Video container: wrapper para posicionar la decoración detrás de la esquina */
+  .diferencia__video-container {
+    position: relative;
+    z-index: 1;
+    max-width: 1080px;
+    margin-left: auto;
+    margin-right: auto;
+    margin-bottom: 0;
+  }
+
+  .diferencia__video-deco {
+    position: absolute;
+    top: 0;
+    right: 0;
+    transform: translate(40%, -40%);
+    max-width: 320px;
+    width: 100%;
+    height: auto;
+    z-index: 0;
+    pointer-events: none;
+  }
+
+  .diferencia__inner {
+    position: relative;
+    z-index: 1;
+  }
+
+  .diferencia__header {
+    text-align: center;
+    margin-bottom: 1.5rem;
+  }
+
+  .diferencia__label {
+    font-family: var(--font-family-base);
+    font-size: var(--text-section-label-size);
+    font-weight: var(--text-micro-weight);
+    letter-spacing: var(--text-micro-spacing);
+    line-height: var(--text-micro-line);
+    color: var(--color-blue-primary);
+    margin: 0 0 20px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.5rem;
+  }
+
+  .diferencia__label-dot {
+    width: 8px;
+    height: 8px;
+    border-radius: 50%;
+    background-color: var(--color-red);
+    flex-shrink: 0;
+  }
+
+  .diferencia__title {
+    font-family: var(--font-family-base);
+    font-weight: var(--text-h4-weight);
+    font-size: clamp(1.25rem, 2.5vw, var(--text-h4-size));
+    letter-spacing: var(--text-h4-spacing);
+    line-height: var(--text-h4-line);
+    color: var(--color-black);
+    margin: 0;
+    max-width: 1000px;
+    margin-left: auto;
+    margin-right: auto;
+  }
+
+  /* Captura de pantalla (dashboard Luca) */
+  .diferencia__video-wrap {
+    position: relative;
+    z-index: 1;
+    width: 100%;
+    border-radius: 24px;
+    overflow: hidden;
+    aspect-ratio: 16 / 9;
+    background: #e8ecf4;
+    border: 2px solid var(--color-blue-primary);
+  }
+
+  .diferencia__screen-video {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    object-position: center;
+    display: block;
+  }
+
+  /* Features: montado ~64px sobre la captura de pantalla */
+  .diferencia__features {
+    position: relative;
+    z-index: 2;
+    max-width: 850px;
+    margin-left: auto;
+    margin-right: auto;
+    margin-top: -40px;
+    margin-bottom: 42px;
+    background: var(--color-blue-secondary);
+    color: #fff;
+    padding: 2rem;
+    padding-right: 2rem;
+    padding-bottom: 2rem;
+    border-radius: 24px;
+    box-shadow: 0 8px 32px rgba(40, 48, 148, 0.25);
+    overflow: visible;
+  }
+
+  .diferencia__features-grid {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 1rem 1.5rem;
+    position: relative;
+    z-index: 1;
+  }
+
+  .diferencia__feature {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+  }
+
+  .diferencia__feature-icon {
+    width: 42px;
+    height: 42px;
+    flex-shrink: 0;
+    object-fit: contain;
+  }
+
+  .diferencia__feature-label {
+    font-family: var(--font-family-base);
+    font-weight: 600;
+    font-size: 0.9375rem;
+  }
+
+  .diferencia__feature-illus {
+    position: absolute;
+    right: 0;
+    bottom: 0;
+    max-width: 230px;
+    width: 100%;
+    height: auto;
+    z-index: 2;
+    pointer-events: none;
+    object-fit: contain;
+    /* Anclado a la esquina: parte superior solapa la tarjeta, pies y sombra quedan debajo */
+    transform: translate(15%, 28%);
+  }
+
+  @media (max-width: 767px) {
+    .diferencia__video-deco,
+    .diferencia__feature-illus {
+      display: none;
+    }
+  }
+
+  .diferencia__cta-wrap {
+    text-align: center;
+    margin-bottom: 0;
+  }
+
+  .diferencia__cta {
+    color: var(--color-white);
+  }
+
+  .diferencia__cta .diferencia__cta-icon {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    color: var(--color-white);
+  }
+
+  .diferencia__cta .diferencia__cta-icon svg {
+    width: 1.25rem;
+    height: 1.25rem;
+  }
+
+  .diferencia__stats {
+    list-style: none;
+    margin: 115px 0 0;
+    padding: 0;
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 1.5rem;
+  }
+
+  .diferencia__stat {
+    text-align: center;
+  }
+
+  .diferencia__stat-value {
+    display: block;
+    font-family: 'Poppins', sans-serif;
+    font-weight: 600;
+    font-size: clamp(2.75rem, 12vw, 100px);
+    line-height: 1;
+    color: var(--color-text-base);
+  }
+
+  .diferencia__stat-label {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin: 1.25rem auto 0;
+    max-width: min(15.5rem, 92vw);
+    font-family: var(--font-family-base);
+    font-size: 1.0625rem;
+    font-weight: 400;
+    letter-spacing: normal;
+    line-height: 1.45;
+    color: #3d3d3d;
+    text-align: center;
+  }
+
+  .diferencia__stat-label-line {
+    display: block;
+    width: 100%;
+    text-align: center;
+  }
+
+  @media (min-width: 600px) {
+    .diferencia__features-grid {
+      grid-template-columns: repeat(3, 1fr);
+    }
+
+    .diferencia__features {
+      padding-right: 120px;
+      padding-bottom: 60px;
+    }
+
+    .diferencia__stats {
+      grid-template-columns: repeat(3, 1fr);
+    }
+  }
+
+  @media (min-width: 768px) {
+    .diferencia {
+      padding: 4rem 0;
+    }
+  }
+
+  @media (min-width: 768px) and (max-width: 1023px) {
+    .diferencia__stats {
+      margin-top: 3.5rem;
+      gap: 1.25rem;
+    }
+
+    .diferencia__features {
+      padding-right: 100px;
+      padding-bottom: 48px;
+    }
+  }
+
+  @media (min-width: 1024px) {
+    .diferencia {
+      padding: 5rem 0;
+    }
+
+    .diferencia__features {
+      padding: 2.5rem;
+      padding-right: 120px;
+      padding-bottom: 60px;
+    }
+
+    .diferencia__features-grid {
+      grid-template-columns: repeat(3, 1fr);
+      gap: 1.5rem 2rem;
+    }
+  }
+</style>
+
+<script>
+  (function () {
+    const root = document.getElementById('diferencia-stats');
+    if (!root) return;
+
+    const counters = root.querySelectorAll('[data-diferencia-counter]');
+    if (!counters.length) return;
+
+    const reduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+    const durationMs = 1400;
+
+    function setFinal(el) {
+      const t = el.dataset.target;
+      const s = el.dataset.suffix ?? '';
+      if (t === undefined) return;
+      el.textContent = `${t}${s}`;
+    }
+
+    function runCounter(el) {
+      if (el.dataset.diferenciaAnimated === '1') return;
+      el.dataset.diferenciaAnimated = '1';
+
+      const target = Number(el.dataset.target);
+      const suffix = el.dataset.suffix ?? '';
+      if (Number.isNaN(target)) return;
+
+      if (reduced) {
+        setFinal(el);
+        return;
+      }
+
+      const start = performance.now();
+
+      function frame(now) {
+        const t = Math.min(1, (now - start) / durationMs);
+        const eased = 1 - Math.pow(1 - t, 3);
+        const current = Math.round(eased * target);
+        el.textContent = `${current}${suffix}`;
+        if (t < 1) {
+          requestAnimationFrame(frame);
+        } else {
+          el.textContent = `${target}${suffix}`;
+        }
+      }
+
+      requestAnimationFrame(frame);
+    }
+
+    const obs = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((entry) => {
+          if (!entry.isIntersecting) return;
+          counters.forEach((el) => runCounter(el));
+          obs.disconnect();
+        });
+      },
+      { threshold: 0.2, rootMargin: '0px 0px -40px 0px' }
+    );
+
+    obs.observe(root);
+  })();
+</script>

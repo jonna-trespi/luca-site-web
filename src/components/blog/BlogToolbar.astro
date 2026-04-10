@@ -1,0 +1,190 @@
+---
+/**
+ * Blog: buscador y chips de categoría (datos desde CSV vía getCategoryList).
+ */
+interface Props {
+  categories: string[];
+}
+
+const { categories } = Astro.props;
+const chips = ['Todas', ...categories];
+---
+
+<section class="blog-toolbar" data-blog-toolbar aria-label="Buscar y filtrar artículos del blog">
+  <div class="blog-toolbar__inner layout-container">
+    <div class="blog-toolbar__search">
+      <label class="visually-hidden" for="blog-search-input">Buscar artículos</label>
+      <div class="blog-toolbar__search-field">
+        <input
+          type="search"
+          id="blog-search-input"
+          class="blog-toolbar__search-input"
+          placeholder="Buscar artículos..."
+          autocomplete="off"
+          data-blog-search
+        />
+        <span class="blog-toolbar__search-icon" aria-hidden="true">
+          <svg width="22" height="22" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <path
+              d="M11 19a8 8 0 1 0 0-16 8 8 0 0 0 0 16zm9 2-4.35-4.35"
+              stroke="currentColor"
+              stroke-width="2"
+              stroke-linecap="round"
+              stroke-linejoin="round"></path>
+          </svg>
+        </span>
+      </div>
+    </div>
+
+    <div class="blog-toolbar__categories" role="group" aria-label="Categorías">
+      <ul class="blog-toolbar__chips">
+        {
+          chips.map((label, i) => (
+            <li class="blog-toolbar__chips-item">
+              <button
+                type="button"
+                class:list={['blog-toolbar__chip', i === 0 && 'blog-toolbar__chip--active']}
+                data-blog-category={label === 'Todas' ? '__all__' : label}
+                aria-pressed={i === 0 ? 'true' : 'false'}
+              >
+                {label}
+              </button>
+            </li>
+          ))
+        }
+      </ul>
+    </div>
+  </div>
+</section>
+
+<style>
+  .visually-hidden {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    padding: 0;
+    margin: -1px;
+    overflow: hidden;
+    clip: rect(0, 0, 0, 0);
+    white-space: nowrap;
+    border: 0;
+  }
+
+  .blog-toolbar {
+    width: 100%;
+    background-color: #ffffff;
+    padding: 0 0 clamp(2rem, 5vw, 3rem);
+    box-sizing: border-box;
+  }
+
+  .blog-toolbar__inner.layout-container {
+    max-width: 1100px;
+    margin-left: auto;
+    margin-right: auto;
+    padding-left: var(--layout-padding-x);
+    padding-right: var(--layout-padding-x);
+  }
+
+  .blog-toolbar__search {
+    margin-bottom: 1.5rem;
+    width: 100%;
+  }
+
+  .blog-toolbar__search-field {
+    position: relative;
+    width: 100%;
+    max-width: 580px;
+    margin-left: auto;
+    margin-right: auto;
+  }
+
+  .blog-toolbar__search-input {
+    width: 100%;
+    box-sizing: border-box;
+    padding: 0.9rem 3rem 0.9rem 1.25rem;
+    border: none;
+    border-radius: 999px;
+    background: #e8ecf2;
+    font-family: var(--font-family-base);
+    font-size: var(--text-body-primary-size);
+    color: var(--color-text-base);
+    box-shadow: inset 0 1px 2px rgba(0, 0, 0, 0.04);
+  }
+
+  .blog-toolbar__search-input::placeholder {
+    color: #8891a8;
+  }
+
+  .blog-toolbar__search-input:focus {
+    outline: 2px solid var(--color-blue-primary);
+    outline-offset: 2px;
+  }
+
+  .blog-toolbar__search-icon {
+    position: absolute;
+    right: 1.1rem;
+    top: 50%;
+    transform: translateY(-50%);
+    color: var(--color-blue-primary);
+    display: flex;
+    pointer-events: none;
+  }
+
+  .blog-toolbar__chips {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.65rem 0.5rem;
+    justify-content: center;
+  }
+
+  @media (min-width: 768px) {
+    .blog-toolbar__chips {
+      justify-content: flex-start;
+    }
+  }
+
+  .blog-toolbar__chips-item {
+    flex-shrink: 0;
+  }
+
+  .blog-toolbar__chip {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    padding: 0.55rem 1.1rem;
+    border: none;
+    border-radius: 999px;
+    cursor: pointer;
+    font-family: var(--font-family-base);
+    font-size: var(--text-body-secondary-size);
+    font-weight: 500;
+    line-height: 1.2;
+    background-color: #edf5ff;
+    color: var(--color-blue-secondary);
+    transition:
+      background-color 0.2s ease,
+      color 0.2s ease;
+  }
+
+  .blog-toolbar__chip:hover {
+    background-color: #dce8fc;
+  }
+
+  .blog-toolbar__chip:focus-visible {
+    outline: 2px solid var(--color-blue-primary);
+    outline-offset: 2px;
+  }
+
+  .blog-toolbar__chip--active {
+    background-color: var(--color-blue-secondary);
+    color: #ffffff;
+  }
+
+  .blog-toolbar__chip--active:hover {
+    background-color: var(--color-blue-secondary);
+    filter: brightness(1.05);
+  }
+</style>

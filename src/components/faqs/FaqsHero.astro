@@ -1,0 +1,129 @@
+---
+/**
+ * Hero FAQs: panel azul (padding 50px 80px vertical), label .programas__label, geo flotantes.
+ */
+---
+
+<section class="faqs-hero" aria-labelledby="faqs-hero-title">
+  <div class="faqs-hero__container layout-container">
+    <div class="faqs-hero__banner">
+      <img
+        class="faqs-hero__geo faqs-hero__geo--left"
+        src="/images/faqs/geo-1.png"
+        alt=""
+        width="90"
+        height="90"
+        loading="eager"
+        decoding="async"
+        aria-hidden="true"
+      />
+      <img
+        class="faqs-hero__geo faqs-hero__geo--right"
+        src="/images/faqs/geo-2.png"
+        alt=""
+        width="90"
+        height="90"
+        loading="eager"
+        decoding="async"
+        aria-hidden="true"
+      />
+      <div class="faqs-hero__inner">
+        <p class="programas__label faqs-hero__label">
+          <span class="programas__label-dot" aria-hidden="true"></span>
+          Preguntas frecuentes
+        </p>
+        <h1 id="faqs-hero-title" class="faqs-hero__title text-h2">
+          ¿Tienes dudas? Aquí las resolvemos<span class="faqs-hero__title-dot" aria-hidden="true">.</span>
+        </h1>
+      </div>
+    </div>
+  </div>
+</section>
+
+<style>
+  .faqs-hero {
+    width: 100%;
+    background-color: var(--color-bg-base);
+    /* Debajo del header fijo; 80px de separación antes de la siguiente sección */
+    padding: calc(1rem + 80px + 1rem) 0 80px;
+    box-sizing: border-box;
+  }
+
+  .faqs-hero__container {
+    max-width: var(--layout-max-width);
+    margin-left: auto;
+    margin-right: auto;
+    padding-left: var(--layout-padding-x);
+    padding-right: var(--layout-padding-x);
+  }
+
+  .faqs-hero__banner {
+    position: relative;
+    width: 100%;
+    background-color: var(--color-blue-secondary);
+    border-radius: clamp(24px, 4vw, 48px);
+    padding: 50px clamp(1.25rem, 4vw, 3rem) 80px;
+    overflow: hidden;
+    box-sizing: border-box;
+    box-shadow: 0 12px 40px rgba(40, 48, 148, 0.18);
+  }
+
+  .faqs-hero__geo {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    max-width: 90px;
+    width: min(90px, 24vw);
+    height: auto;
+    display: block;
+    pointer-events: none;
+    user-select: none;
+    z-index: 0;
+    object-fit: contain;
+  }
+
+  .faqs-hero__geo--left {
+    left: clamp(0.5rem, 2vw, 1.25rem);
+  }
+
+  .faqs-hero__geo--right {
+    right: clamp(0.5rem, 2vw, 1.25rem);
+  }
+
+  .faqs-hero__inner {
+    position: relative;
+    z-index: 1;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    margin-left: auto;
+    margin-right: auto;
+    max-width: 100%;
+    padding-left: clamp(3.5rem, 12vw, 5rem);
+    padding-right: clamp(3.5rem, 12vw, 5rem);
+    box-sizing: border-box;
+  }
+
+  /* Label global: color claro sobre panel azul */
+  .faqs-hero__label.programas__label {
+    color: #ffffff;
+    margin: 0 0 20px;
+  }
+
+  .faqs-hero__title {
+    margin: 0 auto;
+    max-width: 680px;
+    width: 100%;
+    color: #ffffff;
+    font-weight: var(--text-h2-weight);
+    font-size: clamp(1.65rem, 4.5vw, var(--text-h2-size));
+    line-height: 1.15;
+    letter-spacing: var(--text-h1-spacing);
+    text-align: center;
+  }
+
+  .faqs-hero__title-dot {
+    color: var(--color-red);
+  }
+</style>

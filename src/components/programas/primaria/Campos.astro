@@ -1,0 +1,171 @@
+---
+/**
+ * Campos formativos: tarjeta con etiqueta, título y grid de 4 campos (Primaria).
+ */
+const items = [
+  { label: 'Lenguajes', icon: '/icons/programas/primaria/icon-1.png' },
+  { label: 'Saberes y Pensamiento científico', icon: '/icons/programas/primaria/icon-2.png' },
+  { label: 'De lo Humano y lo Comunitario', icon: '/icons/programas/primaria/icon-3.png' },
+  { label: 'Ética, Naturaleza y Sociedades', icon: '/icons/programas/primaria/icon-4.png' },
+];
+---
+
+<section class="campos">
+  <div class="campos__inner layout-container">
+    <div class="campos__card">
+      <div class="campos__grid">
+        <header class="campos__header">
+          <p class="programas__label programas__label--align-start">
+            <span class="programas__label-dot" aria-hidden="true"></span>
+            Campos formativos
+          </p>
+          <h4 class="campos__title text-h4">Transformamos el saber en experiencia</h4>
+        </header>
+        <ul class="campos__list">
+          {items.map((item) => (
+            <li class="campos__item">
+              <img class="campos__icon" src={item.icon} alt="" width="48" height="48" loading="lazy" decoding="async" />
+              <span class="campos__item-label text-subtitle-2">{item.label}</span>
+            </li>
+          ))}
+        </ul>
+      </div>
+      <img
+        class="campos__mascot"
+        src="/images/programas/primaria/campos-img.png"
+        alt="Mascota Luca"
+        width="200"
+        height="200"
+        loading="lazy"
+        decoding="async"
+      />
+    </div>
+  </div>
+</section>
+
+<style>
+  .campos {
+    width: 100%;
+    background-color: transparent;
+    padding: 2rem 0;
+  }
+
+  .campos__inner {
+    width: 100%;
+    max-width: var(--layout-max-width);
+    margin-left: auto;
+    margin-right: auto;
+    padding-left: var(--layout-padding-x);
+    padding-right: var(--layout-padding-x);
+  }
+
+  .campos__card {
+    position: relative;
+    background-color: #faf8f3;
+    border: 2px solid var(--color-yellow);
+    border-radius: 24px;
+    padding: 45px;
+    overflow: visible;
+  }
+
+  .campos__grid {
+    position: relative;
+    z-index: 2;
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 1.5rem;
+  }
+
+  .campos__header {
+    margin: 0;
+    text-align: left;
+  }
+
+  /* Tipografía: .text-h4 (global.css) */
+  .campos__title {
+    color: var(--color-text-base);
+    margin: 0;
+    text-align: left;
+    max-width: 400px;
+  }
+
+  .campos__list {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 1rem;
+  }
+
+  .campos__item {
+    display: flex;
+    align-items: center;
+    gap: 14px;
+  }
+
+  .campos__icon {
+    width: 48px;
+    height: 48px;
+    flex-shrink: 0;
+    object-fit: contain;
+    display: block;
+  }
+
+  .campos__item-label {
+    color: var(--color-text-base);
+  }
+
+  /* Desktop: esquina inferior derecha (~ -10% / -10%). Mobile: centrada abajo */
+  .campos__mascot {
+    position: absolute;
+    bottom: -10%;
+    right: -10%;
+    max-width: 200px;
+    width: min(200px, 52vw);
+    height: auto;
+    display: block;
+    z-index: 1;
+    pointer-events: none;
+    user-select: none;
+  }
+
+  @media (max-width: 767px) {
+    /* Aire bajo la lista: la mascota (absolute) no tapa el último ítem */
+    .campos__card {
+      padding-bottom: clamp(9rem, 42vw, 11rem);
+    }
+
+    .campos__mascot {
+      left: 50%;
+      right: auto;
+      transform: translateX(-50%);
+    }
+  }
+
+  @media (min-width: 768px) {
+    .campos {
+      padding: 2.5rem 0;
+    }
+
+    .campos__grid {
+      grid-template-columns: 1fr 1fr;
+      gap: 2rem;
+      align-items: center;
+    }
+
+    .campos__list {
+      grid-template-columns: repeat(2, 1fr);
+    }
+
+    .campos__mascot {
+      transform: none;
+    }
+  }
+
+  @media (min-width: 1024px) {
+    .campos {
+      padding: 3rem 0;
+    }
+  }
+</style>

@@ -1,0 +1,92 @@
+---
+/**
+ * Página de ejemplo: guía de estilos para botones CTA globales.
+ * Muestra Primario, Secundario y Terciario con la animación de flujo.
+ * Ruta: /ejemplo-botones-cta
+ */
+import Layout from '../layouts/Layout.astro';
+---
+
+<Layout
+  title="Ejemplo botones CTA - Luca"
+  description="Página interna de referencia de botones CTA del sitio Luca. No indexar."
+  robots="noindex, nofollow"
+>
+  <main class="layout-container ejemplo-cta-page">
+    <h1 class="text-h2 ejemplo-cta-page__title">Botones CTA – Guía de estilos</h1>
+
+    <!-- Fondo oscuro para que primario y secundario (texto blanco) se vean -->
+    <section class="ejemplo-cta-bar">
+      <div class="layout-container ejemplo-cta-bar__inner">
+      <!-- Primario: botón sólido con flujo en hover -->
+      <button type="button" class="btn-base btn-cta-animated btn-primary">
+        Button
+        <span class="icon-circle" aria-hidden="true">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+            <path d="M5 12h14m-4-4 4 4-4 4" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+          </svg>
+        </span>
+      </button>
+
+      <!-- Secundario: borde + flujo en hover -->
+      <a href="#" class="btn-base btn-cta-animated btn-secondary">
+        Button
+        <span class="icon-circle icon-outline" aria-hidden="true">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+            <path d="M5 12h14m-4-4 4 4-4 4" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+          </svg>
+        </span>
+      </a>
+
+      <!-- Terciario: tipo link, sin flujo; flecha en color primario (sin círculo) -->
+      <a href="#" class="btn-terciary">
+        Button
+        <span class="btn-terciary-icon" aria-hidden="true"></span>
+      </a>
+      </div>
+    </section>
+
+    <p class="text-body-secondary ejemplo-cta-page__desc">
+      Primario y secundario usan <code>.btn-base .btn-cta-animated</code> + <code>.btn-primary</code> o <code>.btn-secondary</code>.
+      Terciario usa solo <code>.btn-terciary</code> y <code>.btn-terciary-icon</code> para la flecha (sin animación de flujo).
+    </p>
+  </main>
+</Layout>
+
+<style>
+  .ejemplo-cta-page {
+    padding-top: 4rem;
+    padding-bottom: 4rem;
+  }
+
+  .ejemplo-cta-page__title {
+    color: var(--color-text-base);
+    margin: 0 0 2rem;
+  }
+
+  .ejemplo-cta-page__desc {
+    margin-top: 2rem;
+    color: var(--color-text-base);
+  }
+
+  .ejemplo-cta-page__desc code {
+    font-size: var(--text-micro-size);
+    background: rgba(0, 0, 0, 0.06);
+    padding: 0.15rem 0.35rem;
+    border-radius: 4px;
+  }
+
+  .ejemplo-cta-bar__inner {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 2rem;
+    align-items: center;
+  }
+
+  .ejemplo-cta-bar {
+    background: linear-gradient(135deg, var(--color-blue-secondary) 0%, var(--color-blue-primary) 100%);
+    padding: 3rem 0;
+    border-radius: 12px;
+    margin-bottom: 2rem;
+  }
+</style>

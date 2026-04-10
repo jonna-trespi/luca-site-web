@@ -1,0 +1,546 @@
+---
+/**
+ * Programas (Secundaria): misma estructura, diagramación y responsive que ProgramasPrimaria.
+ */
+const DEFAULT_TAB = 'matematicas';
+
+const tabPanels = [
+  {
+    id: 'matematicas',
+    label: 'Matemáticas',
+    book: {
+      src: '/images/programas/secundaria/book-1.webp',
+      alt: 'Libro de matemáticas Luca Secundaria',
+      width: 892,
+      height: 822,
+    },
+    paragraphsHtml: [
+      'En Luca, las <strong class="text-body-primary text-body-primary--highlight">matemáticas</strong> van <strong class="text-body-primary text-body-primary--highlight">más allá de los números</strong>.',
+      'Fortalecemos el razonamiento, el pensamiento crítico y el espíritu emprendedor, conectando las matemáticas con situaciones reales y aplicaciones en distintas áreas del conocimiento.',
+    ],
+  },
+  {
+    id: 'ingles',
+    label: 'Inglés',
+    book: {
+      src: '/images/programas/secundaria/book-2.webp',
+      alt: 'Libro de inglés Luca Secundaria',
+      width: 904,
+      height: 806,
+    },
+    paragraphsHtml: [
+      'En Luca, el aprendizaje de <strong class="text-body-primary text-body-primary--highlight">Inglés</strong> impulsa una <strong class="text-body-primary text-body-primary--highlight">comunicación global, práctica y alineada con el futuro.</strong>',
+      'Con enfoque STEAM, conversaciones con IA y trabajo sobre las palabras clave del Oxford Top 3000, los estudiantes desarrollan un dominio sólido del idioma y egresan con nivel hasta B2+.',
+    ],
+  },
+  {
+    id: 'historia',
+    label: 'Historia',
+    book: {
+      src: '/images/programas/secundaria/book-3.webp',
+      alt: 'Libro Historia de México Luca Secundaria',
+      width: 794,
+      height: 736,
+    },
+    paragraphsHtml: [
+      'Nuestra propuesta facilita el <strong class="text-body-primary text-body-primary--highlight">desarrollo de habilidades para analizar el pasado y comprender el presente</strong> con mirada crítica.',
+      'Con recursos innovadores hacemos que el aprendizaje sea más dinámico y significativo.',
+    ],
+  },
+  {
+    id: 'ciencias',
+    label: 'Ciencias',
+    book: {
+      src: '/images/programas/secundaria/book-4.webp',
+      alt: 'Libro Nova Ciencias Luca Secundaria',
+      width: 834,
+      height: 772,
+    },
+    paragraphsHtml: [
+      'En Luca, la propuesta de <strong class="text-body-primary text-body-primary--highlight">Ciencias</strong> invita a <strong class="text-body-primary text-body-primary--highlight">explorar, comprobar y pensar críticamente.</strong>',
+      'Mediante experimentos aplicados e investigaciones científicas, conectamos la teoría con la práctica de forma dinámica y significativa.',
+    ],
+  },
+  {
+    id: 'formacion-civica',
+    label: 'Formación Cívica y Ética',
+    book: {
+      src: '/images/programas/secundaria/book-5.webp',
+      alt: 'Libro Formación Cívica y Ética Luca Secundaria',
+      width: 882,
+      height: 802,
+    },
+    paragraphsHtml: [
+      'Nuestra propuesta ayuda a comprender la <strong class="text-body-primary text-body-primary--highlight">convivencia, diversidad y libertad con responsabilidad.</strong>',
+      'Luca potencia este aprendizaje desde una perspectiva de desarrollo integral, resolución de conflictos y participación democrática.',
+    ],
+  },
+  {
+    id: 'geografia',
+    label: 'Geografía',
+    book: {
+      src: '/images/programas/secundaria/book-6.webp',
+      alt: 'Libro Geografía Luca Secundaria',
+      width: 750,
+      height: 696,
+    },
+    paragraphsHtml: [
+      'La propuesta de <strong class="text-body-primary text-body-primary--highlight">Geografía</strong> invita a <strong class="text-body-primary text-body-primary--highlight">observar, relacionar y explicar el mundo que habitamos.</strong>',
+      'Los estudiantes analizan el territorio, el medio ambiente y las dinámicas sociales para entender mejor su entorno local y global.',
+    ],
+  },
+  {
+    id: 'espanol',
+    label: 'Español',
+    kickerHtml: 'Materiales',
+    book: {
+      src: '/images/programas/secundaria/book-7.webp',
+      alt: 'Libro Español Luca Secundaria',
+      width: 820,
+      height: 760,
+    },
+    paragraphsHtml: [
+      'En Luca, el <strong class="text-body-primary text-body-primary--highlight">Español</strong> transforma el lenguaje en una <strong class="text-body-primary text-body-primary--highlight">herramienta para pensar, crear y comunicar.</strong>',
+      'Con enfoque claro y significativo, ayudamos a los estudiantes a desarrollar comprensión lectora, expresión escrita y análisis crítico para la vida personal y académica.',
+    ],
+  },
+];
+---
+
+<section class="programas-secundaria" data-programas-secundaria>
+  <div class="programas-secundaria__inner layout-container">
+    <header class="programas-secundaria__header">
+      <p class="programas__label">
+        <span class="programas__label-dot" aria-hidden="true"></span>
+        Programas de 1o. a 3o
+      </p>
+      <h3 class="programas-secundaria__title text-h3">
+        Innovación educativa para secundaria<span class="programas-secundaria__title-dot">.</span>
+      </h3>
+      <p class="programas-secundaria__intro text-subtitle-2">
+        Todo lo que necesitas para hacer del <strong class="programas-secundaria__intro-strong">aprendizaje algo extraordinario</strong>, cubriendo todos los campos formativos.
+      </p>
+    </header>
+
+    <div class="programas-secundaria__tabs-wrap">
+      <nav class="programas-secundaria__tabs" role="tablist" aria-label="Materias de secundaria">
+        {tabPanels.map((panel) => (
+          <button
+            type="button"
+            role="tab"
+            id={`programas-tab-${panel.id}`}
+            class={`btn-base btn-cta-animated programas-secundaria__tab ${panel.id === DEFAULT_TAB ? 'btn-primary programas-secundaria__tab--active' : ''}`}
+            data-tab={panel.id}
+            aria-selected={panel.id === DEFAULT_TAB}
+            aria-controls={`programas-panel-${panel.id}`}
+            tabindex={panel.id === DEFAULT_TAB ? 0 : -1}
+          >
+            <span class="programas-secundaria__tab-label">{panel.label}</span>
+          </button>
+        ))}
+      </nav>
+    </div>
+
+    <div class="programas-secundaria__panels">
+      {tabPanels.map((panel) => (
+        <div
+          class="programas-secundaria__cards programas-secundaria__panel"
+          id={`programas-panel-${panel.id}`}
+          data-panel={panel.id}
+          role="tabpanel"
+          aria-labelledby={`programas-tab-${panel.id}`}
+          hidden={panel.id !== DEFAULT_TAB}
+        >
+          <div class="programas-secundaria__card programas-secundaria__card--showcase">
+            <img
+              class="programas-secundaria__card-geo"
+              src="/images/programas/secundaria/geo-4.png"
+              alt=""
+              width="510"
+              height="456"
+              loading="lazy"
+              decoding="async"
+              aria-hidden="true"
+            />
+            <img
+              class="programas-secundaria__card-books"
+              src={panel.book.src}
+              alt={panel.book.alt}
+              width={panel.book.width}
+              height={panel.book.height}
+              loading={panel.id === DEFAULT_TAB ? 'eager' : 'lazy'}
+              decoding="async"
+            />
+            <img
+              class="programas-secundaria__card-mascot"
+              src="/images/programas/secundaria/bot-programas.png"
+              alt="Luca, asistente educativo"
+              width="410"
+              height="410"
+              loading="lazy"
+              decoding="async"
+            />
+          </div>
+          <div class="programas-secundaria__card programas-secundaria__card--materials">
+            {'kickerHtml' in panel && panel.kickerHtml ? (
+              <p class="programas-secundaria__card-kicker">{panel.kickerHtml}</p>
+            ) : null}
+            {panel.paragraphsHtml.map((html) => (
+              <p class="text-body-primary programas-secundaria__card-text" set:html={html} />
+            ))}
+          </div>
+        </div>
+      ))}
+    </div>
+  </div>
+</section>
+
+<script is:inline>
+  (function () {
+    function activateTab(/** @type {HTMLElement} */ root, /** @type {string} */ tabId) {
+      root.querySelectorAll('[data-tab]').forEach((/** @type {Element} */ btn) => {
+        const el = /** @type {HTMLElement} */ (btn);
+        const isOn = el.dataset.tab === tabId;
+        el.classList.toggle('btn-primary', isOn);
+        el.classList.toggle('programas-secundaria__tab--active', isOn);
+        el.setAttribute('aria-selected', String(isOn));
+        el.tabIndex = isOn ? 0 : -1;
+      });
+
+      root.querySelectorAll('[data-panel]').forEach((/** @type {Element} */ panel) => {
+        const el = /** @type {HTMLElement} */ (panel);
+        const isOn = el.dataset.panel === tabId;
+        el.hidden = !isOn;
+      });
+    }
+
+    function init() {
+      const root = document.querySelector('[data-programas-secundaria]');
+      if (!(root instanceof HTMLElement)) return;
+      if (root.dataset.programasTabsBound === 'true') return;
+      root.dataset.programasTabsBound = 'true';
+
+      root.addEventListener('click', (e) => {
+        const t = e.target;
+        if (!(t instanceof Element)) return;
+        const btn = t.closest('[data-tab]');
+        if (!(btn instanceof HTMLElement) || !root.contains(btn)) return;
+        const id = btn.dataset.tab;
+        if (!id) return;
+        activateTab(root, id);
+      });
+    }
+
+    if (document.readyState === 'loading') {
+      document.addEventListener('DOMContentLoaded', init);
+    } else {
+      init();
+    }
+
+    document.addEventListener('astro:page-load', init);
+  })();
+</script>
+
+<style>
+  .programas-secundaria {
+    width: 100%;
+    background-color: var(--color-bg-base);
+    padding: 1.75rem 0 2rem;
+    overflow-x: clip;
+    box-sizing: border-box;
+  }
+
+  .programas-secundaria__inner {
+    width: 100%;
+    max-width: var(--layout-max-width);
+    margin-left: auto;
+    margin-right: auto;
+    padding-left: var(--layout-padding-x);
+    padding-right: var(--layout-padding-x);
+  }
+
+  .programas-secundaria__header {
+    margin-bottom: 0;
+    text-align: left;
+  }
+
+  .programas-secundaria__header .programas__label {
+    justify-content: flex-start;
+    margin-bottom: clamp(1rem, 3vw, 26px);
+  }
+
+  .programas-secundaria__title {
+    max-width: 550px;
+    margin: 0 0 clamp(1.25rem, 4vw, 36px);
+    color: var(--color-text-base);
+  }
+
+  .programas-secundaria__title-dot {
+    color: var(--color-red);
+  }
+
+  .programas-secundaria__intro {
+    max-width: 550px;
+    margin: 0 0 clamp(2rem, 6vw, 64px);
+    color: var(--color-text-base);
+  }
+
+  .programas-secundaria__intro-strong {
+    font-weight: 700;
+  }
+
+  .programas-secundaria__tabs-wrap {
+    margin-bottom: 1.5rem;
+    overflow-x: auto;
+    -webkit-overflow-scrolling: touch;
+    padding-bottom: 0.5rem;
+    display: flex;
+    justify-content: center;
+  }
+
+  .programas-secundaria__tabs {
+    display: flex;
+    flex-wrap: nowrap;
+    align-items: stretch;
+    gap: 11px;
+    min-width: min-content;
+    justify-content: center;
+  }
+
+  /*
+   * Mismo comportamiento que Hero CTA: .btn-base.btn-primary.btn-cta-animated
+   * Tab activa = primario; inactiva = #D2E6FF
+   */
+  .programas-secundaria__tab.btn-base {
+    box-sizing: border-box;
+    max-width: 200px;
+    min-width: 0;
+    flex: 0 1 auto;
+    padding: 8px 12px;
+    border-radius: 10px;
+    font-weight: var(--text-body-primary-weight);
+    font-size: var(--text-body-primary-size);
+    letter-spacing: var(--text-body-primary-spacing);
+    line-height: 1.25;
+    white-space: normal;
+    border: 2px solid transparent;
+    gap: 0.5rem;
+    text-align: center;
+  }
+
+  .programas-secundaria__tab-label {
+    display: block;
+    max-width: 100%;
+    text-align: center;
+    overflow-wrap: break-word;
+    word-wrap: break-word;
+  }
+
+  .programas-secundaria__tab.btn-base:not(.btn-primary) {
+    background-color: #d2e6ff;
+    color: var(--color-black);
+    background-image: none;
+  }
+
+  .programas-secundaria__tab.btn-base:not(.btn-primary):hover {
+    background-image: linear-gradient(to right, var(--color-blue-primary) 50%, var(--color-blue-secondary) 50%);
+    background-size: 200% 100%;
+    background-position: right bottom;
+    color: #ffffff;
+    box-shadow: 0 4px 12px rgba(40, 48, 148, 0.25);
+  }
+
+  .programas-secundaria__panels {
+    width: 100%;
+  }
+
+  .programas-secundaria__panel[hidden] {
+    display: none !important;
+  }
+
+  .programas-secundaria__cards {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 24px;
+    width: 100%;
+    max-width: 1100px;
+    margin-left: auto;
+    margin-right: auto;
+  }
+
+  .programas-secundaria__card {
+    border-radius: 24px;
+    padding: 1.5rem;
+    min-height: 200px;
+  }
+
+  .programas-secundaria__card--showcase {
+    position: relative;
+    background-color: #fff8ea;
+    overflow: visible;
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+    min-height: 220px;
+  }
+
+  .programas-secundaria__card-geo {
+    position: absolute;
+    right: 0;
+    bottom: 0;
+    max-width: 200px;
+    width: min(200px, 58vw);
+    height: auto;
+    display: block;
+    pointer-events: none;
+    user-select: none;
+    z-index: 0;
+  }
+
+  .programas-secundaria__card-books {
+    position: relative;
+    z-index: 1;
+    width: 100%;
+    max-width: 220px;
+    height: auto;
+    display: block;
+    border-radius: 12px;
+    object-fit: contain;
+  }
+
+  .programas-secundaria__card-mascot {
+    position: absolute;
+    right: max(-4%, -1rem);
+    bottom: max(-10%, -1.5rem);
+    max-width: 168px;
+    width: min(168px, 44vw);
+    height: auto;
+    display: block;
+    object-fit: contain;
+    z-index: 2;
+    pointer-events: none;
+  }
+
+  .programas-secundaria__card--materials {
+    max-width: 430px;
+    width: 100%;
+    background-color: #f5f5f5;
+  }
+
+  .programas-secundaria__card-kicker {
+    margin: 0 0 1rem;
+    font-family: var(--font-family-base);
+    font-weight: 600;
+    font-size: var(--text-body-secondary-size);
+    color: var(--color-blue-primary);
+  }
+
+  .programas-secundaria__card-text {
+    margin: 0;
+    color: var(--color-text-base);
+    text-align: left;
+  }
+
+  .programas-secundaria__card-text + .programas-secundaria__card-text {
+    margin-top: 1.25rem;
+  }
+
+  @media (max-width: 767px) {
+    .programas-secundaria__tabs-wrap {
+      overflow-x: visible;
+      padding-bottom: 0;
+      justify-content: stretch;
+      width: 100%;
+    }
+
+    .programas-secundaria__tabs {
+      flex-direction: column;
+      flex-wrap: nowrap;
+      align-items: stretch;
+      justify-content: flex-start;
+      width: 100%;
+      max-width: 100%;
+      min-width: 0;
+      gap: 10px;
+    }
+
+    .programas-secundaria__tab.btn-base {
+      width: 100%;
+      max-width: 100%;
+      white-space: normal;
+      text-align: center;
+      justify-content: center;
+    }
+  }
+
+  @media (min-width: 768px) {
+    .programas-secundaria {
+      padding: 2.5rem 0 2.75rem;
+    }
+
+    .programas-secundaria__tabs-wrap {
+      overflow-x: visible;
+      margin-bottom: 1.75rem;
+    }
+
+    .programas-secundaria__tabs {
+      flex-direction: row;
+      flex-wrap: wrap;
+      align-items: stretch;
+      justify-content: flex-start;
+    }
+
+    .programas-secundaria__card {
+      padding: 1.75rem;
+      min-height: 220px;
+    }
+
+    .programas-secundaria__card--showcase {
+      min-height: 248px;
+    }
+
+    .programas-secundaria__card-mascot {
+      right: -5%;
+      bottom: -12%;
+    }
+  }
+
+  @media (min-width: 900px) {
+    .programas-secundaria__cards {
+      grid-template-columns: minmax(0, 1fr) minmax(0, 430px);
+      gap: clamp(1rem, 2vw, 24px);
+    }
+
+    .programas-secundaria__card {
+      padding: 2rem;
+      min-height: 240px;
+    }
+
+    .programas-secundaria__card--showcase {
+      min-height: 260px;
+    }
+
+    .programas-secundaria__card-books {
+      max-width: 260px;
+    }
+
+    .programas-secundaria__card-mascot {
+      max-width: 200px;
+      width: min(200px, 36vw);
+    }
+  }
+
+  @media (min-width: 1024px) {
+    .programas-secundaria {
+      padding: 4rem 0;
+    }
+
+    .programas-secundaria__tabs-wrap {
+      margin-bottom: 2rem;
+    }
+
+    .programas-secundaria__tabs {
+      justify-content: center;
+    }
+  }
+</style>

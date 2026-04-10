@@ -1,0 +1,722 @@
+---
+/**
+ * Modal de solicitud (Somos Luca / careers): formulario CV + datos de contacto.
+ * Abre con [data-open-somos-solicitud-modal]. Envío vía FormSubmit (AJAX + multipart).
+ */
+const formSubmitTarget =
+  import.meta.env.PUBLIC_FORMSUBMIT_EMAIL ?? 'people@lucaedu.com';
+---
+
+<div
+  class="somos-solicitud-modal"
+  id="somos-solicitud-modal"
+  data-somos-solicitud-modal
+  hidden
+  aria-hidden="true"
+>
+  <div class="somos-solicitud-modal__backdrop" data-somos-solicitud-modal-close tabindex="-1" aria-hidden="true"
+  ></div>
+  <div
+    class="somos-solicitud-modal__panel"
+    role="dialog"
+    aria-modal="true"
+    aria-labelledby="somos-solicitud-modal-title"
+    aria-describedby="somos-solicitud-modal-desc"
+    tabindex="-1"
+  >
+    <button
+      type="button"
+      class="somos-solicitud-modal__close"
+      data-somos-solicitud-modal-close
+      aria-label="Cerrar"
+    >
+      <span class="somos-solicitud-modal__close-icon" aria-hidden="true"></span>
+    </button>
+
+    <div class="somos-solicitud-modal__body">
+      <div class="somos-solicitud-modal__flow" id="somos-solicitud-flow">
+        <header class="somos-solicitud-modal__header">
+          <h2 class="somos-solicitud-modal__title" id="somos-solicitud-modal-title">
+            Si quieres transformar la educación, este es el lugar.
+          </h2>
+          <p class="somos-solicitud-modal__subtitle text-subtitle-2" id="somos-solicitud-modal-desc">
+            Déjanos tus datos y comparte tu perfil con el equipo Luca.
+          </p>
+        </header>
+
+        <form
+          class="somos-solicitud-modal__form"
+          id="somos-solicitud-form"
+          novalidate
+          enctype="multipart/form-data"
+          method="post"
+        >
+        <input type="hidden" name="_subject" value="Solicitud empleo — Luca (Somos Luca)" />
+        <input type="hidden" name="_template" value="table" />
+        <input type="hidden" name="_captcha" value="false" />
+        <div class="somos-solicitud-modal__hp" aria-hidden="true">
+          <label for="somos-solicitud-honey">Deja este campo vacío</label>
+          <input
+            type="text"
+            id="somos-solicitud-honey"
+            name="_honey"
+            tabindex="-1"
+            autocomplete="off"
+          />
+        </div>
+        <div class="somos-solicitud-modal__row">
+          <div class="somos-solicitud-modal__field">
+            <label for="somos-solicitud-nombre">Nombre <span class="somos-solicitud-modal__req">*</span></label>
+            <input
+              id="somos-solicitud-nombre"
+              name="nombre"
+              type="text"
+              placeholder="Nombre"
+              required
+              minlength="2"
+              autocomplete="given-name"
+            />
+          </div>
+          <div class="somos-solicitud-modal__field">
+            <label for="somos-solicitud-apellido">Apellido <span class="somos-solicitud-modal__req">*</span></label>
+            <input
+              id="somos-solicitud-apellido"
+              name="apellido"
+              type="text"
+              placeholder="Apellido"
+              required
+              minlength="2"
+              autocomplete="family-name"
+            />
+          </div>
+        </div>
+        <div class="somos-solicitud-modal__row">
+          <div class="somos-solicitud-modal__field">
+            <label for="somos-solicitud-telefono"
+              >Número de teléfono <span class="somos-solicitud-modal__req">*</span></label
+            >
+            <input
+              id="somos-solicitud-telefono"
+              name="telefono"
+              type="tel"
+              placeholder="5512345678"
+              required
+              inputmode="tel"
+              autocomplete="tel"
+            />
+          </div>
+          <div class="somos-solicitud-modal__field">
+            <label for="somos-solicitud-email"
+              >Correo electrónico <span class="somos-solicitud-modal__req">*</span></label
+            >
+            <input
+              id="somos-solicitud-email"
+              name="email"
+              type="email"
+              placeholder="correo@ejemplo.com"
+              required
+              autocomplete="email"
+            />
+          </div>
+        </div>
+
+        <div class="somos-solicitud-modal__field somos-solicitud-modal__field--file">
+          <span class="somos-solicitud-modal__file-label-text" id="somos-solicitud-cv-label">
+            Subir CV <span class="somos-solicitud-modal__req">*Requerido</span>
+          </span>
+          <div class="somos-solicitud-modal__drop" data-somos-solicitud-drop>
+            <input
+              id="somos-solicitud-cv"
+              name="cv"
+              type="file"
+              required
+              accept=".pdf,.doc,.docx,application/pdf"
+              class="somos-solicitud-modal__file-input"
+              aria-labelledby="somos-solicitud-cv-label"
+            />
+            <span class="somos-solicitud-modal__drop-text">
+              Suelta tu archivo o <span class="somos-solicitud-modal__drop-link">cárgalo</span>
+            </span>
+          </div>
+          <p class="somos-solicitud-modal__file-name" data-somos-solicitud-filename hidden></p>
+        </div>
+
+        <div class="somos-solicitud-modal__field">
+          <label for="somos-solicitud-interes">Interés principal</label>
+          <textarea
+            id="somos-solicitud-interes"
+            name="interes"
+            rows="4"
+            placeholder="Cuéntanos en qué área te gustaría colaborar"
+            class="somos-solicitud-modal__textarea"
+          ></textarea>
+        </div>
+
+        <p class="somos-solicitud-modal__error" id="somos-solicitud-error" role="alert" hidden></p>
+
+        <div class="somos-solicitud-modal__footer">
+          <button type="submit" class="btn-base btn-primary btn-cta-animated somos-solicitud-modal__submit">
+            <span class="somos-solicitud-modal__submit-label">Enviar solicitud</span>
+          </button>
+        </div>
+      </form>
+      </div>
+
+      <div class="somos-solicitud-modal__success" id="somos-solicitud-success" hidden>
+        <h2 class="somos-solicitud-modal__success-title" id="somos-solicitud-success-title">
+          Gracias. Hemos recibido tu solicitud.
+        </h2>
+        <button type="button" class="btn-base btn-primary somos-solicitud-modal__success-btn" data-somos-solicitud-modal-close>
+          Cerrar
+        </button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<script define:vars={{ formSubmitTarget }}>
+  (function () {
+    const rootEl = document.getElementById('somos-solicitud-modal');
+    const panel = rootEl ? rootEl.querySelector('.somos-solicitud-modal__panel') : null;
+    const flowEl = document.getElementById('somos-solicitud-flow');
+    const form = document.getElementById('somos-solicitud-form');
+    const successEl = document.getElementById('somos-solicitud-success');
+    const errorEl = document.getElementById('somos-solicitud-error');
+    const submitBtn = form ? form.querySelector('.somos-solicitud-modal__submit') : null;
+    const submitLabel = form ? form.querySelector('.somos-solicitud-modal__submit-label') : null;
+    const fileInput = document.getElementById('somos-solicitud-cv');
+    const fileNameEl = rootEl ? rootEl.querySelector('[data-somos-solicitud-filename]') : null;
+    const dropZone = rootEl ? rootEl.querySelector('[data-somos-solicitud-drop]') : null;
+
+    const submitDefaultText = (submitLabel && submitLabel.textContent && submitLabel.textContent.trim()) || 'Enviar solicitud';
+    const ajaxUrl = 'https://formsubmit.co/ajax/' + encodeURIComponent(formSubmitTarget);
+
+    if (!rootEl || !panel) return;
+
+    const modalRoot = rootEl;
+    const modalPanel = panel;
+
+    /** @type {HTMLElement | null} */
+    let lastFocus = null;
+
+    function hideError() {
+      if (!errorEl) return;
+      errorEl.hidden = true;
+      errorEl.textContent = '';
+    }
+
+    function showError(message) {
+      if (!errorEl) return;
+      errorEl.textContent = message;
+      errorEl.hidden = false;
+    }
+
+    function setSubmitting(sending) {
+      if (submitBtn) {
+        submitBtn.disabled = sending;
+        submitBtn.setAttribute('aria-busy', sending ? 'true' : 'false');
+      }
+      if (submitLabel) {
+        submitLabel.textContent = sending ? 'Enviando…' : submitDefaultText;
+      }
+    }
+
+    function showForm() {
+      if (flowEl) flowEl.hidden = false;
+      if (successEl) successEl.hidden = true;
+      modalPanel.setAttribute('aria-labelledby', 'somos-solicitud-modal-title');
+      modalPanel.setAttribute('aria-describedby', 'somos-solicitud-modal-desc');
+      hideError();
+    }
+
+    function showSuccessView() {
+      if (flowEl) flowEl.hidden = true;
+      if (successEl) successEl.hidden = false;
+      modalPanel.setAttribute('aria-labelledby', 'somos-solicitud-success-title');
+      modalPanel.removeAttribute('aria-describedby');
+      const successBtn = successEl && successEl.querySelector('.somos-solicitud-modal__success-btn');
+      if (successBtn && typeof successBtn.focus === 'function') successBtn.focus();
+    }
+
+    function open() {
+      showForm();
+      lastFocus = document.activeElement instanceof HTMLElement ? document.activeElement : null;
+      modalRoot.hidden = false;
+      modalRoot.setAttribute('aria-hidden', 'false');
+      document.body.style.overflow = 'hidden';
+      const toFocus = modalPanel.querySelector('#somos-solicitud-nombre') || modalPanel;
+      if (toFocus && typeof toFocus.focus === 'function') toFocus.focus();
+    }
+
+    function close() {
+      modalRoot.hidden = true;
+      modalRoot.setAttribute('aria-hidden', 'true');
+      document.body.style.overflow = '';
+      if (lastFocus && typeof lastFocus.focus === 'function') lastFocus.focus();
+      lastFocus = null;
+      showForm();
+      if (form) form.reset();
+      setFileName('');
+    }
+
+    document.querySelectorAll('[data-open-somos-solicitud-modal]').forEach(function (el) {
+      el.addEventListener('click', function (e) {
+        e.preventDefault();
+        open();
+      });
+    });
+
+    modalRoot.querySelectorAll('[data-somos-solicitud-modal-close]').forEach(function (el) {
+      el.addEventListener('click', function () {
+        close();
+      });
+    });
+
+    document.addEventListener('keydown', function (e) {
+      if (e.key === 'Escape' && !modalRoot.hidden) close();
+    });
+
+    function setFileName(name) {
+      if (!fileNameEl) return;
+      if (name) {
+        fileNameEl.textContent = name;
+        fileNameEl.hidden = false;
+      } else {
+        fileNameEl.textContent = '';
+        fileNameEl.hidden = true;
+      }
+    }
+
+    if (fileInput) {
+      fileInput.addEventListener('change', function () {
+        const f = fileInput.files && fileInput.files[0];
+        setFileName(f ? f.name : '');
+      });
+    }
+
+    if (dropZone && fileInput) {
+      ['dragenter', 'dragover'].forEach(function (ev) {
+        dropZone.addEventListener(ev, function (e) {
+          e.preventDefault();
+          dropZone.classList.add('somos-solicitud-modal__drop--active');
+        });
+      });
+      ['dragleave', 'drop'].forEach(function (ev) {
+        dropZone.addEventListener(ev, function (e) {
+          e.preventDefault();
+          dropZone.classList.remove('somos-solicitud-modal__drop--active');
+        });
+      });
+      dropZone.addEventListener('drop', function (e) {
+        const dt = e.dataTransfer;
+        if (!dt || !dt.files.length) return;
+        const list = new DataTransfer();
+        list.items.add(dt.files[0]);
+        fileInput.files = list.files;
+        setFileName(dt.files[0].name);
+      });
+    }
+
+    if (form) {
+      form.addEventListener('submit', async function (e) {
+        e.preventDefault();
+        hideError();
+        if (!form.checkValidity()) {
+          form.reportValidity();
+          return;
+        }
+        const honey = form.querySelector('input[name="_honey"]');
+        if (honey && honey.value && honey.value.trim()) {
+          return;
+        }
+
+        const fd = new FormData(form);
+        setSubmitting(true);
+        try {
+          const res = await fetch(ajaxUrl, {
+            method: 'POST',
+            body: fd,
+            headers: { Accept: 'application/json' },
+          });
+          let data = null;
+          try {
+            data = await res.json();
+          } catch {
+            data = null;
+          }
+
+          if (!res.ok) {
+            const msg =
+              (data && typeof data.message === 'string' && data.message) ||
+              (res.status === 403
+                ? 'Activa FormSubmit: revisa el correo y confirma el enlace que te enviaron.'
+                : 'No se pudo enviar. Revisa tu conexión o intenta más tarde.');
+            showError(msg);
+            return;
+          }
+
+          if (data === null) {
+            showError('No pudimos confirmar el envío. Intenta de nuevo.');
+            return;
+          }
+
+          if (typeof data.error === 'string' && data.error) {
+            showError(data.error);
+            return;
+          }
+
+          const explicitFail =
+            data.success === false ||
+            data.success === 'false' ||
+            String(data.success != null ? data.success : '').toLowerCase() === 'error';
+
+          if (explicitFail) {
+            showError(
+              typeof data.message === 'string' && data.message
+                ? data.message
+                : 'No se pudo enviar. Intenta más tarde.'
+            );
+            return;
+          }
+
+          form.reset();
+          setFileName('');
+          showSuccessView();
+        } catch {
+          showError('No se pudo enviar. Revisa tu conexión o intenta más tarde.');
+        } finally {
+          setSubmitting(false);
+        }
+      });
+    }
+  })();
+</script>
+
+<style>
+  .somos-solicitud-modal {
+    position: fixed;
+    inset: 0;
+    z-index: 2100;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: var(--layout-padding-x);
+    box-sizing: border-box;
+  }
+
+  .somos-solicitud-modal[hidden] {
+    display: none !important;
+  }
+
+  .somos-solicitud-modal__backdrop {
+    position: absolute;
+    inset: 0;
+    background: rgba(29, 29, 46, 0.52);
+    backdrop-filter: blur(4px);
+    -webkit-backdrop-filter: blur(4px);
+  }
+
+  .somos-solicitud-modal__panel {
+    position: relative;
+    z-index: 1;
+    width: 100%;
+    max-width: 640px;
+    max-height: min(92vh, 880px);
+    overflow-y: auto;
+    margin: auto;
+    padding: clamp(1.75rem, 4vw, 2.5rem) clamp(1.25rem, 3vw, 2.5rem) clamp(1.5rem, 3vw, 2rem);
+    background: var(--color-white);
+    border-radius: 28px;
+    box-shadow: 0 24px 64px rgba(40, 48, 148, 0.2);
+    outline: none;
+  }
+
+  .somos-solicitud-modal__close {
+    position: absolute;
+    top: 1rem;
+    right: 1rem;
+    width: 44px;
+    height: 44px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border: none;
+    border-radius: 12px;
+    background: rgba(56, 67, 208, 0.08);
+    color: var(--color-blue-primary);
+    cursor: pointer;
+    transition: background 0.2s ease;
+    z-index: 2;
+  }
+
+  .somos-solicitud-modal__close:hover {
+    background: rgba(56, 67, 208, 0.14);
+  }
+
+  .somos-solicitud-modal__close-icon::before,
+  .somos-solicitud-modal__close-icon::after {
+    content: '';
+    position: absolute;
+    width: 18px;
+    height: 2px;
+    background: currentColor;
+    border-radius: 1px;
+  }
+
+  .somos-solicitud-modal__close-icon::before {
+    transform: rotate(45deg);
+  }
+
+  .somos-solicitud-modal__close-icon::after {
+    transform: rotate(-45deg);
+  }
+
+  .somos-solicitud-modal__close-icon {
+    position: relative;
+    display: block;
+    width: 18px;
+    height: 18px;
+  }
+
+  .somos-solicitud-modal__body {
+    display: flex;
+    flex-direction: column;
+    min-height: 0;
+  }
+
+  .somos-solicitud-modal__flow[hidden] {
+    display: none !important;
+  }
+
+  .somos-solicitud-modal__header {
+    margin-bottom: clamp(1.25rem, 3vw, 1.75rem);
+    padding-right: 2.5rem;
+  }
+
+  .somos-solicitud-modal__title {
+    margin: 0 0 0.75rem;
+    font-family: var(--font-family-base);
+    font-weight: var(--text-h3-weight);
+    font-size: clamp(1.25rem, 3.5vw, var(--text-h3-size));
+    line-height: var(--text-h3-line);
+    letter-spacing: var(--text-h3-spacing);
+    color: var(--color-text-base);
+  }
+
+  .somos-solicitud-modal__subtitle {
+    margin: 0;
+    color: #3d3d3d;
+  }
+
+  .somos-solicitud-modal__success {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    flex: 1;
+    gap: 1.5rem;
+    min-height: min(42vh, 320px);
+    padding: clamp(1.5rem, 4vw, 2.5rem) 2.5rem clamp(1.5rem, 3vw, 2rem) 0;
+    text-align: center;
+    box-sizing: border-box;
+  }
+
+  .somos-solicitud-modal__success[hidden] {
+    display: none !important;
+  }
+
+  .somos-solicitud-modal__success-title {
+    margin: 0;
+    max-width: 28rem;
+    font-family: var(--font-family-base);
+    font-weight: var(--text-h3-weight);
+    font-size: clamp(1.25rem, 3.5vw, var(--text-h3-size));
+    line-height: var(--text-h3-line);
+    letter-spacing: var(--text-h3-spacing);
+    color: var(--color-text-base);
+  }
+
+  .somos-solicitud-modal__success-btn {
+    min-width: 8rem;
+  }
+
+  .somos-solicitud-modal__form {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    gap: 1.25rem;
+  }
+
+  .somos-solicitud-modal__row {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 1rem 1.25rem;
+  }
+
+  .somos-solicitud-modal__field {
+    display: flex;
+    flex-direction: column;
+    gap: 0.4rem;
+  }
+
+  .somos-solicitud-modal__field label,
+  .somos-solicitud-modal__file-label-text {
+    font-family: var(--font-family-base);
+    font-size: 0.9375rem;
+    font-weight: 600;
+    color: var(--color-text-base);
+  }
+
+  .somos-solicitud-modal__req {
+    color: var(--color-red);
+    font-weight: 600;
+  }
+
+  .somos-solicitud-modal__field input[type='text'],
+  .somos-solicitud-modal__field input[type='email'],
+  .somos-solicitud-modal__field input[type='tel'] {
+    width: 100%;
+    padding: 0.75rem 1rem;
+    border: 2px solid #d8dce8;
+    border-radius: 14px;
+    font-family: var(--font-family-base);
+    font-size: 1rem;
+    color: var(--color-text-base);
+    background: var(--color-white);
+    box-sizing: border-box;
+    transition: border-color 0.2s ease, box-shadow 0.2s ease;
+  }
+
+  .somos-solicitud-modal__field input:focus {
+    outline: none;
+    border-color: var(--color-blue-primary);
+    box-shadow: 0 0 0 3px rgba(56, 67, 208, 0.15);
+  }
+
+  .somos-solicitud-modal__textarea {
+    width: 100%;
+    padding: 0.75rem 1rem;
+    border: 2px solid #d8dce8;
+    border-radius: 14px;
+    font-family: var(--font-family-base);
+    font-size: 1rem;
+    line-height: 1.45;
+    color: var(--color-text-base);
+    resize: vertical;
+    min-height: 7rem;
+    box-sizing: border-box;
+    transition: border-color 0.2s ease;
+  }
+
+  .somos-solicitud-modal__textarea:focus {
+    outline: none;
+    border-color: var(--color-blue-primary);
+    box-shadow: 0 0 0 3px rgba(56, 67, 208, 0.15);
+  }
+
+  .somos-solicitud-modal__field--file {
+    gap: 0.5rem;
+  }
+
+  .somos-solicitud-modal__drop {
+    position: relative;
+    border: 2px dashed #c5cad8;
+    border-radius: 16px;
+    background: #f7f8fc;
+    min-height: 5.5rem;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding: 1rem;
+    transition:
+      border-color 0.2s ease,
+      background 0.2s ease;
+  }
+
+  .somos-solicitud-modal__drop--active {
+    border-color: var(--color-blue-primary);
+    background: rgba(56, 67, 208, 0.06);
+  }
+
+  .somos-solicitud-modal__file-input {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    opacity: 0;
+    cursor: pointer;
+    z-index: 2;
+  }
+
+  .somos-solicitud-modal__drop-text {
+    position: relative;
+    z-index: 1;
+    font-family: var(--font-family-base);
+    font-size: 0.9375rem;
+    color: #5a5f72;
+  }
+
+  .somos-solicitud-modal__drop-link {
+    color: var(--color-blue-primary);
+    font-weight: 600;
+    text-decoration: underline;
+    text-underline-offset: 0.15em;
+  }
+
+  .somos-solicitud-modal__file-name {
+    margin: 0.5rem 0 0;
+    font-size: 0.875rem;
+    color: var(--color-blue-primary);
+    text-align: center;
+    word-break: break-word;
+  }
+
+  .somos-solicitud-modal__footer {
+    margin-top: 0.25rem;
+  }
+
+  .somos-solicitud-modal__hp {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    padding: 0;
+    margin: -1px;
+    overflow: hidden;
+    clip: rect(0, 0, 0, 0);
+    white-space: nowrap;
+    border: 0;
+  }
+
+  .somos-solicitud-modal__error {
+    margin: 0;
+    padding: 0.65rem 0.85rem;
+    border-radius: 12px;
+    font-family: var(--font-family-base);
+    font-size: 0.9375rem;
+    line-height: 1.4;
+    color: #8b1a1a;
+    background: #fdeaea;
+    border: 1px solid #f0b4b4;
+  }
+
+  .somos-solicitud-modal__error[hidden] {
+    display: none !important;
+  }
+
+  .somos-solicitud-modal__submit {
+    width: 100%;
+    justify-content: center;
+    color: var(--color-white);
+  }
+
+  @media (max-width: 560px) {
+    .somos-solicitud-modal__row {
+      grid-template-columns: 1fr;
+    }
+
+    .somos-solicitud-modal__panel {
+      padding-top: 3.25rem;
+    }
+  }
+</style>

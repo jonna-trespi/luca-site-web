@@ -1,0 +1,278 @@
+---
+/**
+ * Hero Preescolar: cabecera de la página del programa Preescolar.
+ * Franja 80% con fondo; carrusel full viewport (--carousel-img-h definido en section).
+ */
+const carouselImages = [
+  { src: '/images/programas/preescolar/carrusel-1.webp', alt: 'Estudiantes en actividad de Preescolar' },
+  { src: '/images/programas/preescolar/carrusel-2.webp', alt: 'Aprendizaje colaborativo en el aula' },
+  { src: '/images/programas/preescolar/carrusel-3.webp', alt: 'Experiencia educativa Luca Preescolar' },
+  { src: '/images/programas/preescolar/carrusel-4.webp', alt: 'Materiales y dinámicas en clase' },
+  { src: '/images/programas/preescolar/carrusel-5.webp', alt: 'Comunidad escolar Luca' },
+] as const;
+---
+
+<section class="hero-preescolar">
+  <div class="hero-preescolar__strip">
+    <img
+      class="hero-preescolar__deco hero-preescolar__deco--right"
+      src="/images/programas/preescolar/geo-1.png"
+      alt=""
+      aria-hidden="true"
+    />
+
+    <div class="hero-preescolar__inner layout-container">
+      <header class="hero-preescolar__content">
+        <p class="programas__label">
+          <span class="programas__label-dot" aria-hidden="true"></span>
+          Preescolar
+        </p>
+        <h1 class="hero-preescolar__title text-h1">
+          Descubrir, jugar y aprender en movimiento<span class="hero-preescolar__title-dot" aria-hidden="true">.</span>
+        </h1>
+        <p class="hero-preescolar__subtitle text-subtitle-1">
+          El cuerpo como punto de partida para aumentar la riqueza perceptiva, emocional y neuromotriz.
+        </p>
+        <a href="/contacto" class="btn-base btn-primary btn-cta-animated hero-preescolar__cta">
+          <span>Solicita tu demo</span>
+          <span class="hero-preescolar__cta-icon" aria-hidden="true">
+            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+              <path
+                fill-rule="evenodd"
+                clip-rule="evenodd"
+                d="M11.235 16.089C11.105 16.178 10.958 16.221 10.811 16.221C10.572 16.221 10.338 16.108 10.192 15.896C9.958 15.555 10.044 15.088 10.385 14.853C11.969 13.763 13.445 12.415 13.542 11.969C13.445 11.583 11.969 10.236 10.385 9.148C10.045 8.913 9.958 8.446 10.192 8.105C10.426 7.763 10.892 7.677 11.235 7.911C12.656 8.887 15.04 10.716 15.04 11.999C15.04 13.282 12.656 15.112 11.235 16.089ZM12.25 2.25C5.051 2.25 2.5 4.802 2.5 12C2.5 19.198 5.051 21.75 12.25 21.75C19.448 21.75 22 19.198 22 12C22 4.802 19.448 2.25 12.25 2.25Z"
+                fill="currentColor"></path>
+            </svg>
+          </span>
+        </a>
+      </header>
+    </div>
+  </div>
+
+  <div
+    class="hero-preescolar__carousel"
+    role="region"
+    aria-roledescription="carrusel"
+    aria-label="Imágenes del programa Preescolar"
+  >
+    <div class="hero-preescolar__carousel-viewport">
+      <div class="hero-preescolar__carousel-track">
+        {
+          [...carouselImages, ...carouselImages].map((img) => (
+            <img
+              class="hero-preescolar__carousel-img"
+              src={img.src}
+              alt={img.alt}
+              loading="lazy"
+              decoding="async"
+            />
+          ))
+        }
+      </div>
+    </div>
+  </div>
+</section>
+
+<style>
+  .hero-preescolar {
+    /* Carrusel hijo del section: variables aquí para altura de imágenes y viewport */
+    --carousel-img-h: 355px;
+    --hero-carousel-h: var(--carousel-img-h);
+    --hero-preescolar-pad-bottom: clamp(72px, 11vw, 120px);
+    width: 100%;
+    background-color: #ffffff;
+    padding: 0;
+    position: relative;
+    overflow-x: hidden;
+    /* Espacio para la mitad inferior del carrusel (fuera del fondo) */
+    padding-bottom: var(--hero-preescolar-pad-bottom);
+    box-sizing: border-box;
+  }
+
+  .hero-preescolar__strip {
+    width: 80%;
+    max-width: 100%;
+    margin-left: auto;
+    margin-right: auto;
+    background-color: #BFEEEB;
+    position: relative;
+    overflow: visible;
+    padding-top: calc(1rem + 64px + 128px);
+    /* Mitad del carrusel dentro del strip + 54px entre CTA y borde superior del carrusel */
+    padding-bottom: calc(var(--hero-carousel-h) * 0.5 + 54px);
+    padding-left: 0;
+    padding-right: 0;
+    box-sizing: border-box;
+  }
+
+  .hero-preescolar__deco {
+    position: absolute;
+    display: block;
+    width: auto;
+    height: auto;
+    pointer-events: none;
+    user-select: none;
+    object-fit: contain;
+    z-index: 0;
+  }
+
+  .hero-preescolar__deco--left {
+    left: 0;
+    top: 0;
+    max-width: 200px;
+    width: min(200px, 42vw);
+  }
+
+  .hero-preescolar__deco--right {
+    right: 0;
+    top: 0;
+    max-width: 300px;
+    width: min(300px, 55vw);
+  }
+
+  .hero-preescolar__inner {
+    position: relative;
+    z-index: 1;
+  }
+
+  .hero-preescolar__content {
+    text-align: center;
+    margin-bottom: 0;
+  }
+
+  .hero-preescolar__title {
+    color: var(--color-text-base);
+    max-width: 950px;
+    margin: 0 auto 48px;
+  }
+
+  .hero-preescolar__title-dot {
+    color: var(--color-red);
+  }
+
+  .hero-preescolar__subtitle {
+    color: var(--color-text-base);
+    max-width: 950px;
+    margin: 0 auto 28px;
+  }
+
+  .hero-preescolar__cta {
+    color: var(--color-white);
+  }
+
+  .hero-preescolar__cta .hero-preescolar__cta-icon {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    color: var(--color-white);
+  }
+
+  .hero-preescolar__cta .hero-preescolar__cta-icon svg {
+    width: 1.25rem;
+    height: 1.25rem;
+  }
+
+  /* Full viewport: centrado respecto al section (ancho página); borde inferior alineado al strip */
+  .hero-preescolar__carousel {
+    position: absolute;
+    left: 50%;
+    width: 100vw;
+    margin-left: -50vw;
+    bottom: var(--hero-preescolar-pad-bottom);
+    z-index: 2;
+    transform: translateY(50%);
+    padding: 0;
+    box-sizing: border-box;
+  }
+
+  .hero-preescolar__carousel-viewport {
+    overflow: hidden;
+    width: 100%;
+    min-height: var(--hero-carousel-h);
+  }
+
+  .hero-preescolar__carousel-track {
+    display: flex;
+    align-items: flex-end;
+    flex-wrap: nowrap;
+    gap: clamp(10px, 1.2vw, 16px);
+    width: max-content;
+    will-change: transform;
+    /* Desplazamiento continuo: derecha → izquierda */
+    animation: hero-preescolar-carousel-marquee 45s linear infinite;
+  }
+
+  .hero-preescolar__carousel:hover .hero-preescolar__carousel-track {
+    animation-play-state: paused;
+  }
+
+  @keyframes hero-preescolar-carousel-marquee {
+    from {
+      transform: translateX(0);
+    }
+    to {
+      transform: translateX(-50%);
+    }
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .hero-preescolar__carousel-track {
+      animation: none;
+      transform: translateX(0);
+    }
+  }
+
+  /* Sin contenedor decorativo: el asset ya trae borde y estilo */
+  .hero-preescolar__carousel-img {
+    flex: 0 0 auto;
+    display: block;
+    height: var(--carousel-img-h);
+    width: auto;
+    max-width: none;
+  }
+
+  @media (min-width: 768px) {
+    .hero-preescolar__strip {
+      padding-top: calc(1.5rem + 80px + 128px);
+    }
+  }
+
+  @media (min-width: 1025px) {
+    .hero-preescolar__strip {
+      padding-top: calc(2rem + 80px + 128px);
+    }
+  }
+
+  @media (max-width: 767px) {
+    .hero-preescolar {
+      --carousel-img-h: 260px;
+    }
+
+    /* Fondo mint a todo el ancho; texto con márgenes laterales compactos (~16–20px) */
+    .hero-preescolar__strip {
+      width: 100%;
+      max-width: none;
+      margin-left: 0;
+      margin-right: 0;
+    }
+
+    .hero-preescolar__inner.layout-container {
+      max-width: none;
+      padding-left: clamp(1rem, 4vw, 1.25rem);
+      padding-right: clamp(1rem, 4vw, 1.25rem);
+    }
+
+    .hero-preescolar__title,
+    .hero-preescolar__subtitle {
+      max-width: none;
+    }
+
+    .hero-preescolar__title {
+      margin-bottom: clamp(1.25rem, 4vw, 48px);
+    }
+
+    .hero-preescolar__subtitle {
+      margin-bottom: clamp(1rem, 3vw, 28px);
+    }
+  }
+</style>

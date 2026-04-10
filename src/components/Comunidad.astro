@@ -1,0 +1,470 @@
+---
+/**
+ * Comunidad: 4 perfiles educativos (Docentes, Directivos, Padres, Estudiantes).
+ * Fondo full width; contenido centrado con .layout-container.
+ */
+const profiles = [
+  { id: 'docentes', title: 'Docentes', subtext: 'Herramientas digitales para docentes.', image: 'docentes.png', bgColor: '#3868D0', iconVariant: 'white' as const, href: '/perfiles/docentes' },
+  { id: 'directivos', title: 'Directivos', subtext: 'Inteligencia artificial en educación.', image: 'directivos.png', bgColor: '#D2E6FF', iconVariant: 'primary' as const, href: '/perfiles/directores' },
+  { id: 'padres', title: 'Padres', subtext: 'Personalización del aprendizaje con IA.', image: 'padres.png', bgColor: '#1F2572', iconVariant: 'white' as const, href: '/perfiles/padres' },
+  { id: 'estudiantes', title: 'Estudiantes', subtext: 'Aprendizaje gamificado.', image: 'estudiantes.png', bgColor: '#3843D0', iconVariant: 'white' as const, href: '/perfiles/estudiantes' },
+];
+---
+
+<section class="comunidad">
+  <div class="comunidad__blob" aria-hidden="true">
+    <img src="/images/home/geometrico-5.png" alt="" width="250" height="250" loading="lazy" />
+  </div>
+
+  <div class="comunidad__inner layout-container">
+    <header class="comunidad__header">
+      <p class="comunidad__label">
+        <span class="comunidad__label-dot" aria-hidden="true"></span>
+        Nuestra comunidad
+      </p>
+      <h2 class="comunidad__title">
+        1 solución, 4 perfiles <br> educativos<span class="comunidad__title-dot">.</span>
+      </h2>
+    </header>
+
+    <div class="comunidad__grid">
+      <ul class="comunidad__grid-row comunidad__grid-row--top" aria-label="Docentes y Directivos">
+        {profiles.slice(0, 2).map((profile) => (
+          <li class="comunidad__card-wrap">
+            <a
+              href={profile.href}
+              class={`comunidad__card comunidad__card--${profile.id}`}
+              style={`--card-bg: ${profile.bgColor};`}
+            >
+              <div class="comunidad__card-visual">
+                <div class="comunidad__card-image-wrap">
+                  <img
+                    src={`/images/home/${profile.image}`}
+                    alt=""
+                    class="comunidad__card-image"
+                    width="400"
+                    height="300"
+                    loading="lazy"
+                  />
+                </div>
+              </div>
+              <div class="comunidad__card-footer">
+                <div class="comunidad__card-copy">
+                  <span class="comunidad__card-title">{profile.title}</span>
+                  <p class="comunidad__card-subtext">{profile.subtext}</p>
+                </div>
+                <span class={`comunidad__card-icon comunidad__card-icon--${profile.iconVariant}`} aria-hidden="true"></span>
+              </div>
+            </a>
+          </li>
+        ))}
+      </ul>
+      <ul class="comunidad__grid-row comunidad__grid-row--bottom" aria-label="Padres y Estudiantes">
+        {profiles.slice(2, 4).map((profile) => (
+          <li class="comunidad__card-wrap">
+            <a
+              href={profile.href}
+              class={`comunidad__card comunidad__card--${profile.id}`}
+              style={`--card-bg: ${profile.bgColor};`}
+            >
+              <div class="comunidad__card-visual">
+                <div class="comunidad__card-image-wrap">
+                  <img
+                    src={`/images/home/${profile.image}`}
+                    alt=""
+                    class="comunidad__card-image"
+                    width="400"
+                    height="300"
+                    loading="lazy"
+                  />
+                </div>
+              </div>
+              <div class="comunidad__card-footer">
+                <div class="comunidad__card-copy">
+                  <span class="comunidad__card-title">{profile.title}</span>
+                  <p class="comunidad__card-subtext">{profile.subtext}</p>
+                </div>
+                <span class={`comunidad__card-icon comunidad__card-icon--${profile.iconVariant}`} aria-hidden="true"></span>
+              </div>
+            </a>
+          </li>
+        ))}
+      </ul>
+    </div>
+  </div>
+</section>
+
+<style>
+  .comunidad {
+    width: 100%;
+    background-color: var(--color-bg-base);
+    padding: 3rem 0;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .comunidad__blob {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    max-width: 250px;
+    width: 100%;
+    pointer-events: none;
+  }
+
+  .comunidad__blob img {
+    width: 100%;
+    height: auto;
+    max-width: 250px;
+    display: block;
+  }
+
+  .comunidad__inner {
+    position: relative;
+    z-index: 1;
+  }
+
+  .comunidad__header {
+    text-align: left;
+    margin-bottom: 2rem;
+  }
+
+  .comunidad__label {
+    font-family: var(--font-family-base);
+    font-size: var(--text-section-label-size);
+    font-weight: var(--text-micro-weight);
+    letter-spacing: var(--text-micro-spacing);
+    line-height: var(--text-micro-line);
+    color: var(--color-blue-primary);
+    margin: 0 0 20px;
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+    gap: 0.5rem;
+  }
+
+  .comunidad__label-dot {
+    width: 8px;
+    height: 8px;
+    border-radius: 50%;
+    background-color: var(--color-red);
+    flex-shrink: 0;
+  }
+
+  .comunidad__title {
+    font-family: var(--font-family-base);
+    font-weight: var(--text-h4-weight);
+    font-size: clamp(1.25rem, 2.5vw, var(--text-h4-size));
+    letter-spacing: var(--text-h4-spacing);
+    line-height: var(--text-h4-line);
+    color: var(--color-black);
+    margin: 0;
+    max-width: 1000px;
+  }
+
+  .comunidad__title-dot {
+    color: var(--color-red);
+  }
+
+  .comunidad__grid {
+    display: flex;
+    flex-direction: column;
+    gap: 1.25rem;
+    width: 100%;
+    max-width: 1200px;
+    margin-left: auto;
+    margin-right: auto;
+  }
+
+  .comunidad__grid-row {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    display: grid;
+    gap: 1.25rem;
+  }
+
+  .comunidad__grid-row--top {
+    grid-template-columns: 1.5fr 1fr;
+  }
+
+  .comunidad__grid-row--bottom {
+    grid-template-columns: 1fr 1.5fr;
+  }
+
+  .comunidad__card-wrap {
+    margin: 0;
+  }
+
+  .comunidad__card {
+    display: flex;
+    flex-direction: column;
+    align-items: stretch;
+    justify-content: flex-start;
+    position: relative;
+    border-radius: 32px;
+    overflow: hidden;
+    min-height: 280px;
+    padding: 1.5rem;
+    text-decoration: none;
+    transition:
+      transform 0.55s cubic-bezier(0.33, 1, 0.32, 1),
+      box-shadow 0.55s cubic-bezier(0.33, 1, 0.32, 1);
+    background-color: var(--card-bg, var(--color-blue));
+  }
+
+  /* Ilustración centrada (blob + personaje), referencia diseño */
+  .comunidad__card-visual {
+    flex: 1;
+    min-height: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+    z-index: 0;
+    pointer-events: none;
+    padding: 0.25rem 0 0.5rem;
+  }
+
+  /* Pie: título + subtexto a la izquierda, flecha a la derecha */
+  .comunidad__card-footer {
+    display: flex;
+    flex-direction: row;
+    align-items: flex-end;
+    justify-content: space-between;
+    gap: 1rem;
+    flex-shrink: 0;
+    margin-top: auto;
+    padding-top: 0.75rem;
+    position: relative;
+    z-index: 2;
+    width: 100%;
+    box-sizing: border-box;
+  }
+
+  .comunidad__card-copy {
+    flex: 1;
+    min-width: 0;
+    max-width: calc(100% - 3.5rem);
+    text-align: left;
+    box-sizing: border-box;
+  }
+
+  .comunidad__card:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 12px 24px rgba(0, 0, 0, 0.12);
+  }
+
+  .comunidad__card--docentes,
+  .comunidad__card--padres,
+  .comunidad__card--estudiantes {
+    color: #ffffff;
+  }
+
+  .comunidad__card--directivos {
+    color: var(--color-text-base);
+  }
+
+  .comunidad__card--directivos .comunidad__card-title {
+    color: var(--color-blue-primary);
+  }
+
+  .comunidad__card-image-wrap {
+    position: relative;
+    width: min(94%, 400px);
+    max-width: 400px;
+    height: min(260px, 38vw);
+    min-height: 175px;
+    margin-left: auto;
+    margin-right: auto;
+    padding: 0.5rem;
+    box-sizing: border-box;
+    overflow: visible;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .comunidad__card-image {
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+    object-position: center;
+    pointer-events: none;
+    transition: transform 0.65s cubic-bezier(0.33, 1, 0.32, 1);
+  }
+
+  .comunidad__card:hover .comunidad__card-image {
+    transform: scale(1.08);
+  }
+
+  .comunidad__card-title {
+    display: block;
+    font-family: var(--font-family-base);
+    font-weight: var(--text-h4-weight);
+    font-size: clamp(1.65rem, 3.6vw, 2.75rem);
+    line-height: 1.12;
+    letter-spacing: var(--text-h4-spacing);
+    margin: 0;
+    padding-bottom: 0;
+  }
+
+  .comunidad__card-subtext {
+    font-family: var(--font-family-base);
+    font-weight: var(--text-body-secondary-weight);
+    font-size: clamp(0.9375rem, 1.9vw, 1.125rem);
+    line-height: 1.45;
+    margin: 0;
+    padding: 0;
+    max-height: 0;
+    opacity: 0;
+    overflow: hidden;
+    transition:
+      max-height 0.45s cubic-bezier(0.33, 1, 0.32, 1),
+      opacity 0.35s ease,
+      padding 0.35s ease;
+  }
+
+  .comunidad__card:hover .comunidad__card-subtext,
+  .comunidad__card:focus-visible .comunidad__card-subtext {
+    max-height: 7.5rem;
+    opacity: 1;
+    padding-top: 0.5rem;
+    padding-bottom: 0.15rem;
+  }
+
+  /* Sin hover (táctil): el copy siempre visible */
+  @media (hover: none) {
+    .comunidad__card-subtext {
+      max-height: none;
+      opacity: 1;
+      overflow: visible;
+      padding: 0 0 0.25rem 0;
+    }
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .comunidad__card-subtext {
+      transition: none;
+    }
+  }
+
+  .comunidad__card--docentes .comunidad__card-subtext,
+  .comunidad__card--padres .comunidad__card-subtext,
+  .comunidad__card--estudiantes .comunidad__card-subtext {
+    color: rgba(255, 255, 255, 0.9);
+  }
+
+  .comunidad__card--directivos .comunidad__card-subtext {
+    color: var(--color-black);
+  }
+
+  /* Icono de flecha 40×40px; sin círculo ni fondo */
+  .comunidad__card-icon {
+    flex-shrink: 0;
+    width: 40px;
+    height: 40px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    pointer-events: none;
+    box-sizing: border-box;
+  }
+
+  .comunidad__card-icon::after {
+    content: '';
+    width: 40px;
+    height: 40px;
+    display: block;
+    flex-shrink: 0;
+    -webkit-mask-image: url('/icons/transversal/array-right-icon.svg');
+    mask-image: url('/icons/transversal/array-right-icon.svg');
+    -webkit-mask-repeat: no-repeat;
+    mask-repeat: no-repeat;
+    -webkit-mask-position: center;
+    mask-position: center;
+    -webkit-mask-size: contain;
+    mask-size: contain;
+  }
+
+  .comunidad__card-icon--white::after {
+    background-color: #ffffff;
+  }
+
+  .comunidad__card-icon--primary::after {
+    background-color: var(--color-blue-primary);
+  }
+
+  .comunidad__footer {
+    font-family: var(--font-family-base);
+    font-weight: var(--text-body-secondary-weight);
+    font-size: var(--text-body-secondary-size);
+    color: var(--color-text-base);
+    margin: 2rem 0 0;
+    display: flex;
+    align-items: center;
+    gap: 0.35rem;
+  }
+
+  .comunidad__footer-bullet {
+    color: var(--color-red);
+  }
+
+  @media (max-width: 599px) {
+    .comunidad__grid-row--top,
+    .comunidad__grid-row--bottom {
+      grid-template-columns: 1fr;
+    }
+  }
+
+  @media (min-width: 600px) {
+    .comunidad__grid {
+      gap: 1.5rem;
+    }
+
+    .comunidad__card {
+      min-height: 300px;
+    }
+  }
+
+  @media (min-width: 768px) {
+    .comunidad {
+      padding: 4rem 0;
+    }
+
+    .comunidad__header {
+      margin-bottom: 2.5rem;
+    }
+
+    .comunidad__grid {
+      gap: 1.75rem;
+    }
+
+    .comunidad__card {
+      min-height: 320px;
+      padding: 2rem;
+    }
+  }
+
+  @media (min-width: 768px) and (max-width: 1023px) {
+    .comunidad__grid-row--top,
+    .comunidad__grid-row--bottom {
+      grid-template-columns: 1fr 1fr;
+    }
+
+    .comunidad__card {
+      min-height: 280px;
+      padding: 1.35rem 1.25rem;
+    }
+  }
+
+  @media (min-width: 1024px) {
+    .comunidad {
+      padding: 5rem 0;
+    }
+
+    .comunidad__card {
+      min-height: 340px;
+    }
+  }
+</style>

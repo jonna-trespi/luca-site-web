@@ -1,0 +1,266 @@
+---
+/**
+ * Banner: ayuda (h4) + WhatsApp + redes; avatar anclado abajo-izquierda.
+ */
+const waHref = 'https://wa.me/525541691994';
+const waLabel = '+52 55 416 91994';
+---
+
+<section class="contacto-channels" aria-labelledby="contacto-channels-title">
+  <div class="contacto-channels__inner">
+    <div class="contacto-channels__card">
+      <img
+        class="contacto-channels__avatar"
+        src="/images/contacto/avatar.png"
+        alt=""
+        width="150"
+        height="178"
+        loading="lazy"
+        decoding="async"
+        aria-hidden="true"
+      />
+      <h4 id="contacto-channels-title" class="contacto-channels__title text-h4">
+        ¿Necesitas una ayuda más específica?
+      </h4>
+      <div class="contacto-channels__wa">
+        <span class="contacto-channels__block-heading text-subtitle-1">WhatsApp</span>
+        <a href={waHref} class="contacto-channels__wa-link" target="_blank" rel="noopener noreferrer">
+          <img
+            class="contacto-channels__icon"
+            src="/images/contacto/wp-blue.png"
+            alt=""
+            width="40"
+            height="40"
+            aria-hidden="true"
+          />
+          <span class="contacto-channels__wa-number">{waLabel}</span>
+        </a>
+      </div>
+      <div class="contacto-channels__social-wrap">
+        <span class="contacto-channels__block-heading text-subtitle-1">Redes sociales</span>
+        <ul class="contacto-channels__social">
+          <li>
+            <a href="#linkedin" class="contacto-channels__social-link" aria-label="LinkedIn">
+              <img
+                class="contacto-channels__icon"
+                src="/images/contacto/in-blue.png"
+                alt=""
+                width="40"
+                height="40"
+                aria-hidden="true"
+              />
+            </a>
+          </li>
+          <li>
+            <a href="#youtube" class="contacto-channels__social-link" aria-label="YouTube">
+              <img
+                class="contacto-channels__icon"
+                src="/images/contacto/youtube-blue.png"
+                alt=""
+                width="40"
+                height="40"
+                aria-hidden="true"
+              />
+            </a>
+          </li>
+          <li>
+            <a href="#instagram" class="contacto-channels__social-link" aria-label="Instagram">
+              <img
+                class="contacto-channels__icon"
+                src="/images/contacto/ig-blue.png"
+                alt=""
+                width="40"
+                height="40"
+                aria-hidden="true"
+              />
+            </a>
+          </li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</section>
+
+<style>
+  .contacto-channels {
+    width: 100%;
+    padding: 0 0 3rem;
+    background: var(--color-white);
+    box-sizing: border-box;
+  }
+
+  .contacto-channels__inner {
+    width: 100%;
+    max-width: 1100px;
+    margin: 0 auto;
+    padding: 0 var(--layout-padding-x);
+    box-sizing: border-box;
+  }
+
+  .contacto-channels__card {
+    --cc-pad-left: clamp(1rem, 4vw, 1.5rem);
+    position: relative;
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 1.25rem 2rem;
+    padding: 1.75rem 1.5rem 1.75rem var(--cc-pad-left);
+    background: #f5f5f5;
+    border: 1px solid var(--color-blue-primary);
+    border-radius: 30px;
+    box-sizing: border-box;
+    min-height: 120px;
+    overflow: hidden;
+  }
+
+  .contacto-channels__avatar {
+    position: absolute;
+    left: calc(-1 * var(--cc-pad-left));
+    bottom: 0;
+    width: 150px;
+    max-width: min(150px, 38vw);
+    height: auto;
+    object-fit: contain;
+    object-position: left bottom;
+    pointer-events: none;
+    user-select: none;
+    display: block;
+    border-bottom-left-radius: 30px;
+  }
+
+  .contacto-channels__title {
+    margin: 0;
+    flex: 1 1 200px;
+    min-width: min(100%, 220px);
+    color: var(--color-text-base);
+    padding-left: calc(150px + clamp(0.75rem, 3vw, 1.25rem) - var(--cc-pad-left));
+  }
+
+  .contacto-channels__block-heading {
+    display: block;
+    margin: 0 0 0.5rem;
+    color: var(--color-text-base);
+  }
+
+  .contacto-channels__wa {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    flex: 0 0 auto;
+  }
+
+  .contacto-channels__wa-link {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    font-family: var(--font-family-base);
+    font-weight: 600;
+    font-size: var(--text-body-primary-size);
+    color: var(--color-blue-primary);
+    text-decoration: none;
+    transition: color 0.2s ease;
+  }
+
+  .contacto-channels__wa-link:hover {
+    color: var(--color-blue-secondary);
+    text-decoration: underline;
+  }
+
+  .contacto-channels__icon {
+    width: 40px;
+    height: 40px;
+    display: block;
+    flex-shrink: 0;
+    object-fit: contain;
+  }
+
+  .contacto-channels__social-wrap {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    flex: 0 0 auto;
+  }
+
+  .contacto-channels__social {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.65rem;
+    align-items: center;
+  }
+
+  .contacto-channels__social-link {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    line-height: 0;
+    border-radius: 10px;
+    transition: transform 0.2s ease, opacity 0.2s ease;
+  }
+
+  .contacto-channels__social-link:hover {
+    transform: translateY(-2px);
+    opacity: 0.9;
+  }
+
+  @media (min-width: 768px) {
+    .contacto-channels__card {
+      --cc-pad-left: 1.75rem;
+      padding: 1.85rem 2rem 1.85rem var(--cc-pad-left);
+      gap: 1.5rem 2.5rem;
+    }
+
+    .contacto-channels__title {
+      padding-left: calc(150px + 1.25rem - var(--cc-pad-left));
+    }
+
+    .contacto-channels__wa {
+      align-items: center;
+    }
+
+    .contacto-channels__social-wrap {
+      align-items: center;
+    }
+
+    .contacto-channels__block-heading {
+      width: 100%;
+      text-align: center;
+    }
+  }
+
+  @media (max-width: 767px) {
+    .contacto-channels__card {
+      flex-direction: column;
+      align-items: stretch;
+      padding-bottom: clamp(6.5rem, 28vw, 8.5rem);
+      padding-top: 1.25rem;
+    }
+
+    .contacto-channels__title {
+      padding-left: 0;
+      text-align: center;
+      flex: none;
+      order: 1;
+    }
+
+    .contacto-channels__wa {
+      order: 2;
+      align-items: center;
+      width: 100%;
+    }
+
+    .contacto-channels__social-wrap {
+      order: 3;
+      align-items: center;
+      width: 100%;
+    }
+
+    .contacto-channels__block-heading {
+      text-align: center;
+      width: 100%;
+    }
+
+  }
+</style>

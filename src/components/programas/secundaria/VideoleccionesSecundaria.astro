@@ -1,0 +1,149 @@
+---
+/**
+ * Videolecciones: título, vídeo embebido (autoplay, sin controles) y figuras geo-7 / geo-8.
+ * Misma estructura y estilos que VideoleccionesPrimaria.astro (página Secundaria).
+ */
+const VIDEO_ID = '_8GxMENPq8s';
+const embedSrc = `https://www.youtube.com/embed/${VIDEO_ID}?autoplay=1&mute=1&loop=1&playlist=${VIDEO_ID}&controls=0&modestbranding=1&rel=0`;
+---
+<section class="videolecciones-secundaria">
+  <div class="videolecciones-secundaria__geo7" aria-hidden="true">
+    <img src="/images/programas/secundaria/geo-7.png" alt="" width="250" height="214" loading="lazy" decoding="async" />
+  </div>
+
+  <div class="videolecciones-secundaria__inner layout-container">
+    <h3 class="text-h3 videolecciones-secundaria__title">
+      Videolecciones creadas por expertos de Netflix<span class="videolecciones-secundaria__title-dot" aria-hidden="true">.</span>
+    </h3>
+
+    <div class="videolecciones-secundaria__media">
+      <div class="videolecciones-secundaria__geo8" aria-hidden="true">
+        <img src="/images/programas/secundaria/geo-8.png" alt="" width="230" height="230" loading="lazy" decoding="async" />
+      </div>
+      <div class="videolecciones-secundaria__video-shell">
+        <iframe
+          class="videolecciones-secundaria__iframe"
+          src={embedSrc}
+          title="Videolecciones Luca"
+          allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+          allowfullscreen
+        ></iframe>
+      </div>
+    </div>
+  </div>
+</section>
+
+<style>
+  .videolecciones-secundaria {
+    position: relative;
+    width: 100%;
+    background-color: var(--color-bg-base);
+    padding: 3rem 0;
+    overflow: hidden;
+    z-index: 0;
+  }
+
+  .videolecciones-secundaria__inner {
+    position: relative;
+    z-index: 1;
+  }
+
+  /* Fondo: forma amarilla pegada al borde derecho del viewport */
+  .videolecciones-secundaria__geo7 {
+    position: absolute;
+    right: 0;
+    top: 0;
+    width: min(100%, 250px);
+    max-width: 250px;
+    z-index: 0;
+    pointer-events: none;
+    transform: translateY(-8%);
+  }
+
+  .videolecciones-secundaria__geo7 img {
+    display: block;
+    width: 100%;
+    height: auto;
+    margin-left: auto;
+    object-fit: contain;
+    object-position: right top;
+  }
+
+  .videolecciones-secundaria__title {
+    max-width: 650px;
+    margin: 0 auto 56px;
+    text-align: center;
+    color: var(--color-text-base);
+  }
+
+  .videolecciones-secundaria__title-dot {
+    color: var(--color-red);
+  }
+
+  .videolecciones-secundaria__media {
+    position: relative;
+    width: 100%;
+    max-width: min(960px, 100%);
+    margin: 0 auto;
+  }
+
+  /* Detrás del vídeo, esquina inferior izquierda */
+  .videolecciones-secundaria__geo8 {
+    position: absolute;
+    left: -10%;
+    bottom: -10%;
+    z-index: 0;
+    max-width: 230px;
+    width: min(32%, 230px);
+    pointer-events: none;
+  }
+
+  .videolecciones-secundaria__geo8 img {
+    width: 100%;
+    max-width: 230px;
+    height: auto;
+    display: block;
+  }
+
+  .videolecciones-secundaria__video-shell {
+    position: relative;
+    z-index: 1;
+    border-radius: 24px;
+    overflow: hidden;
+    aspect-ratio: 16 / 9;
+    background: var(--color-black);
+    box-shadow: 0 16px 48px rgba(56, 67, 208, 0.12), 0 8px 24px rgba(0, 0, 0, 0.08);
+  }
+
+  .videolecciones-secundaria__iframe {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    border: none;
+  }
+
+  @media (min-width: 768px) {
+    .videolecciones-secundaria {
+      padding: 4rem 0;
+    }
+  }
+
+  @media (min-width: 1024px) {
+    .videolecciones-secundaria {
+      padding: 5rem 0;
+    }
+  }
+
+  @media (max-width: 767px) {
+    .videolecciones-secundaria__geo7 {
+      top: 30%;
+      transform: none;
+      opacity: 0.95;
+    }
+
+    .videolecciones-secundaria__geo8 {
+      width: min(40%, 230px);
+    }
+  }
+</style>

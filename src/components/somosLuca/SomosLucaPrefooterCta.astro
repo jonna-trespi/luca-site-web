@@ -1,0 +1,200 @@
+---
+/**
+ * CTA previo al footer (Somos Luca): fondo #edf5ff, tarjeta con borde/sombra, avatar, modal de solicitud.
+ */
+---
+
+<section class="somos-luca-prefooter-cta" aria-labelledby="somos-luca-prefooter-cta-heading">
+  <div class="somos-luca-prefooter-cta__inner layout-container">
+    <div class="somos-luca-prefooter-cta__card">
+      <img
+        class="somos-luca-prefooter-cta__avatar"
+        src="/images/somosLuca/avatar.png"
+        alt=""
+        width="314"
+        height="334"
+        loading="lazy"
+        decoding="async"
+        aria-hidden="true"
+      />
+      <div class="somos-luca-prefooter-cta__layout">
+        <div class="somos-luca-prefooter-cta__col somos-luca-prefooter-cta__col--title">
+          <h3 id="somos-luca-prefooter-cta-heading" class="text-h3 somos-luca-prefooter-cta__heading">
+            ¿Te gustaría ser parte de Luca?
+          </h3>
+        </div>
+        <div class="somos-luca-prefooter-cta__col somos-luca-prefooter-cta__col--cta">
+          <p class="text-subtitle-2 somos-luca-prefooter-cta__lead">
+            Buscamos mentes curiosas y talentos que quieran transformar la educación.
+          </p>
+          <button
+            type="button"
+            class="btn-base btn-primary btn-cta-animated somos-luca-prefooter-cta__cta"
+            data-open-somos-solicitud-modal
+          >
+            <span>Presenta tu solicitud</span>
+            <span class="somos-luca-prefooter-cta__cta-icon" aria-hidden="true">
+              <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+                <path
+                  fill-rule="evenodd"
+                  clip-rule="evenodd"
+                  d="M11.235 16.089C11.105 16.178 10.958 16.221 10.811 16.221C10.572 16.221 10.338 16.108 10.192 15.896C9.958 15.555 10.044 15.088 10.385 14.853C11.969 13.763 13.445 12.415 13.542 11.969C13.445 11.583 11.969 10.236 10.385 9.148C10.045 8.913 9.958 8.446 10.192 8.105C10.426 7.763 10.892 7.677 11.235 7.911C12.656 8.887 15.04 10.716 15.04 11.999C15.04 13.282 12.656 15.112 11.235 16.089ZM12.25 2.25C5.051 2.25 2.5 4.802 2.5 12C2.5 19.198 5.051 21.75 12.25 21.75C19.448 21.75 22 19.198 22 12C22 4.802 19.448 2.25 12.25 2.25Z"
+                  fill="currentColor"></path>
+              </svg>
+            </span>
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<style>
+  .somos-luca-prefooter-cta {
+    position: relative;
+    z-index: 2;
+    width: 100%;
+    background-color: #edf5ff;
+    margin-bottom: clamp(-4.5rem, -8vw, -6.5rem);
+    padding-top: clamp(4rem, 11vw, 7.5rem);
+    padding-bottom: clamp(1rem, 2vw, 1.5rem);
+  }
+
+  .somos-luca-prefooter-cta__inner {
+    max-width: 960px;
+    margin: 0 auto;
+  }
+
+  .somos-luca-prefooter-cta__card {
+    position: relative;
+    background-color: #edf5ff;
+    border-radius: 28px;
+    border: 2px solid var(--color-blue-primary);
+    box-shadow: 0 20px 56px rgba(40, 48, 148, 0.14);
+    padding: clamp(1.5rem, 3.5vw, 2rem) clamp(1.25rem, 3vw, 2rem);
+    padding-left: clamp(1.25rem, 3vw, 2rem);
+    overflow: visible;
+  }
+
+  .somos-luca-prefooter-cta__avatar {
+    position: absolute;
+    left: 0;
+    top: 50%;
+    z-index: 2;
+    display: block;
+    width: min(150px, 34vw);
+    max-width: 150px;
+    height: auto;
+    object-fit: contain;
+    pointer-events: none;
+    user-select: none;
+    transform: translate(-32%, -50%);
+    filter: drop-shadow(0 12px 28px rgba(40, 48, 148, 0.2));
+  }
+
+  .somos-luca-prefooter-cta__layout {
+    display: flex;
+    flex-direction: column;
+    gap: clamp(1.25rem, 3vw, 1.75rem);
+    align-items: stretch;
+    padding-left: clamp(3.5rem, 12vw, 5.5rem);
+  }
+
+  .somos-luca-prefooter-cta__col--title {
+    min-width: 0;
+  }
+
+  .somos-luca-prefooter-cta__heading {
+    margin: 0;
+    max-width: 300px;
+    color: var(--color-text-base);
+    text-wrap: balance;
+  }
+
+  .somos-luca-prefooter-cta__col--cta {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 1rem;
+    min-width: 0;
+  }
+
+  .somos-luca-prefooter-cta__lead {
+    margin: 0;
+    max-width: 26rem;
+    color: #2f3548;
+  }
+
+  /* Mismo patrón que PrefooterCta (home): flecha blanca sin icon-circle */
+  .somos-luca-prefooter-cta__cta {
+    color: var(--color-white);
+    flex-shrink: 0;
+  }
+
+  .somos-luca-prefooter-cta__cta .somos-luca-prefooter-cta__cta-icon {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    color: var(--color-white);
+  }
+
+  .somos-luca-prefooter-cta__cta .somos-luca-prefooter-cta__cta-icon svg {
+    width: 1.25rem;
+    height: 1.25rem;
+  }
+
+  @media (min-width: 768px) {
+    .somos-luca-prefooter-cta__layout {
+      flex-direction: row;
+      align-items: flex-start;
+      justify-content: space-between;
+      gap: clamp(1.5rem, 3vw, 2.5rem);
+    }
+
+    .somos-luca-prefooter-cta__col--cta {
+      flex: 1;
+      max-width: min(100%, 22rem);
+      align-items: stretch;
+    }
+
+    .somos-luca-prefooter-cta__cta {
+      align-self: flex-start;
+    }
+  }
+
+  @media (max-width: 767px) {
+    .somos-luca-prefooter-cta__card {
+      margin-top: clamp(2.5rem, 8vw, 3.5rem);
+      padding-top: clamp(2.75rem, 7vw, 3.25rem);
+    }
+
+    .somos-luca-prefooter-cta__avatar {
+      left: 50%;
+      top: 0;
+      transform: translate(-50%, -48%);
+      width: min(130px, 36vw);
+      max-width: 130px;
+    }
+
+    .somos-luca-prefooter-cta__layout {
+      padding-left: 0;
+      align-items: center;
+      text-align: center;
+    }
+
+    .somos-luca-prefooter-cta__heading {
+      max-width: 20rem;
+      margin-left: auto;
+      margin-right: auto;
+    }
+
+    .somos-luca-prefooter-cta__col--cta {
+      align-items: center;
+      max-width: 100%;
+    }
+
+    .somos-luca-prefooter-cta__lead {
+      max-width: 22rem;
+    }
+  }
+</style>

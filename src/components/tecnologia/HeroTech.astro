@@ -1,0 +1,292 @@
+---
+/**
+ * Tecnología — hero: label + título + subtítulo, geos de fondo, panel azul ~80% + geo-3 + vídeo + avatar.
+ * Assets: public/images/tecnologia/geo-*.png, hero-avatar.png, public/videos/demo-general.mp4
+ */
+const baseImg = '/images/tecnologia';
+const videoSrc = '/videos/demo-general.mp4';
+const avatarSrc = `${baseImg}/hero-avatar.png`;
+---
+
+<section class="hero-tech" aria-labelledby="hero-tech-title">
+  <div class="hero-tech__head">
+    <div class="hero-tech__geo hero-tech__geo--left" aria-hidden="true">
+      <img
+        class="hero-tech__geo-img"
+        src={`${baseImg}/geo-2.png`}
+        alt=""
+        width="100"
+        height="97"
+        loading="eager"
+        decoding="async"
+      />
+    </div>
+    <div class="hero-tech__geo hero-tech__geo--right" aria-hidden="true">
+      <img
+        class="hero-tech__geo-img"
+        src={`${baseImg}/geo-1.png`}
+        alt=""
+        width="90"
+        height="85"
+        loading="eager"
+        decoding="async"
+      />
+    </div>
+
+    <div class="hero-tech__head-inner layout-container">
+      <p class="programas__label hero-tech__label">
+        <span class="programas__label-dot" aria-hidden="true"></span>
+        Plataforma educativa
+      </p>
+      <h1 id="hero-tech-title" class="text-h1 hero-tech__title">
+        IA integrada en todo el ecosistema Luca<span class="hero-tech__title-dot" aria-hidden="true">.</span>
+      </h1>
+      <p class="text-subtitle-1 hero-tech__subtitle">
+        Tecnología que trabaja por tu escuela, todos los días.
+      </p>
+    </div>
+  </div>
+
+  <div class="hero-tech__blue">
+    <div class="hero-tech__blue-panel">
+      <img
+        class="hero-tech__panel-geo"
+        src={`${baseImg}/geo-3.png`}
+        alt=""
+        width="238"
+        height="258"
+        loading="lazy"
+        decoding="async"
+        aria-hidden="true"
+      />
+      <div class="hero-tech__shell-wrap">
+        <div class="hero-tech__shell">
+          <video
+            class="hero-tech__video"
+            muted
+            playsinline
+            autoplay
+            loop
+            preload="metadata"
+            aria-label="Demostración general de la plataforma Luca"
+          >
+            <source src={videoSrc} type="video/mp4" />
+          </video>
+        </div>
+      </div>
+      <img
+        class="hero-tech__avatar"
+        src={avatarSrc}
+        alt=""
+        width="320"
+        height="320"
+        loading="eager"
+        decoding="async"
+      />
+    </div>
+  </div>
+</section>
+
+<style>
+  .hero-tech {
+    width: 100%;
+    background-color: var(--color-bg-base);
+    padding: 0;
+    box-sizing: border-box;
+  }
+
+  .hero-tech__head {
+    position: relative;
+    width: 100%;
+    padding-top: calc(1rem + 64px + 80px);
+    padding-bottom: 0;
+  }
+
+  .hero-tech__head-inner {
+    position: relative;
+    z-index: 1;
+    max-width: 56rem;
+    margin-left: auto;
+    margin-right: auto;
+    text-align: center;
+  }
+
+  .hero-tech__label {
+    margin: 0 auto 24px;
+    justify-content: center;
+  }
+
+  .hero-tech__title {
+    margin: 0 auto 45px;
+    color: var(--color-black);
+  }
+
+  .hero-tech__title-dot {
+    color: var(--color-red);
+  }
+
+  .hero-tech__subtitle {
+    margin: 0 auto;
+    max-width: 42rem;
+    color: var(--color-text-base);
+  }
+
+  /* Figuras de fondo (no compiten con el copy: z-index 0) */
+  .hero-tech__geo {
+    position: absolute;
+    z-index: 0;
+    pointer-events: none;
+    user-select: none;
+    line-height: 0;
+    top: 50%;
+    transform: translateY(-50%);
+  }
+
+  .hero-tech__geo-img {
+    display: block;
+    height: auto;
+  }
+
+  .hero-tech__geo--left {
+    left: 10%;
+    top: 80%;
+  }
+
+  .hero-tech__geo--left .hero-tech__geo-img {
+    width: 100px;
+    max-width: 100px;
+  }
+
+  .hero-tech__geo--right {
+    right: 10%;
+    top: 40%;
+  }
+
+  .hero-tech__geo--right .hero-tech__geo-img {
+    width: 90px;
+    max-width: 90px;
+  }
+
+  /* 95px entre subtítulo y borde superior del vídeo: el shell sube 64px (top:-64px), así que el margen al panel = 95 + 64 */
+  .hero-tech__blue {
+    position: relative;
+    width: 100%;
+    margin-top: calc(95px + 64px);
+    padding: 0 var(--layout-padding-x) clamp(4rem, 8vw, 6rem);
+    box-sizing: border-box;
+  }
+
+  .hero-tech__blue-panel {
+    width: 80%;
+    max-width: 1200px;
+    margin-left: auto;
+    margin-right: auto;
+    background-color: #3843d0;
+    border-radius: 32px;
+    position: relative;
+    overflow: visible;
+    /* Altura mínima: cabe el vídeo (80% ancho, 16:9) desplazado -64px + hueco inferior */
+    min-height: clamp(280px, 52vw, 520px);
+    padding-bottom: clamp(5rem, 10vw, 7rem);
+    box-sizing: border-box;
+  }
+
+  .hero-tech__panel-geo {
+    position: absolute;
+    left: 0;
+    bottom: 0;
+    z-index: 0;
+    width: 50%;
+    max-width: 280px;
+    height: auto;
+    pointer-events: none;
+    user-select: none;
+    object-fit: contain;
+    object-position: left bottom;
+    border-bottom-left-radius: 50px;
+  }
+
+  /* Vídeo montado sobre el panel: centrado, 80% del ancho del panel, ~64px por encima del borde superior */
+  .hero-tech__shell-wrap {
+    position: absolute;
+    left: 50%;
+    top: -64px;
+    transform: translateX(-50%);
+    width: 80%;
+    max-width: 100%;
+    z-index: 2;
+    box-sizing: border-box;
+  }
+
+  .hero-tech__shell {
+    position: relative;
+    z-index: 1;
+    border-radius: 28px;
+    overflow: hidden;
+    aspect-ratio: 16 / 9;
+    background: var(--color-black);
+    box-shadow:
+      0 16px 48px rgba(40, 48, 148, 0.14),
+      0 8px 24px rgba(0, 0, 0, 0.08);
+  }
+
+  .hero-tech__video {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+  }
+
+  /* Avatar anclado a la esquina inferior derecha del panel azul */
+  .hero-tech__avatar {
+    position: absolute;
+    right: -5%;
+    bottom: -10%;
+    max-width: 160px;
+    width: min(160px, 38%);
+    height: auto;
+    z-index: 3;
+    pointer-events: none;
+    user-select: none;
+    object-fit: contain;
+  }
+
+  @media (max-width: 767px) {
+    .hero-tech__blue {
+      margin-top: calc(95px + 48px);
+    }
+
+    .hero-tech__blue-panel {
+      width: 92%;
+      min-height: clamp(240px, 70vw, 400px);
+    }
+
+    .hero-tech__shell-wrap {
+      width: 90%;
+      top: -48px;
+    }
+
+    .hero-tech__panel-geo {
+      max-width: 55%;
+    }
+
+    .hero-tech__avatar {
+      max-width: 120px;
+      width: min(120px, 42%);
+    }
+  }
+
+  @media (min-width: 768px) {
+    .hero-tech__head {
+      padding-top: calc(1.5rem + 80px + 80px);
+    }
+  }
+
+  @media (min-width: 1025px) {
+    .hero-tech__head {
+      padding-top: calc(2rem + 80px + 96px);
+    }
+  }
+</style>

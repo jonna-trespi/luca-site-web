@@ -1,0 +1,26 @@
+---
+/**
+ * Página Tecnología — hero inicial; más secciones después.
+ */
+import Layout from '../layouts/Layout.astro';
+import Header from '../components/Header.astro';
+import HeroTech from '../components/tecnologia/HeroTech.astro';
+import HerramientasTech from '../components/tecnologia/HerramientasTech.astro';
+import CtaTecnologia from '../components/tecnologia/CtaTecnologia.astro';
+import FaqTecnologia from '../components/tecnologia/FaqTecnologia.astro';
+import Footer from '../components/Footer.astro';
+---
+
+<Layout
+  title="Tecnología - Luca"
+  description="Tecnología e inteligencia artificial integradas en el ecosistema Luca: herramientas para el aula, personalización del aprendizaje y una experiencia educativa moderna."
+>
+  <Header />
+  <main>
+    <HeroTech />
+    <HerramientasTech />
+    <CtaTecnologia />
+    <FaqTecnologia />
+  </main>
+  <Footer />
+</Layout>

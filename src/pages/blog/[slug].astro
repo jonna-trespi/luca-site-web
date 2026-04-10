@@ -1,0 +1,221 @@
+---
+import Layout from '../../layouts/Layout.astro';
+import Header from '../../components/Header.astro';
+import Footer from '../../components/Footer.astro';
+import BlogRelated from '../../components/blog/BlogRelated.astro';
+import { getAllPosts, getPostBySlug, getRelatedPosts } from '../../lib/blog';
+
+export function getStaticPaths() {
+  return getAllPosts().map((post) => ({
+    params: { slug: post.slug },
+  }));
+}
+
+const slug = Astro.params.slug;
+const post = slug ? getPostBySlug(slug) : undefined;
+if (!post) {
+  throw new Error(`Entrada de blog no encontrada: ${slug}`);
+}
+
+const related = getRelatedPosts(post.slug, post.category, 3);
+const canonicalPath = `/blog/${post.slug}/`;
+const ogImage = post.mainImage?.startsWith('http') ? post.mainImage : undefined;
+---
+
+<Layout
+  title={`${post.name} - Blog Luca`}
+  description={post.summary || post.name}
+  canonicalPath={canonicalPath}
+  image={ogImage}
+>
+  <Header />
+  <main class="blog-post-page">
+    <article class="blog-post">
+      <div class="blog-post__shell layout-container">
+        <header class="blog-post__head">
+          <div class="blog-post__meta-row">
+            {post.category ? (
+              <span class="blog-post__category-chip">{post.category}</span>
+            ) : null}
+            {post.dateLabel ? (
+              <time
+                class="blog-post__date text-body-primary"
+                datetime={post.publishedAt ? post.publishedAt.toISOString() : undefined}
+              >
+                {post.dateLabel}
+              </time>
+            ) : null}
+          </div>
+          <h2 class="blog-post__title text-h2">{post.name}</h2>
+        </header>
+
+        {post.mainImage ? (
+          <div class="blog-post__featured">
+            <img
+              class="blog-post__featured-img"
+              src={post.mainImage}
+              alt={post.mainImageAlt || ''}
+              width="1200"
+              height="675"
+              loading="eager"
+              decoding="async"
+            />
+          </div>
+        ) : null}
+
+        <div class="blog-post__body blog-prose text-body-primary" set:html={post.bodyHtml} />
+      </div>
+    </article>
+
+    <BlogRelated posts={related} />
+  </main>
+  <Footer />
+</Layout>
+
+<style>
+  .blog-post-page {
+    background-color: var(--color-bg-base);
+  }
+
+  .blog-post__shell.layout-container {
+    max-width: 1100px;
+    margin-left: auto;
+    margin-right: auto;
+    padding-top: calc(1rem + 80px + 1.5rem);
+    padding-bottom: clamp(2rem, 5vw, 3rem);
+    padding-left: var(--layout-padding-x);
+    padding-right: var(--layout-padding-x);
+    box-sizing: border-box;
+  }
+
+  @media (min-width: 1920px) {
+    .blog-post__shell.layout-container {
+      max-width: 1400px;
+    }
+  }
+
+  @media (max-width: 767px) {
+    .blog-post__shell.layout-container {
+      padding-top: calc(1rem + 64px + 1.25rem);
+    }
+  }
+
+  .blog-post__head {
+    margin: 0;
+  }
+
+  .blog-post__meta-row {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 0.75rem 1.25rem;
+  }
+
+  /* Chip tipo píldora (no interactivo) */
+  .blog-post__category-chip {
+    display: inline-flex;
+    align-items: center;
+    padding: 0.35rem 0.75rem;
+    border-radius: 999px;
+    font-family: var(--font-family-base);
+    font-size: var(--text-micro-size, 0.75rem);
+    font-weight: 600;
+    line-height: 1.2;
+    background-color: var(--color-blue-secondary);
+    color: #ffffff;
+    max-width: 100%;
+  }
+
+  .blog-post__date {
+    margin: 0;
+    color: var(--color-text-base);
+  }
+
+  .blog-post__title.text-h2 {
+    margin-top: 32px;
+    margin-bottom: clamp(1.5rem, 5vw, 2.5rem);
+    color: var(--color-text-base);
+  }
+
+  /* 64px solo cuando sigue la imagen destacada */
+  .blog-post__head:has(+ .blog-post__featured) .blog-post__title.text-h2 {
+    margin-bottom: 64px;
+  }
+
+  .blog-post__featured {
+    margin: 0 0 clamp(2rem, 5vw, 3rem);
+    width: 100%;
+    border-radius: clamp(16px, 3vw, 24px);
+    overflow: hidden;
+    background: #e8ecf2;
+    box-shadow: 0 8px 32px rgba(40, 48, 148, 0.1);
+  }
+
+  .blog-post__featured-img {
+    display: block;
+    width: 100%;
+    height: auto;
+  }
+
+  .blog-prose {
+    color: var(--color-text-base);
+    line-height: 1.65;
+  }
+
+  .blog-prose :global(p) {
+    margin: 0 0 1rem;
+  }
+
+  .blog-prose :global(h2),
+  .blog-prose :global(h3),
+  .blog-prose :global(h4) {
+    font-family: var(--font-family-base);
+    color: var(--color-text-base);
+    margin: 1.75rem 0 0.75rem;
+    line-height: 1.25;
+  }
+
+  .blog-prose :global(h2) {
+    font-size: clamp(1.25rem, 2.5vw, 1.5rem);
+    font-weight: var(--text-h4-weight, 700);
+  }
+
+  .blog-prose :global(h3) {
+    font-size: clamp(1.1rem, 2vw, 1.25rem);
+    font-weight: 600;
+  }
+
+  .blog-prose :global(ul),
+  .blog-prose :global(ol) {
+    margin: 0 0 1rem;
+    padding-left: 1.35rem;
+  }
+
+  .blog-prose :global(li) {
+    margin-bottom: 0.35rem;
+  }
+
+  .blog-prose :global(a) {
+    color: var(--color-blue-primary);
+    text-decoration: underline;
+  }
+
+  .blog-prose :global(a:hover) {
+    color: var(--color-blue-secondary);
+  }
+
+  .blog-prose :global(img) {
+    max-width: 100%;
+    height: auto;
+    border-radius: 12px;
+    margin: 1rem 0;
+  }
+
+  .blog-prose :global(blockquote) {
+    margin: 1.25rem 0;
+    padding: 0.75rem 1rem 0.75rem 1.1rem;
+    border-left: 4px solid var(--color-blue-secondary);
+    background: #f4f7fc;
+    border-radius: 0 8px 8px 0;
+  }
+</style>

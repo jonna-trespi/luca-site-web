@@ -1,0 +1,217 @@
+---
+/**
+ * Somos Luca — Trabaja con nosotros: hover muestra descripción bajo el título, tarjeta más alta y fondo ligeramente más oscuro.
+ */
+const roles = [
+  {
+    title: 'Data Engineer',
+    description:
+      'Diseñar y escalar la infraestructura de datos que impulsa la plataforma Luca y mejora la experiencia de escuelas y estudiantes.',
+    href: 'https://www.linkedin.com',
+    imageSrc: '/images/somosLuca/trabaja-1.webp',
+    imageW: 640,
+    imageH: 432,
+    imageAlt: 'Persona trabajando con laptop y planos técnicos.',
+  },
+  {
+    title: 'Diseñador/a Jr.',
+    description:
+      'Aumentar la capacidad de producción de piezas digitales, físicas y web de Luca, asegurando consistencia visual, orden de trabajo y rapidez de entrega.',
+    href: 'https://www.linkedin.com',
+    imageSrc: '/images/somosLuca/trabaja-2.webp',
+    imageW: 687,
+    imageH: 464,
+    imageAlt: 'Escritorio creativo con herramientas de diseño.',
+  },
+  {
+    title: 'Especialista en marketing',
+    description:
+      'Dar a conocer Luca con estrategias de contenido y campañas alineadas a la transformación educativa en México y Latinoamérica.',
+    href: 'https://www.linkedin.com',
+    imageSrc: '/images/somosLuca/trabaja-3.webp',
+    imageW: 640,
+    imageH: 432,
+    imageAlt: 'Ilustración de laptop y redes sociales.',
+  },
+] as const;
+---
+
+<section class="somos-luca-unete" aria-labelledby="somos-luca-unete-heading">
+  <div class="somos-luca-unete__inner layout-container">
+    <header class="somos-luca-unete__header">
+      <p class="programas__label">
+        <span class="programas__label-dot" aria-hidden="true"></span>
+        Trabaja con nosotros
+      </p>
+      <h3 id="somos-luca-unete-heading" class="text-h3 somos-luca-unete__title">
+        Únete a Luca
+      </h3>
+    </header>
+    <ul class="somos-luca-unete__grid">
+      {roles.map((role) => (
+        <li>
+          <a
+            href={role.href}
+            target="_blank"
+            rel="noopener noreferrer"
+            class="somos-luca-unete__card"
+            data-open-somos-solicitud-modal
+          >
+            <div class="somos-luca-unete__media">
+              <img
+                class="somos-luca-unete__img"
+                src={role.imageSrc}
+                alt={role.imageAlt}
+                width={role.imageW}
+                height={role.imageH}
+                loading="lazy"
+                decoding="async"
+              />
+            </div>
+            <h4 class="text-subtitle-2 somos-luca-unete__card-title">{role.title}</h4>
+            <div class="somos-luca-unete__desc-wrap">
+              <div class="somos-luca-unete__desc-inner">
+                <p class="somos-luca-unete__desc">{role.description}</p>
+              </div>
+            </div>
+          </a>
+        </li>
+      ))}
+    </ul>
+  </div>
+</section>
+
+<style>
+  .somos-luca-unete {
+    width: 100%;
+    padding: clamp(3rem, 6vw, 5rem) 0 clamp(2.5rem, 5vw, 4rem);
+    background: #edf5ff;
+    box-sizing: border-box;
+  }
+
+  .somos-luca-unete__header {
+    text-align: center;
+    margin-bottom: clamp(2rem, 4vw, 3rem);
+  }
+
+  .somos-luca-unete__title {
+    margin: 0;
+    color: var(--color-text-base);
+  }
+
+  .somos-luca-unete__grid {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: clamp(1.25rem, 3vw, 1.75rem);
+    align-items: start;
+  }
+
+  @media (min-width: 640px) {
+    .somos-luca-unete__grid {
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+  }
+
+  @media (min-width: 960px) {
+    .somos-luca-unete__grid {
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+    }
+  }
+
+  .somos-luca-unete__card {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+    padding: 1rem 1rem 1.25rem;
+    background-color: var(--color-white);
+    border-radius: 24px;
+    box-shadow: 0 12px 40px rgba(40, 48, 148, 0.1);
+    border: 2px solid transparent;
+    text-decoration: none;
+    color: inherit;
+    transition:
+      background-color 0.3s ease,
+      border-color 0.25s ease,
+      box-shadow 0.25s ease;
+  }
+
+  .somos-luca-unete__card:hover,
+  .somos-luca-unete__card:focus-within {
+    background-color: #e4eaf8;
+    border-color: var(--color-blue-primary);
+    box-shadow: 0 16px 48px rgba(40, 48, 148, 0.14);
+    outline: none;
+  }
+
+  .somos-luca-unete__media {
+    position: relative;
+    border-radius: 20px;
+    overflow: hidden;
+    aspect-ratio: 4 / 3;
+    background: #e8ecf8;
+  }
+
+  .somos-luca-unete__img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+  }
+
+  .somos-luca-unete__desc-wrap {
+    display: grid;
+    grid-template-rows: 0fr;
+    transition: grid-template-rows 0.4s cubic-bezier(0.33, 1, 0.68, 1);
+  }
+
+  .somos-luca-unete__desc-inner {
+    min-height: 0;
+    overflow: hidden;
+  }
+
+  .somos-luca-unete__card:hover .somos-luca-unete__desc-wrap,
+  .somos-luca-unete__card:focus-within .somos-luca-unete__desc-wrap {
+    grid-template-rows: 1fr;
+  }
+
+  .somos-luca-unete__desc {
+    margin: 0;
+    padding-top: 0.125rem;
+    font-family: var(--font-family-base);
+    font-size: 13px;
+    font-weight: 400;
+    line-height: 1.45;
+    letter-spacing: 0;
+    text-align: center;
+    color: #4a4f63;
+  }
+
+  .somos-luca-unete__card-title {
+    margin: 0;
+    text-align: center;
+    font-weight: 700;
+    color: var(--color-text-base);
+    transition: text-decoration 0.2s ease;
+  }
+
+  .somos-luca-unete__card:hover .somos-luca-unete__card-title,
+  .somos-luca-unete__card:focus-within .somos-luca-unete__card-title {
+    text-decoration: underline;
+    text-underline-offset: 0.2em;
+    text-decoration-thickness: 2px;
+    text-decoration-color: var(--color-blue-primary);
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .somos-luca-unete__desc-wrap {
+      transition: none;
+    }
+
+    .somos-luca-unete__card {
+      transition: none;
+    }
+  }
+</style>

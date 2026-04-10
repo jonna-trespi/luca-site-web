@@ -1,0 +1,282 @@
+---
+/**
+ * Hero Secundaria: cabecera de la página del programa Secundaria.
+ * Misma estructura y responsive que HeroPrimaria; franja 80% (100% en móvil); carrusel full viewport.
+ */
+const carouselImages = [
+  { src: '/images/programas/secundaria/carrusel-1.webp', alt: 'Estudiantes en actividad de Secundaria' },
+  { src: '/images/programas/secundaria/carrusel-2.webp', alt: 'Aprendizaje colaborativo en el aula' },
+  { src: '/images/programas/secundaria/carrusel-3.webp', alt: 'Experiencia educativa Luca Secundaria' },
+  { src: '/images/programas/secundaria/carrusel-4.webp', alt: 'Materiales y dinámicas en clase' },
+  { src: '/images/programas/secundaria/carrusel-5.webp', alt: 'Comunidad escolar Luca' },
+] as const;
+---
+
+<section class="hero-secundaria">
+  <div class="hero-secundaria__strip">
+    <img
+      class="hero-secundaria__deco hero-secundaria__deco--left"
+      src="/images/programas/secundaria/geo-2.png"
+      alt=""
+      aria-hidden="true"
+    />
+    <img
+      class="hero-secundaria__deco hero-secundaria__deco--right"
+      src="/images/programas/secundaria/geo-1.png"
+      alt=""
+      aria-hidden="true"
+    />
+
+    <div class="hero-secundaria__inner layout-container">
+      <header class="hero-secundaria__content">
+        <p class="programas__label">
+          <span class="programas__label-dot" aria-hidden="true"></span>
+          Secundaria
+        </p>
+        <h1 class="hero-secundaria__title text-h1">
+          Pensar, crear y conectar con el mundo real<span class="hero-secundaria__title-dot" aria-hidden="true">.</span>
+        </h1>
+        <p class="hero-secundaria__subtitle text-subtitle-1">
+          Aprendizajes que desarrollan criterio, autonomía y propósito
+        </p>
+        <a href="/contacto" class="btn-base btn-primary btn-cta-animated hero-secundaria__cta">
+          <span>Solicita tu demo</span>
+          <span class="hero-secundaria__cta-icon" aria-hidden="true">
+            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+              <path
+                fill-rule="evenodd"
+                clip-rule="evenodd"
+                d="M11.235 16.089C11.105 16.178 10.958 16.221 10.811 16.221C10.572 16.221 10.338 16.108 10.192 15.896C9.958 15.555 10.044 15.088 10.385 14.853C11.969 13.763 13.445 12.415 13.542 11.969C13.445 11.583 11.969 10.236 10.385 9.148C10.045 8.913 9.958 8.446 10.192 8.105C10.426 7.763 10.892 7.677 11.235 7.911C12.656 8.887 15.04 10.716 15.04 11.999C15.04 13.282 12.656 15.112 11.235 16.089ZM12.25 2.25C5.051 2.25 2.5 4.802 2.5 12C2.5 19.198 5.051 21.75 12.25 21.75C19.448 21.75 22 19.198 22 12C22 4.802 19.448 2.25 12.25 2.25Z"
+                fill="currentColor"></path>
+            </svg>
+          </span>
+        </a>
+      </header>
+    </div>
+  </div>
+
+  <div
+    class="hero-secundaria__carousel"
+    role="region"
+    aria-roledescription="carrusel"
+    aria-label="Imágenes del programa Secundaria"
+  >
+    <div class="hero-secundaria__carousel-viewport">
+      <div class="hero-secundaria__carousel-track">
+        {
+          [...carouselImages, ...carouselImages].map((img) => (
+            <img
+              class="hero-secundaria__carousel-img"
+              src={img.src}
+              alt={img.alt}
+              loading="lazy"
+              decoding="async"
+            />
+          ))
+        }
+      </div>
+    </div>
+  </div>
+</section>
+
+<style>
+  .hero-secundaria {
+    --carousel-img-h: 355px;
+    --hero-carousel-h: var(--carousel-img-h);
+    --hero-secundaria-pad-bottom: clamp(72px, 11vw, 120px);
+    width: 100%;
+    background-color: #ffffff;
+    padding: 0;
+    position: relative;
+    overflow-x: hidden;
+    /* Espacio para la mitad inferior del carrusel (fuera del fondo) */
+    padding-bottom: var(--hero-secundaria-pad-bottom);
+    box-sizing: border-box;
+  }
+
+  .hero-secundaria__strip {
+    width: 80%;
+    max-width: 100%;
+    margin-left: auto;
+    margin-right: auto;
+    background-color: #d2e6ff;
+    position: relative;
+    overflow: visible;
+    padding-top: calc(1rem + 64px + 128px);
+    /* Mitad del carrusel dentro del strip + 54px entre CTA y borde superior del carrusel */
+    padding-bottom: calc(var(--hero-carousel-h) * 0.5 + 54px);
+    padding-left: 0;
+    padding-right: 0;
+    box-sizing: border-box;
+  }
+
+  .hero-secundaria__deco {
+    position: absolute;
+    display: block;
+    width: auto;
+    height: auto;
+    pointer-events: none;
+    user-select: none;
+    object-fit: contain;
+    z-index: 0;
+  }
+
+  .hero-secundaria__deco--left {
+    left: 0;
+    top: 0;
+    max-width: 200px;
+    width: min(200px, 42vw);
+  }
+
+  .hero-secundaria__deco--right {
+    right: 0;
+    top: 0;
+    max-width: 300px;
+    width: min(300px, 55vw);
+  }
+
+  .hero-secundaria__inner {
+    position: relative;
+    z-index: 1;
+  }
+
+  .hero-secundaria__content {
+    text-align: center;
+    margin-bottom: 0;
+  }
+
+  .hero-secundaria__title {
+    color: var(--color-text-base);
+    max-width: 950px;
+    margin: 0 auto 48px;
+  }
+
+  .hero-secundaria__title-dot {
+    color: var(--color-red);
+  }
+
+  .hero-secundaria__subtitle {
+    color: var(--color-text-base);
+    max-width: 950px;
+    margin: 0 auto 28px;
+  }
+
+  .hero-secundaria__cta {
+    color: var(--color-white);
+  }
+
+  .hero-secundaria__cta .hero-secundaria__cta-icon {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    color: var(--color-white);
+  }
+
+  .hero-secundaria__cta .hero-secundaria__cta-icon svg {
+    width: 1.25rem;
+    height: 1.25rem;
+  }
+
+  .hero-secundaria__carousel {
+    position: absolute;
+    left: 50%;
+    width: 100vw;
+    margin-left: -50vw;
+    bottom: var(--hero-secundaria-pad-bottom);
+    z-index: 2;
+    transform: translateY(50%);
+    padding: 0;
+    box-sizing: border-box;
+  }
+
+  .hero-secundaria__carousel-viewport {
+    overflow: hidden;
+    width: 100%;
+    min-height: var(--hero-carousel-h);
+  }
+
+  .hero-secundaria__carousel-track {
+    display: flex;
+    align-items: flex-end;
+    flex-wrap: nowrap;
+    gap: clamp(10px, 1.2vw, 16px);
+    width: max-content;
+    will-change: transform;
+    /* Desplazamiento continuo: derecha → izquierda */
+    animation: hero-secundaria-carousel-marquee 45s linear infinite;
+  }
+
+  .hero-secundaria__carousel:hover .hero-secundaria__carousel-track {
+    animation-play-state: paused;
+  }
+
+  @keyframes hero-secundaria-carousel-marquee {
+    from {
+      transform: translateX(0);
+    }
+    to {
+      transform: translateX(-50%);
+    }
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .hero-secundaria__carousel-track {
+      animation: none;
+      transform: translateX(0);
+    }
+  }
+
+  /* Sin contenedor decorativo: el asset ya trae borde y estilo */
+  .hero-secundaria__carousel-img {
+    flex: 0 0 auto;
+    display: block;
+    height: var(--carousel-img-h);
+    width: auto;
+    max-width: none;
+  }
+
+  @media (min-width: 768px) {
+    .hero-secundaria__strip {
+      padding-top: calc(1.5rem + 80px + 128px);
+    }
+  }
+
+  @media (min-width: 1025px) {
+    .hero-secundaria__strip {
+      padding-top: calc(2rem + 80px + 128px);
+    }
+  }
+
+  @media (max-width: 767px) {
+    .hero-secundaria {
+      --carousel-img-h: 260px;
+    }
+
+    /* Franja a todo el ancho; texto con márgenes laterales compactos (~16–20px) */
+    .hero-secundaria__strip {
+      width: 100%;
+      max-width: none;
+      margin-left: 0;
+      margin-right: 0;
+    }
+
+    .hero-secundaria__inner.layout-container {
+      max-width: none;
+      padding-left: clamp(1rem, 4vw, 1.25rem);
+      padding-right: clamp(1rem, 4vw, 1.25rem);
+    }
+
+    .hero-secundaria__title,
+    .hero-secundaria__subtitle {
+      max-width: none;
+    }
+
+    .hero-secundaria__title {
+      margin-bottom: clamp(1.25rem, 4vw, 48px);
+    }
+
+    .hero-secundaria__subtitle {
+      margin-bottom: clamp(1rem, 3vw, 28px);
+    }
+  }
+</style>

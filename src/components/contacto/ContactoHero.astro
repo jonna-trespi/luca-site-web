@@ -1,0 +1,138 @@
+---
+/**
+ * Hero página Contacto: label (programas__label), h1 (.text-h1), subtítulo (.text-subtitle-1) y geometrías.
+ */
+---
+
+<section class="contacto-hero" aria-labelledby="contacto-hero-title">
+  <img
+    class="contacto-hero__geo contacto-hero__geo--left"
+    src="/images/contacto/geo-1.png"
+    alt=""
+    width="60"
+    height="55"
+    loading="eager"
+    decoding="async"
+    aria-hidden="true"
+    data-contacto-hero-geo="left"
+  />
+  <img
+    class="contacto-hero__geo contacto-hero__geo--right"
+    src="/images/contacto/geo-1.png"
+    alt=""
+    width="90"
+    height="83"
+    loading="eager"
+    decoding="async"
+    aria-hidden="true"
+    data-contacto-hero-geo="right"
+  />
+  <div class="contacto-hero__inner layout-container">
+    <header class="contacto-hero__header">
+      <p class="programas__label contacto-hero__label">
+        <span class="programas__label-dot" aria-hidden="true"></span>
+        Contáctanos
+      </p>
+      <h1 id="contacto-hero-title" class="contacto-hero__title text-h1">
+        Nos encantará saber de ti<span class="contacto-hero__title-dot" aria-hidden="true">.</span>
+      </h1>
+      <p class="contacto-hero__subtitle text-subtitle-1">
+        Ya sea que tengas una pregunta, quieras conocer Luca, compartir tu experiencia o sumarte para transformar la
+        educación, estamos aquí para atenderte.
+      </p>
+    </header>
+  </div>
+</section>
+
+<style>
+  .contacto-hero {
+    position: relative;
+    width: 100%;
+    /* Pastilla header: padding 1rem + min-height 80px + 1rem; + 100px hasta el label */
+    padding: calc(1rem + 80px + 1rem + 100px) 0 52px;
+    background: var(--color-white);
+    overflow: hidden;
+    box-sizing: border-box;
+  }
+
+  .contacto-hero__geo {
+    position: absolute;
+    pointer-events: none;
+    user-select: none;
+    object-fit: contain;
+    z-index: 0;
+    opacity: 0.95;
+  }
+
+  .contacto-hero__geo--left {
+    left: clamp(0.5rem, 4vw, 2.5rem);
+    top: 52%;
+    transform: translateY(-50%);
+    width: 60px;
+    max-width: 60px;
+    height: auto;
+  }
+
+  .contacto-hero__geo--right {
+    right: clamp(0.5rem, 4vw, 2.5rem);
+    top: 32%;
+    transform: translateY(-50%);
+    width: 90px;
+    max-width: 90px;
+    height: auto;
+  }
+
+  .contacto-hero__inner {
+    position: relative;
+    z-index: 1;
+  }
+
+  .contacto-hero__header {
+    text-align: center;
+    max-width: 700px;
+    margin: 0 auto;
+  }
+
+  .contacto-hero__label {
+    justify-content: center;
+    margin: 0 0 24px;
+  }
+
+  .contacto-hero__title {
+    color: var(--color-text-base);
+    max-width: 620px;
+    margin: 0 auto 52px;
+  }
+
+  .contacto-hero__title-dot {
+    color: var(--color-red);
+  }
+
+  .contacto-hero__subtitle {
+    margin: 0 auto;
+    max-width: 700px;
+    color: var(--color-text-base);
+  }
+
+  @media (max-width: 767px) {
+    .contacto-hero {
+      padding: calc(1rem + 64px + 1rem + 100px) 0 52px;
+    }
+
+    .contacto-hero__geo--left {
+      top: 48%;
+      left: 0.25rem;
+      width: 60px;
+      max-width: 60px;
+      opacity: 0.9;
+    }
+
+    .contacto-hero__geo--right {
+      top: 20%;
+      right: 0.25rem;
+      width: 90px;
+      max-width: 90px;
+      opacity: 0.9;
+    }
+  }
+</style>

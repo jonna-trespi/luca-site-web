@@ -1,0 +1,889 @@
+---
+import DemoModal from './DemoModal.astro';
+/**
+ * Header: pill flotante sobre el hero, fixed para que no ocupe flujo.
+ * Programas / Perfiles / Recursos + Login: hover en desktop; click en móvil.
+ * Recursos: Blog → /blog, FAQ → /faqs; triggers mega siguen con # donde aplique.
+ */
+---
+
+<header class="header">
+  <div class="header__inner" id="header-inner-scope">
+    <a href="/" class="header__logo" aria-label="Luca - Inicio">
+      Luca<span class="header__logo-dot">.</span>
+    </a>
+
+    <nav class="header__nav" id="header-nav" aria-label="Navegación principal">
+      <ul class="header__nav-list">
+        <li class="header__nav-item header__nav-item--mega">
+          <a
+            href="#"
+            class="header__nav-link"
+            aria-haspopup="true"
+            aria-expanded="false"
+            aria-controls="mega-programas"
+            id="mega-programas-btn"
+          >
+            Programas
+            <span class="header__nav-chevron" aria-hidden="true"></span>
+          </a>
+          <div class="header__mega" id="mega-programas" role="region" aria-labelledby="mega-programas-btn">
+            <ul class="header__mega-list">
+              <li>
+                <a class="header__mega-link" href="/programas/preescolar">
+                  <img class="header__mega-icon" src="/icons/header/preescolar-icon.png" alt="" width="24" height="24" loading="lazy" />
+                  <span>Preescolar</span>
+                </a>
+              </li>
+              <li>
+                <a class="header__mega-link" href="/programas/primaria">
+                  <img class="header__mega-icon" src="/icons/header/primaria-icon.png" alt="" width="24" height="24" loading="lazy" />
+                  <span>Primaria</span>
+                </a>
+              </li>
+              <li>
+                <a class="header__mega-link" href="/programas/secundaria">
+                  <img class="header__mega-icon" src="/icons/header/secundaria-icon.png" alt="" width="24" height="24" loading="lazy" />
+                  <span>Secundaria</span>
+                </a>
+              </li>
+            </ul>
+          </div>
+        </li>
+
+        <li class="header__nav-item header__nav-item--mega">
+          <a
+            href="#"
+            class="header__nav-link"
+            aria-haspopup="true"
+            aria-expanded="false"
+            aria-controls="mega-perfiles"
+            id="mega-perfiles-btn"
+          >
+            Perfiles
+            <span class="header__nav-chevron" aria-hidden="true"></span>
+          </a>
+          <div class="header__mega" id="mega-perfiles" role="region" aria-labelledby="mega-perfiles-btn">
+            <ul class="header__mega-list">
+              <li>
+                <a class="header__mega-link" href="/perfiles/directores">
+                  <img class="header__mega-icon" src="/icons/header/directores-icon.png" alt="" width="24" height="24" loading="lazy" />
+                  <span>Directores</span>
+                </a>
+              </li>
+              <li>
+                <a class="header__mega-link" href="/perfiles/docentes">
+                  <img class="header__mega-icon" src="/icons/header/docentes-icon.png" alt="" width="24" height="24" loading="lazy" />
+                  <span>Docentes</span>
+                </a>
+              </li>
+              <li>
+                <a class="header__mega-link" href="/perfiles/estudiantes">
+                  <img class="header__mega-icon" src="/icons/header/estudiantes-icon.png" alt="" width="24" height="24" loading="lazy" />
+                  <span>Estudiantes</span>
+                </a>
+              </li>
+              <li>
+                <a class="header__mega-link" href="/perfiles/padres">
+                  <img class="header__mega-icon" src="/icons/header/padres-icon.png" alt="" width="24" height="24" loading="lazy" />
+                  <span>Padres</span>
+                </a>
+              </li>
+            </ul>
+          </div>
+        </li>
+
+        <li class="header__nav-item">
+          <a href="/tecnologia" class="header__nav-link">Tecnología</a>
+        </li>
+        <li class="header__nav-item">
+          <a href="/somosLuca" class="header__nav-link">Somos Luca</a>
+        </li>
+
+        <li class="header__nav-item header__nav-item--mega">
+          <a
+            href="#"
+            class="header__nav-link"
+            aria-haspopup="true"
+            aria-expanded="false"
+            aria-controls="mega-recursos"
+            id="mega-recursos-btn"
+          >
+            Recursos
+            <span class="header__nav-chevron" aria-hidden="true"></span>
+          </a>
+          <div class="header__mega" id="mega-recursos" role="region" aria-labelledby="mega-recursos-btn">
+            <ul class="header__mega-list">
+              <li>
+                <a class="header__mega-link" href="/blog">
+                  <img class="header__mega-icon" src="/icons/header/blog-icon.png" alt="" width="24" height="24" loading="lazy" />
+                  <span>Blog</span>
+                </a>
+              </li>
+              <li>
+                <a class="header__mega-link" href="/faqs">
+                  <img class="header__mega-icon" src="/icons/header/pqr-icon.png" alt="" width="24" height="24" loading="lazy" />
+                  <span>FAQ</span>
+                </a>
+              </li>
+            </ul>
+          </div>
+        </li>
+      </ul>
+    </nav>
+
+    <div class="header__actions">
+      <div class="header__login-wrap" data-login-dropdown>
+        <button
+          type="button"
+          class="btn-base btn-secondary btn-cta-animated header__login-btn"
+          aria-expanded="false"
+          aria-haspopup="true"
+          aria-controls="header-login-panel"
+          id="header-login-btn"
+        >
+          <span>Login</span>
+          <span class="header__btn-icon-inline header__btn-icon-inline--person" aria-hidden="true"></span>
+        </button>
+        <div class="header__mega header__mega--login" id="header-login-panel" role="region" aria-labelledby="header-login-btn">
+          <ul class="header__mega-list header__mega-list--login">
+            <li>
+              <a class="header__mega-link header__mega-link--text-only" href="" target="_blank">Preescolar</a>
+            </li>
+            <li>
+              <a class="header__mega-link header__mega-link--text-only" href="https://app.lucaedu.com/" target="_blank">Primaria</a>
+            </li>
+            <li>
+              <a class="header__mega-link header__mega-link--text-only" href="https://hs.app.lucaedu.com/" target="_blank">Secundaria</a>
+            </li>
+          </ul>
+        </div>
+      </div>
+      <a
+        href="/contacto"
+        class="btn-base btn-primary btn-cta-animated header__demo-desktop"
+      >
+        Solicita tu demo
+      </a>
+    </div>
+
+    <div class="header__mobile-tools">
+      <a
+        href="#"
+        class="btn-base btn-primary btn-cta-animated header__demo-mobile"
+        data-open-demo-modal
+      >
+        Solicita tu demo
+      </a>
+      <button type="button" class="header__burger" aria-label="Abrir menú" aria-expanded="false" aria-controls="header-inner-scope">
+        <span class="header__burger-dots" aria-hidden="true">
+          <span class="header__burger-dot"></span>
+          <span class="header__burger-dot"></span>
+          <span class="header__burger-dot"></span>
+        </span>
+        <span class="header__burger-x" aria-hidden="true">
+          <span class="header__burger-x-line"></span>
+          <span class="header__burger-x-line"></span>
+        </span>
+      </button>
+    </div>
+  </div>
+</header>
+
+<DemoModal />
+
+<script>
+  (function () {
+    const header = document.querySelector('.header');
+    const burger = document.querySelector('.header__burger');
+    const loginBtn = document.querySelector('#header-login-btn') as HTMLButtonElement | null;
+    if (!header || !burger) return;
+
+    const isMobileNav = () => window.matchMedia('(max-width: 1023px)').matches;
+
+    const loginWrap = document.querySelector('[data-login-dropdown]');
+
+    const closeLoginMobile = () => {
+      loginWrap?.classList.remove('header__login-wrap--open');
+      if (loginBtn) loginBtn.setAttribute('aria-expanded', 'false');
+    };
+
+    const closeMobileNavMegas = () => {
+      document.querySelectorAll('.header__nav-item--mega').forEach((li) => {
+        li.classList.remove('header__nav-item--open');
+        const a = li.querySelector<HTMLAnchorElement>('a[aria-controls^="mega-"]');
+        if (a) a.setAttribute('aria-expanded', 'false');
+      });
+    };
+
+    loginBtn?.addEventListener('click', (e) => {
+      e.stopPropagation();
+      if (!isMobileNav() || !loginWrap || !loginBtn) return;
+      const willOpen = !loginWrap.classList.contains('header__login-wrap--open');
+      closeLoginMobile();
+      if (willOpen) {
+        loginWrap.classList.add('header__login-wrap--open');
+        loginBtn.setAttribute('aria-expanded', 'true');
+      }
+    });
+
+    document.querySelectorAll('.header__nav-item--mega > .header__nav-link').forEach((link) => {
+      link.addEventListener('click', (e) => {
+        if (!isMobileNav()) return;
+        if (!header.classList.contains('header--menu-open')) return;
+        e.preventDefault();
+        const li = (link as HTMLElement).closest('.header__nav-item--mega');
+        if (!li) return;
+        const wasOpen = li.classList.contains('header__nav-item--open');
+        closeMobileNavMegas();
+        if (!wasOpen) {
+          li.classList.add('header__nav-item--open');
+          (link as HTMLElement).setAttribute('aria-expanded', 'true');
+        }
+      });
+    });
+
+    document.addEventListener('click', (e) => {
+      const t = e.target;
+      if (!(t instanceof Node)) return;
+      if (header.classList.contains('header--menu-open') && !header.contains(t)) {
+        header.classList.remove('header--menu-open');
+        burger.setAttribute('aria-expanded', 'false');
+        burger.setAttribute('aria-label', 'Abrir menú');
+        closeMobileNavMegas();
+        closeLoginMobile();
+      }
+      const el = t instanceof Element ? t : null;
+      if (!el || !header.contains(el)) return;
+      if (!el.closest('[data-login-dropdown]')) closeLoginMobile();
+      if (!el.closest('.header__nav-item--mega')) closeMobileNavMegas();
+    });
+
+    burger.addEventListener('click', function (e) {
+      e.stopPropagation();
+      const open = header.classList.toggle('header--menu-open');
+      burger.setAttribute('aria-expanded', open ? 'true' : 'false');
+      burger.setAttribute('aria-label', open ? 'Cerrar menú' : 'Abrir menú');
+      if (!open) {
+        closeMobileNavMegas();
+        closeLoginMobile();
+      }
+    });
+
+    document.addEventListener('keydown', (e) => {
+      if (e.key === 'Escape') {
+        closeMobileNavMegas();
+        closeLoginMobile();
+        if (header.classList.contains('header--menu-open')) {
+          header.classList.remove('header--menu-open');
+          burger.setAttribute('aria-expanded', 'false');
+          burger.setAttribute('aria-label', 'Abrir menú');
+        }
+      }
+    });
+  })();
+</script>
+
+<style>
+  .header {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    z-index: 1000;
+    width: 100%;
+    padding: 1rem var(--layout-padding-x);
+    background: transparent;
+    pointer-events: none;
+  }
+
+  .header__inner {
+    pointer-events: auto;
+    max-width: var(--layout-max-width);
+    margin-left: auto;
+    margin-right: auto;
+    display: flex;
+    flex-wrap: nowrap;
+    align-items: stretch;
+    justify-content: space-between;
+    gap: 0.75rem 1.5rem;
+    background-color: #edf5ff;
+    border-radius: 9999px;
+    box-shadow: 0 4px 24px rgba(0, 0, 0, 0.08);
+    padding: 0 1.5rem;
+    min-height: 80px;
+  }
+
+  .header__logo {
+    align-self: center;
+    font-family: var(--font-family-base);
+    font-weight: var(--text-body-primary-highlight-weight);
+    font-size: 2.5rem;
+    color: var(--color-blue);
+    text-decoration: none;
+    letter-spacing: var(--text-h4-spacing);
+    line-height: 1;
+  }
+
+  .header__logo-dot {
+    color: var(--color-red);
+  }
+
+  /* Ocupa la altura de la pastilla para que el mega (top: 100%) quede bajo el borde inferior */
+  .header__nav {
+    display: flex;
+    align-items: stretch;
+  }
+
+  .header__nav-list {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    flex-wrap: nowrap;
+    align-items: stretch;
+    gap: 0.25rem 1.25rem;
+    height: 100%;
+    min-height: 100%;
+  }
+
+  .header__nav-item {
+    position: relative;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    align-items: center;
+  }
+
+  .header__nav-link {
+    font-family: var(--font-family-base);
+    font-weight: var(--text-body-primary-weight);
+    font-size: var(--text-body-primary-size);
+    letter-spacing: var(--text-body-primary-spacing);
+    line-height: var(--text-body-primary-line);
+    color: var(--color-blue);
+    text-decoration: none;
+    display: inline-flex;
+    align-items: center;
+    gap: 0.25rem;
+    transition: color 0.2s ease, font-weight 0.2s ease;
+  }
+
+  .header__nav-link:hover,
+  .header__nav-link:focus {
+    color: var(--color-blue-secondary);
+    font-weight: var(--text-body-primary-highlight-weight);
+  }
+
+  /* Mega nav (no login): desktop = hover; puente para no perder el hover entre pill y panel */
+  .header__nav-item--mega .header__mega {
+    opacity: 0;
+    visibility: hidden;
+    pointer-events: none;
+    transition: opacity 0.2s ease, visibility 0.2s ease;
+  }
+
+  .header__nav-item--mega .header__mega::before {
+    content: '';
+    position: absolute;
+    bottom: 100%;
+    left: 0;
+    right: 0;
+    height: 16px;
+  }
+
+  @media (min-width: 1024px) {
+    .header__nav-item--mega:hover .header__mega {
+      opacity: 1;
+      visibility: visible;
+      pointer-events: auto;
+    }
+
+    .header__nav-item--mega:hover > .header__nav-link .header__nav-chevron {
+      transform: rotate(-135deg);
+      margin-bottom: -0.1em;
+    }
+  }
+
+  .header__nav-chevron {
+    width: 0.4em;
+    height: 0.4em;
+    border-right: 2px solid currentColor;
+    border-bottom: 2px solid currentColor;
+    transform: rotate(45deg);
+    margin-bottom: 0.15em;
+    flex-shrink: 0;
+    transition: transform 0.2s ease, margin-bottom 0.2s ease;
+  }
+
+  /* Login button no tiene chevron en el diseño; el panel se abre con el mismo patrón */
+  .header__login-wrap {
+    position: relative;
+    align-self: stretch;
+    display: flex;
+    align-items: center;
+  }
+
+  .header__mega {
+    position: absolute;
+    /* Justo bajo la pastilla: el <li> mega ocupa toda la altura de la barra */
+    top: calc(100% + 12px);
+    left: 50%;
+    transform: translateX(-50%);
+    min-width: 280px;
+    padding: 1rem 0;
+    background-color: #edf5ff;
+    border-radius: 16px;
+    box-shadow: 0 8px 32px rgba(40, 48, 148, 0.12);
+    z-index: 1001;
+  }
+
+  .header__mega--login {
+    left: auto;
+    right: 0;
+    transform: none;
+    min-width: 220px;
+  }
+
+  @media (min-width: 1024px) {
+    .header__mega--login {
+      opacity: 0;
+      visibility: hidden;
+      pointer-events: none;
+      transition: opacity 0.2s ease, visibility 0.2s ease;
+    }
+
+    .header__login-wrap:hover .header__mega--login,
+    .header__login-wrap:focus-within .header__mega--login {
+      opacity: 1;
+      visibility: visible;
+      pointer-events: auto;
+    }
+
+    .header__mega--login::before {
+      content: '';
+      position: absolute;
+      bottom: 100%;
+      left: 0;
+      right: 0;
+      height: 16px;
+    }
+  }
+
+  .header__mega-list {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+  }
+
+  .header__mega-list li {
+    margin: 0;
+    padding: 0;
+  }
+
+  .header__mega-link {
+    font-family: var(--font-family-base);
+    font-weight: var(--text-body-primary-weight);
+    font-size: var(--text-body-primary-size);
+    letter-spacing: var(--text-body-primary-spacing);
+    line-height: var(--text-body-primary-line);
+    color: var(--color-blue);
+    text-decoration: none;
+    display: flex;
+    align-items: center;
+    gap: 32px;
+    padding: 0.75rem 1.25rem;
+    transition: color 0.2s ease, font-weight 0.2s ease, background-color 0.2s ease;
+  }
+
+  .header__mega-link:hover,
+  .header__mega-link:focus {
+    color: var(--color-blue-secondary);
+    font-weight: var(--text-body-primary-highlight-weight);
+    background-color: rgba(56, 67, 208, 0.06);
+  }
+
+  .header__mega-link--text-only {
+    gap: 0;
+  }
+
+  .header__mega-icon {
+    width: 24px;
+    height: 24px;
+    object-fit: contain;
+    flex-shrink: 0;
+  }
+
+  .header__actions {
+    align-self: stretch;
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+  }
+
+  .header__actions .btn-base {
+    padding: 14px 24px;
+    height: 52px;
+    min-height: 52px;
+    box-sizing: border-box;
+  }
+
+  .header__btn-icon-inline {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+  }
+
+  /* Icono persona desde SVG (trazo); color = currentColor del botón vía máscara */
+  .header__btn-icon-inline--person {
+    width: 24px;
+    height: 24px;
+    background-color: currentColor;
+    mask: url('/icons/transversal/person-icon.svg') center / contain no-repeat;
+    -webkit-mask: url('/icons/transversal/person-icon.svg') center / contain no-repeat;
+  }
+
+  .header__mobile-tools {
+    display: none;
+    align-items: center;
+    flex-shrink: 0;
+    gap: 0.5rem;
+    margin-left: auto;
+  }
+
+  .header__demo-mobile {
+    display: none;
+  }
+
+  /* CTA compacto en barra móvil (fuera del menú) */
+  .header__demo-mobile.btn-base {
+    padding: 10px 14px;
+    min-height: 44px;
+    height: auto;
+    font-size: var(--text-body-secondary-size);
+    line-height: 1.2;
+    white-space: nowrap;
+  }
+
+  @media (max-width: 380px) {
+    .header__demo-mobile.btn-base {
+      padding: 9px 10px;
+      font-size: 0.8125rem;
+    }
+  }
+
+  /* Menú móvil: tres puntos en círculo (cerrado) → aspa (abierto) */
+  .header__burger {
+    display: none;
+    position: relative;
+    align-self: center;
+    flex-shrink: 0;
+    width: 44px;
+    height: 44px;
+    padding: 0;
+    border: none;
+    border-radius: 50%;
+    background: var(--color-blue-primary);
+    color: var(--color-white);
+    cursor: pointer;
+    box-shadow: 0 2px 10px rgba(40, 48, 148, 0.2);
+    transition: background 0.2s ease, transform 0.2s ease;
+  }
+
+  .header__burger:hover {
+    background: var(--color-blue-secondary);
+  }
+
+  .header__burger:focus-visible {
+    outline: 2px solid var(--color-blue-primary);
+    outline-offset: 2px;
+  }
+
+  .header__burger-dots {
+    position: absolute;
+    inset: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 4px;
+    transition: opacity 0.2s ease;
+  }
+
+  .header__burger-dot {
+    display: block;
+    width: 4px;
+    height: 4px;
+    border-radius: 50%;
+    background-color: currentColor;
+    flex-shrink: 0;
+  }
+
+  .header__burger-x {
+    position: absolute;
+    inset: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity 0.2s ease;
+  }
+
+  .header__burger-x-line {
+    position: absolute;
+    width: 18px;
+    height: 2px;
+    border-radius: 1px;
+    background-color: currentColor;
+  }
+
+  .header__burger-x-line:nth-child(1) {
+    transform: rotate(45deg);
+  }
+
+  .header__burger-x-line:nth-child(2) {
+    transform: rotate(-45deg);
+  }
+
+  .header--menu-open .header__burger-dots {
+    opacity: 0;
+    pointer-events: none;
+  }
+
+  .header--menu-open .header__burger-x {
+    opacity: 1;
+  }
+
+  @media (max-width: 1024px) {
+    .header {
+      padding: 0.75rem var(--layout-padding-x);
+    }
+
+    .header__inner {
+      min-height: 80px;
+      padding: 0 1.25rem;
+      gap: 0.75rem;
+    }
+
+    .header__logo {
+      font-size: 1.5rem;
+    }
+
+    .header__nav-link {
+      font-size: var(--text-body-secondary-size);
+    }
+
+    .header__nav-list {
+      gap: 0.25rem 1.25rem;
+    }
+
+    .header__actions .btn-base {
+      padding: 14px 24px;
+      height: 48px;
+      min-height: 48px;
+    }
+
+    .header__mega-link {
+      font-size: var(--text-body-secondary-size);
+    }
+  }
+
+  @media (max-width: 1023px) {
+    .header__nav-item--mega .header__mega {
+      display: none;
+      opacity: 1;
+      visibility: visible;
+      pointer-events: auto;
+      transition: none;
+    }
+
+    .header__nav-item--mega .header__mega::before {
+      display: none;
+    }
+
+    .header__nav-item--mega.header__nav-item--open .header__mega {
+      display: block;
+    }
+
+    .header__nav-item--mega.header__nav-item--open > .header__nav-link .header__nav-chevron {
+      transform: rotate(-135deg);
+      margin-bottom: -0.1em;
+    }
+
+    .header__mega--login {
+      display: none;
+      opacity: 1;
+      visibility: visible;
+      pointer-events: auto;
+      transition: none;
+    }
+
+    .header__mega--login::before {
+      display: none;
+    }
+
+    .header__login-wrap--open .header__mega--login {
+      display: block;
+    }
+
+    .header {
+      padding: 0.5rem 0;
+    }
+
+    .header__inner {
+      align-items: center;
+      min-height: 64px;
+      padding: 0.5rem 0.875rem;
+      flex-wrap: wrap;
+      gap: 0;
+      margin-left: var(--layout-padding-x);
+      margin-right: var(--layout-padding-x);
+      max-width: calc(100% - 2 * var(--layout-padding-x));
+    }
+
+    .header__logo {
+      font-size: 1.375rem;
+      order: 1;
+    }
+
+    .header__nav,
+    .header__actions {
+      display: none;
+      width: 100%;
+      order: 3;
+    }
+
+    .header__demo-desktop {
+      display: none !important;
+    }
+
+    .header__mobile-tools {
+      display: flex;
+      align-items: center;
+      gap: clamp(0.35rem, 2vw, 0.65rem);
+      margin-left: auto;
+      order: 2;
+    }
+
+    .header__demo-mobile {
+      display: inline-flex;
+    }
+
+    .header__burger {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .header--menu-open .header__inner {
+      margin-left: 0;
+      margin-right: 0;
+      max-width: none;
+      width: 100%;
+      border-radius: 0;
+      padding: 0 1rem 1.5rem;
+      min-height: 64px;
+    }
+
+    .header--menu-open .header__nav,
+    .header--menu-open .header__actions {
+      display: block;
+      padding-top: 0.75rem;
+      border-top: 1px solid rgba(56, 67, 208, 0.15);
+      margin-top: 0.5rem;
+    }
+
+    .header--menu-open .header__nav-list {
+      flex-direction: column;
+      align-items: stretch;
+      gap: 0.25rem;
+    }
+
+    .header--menu-open .header__nav-item {
+      width: 100%;
+    }
+
+    /* Mega: lista vertical bajo el ítem (no panel a la derecha) */
+    .header--menu-open .header__nav-item--mega {
+      flex-direction: column;
+      align-items: stretch;
+      align-self: stretch;
+    }
+
+    .header--menu-open .header__nav-link {
+      padding: 0.5rem 0;
+    }
+
+    .header--menu-open .header__nav-item--mega > .header__nav-link {
+      width: 100%;
+      justify-content: flex-start;
+      text-align: left;
+    }
+
+    /* Submenú sin tarjeta: mismo fondo que el drawer, solo lista indentada */
+    .header--menu-open .header__mega {
+      position: static;
+      transform: none;
+      left: auto;
+      right: auto;
+      min-width: 0;
+      width: 100%;
+      margin-top: 0.125rem;
+      margin-bottom: 0.35rem;
+      padding: 0 0 0 0.75rem;
+      box-shadow: none;
+      border-radius: 0;
+      border: none;
+      background-color: transparent;
+      z-index: auto;
+    }
+
+    .header--menu-open .header__mega-list {
+      display: flex;
+      flex-direction: column;
+      gap: 0.125rem;
+    }
+
+    .header--menu-open .header__mega-link {
+      padding: 0.45rem 0;
+      gap: 0.75rem;
+      border-radius: 0;
+    }
+
+    .header--menu-open .header__mega-link:hover,
+    .header--menu-open .header__mega-link:focus {
+      background-color: transparent;
+    }
+
+    .header--menu-open .header__mega--login {
+      margin-top: 0.35rem;
+      padding-left: 0.75rem;
+    }
+
+    .header--menu-open .header__actions {
+      display: flex;
+      flex-direction: column;
+      align-items: stretch;
+      gap: 0.75rem;
+    }
+
+    .header--menu-open .header__login-wrap {
+      display: flex;
+      flex-direction: column;
+      align-items: stretch;
+    }
+
+    .header--menu-open .header__login-btn {
+      width: 100%;
+      justify-content: center;
+    }
+
+    .header--menu-open .header__actions .btn-base {
+      justify-content: center;
+      padding: 14px 20px;
+      height: 48px;
+      min-height: 48px;
+    }
+  }
+</style>

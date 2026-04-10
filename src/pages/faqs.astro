@@ -1,0 +1,19 @@
+---
+import Layout from '../layouts/Layout.astro';
+import Header from '../components/Header.astro';
+import Footer from '../components/Footer.astro';
+import FaqsHero from '../components/faqs/FaqsHero.astro';
+import FaqsMain from '../components/faqs/FaqsMain.astro';
+---
+
+<Layout
+  title="Preguntas frecuentes - Luca"
+  description="Resuelve tus dudas sobre Luca: plataforma, programas por nivel, perfiles (directivos, docentes, familias), implementación y soporte. Preguntas frecuentes actualizadas."
+>
+  <Header />
+  <main>
+    <FaqsHero />
+    <FaqsMain />
+  </main>
+  <Footer />
+</Layout>

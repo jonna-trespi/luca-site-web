@@ -1,0 +1,34 @@
+---
+/**
+ * Perfiles — Padres
+ * Secciones independientes: src/components/perfiles/padres/
+ * Assets: public/{images,gif,videos}/perfiles/padres/
+ */
+import Layout from '../../layouts/Layout.astro';
+import Header from '../../components/Header.astro';
+import HeroPadres from '../../components/perfiles/padres/HeroPadres.astro';
+import VideoZoom from '../../components/perfiles/padres/VideoZoom.astro';
+import AyudaLuca from '../../components/perfiles/padres/AyudaLuca.astro';
+import Carrusel from '../../components/perfiles/padres/Carrusel.astro';
+import Casos from '../../components/perfiles/padres/Casos.astro';
+import Faq from '../../components/perfiles/padres/Faq.astro';
+import PrefooterPadres from '../../components/perfiles/padres/PrefooterPadres.astro';
+import Footer from '../../components/Footer.astro';
+---
+
+<Layout
+  title="Padres - Luca Perfiles"
+  description="Luca para familias: seguimiento del avance de los hijos, comunicación clara con la escuela y apoyo en casa con una experiencia sencilla y transparente."
+>
+  <Header />
+  <main>
+    <HeroPadres />
+    <VideoZoom />
+    <AyudaLuca />
+    <Carrusel />
+    <Casos />
+    <Faq />
+    <PrefooterPadres />
+  </main>
+  <Footer />
+</Layout>

@@ -1,0 +1,308 @@
+---
+/**
+ * Somos Luca — Hero: fondo hero-bg, geo, copy + hero.gif sobre círculo var(--color-red).
+ */
+const heroGifSrc = '/gif/somosLuca/hero.gif';
+---
+
+<section class="somos-luca-hero" aria-labelledby="somos-luca-hero-title">
+  <div class="somos-luca-hero__layer" aria-hidden="true"></div>
+  <img
+    class="somos-luca-hero__geo somos-luca-hero__geo--left"
+    src="/images/somosLuca/geo-1.png"
+    alt=""
+    width="150"
+    height="400"
+    loading="eager"
+    decoding="async"
+    aria-hidden="true"
+  />
+  <img
+    class="somos-luca-hero__geo somos-luca-hero__geo--right"
+    src="/images/somosLuca/geo-2.png"
+    alt=""
+    width="150"
+    height="400"
+    loading="eager"
+    decoding="async"
+    aria-hidden="true"
+  />
+  <div class="somos-luca-hero__shell layout-container">
+    <div class="somos-luca-hero__row">
+      <header class="somos-luca-hero__content">
+        <p class="programas__label programas__label--align-start somos-luca-hero__label">
+          <span class="programas__label-dot somos-luca-hero__label-dot" aria-hidden="true"></span>
+          Somos Luca
+        </p>
+        <h1 id="somos-luca-hero-title" class="somos-luca-hero__title text-h1">
+          Aprender puede ser la mejor aventura del día<span class="somos-luca-hero__title-dot" aria-hidden="true">.</span>
+        </h1>
+        <p class="somos-luca-hero__subtitle text-subtitle-1">
+          Con Luca transformas el aula en una experiencia activa, personalizada y divertida.
+        </p>
+      </header>
+      <div class="somos-luca-hero__media">
+        <div class="somos-luca-hero__figure">
+          <span class="somos-luca-hero__figure-circle" aria-hidden="true"></span>
+          <img
+            class="somos-luca-hero__gif"
+            src={heroGifSrc}
+            alt="Luca, el robot asistente de aprendizaje"
+            width="420"
+            height="420"
+            loading="eager"
+            decoding="async"
+          />
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<style>
+  .somos-luca-hero {
+    position: relative;
+    width: 100%;
+    overflow: hidden;
+    padding: calc(5rem + 56px) 0 clamp(3rem, 7vw, 5.5rem);
+    box-sizing: border-box;
+  }
+
+  /* Solo hero-bg.png (sin color de relleno): cover + anclaje abajo */
+  .somos-luca-hero__layer {
+    position: absolute;
+    inset: 0;
+    z-index: 0;
+    pointer-events: none;
+    background-image: url('/images/somosLuca/hero-bg.png');
+    background-repeat: no-repeat;
+    background-position: center bottom;
+    background-size: cover;
+  }
+
+  .somos-luca-hero__geo {
+    position: absolute;
+    z-index: 1;
+    pointer-events: none;
+    user-select: none;
+    object-fit: contain;
+    object-position: center;
+    width: auto;
+    height: auto;
+    max-width: 150px;
+    max-height: min(55vh, 420px);
+  }
+
+  .somos-luca-hero__geo--left {
+    left: 0;
+    top: 50%;
+    transform: translateY(-50%) translateZ(0);
+  }
+
+  .somos-luca-hero__geo--right {
+    right: 0;
+    top: clamp(18%, 28vh, 38%);
+    transform: translateY(-50%) translateZ(0);
+  }
+
+  .somos-luca-hero__shell {
+    position: relative;
+    z-index: 2;
+  }
+
+  .somos-luca-hero__row {
+    max-width: 1200px;
+    margin: 0 auto;
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: clamp(1.5rem, 4vw, 2.5rem);
+    align-items: center;
+  }
+
+  .programas__label--align-start {
+    justify-content: flex-start;
+  }
+
+  .somos-luca-hero__label {
+    color: var(--color-white);
+    margin-bottom: 1rem;
+  }
+
+  .somos-luca-hero__label-dot {
+    background-color: var(--color-red);
+  }
+
+  .somos-luca-hero__title {
+    margin: 0;
+    color: var(--color-white);
+    text-align: left;
+    line-height: 1;
+  }
+
+  .somos-luca-hero__title-dot {
+    color: var(--color-red);
+  }
+
+  .somos-luca-hero__subtitle {
+    margin: 1.25rem 0 0;
+    color: var(--color-white);
+    text-align: left;
+    max-width: 26rem;
+    line-height: 1.45;
+  }
+
+  /* Aire bajo el copy para que no quede pegado a la ola / al bloque inferior */
+  .somos-luca-hero__content {
+    padding-bottom: clamp(1.75rem, 5vw, 3rem);
+  }
+
+  .somos-luca-hero__media {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    overflow: visible;
+  }
+
+  /*
+   * Caja con altura reservada: círculo pequeño centrado en la zona baja;
+   * el gif va en absolute encima y puede sobresalir del círculo.
+   */
+  .somos-luca-hero__figure {
+    position: relative;
+    width: min(300px, 82vw);
+    min-height: 240px;
+    height: min(360px, max(62vw, 248px));
+    max-height: 400px;
+    flex-shrink: 0;
+  }
+
+  .somos-luca-hero__figure-circle {
+    position: absolute;
+    z-index: 0;
+    width: min(168px, 52%);
+    aspect-ratio: 1;
+    border-radius: 50%;
+    background-color: var(--color-red);
+    left: 46%;
+    top: 62%;
+    transform: translate(-50%, -50%);
+    pointer-events: none;
+  }
+
+  .somos-luca-hero__gif {
+    position: absolute;
+    z-index: 1;
+    left: 50%;
+    top: 46%;
+    transform: translate(-50%, -50%);
+    width: min(420px, 132%);
+    height: auto;
+    max-width: none;
+    object-fit: contain;
+    display: block;
+    pointer-events: none;
+  }
+
+  @media (min-width: 768px) {
+    .somos-luca-hero__row {
+      grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
+      gap: clamp(1.25rem, 3vw, 2rem);
+      align-items: center;
+    }
+
+    .somos-luca-hero__media {
+      justify-content: flex-end;
+    }
+
+    .somos-luca-hero__figure {
+      width: min(320px, 42vw);
+      height: min(380px, 36vw);
+      max-height: 420px;
+    }
+
+    .somos-luca-hero__figure-circle {
+      width: min(180px, 48%);
+      left: 44%;
+      top: 60%;
+    }
+
+    .somos-luca-hero__gif {
+      width: min(440px, 128%);
+      top: 44%;
+    }
+  }
+
+  @media (min-width: 1024px) {
+    .somos-luca-hero {
+      padding: calc(5.5rem + 64px) 0 clamp(3.5rem, 6.5vw, 5.5rem);
+    }
+  }
+
+  @media (max-width: 767px) {
+    .somos-luca-hero__geo {
+      max-width: min(120px, 32vw);
+      max-height: min(38vh, 260px);
+    }
+
+    /* Esquinas: fuera del flujo del texto pero dentro del hero (overflow hidden recorta suave) */
+    .somos-luca-hero__geo--left {
+      top: auto;
+      bottom: 0;
+      left: max(-12px, -2vw);
+      transform: translateZ(0);
+      object-position: left bottom;
+      opacity: 1;
+    }
+
+    .somos-luca-hero__geo--right {
+      top: calc(4.5rem + 36px + env(safe-area-inset-top, 0px));
+      right: max(-8px, -1.5vw);
+      transform: translateZ(0);
+      object-position: right top;
+      opacity: 1;
+    }
+
+    .somos-luca-hero__subtitle {
+      max-width: none;
+    }
+
+    .somos-luca-hero__content {
+      padding-bottom: clamp(2rem, 6vw, 2.75rem);
+    }
+
+    .somos-luca-hero__figure {
+      width: min(280px, 78vw);
+      height: min(320px, 68vw);
+    }
+
+    .somos-luca-hero__figure-circle {
+      width: min(150px, 50%);
+      top: 64%;
+    }
+
+    .somos-luca-hero__gif {
+      width: min(380px, 125%);
+    }
+  }
+
+  @media (max-width: 480px) {
+    .somos-luca-hero {
+      padding: calc(4.25rem + 48px) 0 clamp(2.5rem, 8vw, 3.25rem);
+    }
+
+    .somos-luca-hero__geo {
+      max-width: min(100px, 30vw);
+      max-height: min(34vh, 220px);
+    }
+
+    .somos-luca-hero__geo--left {
+      left: max(-16px, -4vw);
+      bottom: 2%;
+    }
+
+    .somos-luca-hero__geo--right {
+      top: calc(4rem + 32px + env(safe-area-inset-top, 0px));
+      right: max(-10px, -2vw);
+    }
+  }
+</style>

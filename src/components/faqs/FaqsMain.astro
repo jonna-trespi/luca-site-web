@@ -1,0 +1,827 @@
+---
+/**
+ * FAQs: fondo #fff, deco geo-3 inferior izquierda, inner max 1100px.
+ */
+type FaqItem = { question: string; answer?: string; answerHtml?: string };
+
+const tabs: { id: string; label: string; items: FaqItem[] }[] = [
+  {
+    id: 'generales',
+    label: 'Generales',
+    items: [
+      {
+        question: '¿Por qué elegir Luca frente a otras plataformas?',
+        answer:
+          'Porque Luca pone al estudiante en el centro. Integra pedagogía de alto nivel, tecnología educativa e innovación continua para generar aprendizajes reales, medibles y con impacto a largo plazo.',
+      },
+      {
+        question: '¿Cómo funciona el modelo académico y metodológico de Luca?',
+        answer:
+          'Luca combina aprendizaje activo, proyectos reales, microlearning, gamificación y tutoría personalizada con IA. Esto permite que los estudiantes comprendan, apliquen y conecten lo aprendido con su vida diaria.',
+      },
+      {
+        question: '¿Los contenidos están alineados al programa escolar?',
+        answer:
+          'Sí. Los contenidos de Luca están alineados a la NEM y a programas internacionales, garantizando cobertura total de las asignaturas del currículo base con metodologías pedagógicas reconocidas a nivel mundial.',
+      },
+      {
+        question: '¿La plataforma de Luca funciona en distintos dispositivos?',
+        answer:
+          'Sí. La plataforma es compatible con múltiples dispositivos, lo que permite acceder a los contenidos y herramientas desde computadora, tablet o móvil, dentro y fuera del aula.',
+      },
+      {
+        question: '¿Qué distingue al equipo Luca de otras soluciones EdTech?',
+        answer:
+          'Evolucionamos junto a cada escuela. Combinamos pedagogía, IA y un modelo híbrido (digital + físico), mejorando continuamente a partir del feedback de docentes y alumnos para generar impacto real en el aprendizaje.',
+      },
+      {
+        question: '¿Cuál es la visión de Luca para el futuro de la educación?',
+        answer:
+          'Hacer que la educación de alta calidad sea accesible para todos, integrando pedagogía probada, tecnología inteligente y experiencias motivadoras que ayuden a cada estudiante a alcanzar su máximo potencial.',
+      },
+      {
+        question: '¿Luca cubre todos los campos formativos de la Nueva Escuela Mexicana?',
+        answer:
+          'Sí. Luca está alineado con la NEM y los integra de manera estructurada dentro de su modelo pedagógico. Nuestra plataforma articula contenidos, evaluación y seguimiento para garantizar que cada campo formativo se trabaje de forma coherente, práctica y con impacto real en el aprendizaje.',
+      },
+    ],
+  },
+  {
+    id: 'programas',
+    label: 'Programas',
+    items: [
+      {
+        question: '¿Qué asignaturas cubre Luca en primaria?',
+        answer:
+          'Contamos con libro de inglés, matemáticas, lenguajes, ciencias y ética, y libro digital de "de lo humano".',
+      },
+      {
+        question: '¿Cómo aprenden los alumnos en primaria con Luca?',
+        answer:
+          'Mediante experiencias prácticas, gamificación y actividades interactivas que fortalecen habilidades fundamentales y mantienen la motivación.',
+      },
+      {
+        question: '¿Qué metodologías educativas se utilizan en este nivel?',
+        answerHtml: `<p>Luca integra un enfoque pedagógico activo y basado en evidencia que combina:</p><ul class="faqs-main__list"><li>Aprendizaje concreto a abstracto (Método Singapur) para comprender realmente las matemáticas.</li><li>Microlearning con contenidos breves y enfocados que mejoran la retención.</li><li>Aprendizaje de idiomas con historias (TPRS) para adquirir fluidez de forma natural.</li><li>Constructivismo y aprendizaje significativo, donde el alumno aprende explorando, conectando y resolviendo.</li><li>Interacción guiada (Zona de Desarrollo Próximo) para avanzar con apoyo oportuno.</li><li>Experiencias multimodales (visual, auditivo y práctico) para fortalecer la comprensión.</li><li>Aprendizaje Basado en Proyectos con IA, aplicando lo aprendido a situaciones reales.</li><li>Gamificación para mantener la motivación y el compromiso.</li><li>Tutoría personalizada con IA, adaptada al ritmo y necesidades de cada estudiante.</li></ul>`,
+      },
+      {
+        question: '¿Qué asignaturas cubre Luca en secundaria?',
+        answer:
+          'Luca cubre las materias clave del plan académico: Español, Matemáticas, Formación Cívica y Ética, Historia, Inglés, Ciencias (Biología, Física y Química) y Geografía, con libros y recursos digitales integrados.',
+      },
+      {
+        question: '¿Cómo apoya Luca el aprendizaje en secundaria?',
+        answer:
+          'Con contenidos más profundos, proyectos aplicados y seguimiento personalizado que preparan a los estudiantes para retos académicos y reales.',
+      },
+      {
+        question:
+          '¿Cómo se fomenta el pensamiento crítico, el aprendizaje por proyectos y la conexión con la vida real?',
+        answer:
+          'Impulsamos el pensamiento crítico ayudando a los alumnos a comprender el por qué de cada concepto, no solo a memorizar. A través de proyectos reales y actividades apoyadas por IA, aprenden haciendo y aplican lo aprendido a situaciones de la vida diaria.',
+      },
+      {
+        question: '¿Cómo aprenden los niños con Luca en preescolar?',
+        answer:
+          'Aprenden jugando, moviéndose y explorando. Combinamos materiales físicos, experiencias sensoriales y tecnología para que el aprendizaje sea natural, activo y significativo. Este trabajo está sustentado en los mejores modelos educativos a nivel global, con materiales físicos y digitales de calidad probada.',
+      },
+      {
+        question: '¿Qué habilidades desarrollan en esta etapa?',
+        answer:
+          'Lenguaje, pensamiento lógico-matemático, motricidad, habilidades sociales, autonomía y seguridad emocional sientan las bases de la vida escolar. A partir de ellas se desarrollan la maestría matemática y las competencias lectoras alineadas con PISA, orientadas a comprender, reflexionar y aplicar lo aprendido en distintos contextos.',
+      },
+      {
+        question: '¿Por qué priorizan el movimiento y el juego?',
+        answer:
+          'Porque en la primera infancia el cuerpo es la principal vía de aprendizaje. Al moverse, manipular y experimentar, comprenden mejor y desarrollan más conexiones cognitivas.',
+      },
+      {
+        question: '¿Los niños usan pantallas todo el tiempo?',
+        answer:
+          'No. Luca es un modelo híbrido: equilibramos el uso de libros, materiales físicos y actividades prácticas con momentos digitales breves y guiados. El uso de actividades interactivas es opcional y se adapta a las necesidades y momentos educativos de cada grupo.',
+      },
+      {
+        question: '¿Qué materias o áreas cubre Luca en Preescolar?',
+        answer:
+          'Lenguajes, Saberes e Inglés, vinculados con actividades socioemocionales y un enfoque de trabajo transversal.',
+      },
+      {
+        question: '¿Cómo enseñan matemáticas a esta edad?',
+        answer:
+          'A través del modelo Singapur, los alumnos aprenden a partir de situaciones concretas y el uso de materiales manipulativos, favoreciendo la comprensión antes que la memorización. Mediante el proceso Concreto-Pictórico-Abstracto, la experiencia se transforma gradualmente en la construcción de conceptos matemáticos más complejos y profundos.',
+      },
+      {
+        question: '¿Cómo se introduce el inglés?',
+        answer:
+          'Mediante canciones, historias, juegos y conversaciones naturales, para que lo adquieran de forma intuitiva y divertida.',
+      },
+      {
+        question: '¿Se adapta al ritmo de cada niño?',
+        answer:
+          'Sí. Las actividades y la tutoría con IA acompañan el progreso individual para que cada alumno avance con confianza y sin presión, y su asignación puede variar según el criterio del profesor.',
+      },
+      {
+        question: '¿Cómo apoyan el desarrollo emocional?',
+        answer:
+          'Con dinámicas colaborativas, juego guiado y retos adecuados a su edad que fortalecen la seguridad, la autonomía y la autoestima, además de ofrecer sugerencias claras para que el docente intervenga con precisión en los momentos clave del aprendizaje.',
+      },
+      {
+        question: '¿Qué pasa si mi hijo necesita más apoyo?',
+        answer:
+          'Cuenta con acompañamiento docente y herramientas personalizadas que refuerzan lo que cada alumno necesita a su propio ritmo. Además, un equipo de expertos académicos acompaña a los docentes y a las escuelas para asegurar capacitaciones útiles y una implementación óptima.',
+      },
+    ],
+  },
+  {
+    id: 'perfiles',
+    label: 'Perfiles',
+    items: [
+      {
+        question: '¿Cómo se implementa Luca en la institución y cuánto tiempo toma el arranque?',
+        answer:
+          'La implementación es gradual y acompañada. Incluye planeación con la escuela, configuración de la plataforma y capacitaciones iniciales. El arranque puede realizarse en pocas semanas, sin interrumpir la operación escolar.',
+      },
+      {
+        question: '¿Qué materias y libros cubre la propuesta académica?',
+        answer:
+          'Luca cubre las asignaturas clave del currículo mexicano, con libros y contenidos alineados a la NEM e integraciones con programas internacionales según el nivel educativo.',
+      },
+      {
+        question: '¿Cuál es la inversión requerida y qué planes están disponibles?',
+        answer:
+          'La inversión depende del nivel, número de alumnos y componentes contratados. Existen planes flexibles que se adaptan a las necesidades de cada institución.',
+      },
+      {
+        question: '¿Qué respaldo académico y pedagógico sustenta la plataforma?',
+        answer:
+          'Luca se basa en una arquitectura pedagógica fundamentada en las mejores prácticas a nivel global, con enfoque humanista, aprendizaje significativo, evaluación formativa y trabajo por proyectos, alineados a la NEM.',
+      },
+      {
+        question: '¿Cómo garantizan resultados educativos reales?',
+        answer:
+          'A través de seguimiento continuo, analítica de aprendizaje, evaluaciones formativas y acompañamiento docente, Luca permite medir avances, detectar áreas de mejora y tomar decisiones educativas informadas.',
+      },
+      {
+        question: '¿La implementación es compleja o requiere mucho tiempo?',
+        answer:
+          'No. La plataforma es intuitiva y la implementación es guiada paso a paso, con capacitación flexible y acompañamiento cercano para docentes y directivos.',
+      },
+      {
+        question: '¿Cuánto tiempo deben invertir en la plataforma por materia?',
+        answer:
+          'Luca optimiza el tiempo docente al automatizar tareas administrativas y facilitar la planeación, reduciendo significativamente el tiempo operativo por materia.',
+      },
+      {
+        question: '¿Cómo son los recursos didácticos y qué tan útiles resultan en el aula?',
+        answer:
+          'Los materiales incluyen libros, actividades, videos, audios y recursos interactivos diseñados para ser prácticos, claros y atractivos para los estudiantes.',
+      },
+      {
+        question: '¿Cómo funciona la evaluación y el seguimiento del desempeño?',
+        answer:
+          'La plataforma permite evaluar, calificar y dar seguimiento continuo al progreso del alumno mediante herramientas digitales y apoyo de inteligencia artificial.',
+      },
+      {
+        question: '¿Cómo realizo mis tareas y cuánto tiempo tengo para entregarlas?',
+        answer:
+          'Las tareas se realizan directamente en la plataforma y cada actividad indica claramente el tiempo y la fecha de entrega.',
+      },
+      {
+        question: '¿Cómo funciona la gamificación y la competencia amistosa?',
+        answer:
+          'Al completar actividades, los alumnos ganan puntos que les permiten avanzar, compararse sanamente y mantenerse motivados.',
+      },
+      {
+        question: '¿Cómo personalizo mi avatar y para qué sirven los puntos?',
+        answer:
+          'Los puntos obtenidos se canjean por accesorios y mejoras para el avatar, que crece junto al alumno conforme avanza en su aprendizaje.',
+      },
+      {
+        question: '¿Cuánto tiempo es recomendable que mi hijo use la plataforma?',
+        answer:
+          'El tiempo de uso está pensado para complementar el aprendizaje escolar, con actividades breves y enfocadas que se adaptan a la edad y nivel del estudiante.',
+      },
+      {
+        question: '¿Es fácil de usar para las familias?',
+        answer:
+          'Sí. La plataforma es intuitiva, visual y fácil de navegar, incluso para padres sin experiencia previa en tecnología educativa.',
+      },
+      {
+        question: '¿Qué información puedo ver sobre el progreso de mi hijo?',
+        answer:
+          'Los padres pueden consultar actividades realizadas, avances académicos y el impacto de la gamificación en el aprendizaje de sus hijos.',
+      },
+    ],
+  },
+  {
+    id: 'soporte',
+    label: 'Soporte',
+    items: [
+      {
+        question: '¿Cómo puedo seguir el progreso de mi hijo?',
+        answer:
+          'Puedes ver avances, actividades y logros en tiempo real desde la plataforma, con información clara y fácil de entender.',
+      },
+      {
+        question: '¿Reciben acompañamiento los padres?',
+        answer:
+          'Sí. Ofrecemos charlas, seguimiento continuo y comunicación directa con la escuela para acompañar cada etapa.',
+      },
+      {
+        question: '¿Necesito conocimientos tecnológicos para usar Luca?',
+        answer: 'No. Es intuitivo y pensado para que cualquier familia pueda usarlo fácilmente.',
+      },
+    ],
+  },
+];
+---
+
+<section class="faqs-main" aria-label="Buscador y preguntas frecuentes" data-faqs-page>
+  <img
+    class="faqs-main__deco"
+    src="/images/faqs/geo-3.png"
+    alt=""
+    width="480"
+    height="480"
+    loading="lazy"
+    decoding="async"
+    aria-hidden="true"
+  />
+
+  <div class="faqs-main__inner layout-container">
+    <div class="faqs-main__search">
+      <label class="visually-hidden" for="faqs-search-input">Buscar en preguntas frecuentes</label>
+      <div class="faqs-main__search-field">
+        <input
+          type="search"
+          id="faqs-search-input"
+          class="faqs-main__search-input"
+          placeholder="Buscar"
+          autocomplete="off"
+          data-faqs-search
+        />
+        <span class="faqs-main__search-icon" aria-hidden="true">
+          <svg width="22" height="22" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <path
+              d="M11 19a8 8 0 1 0 0-16 8 8 0 0 0 0 16zm9 2-4.35-4.35"
+              stroke="currentColor"
+              stroke-width="2"
+              stroke-linecap="round"
+              stroke-linejoin="round"
+            ></path>
+          </svg>
+        </span>
+      </div>
+    </div>
+
+    <div class="faqs-main__layout">
+      <nav class="faqs-main__tabs" aria-label="Categorías de preguntas">
+        <div class="faqs-main__tabs-rail">
+          <ul class="faqs-main__tabs-list" role="tablist">
+            {tabs.map((tab, i) => (
+              <li class="faqs-main__tabs-item" role="none">
+                <button
+                  type="button"
+                  class:list={['faqs-main__tab', i === 0 && 'faqs-main__tab--active']}
+                  role="tab"
+                  id={`faqs-tab-${tab.id}`}
+                  aria-selected={i === 0}
+                  aria-controls={`faqs-panel-${tab.id}`}
+                  tabindex={i === 0 ? 0 : -1}
+                  data-faqs-tab={tab.id}
+                >
+                  {tab.label}
+                </button>
+              </li>
+            ))}
+          </ul>
+        </div>
+      </nav>
+
+      <div class="faqs-main__panels">
+        {tabs.map((tab, i) => (
+          <div
+            class="faqs-main__panel"
+            id={`faqs-panel-${tab.id}`}
+            role="tabpanel"
+            aria-labelledby={`faqs-tab-${tab.id}`}
+            hidden={i !== 0}
+            data-faqs-panel={tab.id}
+          >
+            {tab.items.length === 0 ? (
+              <p class="faqs-main__empty text-body-primary">
+                Contenido de esta sección en preparación. Vuelve pronto o revisa la pestaña Generales.
+              </p>
+            ) : (
+              <ul class="faqs-main__accordion">
+                {tab.items.map((item, j) => (
+                  <li class="faqs-main__item" data-faqs-item>
+                    <div class="faqs-main__card">
+                      <button
+                        type="button"
+                        class="faqs-main__trigger"
+                        aria-expanded="false"
+                        aria-controls={`faqs-answer-${tab.id}-${j}`}
+                        id={`faqs-trigger-${tab.id}-${j}`}
+                        data-faqs-trigger
+                      >
+                        <span class="faqs-main__question text-subtitle-2">{item.question}</span>
+                        <span class="faqs-main__icon" aria-hidden="true"></span>
+                      </button>
+                      <div
+                        class="faqs-main__answer-wrap"
+                        id={`faqs-answer-${tab.id}-${j}`}
+                        role="region"
+                        aria-labelledby={`faqs-trigger-${tab.id}-${j}`}
+                      >
+                        <div class="faqs-main__answer">
+                          {item.answerHtml ? (
+                            <div class="faqs-main__answer-body text-body-primary" set:html={item.answerHtml} />
+                          ) : (
+                            <p class="text-body-primary">{item.answer}</p>
+                          )}
+                        </div>
+                      </div>
+                    </div>
+                  </li>
+                ))}
+              </ul>
+            )}
+          </div>
+        ))}
+      </div>
+    </div>
+  </div>
+</section>
+
+<script is:inline>
+  (function () {
+    function initFaqsPage() {
+      var root = document.querySelector('[data-faqs-page]');
+      if (!root) return;
+      if (root.getAttribute('data-faqs-bound') === '1') return;
+      root.setAttribute('data-faqs-bound', '1');
+
+      var tabs = root.querySelectorAll('[data-faqs-tab]');
+      var panels = root.querySelectorAll('[data-faqs-panel]');
+      var searchInput = root.querySelector('[data-faqs-search]');
+
+      function setTab(tabId) {
+        tabs.forEach(function (btn) {
+          var on = btn.getAttribute('data-faqs-tab') === tabId;
+          btn.setAttribute('aria-selected', on ? 'true' : 'false');
+          btn.tabIndex = on ? 0 : -1;
+          btn.classList.toggle('faqs-main__tab--active', on);
+        });
+        panels.forEach(function (panel) {
+          var match = panel.getAttribute('data-faqs-panel') === tabId;
+          panel.hidden = !match;
+        });
+        filterItems();
+      }
+
+      function filterItems() {
+        var q = (searchInput && searchInput.value ? searchInput.value : '').trim().toLowerCase();
+        var visiblePanel = Array.prototype.find.call(panels, function (p) {
+          return !p.hidden;
+        });
+        if (!visiblePanel) return;
+        visiblePanel.querySelectorAll('[data-faqs-item]').forEach(function (li) {
+          var text = (li.textContent || '').toLowerCase();
+          var show = !q || text.indexOf(q) !== -1;
+          li.style.display = show ? '' : 'none';
+        });
+      }
+
+      tabs.forEach(function (btn) {
+        btn.addEventListener('click', function () {
+          var id = btn.getAttribute('data-faqs-tab');
+          if (id) setTab(id);
+        });
+      });
+
+      if (searchInput) {
+        searchInput.addEventListener('input', filterItems);
+        searchInput.addEventListener('search', filterItems);
+      }
+
+      root.querySelectorAll('[data-faqs-trigger]').forEach(function (btn) {
+        btn.addEventListener('click', function () {
+          var card = btn.closest('.faqs-main__card');
+          var expanded = btn.getAttribute('aria-expanded') === 'true';
+          btn.setAttribute('aria-expanded', String(!expanded));
+          if (card) card.classList.toggle('faqs-main__card--expanded', !expanded);
+        });
+      });
+
+    }
+
+    if (document.readyState === 'loading') {
+      document.addEventListener('DOMContentLoaded', initFaqsPage);
+    } else {
+      initFaqsPage();
+    }
+    document.addEventListener('astro:page-load', initFaqsPage);
+  })();
+</script>
+
+<style>
+  .visually-hidden {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    padding: 0;
+    margin: -1px;
+    overflow: hidden;
+    clip: rect(0, 0, 0, 0);
+    white-space: nowrap;
+    border: 0;
+  }
+
+  .faqs-main {
+    position: relative;
+    width: 100%;
+    background-color: #ffffff;
+    padding: 1.5rem 0 clamp(2.5rem, 6vw, 4.5rem);
+    overflow: hidden;
+    box-sizing: border-box;
+  }
+
+  /* Hoja decorativa: esquina inferior izquierda del bloque (viewport en ancho completo de la sección) */
+  .faqs-main__deco {
+    position: absolute;
+    left: 0;
+    bottom: 0;
+    max-width: min(440px, 78vw);
+    width: auto;
+    height: auto;
+    transform: translate(-12%, 8%);
+    opacity: 1;
+    pointer-events: none;
+    user-select: none;
+    z-index: 0;
+    object-fit: contain;
+    object-position: left bottom;
+  }
+
+  .faqs-main__inner.layout-container {
+    position: relative;
+    z-index: 1;
+    max-width: 1100px;
+    margin-left: auto;
+    margin-right: auto;
+    padding-left: var(--layout-padding-x);
+    padding-right: var(--layout-padding-x);
+  }
+
+  .faqs-main__search {
+    margin-bottom: 1.75rem;
+  }
+
+  .faqs-main__search-field {
+    position: relative;
+    max-width: 420px;
+    width: 100%;
+  }
+
+  .faqs-main__search-input {
+    width: 100%;
+    box-sizing: border-box;
+    padding: 0.9rem 3rem 0.9rem 1.15rem;
+    border: none;
+    border-radius: 999px;
+    background: #e8ecf2;
+    font-family: var(--font-family-base);
+    font-size: var(--text-body-primary-size);
+    color: var(--color-text-base);
+    box-shadow: inset 0 1px 2px rgba(0, 0, 0, 0.04);
+  }
+
+  .faqs-main__search-input::placeholder {
+    color: #8891a8;
+  }
+
+  .faqs-main__search-input:focus {
+    outline: 2px solid var(--color-blue-primary);
+    outline-offset: 2px;
+  }
+
+  .faqs-main__search-icon {
+    position: absolute;
+    right: 1rem;
+    top: 50%;
+    transform: translateY(-50%);
+    color: var(--color-blue-primary);
+    display: flex;
+    pointer-events: none;
+  }
+
+  .faqs-main__layout {
+    display: flex;
+    flex-direction: column;
+    gap: 1.5rem;
+    align-items: stretch;
+  }
+
+  @media (min-width: 900px) {
+    .faqs-main__layout {
+      flex-direction: row;
+      align-items: flex-start;
+      gap: clamp(1.5rem, 3vw, 2.75rem);
+    }
+  }
+
+  .faqs-main__tabs {
+    flex-shrink: 0;
+  }
+
+  /* Carril gris continuo (solo desktop); en móvil no aplica */
+  .faqs-main__tabs-rail {
+    position: relative;
+  }
+
+  @media (min-width: 900px) {
+    .faqs-main__tabs-rail {
+      padding-left: 1.25rem;
+    }
+
+    .faqs-main__tabs-rail::before {
+      content: '';
+      position: absolute;
+      left: 0;
+      top: 0;
+      bottom: 0;
+      width: 1px;
+      background-color: #e2e6ee;
+    }
+  }
+
+  .faqs-main__tabs-list {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    flex-direction: row;
+    flex-wrap: nowrap;
+    gap: 0.5rem;
+    overflow-x: auto;
+    -webkit-overflow-scrolling: touch;
+    scrollbar-width: thin;
+    padding-bottom: 0.35rem;
+  }
+
+  @media (min-width: 900px) {
+    .faqs-main__tabs-list {
+      flex-direction: column;
+      flex-wrap: nowrap;
+      overflow: visible;
+      gap: 70px;
+      min-width: 140px;
+      padding-bottom: 0;
+    }
+  }
+
+  .faqs-main__tabs-item {
+    flex-shrink: 0;
+  }
+
+  @media (min-width: 900px) {
+    .faqs-main__tabs-item {
+      flex-shrink: 0;
+      width: 100%;
+    }
+  }
+
+  .faqs-main__tab {
+    display: block;
+    width: 100%;
+    text-align: left;
+    padding: 0;
+    border: none;
+    background: transparent;
+    font-family: var(--font-family-base);
+    font-size: var(--text-body-secondary-size);
+    font-weight: 400;
+    color: #3d3d3d;
+    cursor: pointer;
+    border-radius: 0;
+    white-space: nowrap;
+    transition: color 0.2s ease;
+    position: relative;
+  }
+
+  @media (max-width: 899px) {
+    .faqs-main__tab {
+      padding: 0.55rem 1rem;
+      border-bottom: 2px solid transparent;
+      border-radius: 8px 8px 0 0;
+    }
+
+    .faqs-main__tab--active {
+      color: var(--color-blue-primary);
+      font-weight: 700;
+      border-bottom-color: var(--color-blue-primary);
+    }
+  }
+
+  @media (min-width: 900px) {
+    .faqs-main__tab--active::before {
+      content: '';
+      position: absolute;
+      left: calc(-1.25rem - 1px);
+      top: 50%;
+      transform: translate(-1px, -50%);
+      width: 3px;
+      height: 1.15em;
+      min-height: 1.25rem;
+      background-color: var(--color-blue-primary);
+      border-radius: 2px;
+    }
+  }
+
+  .faqs-main__tab:not(.faqs-main__tab--active):hover {
+    color: var(--color-blue-primary);
+  }
+
+  .faqs-main__tab--active {
+    color: var(--color-blue-primary);
+    font-weight: 700;
+  }
+
+  .faqs-main__panels {
+    flex: 1;
+    min-width: 0;
+  }
+
+  .faqs-main__empty {
+    margin: 0;
+    padding: 1.5rem 1.25rem;
+    background: #ffffff;
+    border-radius: 16px;
+    box-shadow: 0 2px 12px rgba(0, 0, 0, 0.06);
+    color: var(--color-text-base);
+  }
+
+  .faqs-main__accordion {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    flex-direction: column;
+    gap: 0.75rem;
+  }
+
+  .faqs-main__card {
+    border-radius: 12px;
+    overflow: hidden;
+    background-color: #ffffff;
+    box-shadow: 0 2px 12px rgba(0, 0, 0, 0.06);
+    transition:
+      background-color 0.3s ease,
+      box-shadow 0.25s ease;
+  }
+
+  .faqs-main__card--expanded {
+    background-color: var(--color-blue-primary);
+    box-shadow: 0 4px 20px rgba(56, 67, 208, 0.22);
+  }
+
+  .faqs-main__trigger {
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 1rem;
+    padding: 1.15rem 1.25rem;
+    background: transparent;
+    border: none;
+    font-family: inherit;
+    text-align: left;
+    cursor: pointer;
+    transition: color 0.25s ease;
+  }
+
+  .faqs-main__trigger:focus-visible {
+    outline: 2px solid var(--color-blue-primary);
+    outline-offset: 2px;
+  }
+
+  .faqs-main__card--expanded .faqs-main__trigger:focus-visible {
+    outline-color: #ffffff;
+  }
+
+  .faqs-main__question {
+    flex: 1;
+    min-width: 0;
+    color: #3d3d3d;
+    font-weight: 600;
+    transition: color 0.25s ease;
+  }
+
+  .faqs-main__card--expanded .faqs-main__question {
+    color: #ffffff;
+    font-weight: 700;
+  }
+
+  /* array-right-icon.svg: cerrado → abajo (90deg), abierto → arriba (-90deg) */
+  .faqs-main__icon {
+    flex-shrink: 0;
+    width: 22px;
+    height: 22px;
+    background-color: var(--color-blue-primary);
+    transform: rotate(90deg);
+    transition:
+      transform 0.3s ease,
+      background-color 0.25s ease;
+    -webkit-mask-image: url('/icons/transversal/array-right-icon.svg');
+    mask-image: url('/icons/transversal/array-right-icon.svg');
+    -webkit-mask-repeat: no-repeat;
+    mask-repeat: no-repeat;
+    -webkit-mask-position: center;
+    mask-position: center;
+    -webkit-mask-size: contain;
+    mask-size: contain;
+  }
+
+  .faqs-main__card--expanded .faqs-main__icon {
+    transform: rotate(-90deg);
+    background-color: #ffffff;
+  }
+
+  .faqs-main__answer-wrap {
+    overflow: hidden;
+    max-height: 0;
+    transition: max-height 0.4s ease;
+  }
+
+  .faqs-main__card--expanded .faqs-main__answer-wrap {
+    max-height: 800px;
+  }
+
+  .faqs-main__answer {
+    padding: 0 1.25rem 1.25rem;
+  }
+
+  .faqs-main__card--expanded .faqs-main__answer {
+    padding-top: 0.25rem;
+  }
+
+  .faqs-main__answer .text-body-primary {
+    margin: 0;
+    padding-top: 0;
+    color: #3d3d3d;
+    line-height: 1.5;
+    transition: color 0.25s ease;
+  }
+
+  .faqs-main__card--expanded .faqs-main__answer .text-body-primary {
+    color: rgba(255, 255, 255, 0.95);
+  }
+
+  .faqs-main__answer-body {
+    margin: 0;
+    padding-top: 0;
+    color: #3d3d3d;
+    line-height: 1.5;
+    transition: color 0.25s ease;
+  }
+
+  .faqs-main__answer-body p {
+    margin: 0 0 0.5rem;
+    font: inherit;
+    line-height: inherit;
+  }
+
+  .faqs-main__answer-body p:last-child {
+    margin-bottom: 0;
+  }
+
+  .faqs-main__list {
+    margin: 0.5rem 0 0;
+    padding-left: 1.25rem;
+    list-style: disc;
+  }
+
+  .faqs-main__list li {
+    margin-bottom: 0.45rem;
+    padding-left: 0.15rem;
+  }
+
+  .faqs-main__list li:last-child {
+    margin-bottom: 0;
+  }
+
+  .faqs-main__card--expanded .faqs-main__answer-body {
+    color: rgba(255, 255, 255, 0.95);
+  }
+
+  .faqs-main__card--expanded .faqs-main__list li::marker {
+    color: rgba(255, 255, 255, 0.85);
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .faqs-main__answer-wrap {
+      transition: none;
+    }
+  }
+</style>

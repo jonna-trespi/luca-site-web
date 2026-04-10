@@ -1,0 +1,198 @@
+---
+/**
+ * Hero Blog: panel azul, dos columnas (textos + avatar), geo-1 abajo-izq, geo-2 arriba-der.
+ */
+---
+
+<section class="blog-hero" aria-labelledby="blog-hero-title">
+  <div class="blog-hero__container layout-container">
+    <div class="blog-hero__banner">
+      <img
+        class="blog-hero__geo blog-hero__geo--bl"
+        src="/images/blog/geo-1.png"
+        alt=""
+        width="90"
+        height="90"
+        loading="eager"
+        decoding="async"
+        aria-hidden="true"
+      />
+      <img
+        class="blog-hero__geo blog-hero__geo--tr"
+        src="/images/blog/geo-2.png"
+        alt=""
+        width="250"
+        height="250"
+        loading="eager"
+        decoding="async"
+        aria-hidden="true"
+      />
+      <div class="blog-hero__grid">
+        <header class="blog-hero__copy">
+          <p class="programas__label blog-hero__label">
+            <span class="programas__label-dot" aria-hidden="true"></span>
+            Blog Luca
+          </p>
+          <h1 id="blog-hero-title" class="blog-hero__title text-h2">
+            Ideas que transforman la educación<span class="blog-hero__title-dot" aria-hidden="true">.</span>
+          </h1>
+          <p class="blog-hero__subtitle text-subtitle-1">Contenido educativo y recursos para el aula.</p>
+        </header>
+        <div class="blog-hero__visual">
+          <img
+            class="blog-hero__avatar"
+            src="/images/blog/avatar-blog.png"
+            alt="Ilustración del asistente Luca con un lápiz"
+            width="250"
+            height="250"
+            loading="eager"
+            decoding="async"
+          />
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<style>
+  .blog-hero {
+    width: 100%;
+    background-color: var(--color-bg-base);
+    padding: calc(1rem + 80px + 1rem) 0 48px;
+    box-sizing: border-box;
+  }
+
+  .blog-hero__container {
+    max-width: var(--layout-max-width);
+    margin-left: auto;
+    margin-right: auto;
+    padding-left: var(--layout-padding-x);
+    padding-right: var(--layout-padding-x);
+  }
+
+  .blog-hero__banner {
+    position: relative;
+    width: 100%;
+    background-color: var(--color-blue-secondary);
+    border-radius: clamp(24px, 4vw, 48px);
+    padding-top: 66px;
+    padding-bottom: 56px;
+    padding-left: clamp(1.25rem, 8vw, 188px);
+    padding-right: clamp(1.25rem, 5vw, 3rem);
+    overflow: hidden;
+    box-sizing: border-box;
+    box-shadow: 0 12px 40px rgba(40, 48, 148, 0.18);
+  }
+
+  .blog-hero__geo {
+    position: absolute;
+    pointer-events: none;
+    user-select: none;
+    z-index: 0;
+    object-fit: contain;
+    display: block;
+    height: auto;
+  }
+
+  .blog-hero__geo--bl {
+    left: 0;
+    bottom: 0;
+    max-width: 90px;
+    width: min(90px, 22vw);
+    transform: translate(-4%, 8%);
+  }
+
+  .blog-hero__geo--tr {
+    right: 0;
+    top: 0;
+    max-width: 250px;
+    width: min(250px, 45vw);
+    transform: translate(6%, -8%);
+  }
+
+  .blog-hero__grid {
+    position: relative;
+    z-index: 1;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: clamp(1.5rem, 4vw, 2rem);
+  }
+
+  @media (min-width: 900px) {
+    .blog-hero__grid {
+      flex-direction: row;
+      flex-wrap: wrap;
+      align-items: center;
+      justify-content: flex-start;
+      gap: 64px;
+    }
+  }
+
+  .blog-hero__copy {
+    text-align: left;
+    max-width: 640px;
+    flex: 0 1 auto;
+  }
+
+  @media (max-width: 899px) {
+    .blog-hero__copy {
+      text-align: center;
+      margin-left: auto;
+      margin-right: auto;
+    }
+  }
+
+  .blog-hero__label.programas__label {
+    color: #ffffff;
+    justify-content: flex-start;
+    margin: 0 0 20px;
+  }
+
+  @media (max-width: 899px) {
+    .blog-hero__label.programas__label {
+      justify-content: center;
+    }
+  }
+
+  .blog-hero__title {
+    margin: 0 0 1rem;
+    color: #ffffff;
+    font-weight: var(--text-h2-weight);
+    font-size: clamp(1.65rem, 4.5vw, var(--text-h2-size));
+    line-height: 1.15;
+    letter-spacing: var(--text-h1-spacing);
+  }
+
+  .blog-hero__title-dot {
+    color: var(--color-yellow);
+  }
+
+  .blog-hero__subtitle {
+    margin: 0;
+    color: rgba(255, 255, 255, 0.95);
+    font-size: clamp(1.05rem, 2.2vw, var(--text-subtitle-1-size));
+    line-height: var(--text-subtitle-1-line);
+    font-weight: var(--text-subtitle-1-weight);
+  }
+
+  .blog-hero__visual {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex: 0 0 auto;
+  }
+
+  .blog-hero__avatar {
+    max-width: 250px;
+    width: min(250px, 70vw);
+    height: auto;
+    display: block;
+  }
+
+  @media (max-width: 767px) {
+    .blog-hero {
+      padding: calc(1rem + 64px + 1rem) 0 40px;
+    }
+  }
+</style>

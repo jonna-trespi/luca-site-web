@@ -1,0 +1,1155 @@
+---
+/**
+ * Programas: niveles educativos (Kinder, Primaria, Secundaria),
+ * habilidades y bloque EdTech.
+ * Fondo full width; contenido centrado con .layout-container.
+ */
+---
+
+<section class="programas">
+  <div class="programas__blob programas__blob--left" aria-hidden="true">
+    <img src="/images/home/geometrico-3.png" alt="" width="350" height="280" loading="lazy" />
+  </div>
+  <div class="programas__blob programas__blob--right" aria-hidden="true">
+    <img src="/images/home/geometrico-4.png" alt="" width="230" height="220" loading="lazy" />
+  </div>
+
+  <div class="programas__inner layout-container">
+    <!-- Sección Programas -->
+    <header class="programas__header">
+      <p class="programas__label">
+        <span class="programas__label-dot" aria-hidden="true"></span>
+        Programas
+      </p>
+      <h2 class="programas__title">
+        El aprendizaje que deja huella nace de experiencias memorables<span class="programas__title-dot">.</span>
+      </h2>
+    </header>
+
+    <div class="programas__cards" data-active="primaria" id="programas-cards">
+      <article class="programas__card programas__card--kinder" data-card="kinder" tabindex="0" role="button" aria-expanded="false" aria-label="Expandir Kinder">
+        <img src="/images/home/geometrico-verde.png" alt="" class="programas__card-shape programas__card-shape--kinder" aria-hidden="true" width="200" height="200" loading="lazy" />
+        <span class="programas__card-name programas__card-name--vertical" aria-hidden="false">Preescolar</span>
+        <div class="programas__card-content">
+          <span class="programas__card-name">Preescolar</span>
+          <p class="programas__card-desc">Descubrir, jugar y aprender en movimiento.</p>
+        </div>
+        <img src="/images/home/kinder-image.png" alt="Ilustración Kinder" class="programas__card-character" loading="lazy" />
+      </article>
+      <article class="programas__card programas__card--primaria" data-card="primaria" tabindex="0" role="button" aria-expanded="true" aria-label="Ir a programa Primaria">
+        <img src="/images/home/geometrico-amarillo.png" alt="" class="programas__card-shape programas__card-shape--primaria" aria-hidden="true" width="200" height="200" loading="lazy" />
+        <span class="programas__card-name programas__card-name--vertical" aria-hidden="true">Primaria</span>
+        <div class="programas__card-content">
+          <span class="programas__card-name">Primaria</span>
+          <p class="programas__card-desc">Aprender haciendo, jugando y explorando.</p>
+        </div>
+        <img src="/images/home/primaria-image.png" alt="Ilustración Primaria" class="programas__card-character" loading="lazy" />
+      </article>
+      <article class="programas__card programas__card--secundaria" data-card="secundaria" tabindex="0" role="button" aria-expanded="false" aria-label="Ir a programa Secundaria">
+        <img src="/images/home/geometrico-azul.png" alt="" class="programas__card-shape programas__card-shape--secundaria" aria-hidden="true" width="200" height="200" loading="lazy" />
+        <span class="programas__card-name programas__card-name--vertical" aria-hidden="false">Secundaria</span>
+        <div class="programas__card-content">
+          <span class="programas__card-name">Secundaria</span>
+          <p class="programas__card-desc">Pensar, crear y conectar con el mundo real.</p>
+        </div>
+        <img
+          src="/images/home/secundaria-image.png"
+          alt="Ilustración Secundaria"
+          class="programas__card-character programas__card-character--secundaria"
+          loading="lazy"
+        />
+      </article>
+    </div>
+
+    <p class="programas__skills-intro">
+      Habilidades que se desarrollan mientras se aprende jugando.
+    </p>
+    <ul class="programas__skills">
+      <li class="programas__skill">
+        <img
+          src="/gif/home/habilidades-icon-1.gif"
+          alt=""
+          class="programas__skill-icon"
+          width="48"
+          height="48"
+          loading="lazy"
+          decoding="async"
+        />
+        <span class="programas__skill-label">
+          <span class="programas__skill-line">Pensamiento</span>
+          <span class="programas__skill-line">crítico</span>
+        </span>
+      </li>
+      <li class="programas__skill">
+        <img
+          src="/gif/home/habilidades-icon-2.gif"
+          alt=""
+          class="programas__skill-icon"
+          width="48"
+          height="48"
+          loading="lazy"
+          decoding="async"
+        />
+        <span class="programas__skill-label">
+          <span class="programas__skill-line">Creatividad e</span>
+          <span class="programas__skill-line">innovación</span>
+        </span>
+      </li>
+      <li class="programas__skill">
+        <img
+          src="/gif/home/habilidades-icon-3.gif"
+          alt=""
+          class="programas__skill-icon"
+          width="48"
+          height="48"
+          loading="lazy"
+          decoding="async"
+        />
+        <span class="programas__skill-label">
+          <span class="programas__skill-line">Trabajo en</span>
+          <span class="programas__skill-line">equipo</span>
+        </span>
+      </li>
+      <li class="programas__skill">
+        <img
+          src="/gif/home/habilidades-icon-4.gif"
+          alt=""
+          class="programas__skill-icon"
+          width="48"
+          height="48"
+          loading="lazy"
+          decoding="async"
+        />
+        <span class="programas__skill-label">
+          <span class="programas__skill-line">Resolución de</span>
+          <span class="programas__skill-line">problemas</span>
+        </span>
+      </li>
+      <li class="programas__skill">
+        <img
+          src="/gif/home/habilidades-icon-5.gif"
+          alt=""
+          class="programas__skill-icon"
+          width="48"
+          height="48"
+          loading="lazy"
+          decoding="async"
+        />
+        <span class="programas__skill-label">
+          <span class="programas__skill-line">Comunicación y</span>
+          <span class="programas__skill-line">colaboración</span>
+        </span>
+      </li>
+    </ul>
+
+    <!-- Sección EdTech -->
+    <header class="programas__header programas__header--edtech">
+      <p class="programas__label">
+        <span class="programas__label-dot" aria-hidden="true"></span>
+        EdTech
+      </p>
+      <h3 class="programas__title programas__title--edtech">
+        Convierte la curiosidad en aprendizaje efectivo y resultados medibles.
+      </h3>
+    </header>
+
+    <div class="stacked-cards-wrapper" id="stacked-cards">
+      <article class="card-item" data-card>
+        <div class="card-item__inner">
+          <div class="card-item__content">
+            <h3 class="card-item__heading">
+              <span class="card-item__heading--accent">Contenidos alineados a la NEM</span> <span class="card-item__heading--muted">y programas internacionales.</span>
+            </h3>
+            <p class="card-item__desc">Modelo educativo para colegios en México.</p>
+            <a href="/somosLuca" class="card-item__link btn-terciary">
+              Descubre más
+              <span class="btn-terciary-icon" aria-hidden="true"></span>
+            </a>
+          </div>
+          <div class="card-item__media">
+            <img src="/images/home/edtech-1.jpg" alt="Docente y alumnos en aula con tablet" class="card-item__image" width="600" height="400" loading="lazy" />
+          </div>
+        </div>
+      </article>
+      <article class="card-item" data-card>
+        <div class="card-item__inner">
+          <div class="card-item__content">
+            <h3 class="card-item__heading">
+              Acompañamiento, capacitaciones y <span class="card-item__heading--accent">soporte continuo.</span>
+            </h3>
+            <p class="card-item__desc">Inteligencia artificial en educación.</p>
+            <a href="/contacto" class="card-item__link btn-terciary">
+              Habla con un asesor
+              <span class="btn-terciary-icon" aria-hidden="true"></span>
+            </a>
+          </div>
+          <div class="card-item__media">
+            <img src="/images/home/edtech-2.jpg" alt="Asesor con laptop en aula" class="card-item__image" width="600" height="400" loading="lazy" />
+            <img
+              src="/gif/home/edtech.gif"
+              alt=""
+              class="card-item__media-corner-gif"
+              width="55"
+              height="55"
+              loading="lazy"
+              decoding="async"
+              aria-hidden="true"
+            />
+          </div>
+        </div>
+      </article>
+      <article class="card-item" data-card>
+        <div class="card-item__inner">
+          <div class="card-item__content">
+            <h3 class="card-item__heading">
+              Plataforma compatible con <span class="card-item__heading--accent">múltiples dispositivos.</span>
+            </h3>
+            <p class="card-item__desc">Sistema educativo interactivo.</p>
+            <!-- <a href="#plataforma" class="card-item__link btn-terciary">
+              Ingresa a la plataforma
+              <span class="btn-terciary-icon" aria-hidden="true"></span>
+            </a> -->
+            <img src="/logos/home/plataformas.png" alt="App Store y Google Play" class="card-item__plataformas" width="220" height="80" loading="lazy" />
+          </div>
+          <div class="card-item__media">
+            <img src="/images/home/edtech-3.jpg" alt="Aula con pantalla y tablets" class="card-item__image" width="600" height="400" loading="lazy" />
+          </div>
+        </div>
+      </article>
+      <article class="card-item" data-card>
+        <div class="card-item__inner">
+          <div class="card-item__content">
+            <h3 class="card-item__heading">
+              Cobertura total de <span class="card-item__heading--accent">asignaturas.</span>
+            </h3>
+            <p class="card-item__desc">Recursos digitales para el aula.</p>
+            <a href="/tecnologia" class="card-item__link btn-terciary">
+              Conoce más
+              <span class="btn-terciary-icon" aria-hidden="true"></span>
+            </a>
+          </div>
+          <div class="card-item__media">
+            <img src="/images/home/edtech-4.jpg" alt="Niños con material didáctico en aula" class="card-item__image" width="600" height="400" loading="lazy" />
+          </div>
+        </div>
+      </article>
+    </div>
+  </div>
+</section>
+
+<style>
+  .programas {
+    width: 100%;
+    background-color: #EDF5FF;
+    padding: 3rem 0;
+    position: relative;
+  }
+
+  .programas__blob {
+    position: absolute;
+    border-radius: 50%;
+    opacity: 0.2;
+    pointer-events: none;
+  }
+
+  .programas__blob--left {
+    top: 5%;
+    left: -5%;
+    max-width: 350px;
+    width: 100%;
+    border-radius: 0;
+    opacity: 1;
+  }
+
+  .programas__blob--left img {
+    width: 100%;
+    height: auto;
+    max-width: 350px;
+    display: block;
+  }
+
+  .programas__blob--right {
+    bottom: 0;
+    right: 0;
+    max-width: 230px;
+    width: 100%;
+    border-radius: 0;
+    opacity: 1;
+  }
+
+  .programas__blob--right img {
+    width: 100%;
+    height: auto;
+    max-width: 230px;
+    display: block;
+  }
+
+  .programas__inner {
+    position: relative;
+    z-index: 1;
+  }
+
+  .programas__header {
+    text-align: center;
+    margin-bottom: 40px;
+  }
+
+  .programas__title {
+    font-family: var(--font-family-base);
+    font-weight: var(--text-h4-weight);
+    font-size: clamp(1.25rem, 2.5vw, var(--text-h4-size));
+    letter-spacing: var(--text-h4-spacing);
+    line-height: var(--text-h4-line);
+    color: var(--color-black);
+    margin: 0;
+    max-width: 680px;
+    margin-left: auto;
+    margin-right: auto;
+  }
+
+  .programas__title-dot {
+    color: var(--color-red);
+  }
+
+  .programas__cards {
+    --card-collapsed-w: 200px;
+    --card-expanded-w: 600px;
+    --card-expanded-max-w: 600px;
+    display: grid;
+    gap: 32px;
+    margin-bottom: 2rem;
+    margin-left: auto;
+    margin-right: auto;
+    width: max-content;
+    align-items: stretch;
+    transition: grid-template-columns 0.4s ease-out;
+  }
+
+  .programas__cards[data-active="kinder"] {
+    grid-template-columns: var(--card-expanded-w) var(--card-collapsed-w) var(--card-collapsed-w);
+  }
+
+  .programas__cards[data-active="primaria"] {
+    grid-template-columns: var(--card-collapsed-w) var(--card-expanded-w) var(--card-collapsed-w);
+  }
+
+  .programas__cards[data-active="secundaria"] {
+    grid-template-columns: var(--card-collapsed-w) var(--card-collapsed-w) var(--card-expanded-w);
+  }
+
+  .programas__card {
+    --card-padding: 32px;
+    position: relative;
+    border-radius: 32px;
+    overflow: hidden;
+    width: 100%;
+    height: 400px;
+    min-height: 400px;
+    min-width: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: var(--card-padding);
+    cursor: pointer;
+    transition: background-color 0.4s ease-out;
+  }
+
+  .programas__cards[data-active="kinder"] .programas__card--kinder,
+  .programas__cards[data-active="primaria"] .programas__card--primaria,
+  .programas__cards[data-active="secundaria"] .programas__card--secundaria {
+    max-width: var(--card-expanded-max-w);
+  }
+
+  .programas__card:focus-visible {
+    outline: 2px solid var(--color-blue-primary);
+    outline-offset: 2px;
+  }
+
+  .programas__card-shape {
+    position: absolute;
+    top: -10%;
+    right: -5%;
+    /* Colapsada: figura un poco más grande para que se lea mejor en franja estrecha */
+    width: 178px;
+    height: auto;
+    max-height: 82%;
+    object-fit: contain;
+    object-position: top right;
+    transition: width 0.4s ease-out, transform 0.4s ease-out;
+    transform: translateX(50px);
+  }
+
+  .programas__cards[data-active="kinder"] .programas__card--kinder .programas__card-shape,
+  .programas__cards[data-active="primaria"] .programas__card--primaria .programas__card-shape,
+  .programas__cards[data-active="secundaria"] .programas__card--secundaria .programas__card-shape {
+    width: 210px;
+    transform: none;
+  }
+
+  .programas__card-shape--primaria {
+    top: -5%;
+    right: 5%;
+  }
+
+  .programas__card--kinder {
+    background: #2eb6ac;
+  }
+
+  .programas__card--primaria {
+    background: #e8a92d;
+  }
+
+  .programas__card--secundaria {
+    background: var(--color-blue);
+  }
+
+  /* Colapsada: solo título vertical + shape */
+  .programas__card-name--vertical {
+    font-family: var(--font-family-base);
+    font-weight: var(--text-h4-weight);
+    font-size: clamp(1rem, 2vw, var(--text-h4-size));
+    color: #ffffff;
+    position: relative;
+    z-index: 2;
+    writing-mode: vertical-rl;
+    text-orientation: mixed;
+    transform: rotate(180deg);
+    line-height: 1.2;
+    white-space: nowrap;
+    opacity: 1;
+    transition: opacity 0.4s ease-out;
+  }
+
+  .programas__cards[data-active="kinder"] .programas__card--kinder .programas__card-name--vertical,
+  .programas__cards[data-active="primaria"] .programas__card--primaria .programas__card-name--vertical,
+  .programas__cards[data-active="secundaria"] .programas__card--secundaria .programas__card-name--vertical {
+    opacity: 0;
+    pointer-events: none;
+    position: absolute;
+  }
+
+  .programas__card-content {
+    position: relative;
+    z-index: 2;
+    flex: 1;
+    min-width: 0;
+    max-width: 55%;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    justify-content: center;
+    text-align: left;
+    opacity: 0;
+    transform: translateX(-12px);
+    pointer-events: none;
+    transition: opacity 0.4s ease-out, transform 0.4s ease-out;
+  }
+
+  .programas__cards[data-active="kinder"] .programas__card--kinder .programas__card-content,
+  .programas__cards[data-active="primaria"] .programas__card--primaria .programas__card-content,
+  .programas__cards[data-active="secundaria"] .programas__card--secundaria .programas__card-content {
+    opacity: 1;
+    transform: translateX(0);
+    pointer-events: auto;
+  }
+
+  .programas__card--kinder .programas__card-content,
+  .programas__card--primaria .programas__card-content,
+  .programas__card--secundaria .programas__card-content {
+    position: absolute;
+    left: var(--card-padding);
+    top: 50%;
+    transform: translate(-12px, -50%);
+  }
+
+  .programas__cards[data-active="kinder"] .programas__card--kinder .programas__card-content,
+  .programas__cards[data-active="primaria"] .programas__card--primaria .programas__card-content,
+  .programas__cards[data-active="secundaria"] .programas__card--secundaria .programas__card-content {
+    top: auto;
+    bottom: var(--card-padding);
+    transform: translate(0, 0);
+    justify-content: flex-end;
+  }
+
+  .programas__card-name {
+    font-family: var(--font-family-base);
+    font-weight: var(--text-h4-weight);
+    font-size: clamp(1.25rem, 2.5vw, var(--text-h4-size));
+    color: #ffffff;
+    display: block;
+  }
+
+  .programas__card-desc {
+    font-family: var(--font-family-base);
+    font-weight: var(--text-body-secondary-weight);
+    font-size: var(--text-body-secondary-size);
+    color: rgba(255, 255, 255, 0.95);
+    margin: 12px 0 0;
+  }
+
+  .programas__card-character {
+    display: block;
+    height: auto;
+    max-width: 220px;
+    flex-shrink: 0;
+    position: absolute;
+    right: var(--card-padding);
+    top: 50%;
+    transform: translateY(-50%) translateX(16px);
+    opacity: 0;
+    z-index: 2;
+    transition: opacity 0.4s ease-out, transform 0.4s ease-out;
+  }
+
+  .programas__card--secundaria .programas__card-character {
+    max-width: 120px;
+  }
+
+  .programas__cards[data-active="kinder"] .programas__card--kinder .programas__card-character,
+  .programas__cards[data-active="primaria"] .programas__card--primaria .programas__card-character,
+  .programas__cards[data-active="secundaria"] .programas__card--secundaria .programas__card-character {
+    top: auto;
+    right: 0;
+    bottom: 0;
+    opacity: 1;
+    transform: translateY(0) translateX(0);
+  }
+
+  /* Expandida: geométrico al borde superior derecho (evita hueco de .card-shape--primaria) */
+  .programas__cards[data-active="primaria"] .programas__card--primaria .programas__card-shape--primaria {
+    top: 0;
+    right: 0;
+  }
+
+  .programas__card-info {
+    position: absolute;
+    right: 0.5rem;
+    bottom: 0.5rem;
+    width: 2rem;
+    height: 2rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: rgba(51, 51, 51, 0.6);
+    color: #ffffff;
+    border-radius: 50%;
+    font-family: var(--font-family-base);
+    font-weight: var(--text-body-primary-highlight-weight);
+    font-size: var(--text-body-secondary-size);
+    text-decoration: none;
+    z-index: 3;
+  }
+
+  .programas__card-info:hover {
+    opacity: 0.9;
+  }
+
+  .programas__card-info-inner {
+    line-height: 1;
+  }
+
+  .programas__skills-intro {
+    font-family: var(--font-family-base);
+    font-size: var(--text-subtitle-1-size);
+    font-weight: var(--text-subtitle-1-weight);
+    letter-spacing: var(--text-subtitle-1-spacing);
+    line-height: var(--text-subtitle-1-line);
+    color: var(--color-text-base);
+    text-align: center;
+    max-width: 480px;
+    margin: 65px auto 45px;
+  }
+
+  .programas__skills {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 1.5rem 2rem;
+    margin-bottom: 3rem;
+  }
+
+  .programas__skill {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    flex: 0 0 auto;
+    min-width: min(100%, 10.5rem);
+    max-width: 100%;
+  }
+
+  .programas__skill:not(:first-child) {
+    border-left: 1px solid rgba(0, 0, 0, 0.15);
+    padding-left: 2rem;
+  }
+
+  .programas__skill-icon {
+    display: block;
+    width: 48px;
+    height: 48px;
+    border-radius: 12px;
+    object-fit: contain;
+    margin-bottom: 0.5rem;
+    flex-shrink: 0;
+  }
+
+  .programas__skill-label {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    font-family: var(--font-family-base);
+    font-size: var(--text-subtitle-2-size);
+    font-weight: var(--text-subtitle-2-weight);
+    letter-spacing: var(--text-subtitle-2-spacing);
+    line-height: var(--text-subtitle-2-line);
+    color: var(--color-text-base);
+    text-align: center;
+    min-height: calc(2 * var(--text-subtitle-2-line) * 1em);
+  }
+
+  .programas__skill-line {
+    display: block;
+    white-space: nowrap;
+  }
+
+  .programas__header--edtech {
+    margin-top: 110px;
+    margin-bottom: 1.5rem;
+  }
+
+  .programas__header--edtech .programas__label {
+    margin-bottom: 20px;
+  }
+
+  .programas__title--edtech {
+    max-width: 800px;
+  }
+
+  .stacked-cards-wrapper {
+    position: relative;
+    padding-bottom: 10vh;
+    margin-top: 2rem;
+  }
+
+  .card-item {
+    --stack: 0;
+    position: sticky;
+    top: 10vh;
+    height: auto;
+    margin-bottom: 2rem;
+  }
+
+  .card-item:nth-child(1) { z-index: 1; }
+  .card-item:nth-child(2) { z-index: 2; }
+  .card-item:nth-child(3) { z-index: 3; }
+  .card-item:nth-child(4) { z-index: 4; }
+
+  .card-item__inner {
+    max-width: 1080px;
+    margin: 0 auto;
+    height: auto;
+    min-height: 0;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 8rem;
+    padding: 54px;
+    border-radius: 32px;
+    align-items: center;
+    box-sizing: border-box;
+    transform-origin: top center;
+    transition: transform 0.5s ease, box-shadow 0.5s ease;
+    transform: perspective(1200px) scale(calc(1 - 0.05 * var(--stack))) rotateX(calc(-4deg * var(--stack)));
+    box-shadow:
+      0 1px 3px rgba(0, 0, 0, 0.03),
+      0 8px 24px rgba(40, 48, 148, 0.065),
+      0 18px 48px rgba(0, 0, 0, 0.05);
+  }
+
+  .card-item:nth-child(1) .card-item__inner { background-color: #FFF9E5; }
+
+  .card-item:nth-child(2) .card-item__inner {
+    background-color: #FFF0F0;
+    box-shadow:
+      0 2px 6px rgba(0, 0, 0, 0.035),
+      0 10px 30px rgba(40, 48, 148, 0.078),
+      0 22px 52px rgba(0, 0, 0, 0.055);
+  }
+
+  .card-item:nth-child(3) .card-item__inner {
+    background-color: #E8F8F5;
+    box-shadow:
+      0 3px 8px rgba(0, 0, 0, 0.04),
+      0 12px 34px rgba(40, 48, 148, 0.088),
+      0 26px 56px rgba(0, 0, 0, 0.062);
+  }
+
+  .card-item:nth-child(4) .card-item__inner {
+    background-color: #E8F0FF;
+    box-shadow:
+      0 4px 10px rgba(0, 0, 0, 0.045),
+      0 14px 38px rgba(40, 48, 148, 0.098),
+      0 30px 60px rgba(0, 0, 0, 0.07);
+  }
+
+  .card-item__content {
+    min-width: 0;
+  }
+
+  .card-item__heading {
+    font-family: var(--font-family-base);
+    font-weight: var(--text-h4-weight);
+    font-size: clamp(1.25rem, 2.5vw, var(--text-h4-size));
+    letter-spacing: var(--text-h4-spacing);
+    line-height: var(--text-h4-line);
+    color: var(--color-black);
+    margin: 0;
+  }
+
+  .card-item__heading--accent {
+    color: var(--color-blue-primary);
+  }
+
+  .card-item__heading--muted {
+    color: var(--color-black);
+  }
+
+  .card-item__desc {
+    font-family: var(--font-family-base);
+    font-size: var(--text-body-primary-size);
+    font-weight: var(--text-body-primary-weight);
+    letter-spacing: var(--text-body-primary-spacing);
+    line-height: var(--text-body-primary-line);
+    color: var(--color-black);
+    margin: 24px 0 0;
+  }
+
+  .card-item__link {
+    margin-top: 45px;
+    color: var(--color-blue-primary);
+  }
+
+  .card-item__link:hover {
+    color: var(--color-blue-secondary);
+  }
+
+  .card-item__link .btn-terciary-icon {
+    width: 22px;
+    height: 22px;
+    background-color: var(--color-blue-primary);
+  }
+
+  .card-item__link:hover .btn-terciary-icon {
+    background-color: var(--color-blue-secondary);
+  }
+
+  .card-item__plataformas {
+    display: block;
+    max-width: 220px;
+    height: auto;
+    margin-top: 32px;
+  }
+
+  .card-item__media {
+    position: relative;
+    min-width: 0;
+  }
+
+  .card-item__media-corner-gif {
+    position: absolute;
+    right: 10px;
+    bottom: -10px;
+    max-width: 55px;
+    width: auto;
+    height: auto;
+    display: block;
+    pointer-events: none;
+    z-index: 1;
+    line-height: 0;
+  }
+
+  @media (max-width: 767px) {
+    .card-item__media-corner-gif {
+      display: none;
+    }
+  }
+
+  .card-item__image {
+    width: 100%;
+    max-width: 385px;
+    height: auto;
+    border-radius: 20px 20px 0 20px;
+    object-fit: cover;
+    display: block;
+  }
+
+  @media (min-width: 600px) {
+    .programas__cards {
+      margin-bottom: 2.5rem;
+    }
+
+    .programas__card {
+      padding: var(--card-padding);
+    }
+
+    .programas__card-character {
+      right: 1.25rem;
+    }
+  }
+
+  @media (min-width: 768px) {
+    .programas {
+      padding: 4rem 0;
+    }
+
+    .card-item__inner {
+      gap: 8rem;
+    }
+  }
+
+  /* Habilidades: en tablet/móvil rejilla 2+1; en desktop fila con separadores */
+  @media (max-width: 1023px) {
+    .programas__skills {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(10.5rem, 1fr));
+      gap: 1.25rem 1.5rem;
+      justify-items: center;
+      margin-bottom: 2.5rem;
+    }
+
+    .programas__skill {
+      min-width: 0;
+      width: 100%;
+      max-width: 14rem;
+    }
+
+    .programas__skill:not(:first-child) {
+      border-left: none;
+      padding-left: 0;
+    }
+
+    .programas__skill:nth-child(5) {
+      grid-column: 1 / -1;
+      justify-self: center;
+      max-width: 14rem;
+    }
+  }
+
+  @media (max-width: 359px) {
+    .programas__skills {
+      grid-template-columns: 1fr;
+    }
+
+    .programas__skill:nth-child(5) {
+      grid-column: auto;
+    }
+  }
+
+  @media (min-width: 1024px) {
+    .programas {
+      padding: 5rem 0;
+    }
+
+    .programas__skills {
+      margin-bottom: 4rem;
+    }
+
+    .programas__skill {
+      min-width: 10.5rem;
+      max-width: none;
+    }
+  }
+
+  @media (max-width: 1023px) {
+    .card-item__inner {
+      grid-template-columns: 1fr;
+    }
+
+    .card-item__media {
+      order: 0;
+    }
+
+    .card-item__content {
+      order: 1;
+    }
+  }
+
+  @media (max-width: 599px) {
+    .programas__card {
+      padding: var(--card-padding);
+    }
+  }
+
+  /* Tablet y móvil: 3 cards en columna (sin carrusel horizontal que se corta ~800px) */
+  @media (max-width: 1023px) {
+    .programas {
+      overflow-x: hidden;
+    }
+
+    .programas__cards,
+    .programas__cards[data-active="kinder"],
+    .programas__cards[data-active="primaria"],
+    .programas__cards[data-active="secundaria"] {
+      display: flex;
+      flex-direction: column;
+      width: 100%;
+      max-width: 100%;
+      margin-left: 0;
+      margin-right: 0;
+      gap: 1.25rem;
+      margin-bottom: 2rem;
+      transition: none;
+    }
+
+    .programas__card,
+    .programas__cards .programas__card--kinder,
+    .programas__cards .programas__card--primaria,
+    .programas__cards .programas__card--secundaria {
+      width: 100%;
+      max-width: 100%;
+      flex: 0 0 auto;
+      height: auto;
+      min-height: auto;
+      --card-padding: 1.25rem;
+      display: flex;
+      flex-direction: column;
+      align-items: stretch;
+      justify-content: flex-start;
+      /* Más aire arriba: el texto no queda pegado al borde con el geométrico */
+      padding: 1.5rem var(--card-padding) var(--card-padding);
+      transition: none;
+      cursor: default;
+    }
+
+    .programas__cards .programas__card .programas__card-content {
+      opacity: 1;
+      transform: none;
+      pointer-events: auto;
+      position: relative;
+      left: auto;
+      top: auto;
+      bottom: auto;
+      max-width: 100%;
+      width: 100%;
+      order: 1;
+      transition: none;
+      flex: 0 0 auto;
+    }
+
+    .programas__cards .programas__card .programas__card-name--vertical {
+      display: none;
+    }
+
+    .programas__cards .programas__card .programas__card-shape {
+      transform: none;
+      width: 100px;
+      transition: none;
+    }
+
+    .programas__cards .programas__card .programas__card-character {
+      opacity: 1;
+      transform: none;
+      position: static;
+      order: 2;
+      margin-top: 1rem;
+      align-self: center;
+      max-width: 180px;
+      transition: none;
+    }
+
+    .programas__card--secundaria .programas__card-character {
+      max-width: 120px;
+    }
+
+    .programas__card--primaria,
+    .programas__card--secundaria {
+      cursor: pointer;
+    }
+
+    /* EdTech: sin sticky ni transform, lista simple */
+    .stacked-cards-wrapper {
+      padding-bottom: 0;
+    }
+
+    .card-item {
+      position: static;
+      margin-bottom: 1.5rem;
+    }
+
+    .card-item__inner {
+      transform: none;
+      padding: 1.5rem;
+      gap: 1.25rem;
+    }
+
+    .card-item__image {
+      max-width: 100%;
+    }
+  }
+
+  /* Móvil (<768px): tarjetas a ancho completo, geométricos en esquina, texto uniforme, ilustración Secundaria acotada */
+  @media (max-width: 767px) {
+    .programas__cards[data-active='kinder'] .programas__card--kinder,
+    .programas__cards[data-active='primaria'] .programas__card--primaria,
+    .programas__cards[data-active='secundaria'] .programas__card--secundaria {
+      max-width: 100% !important;
+      width: 100%;
+      min-width: 0;
+      align-self: stretch;
+      box-sizing: border-box;
+    }
+
+    .programas__cards .programas__card {
+      width: 100%;
+      max-width: 100%;
+      min-width: 0;
+    }
+
+    .programas__cards .programas__card .programas__card-shape {
+      position: absolute;
+      top: 0;
+      right: 0;
+      left: auto;
+      width: clamp(92px, 28vw, 136px);
+      max-height: 42%;
+      object-fit: contain;
+      object-position: top right;
+      transform: none;
+      z-index: 1;
+    }
+
+    .programas__cards .programas__card .programas__card-shape--primaria {
+      top: 0;
+      right: 0;
+    }
+
+    .programas__cards .programas__card .programas__card-content {
+      box-sizing: border-box;
+      width: 100%;
+      max-width: 100%;
+      min-width: 0;
+      padding-left: 0;
+      padding-right: clamp(4.75rem, 34vw, 9rem);
+      padding-top: 0.25rem;
+      margin: 0;
+    }
+
+    .programas__cards .programas__card--primaria .programas__card-character {
+      max-width: 150px;
+      margin-top: 0.75rem;
+    }
+
+    .programas__card-character--secundaria {
+      max-width: min(100%, 280px) !important;
+      max-height: 200px;
+      width: auto;
+      height: auto;
+      object-fit: contain;
+    }
+  }
+</style>
+
+<script>
+  (function () {
+    const cardsEl = document.getElementById('programas-cards');
+    if (!cardsEl) return;
+
+    const getCards = () => Array.from(cardsEl.querySelectorAll('.programas__card[data-card]'));
+    const setActive = (key: string) => {
+      if (!['kinder', 'primaria', 'secundaria'].includes(key)) return;
+      cardsEl.setAttribute('data-active', key);
+      getCards().forEach((card) => {
+        const id = card.getAttribute('data-card');
+        card.setAttribute('aria-expanded', id === key ? 'true' : 'false');
+      });
+    };
+
+    const isMobile = () => window.matchMedia('(max-width: 1023px)').matches;
+
+    const programNav: Record<string, string> = {
+      kinder: '/programas/preescolar',
+      primaria: '/programas/primaria',
+      secundaria: '/programas/secundaria',
+    };
+
+    const activateCard = (e: Event) => {
+      const target = (e.target as HTMLElement).closest('.programas__card[data-card]');
+      if (!target) return;
+      const key = (target as HTMLElement).getAttribute('data-card');
+      if (e.type === 'click' && key && programNav[key]) {
+        window.location.href = programNav[key];
+        return;
+      }
+      if (isMobile()) return;
+      if (e.target && (e.target as HTMLElement).closest('a[href]')) return;
+      if (!key) return;
+      setActive(key);
+    };
+
+    const handleKeydown = (e: KeyboardEvent) => {
+      const target = (e.target as HTMLElement).closest('.programas__card[data-card]');
+      if (!target) return;
+      const key = (target as HTMLElement).getAttribute('data-card');
+      if (key && programNav[key]) {
+        if (e.key !== 'Enter' && e.key !== ' ') return;
+        e.preventDefault();
+        window.location.href = programNav[key];
+        return;
+      }
+      if (isMobile()) return;
+      if (e.key !== 'Enter' && e.key !== ' ') return;
+      e.preventDefault();
+      if (key) setActive(key);
+    };
+
+    cardsEl.addEventListener('click', activateCard);
+    cardsEl.addEventListener('mouseenter', activateCard, true);
+    cardsEl.addEventListener('keydown', handleKeydown);
+  })();
+
+  (function stackedCards() {
+    const wrapper = document.getElementById('stacked-cards');
+    if (!wrapper) return;
+
+    const cards = Array.from(wrapper.querySelectorAll('.card-item[data-card]'));
+    const stickyTopPx = () => window.innerHeight * 0.1;
+    const overlapRange = 250;
+
+    function updateStack() {
+      if (window.innerWidth <= 1023) {
+        cards.forEach((card) => (card as HTMLElement).style.setProperty('--stack', '0'));
+        return;
+      }
+      const top = stickyTopPx();
+      cards.forEach((card, i) => {
+        const next = cards[i + 1];
+        const el = card as HTMLElement;
+        if (!next) {
+          el.style.setProperty('--stack', '0');
+          return;
+        }
+        const nextRect = next.getBoundingClientRect();
+        const progress = 1 - (nextRect.top - top) / overlapRange;
+        const value = Math.max(0, Math.min(1, progress));
+        el.style.setProperty('--stack', String(value));
+      });
+    }
+
+    let ticking = false;
+    function onScroll() {
+      if (!ticking) {
+        requestAnimationFrame(() => {
+          updateStack();
+          ticking = false;
+        });
+        ticking = true;
+      }
+    }
+
+    window.addEventListener('scroll', onScroll, { passive: true });
+    window.addEventListener('resize', onScroll);
+    updateStack();
+  })();
+</script>

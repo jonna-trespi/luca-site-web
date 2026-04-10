@@ -1,0 +1,447 @@
+---
+/**
+ * Footer: pie con logo, columnas, redes, contacto, plataforma, apps y barra legal.
+ * Fondo exterior #EDF5FF; caja principal azul oscuro max-width 1400px con decoraciones.
+ */
+---
+
+<div class="footer-wrap">
+  <footer class="footer">
+    <img
+      class="footer__deco footer__deco--tr"
+      src="/images/transversal/geo-footer-1.png"
+      alt=""
+      width="280"
+      height="280"
+      aria-hidden="true"
+    />
+    <img
+      class="footer__deco footer__deco--bl"
+      src="/images/transversal/geo-footer-2.png"
+      alt=""
+      width="220"
+      height="220"
+      aria-hidden="true"
+    />
+
+    <div class="footer__main-inner">
+      <div class="footer__grid">
+        <div class="footer__brand">
+          <a href="/" class="footer__logo">
+            Luca<span class="footer__logo-dot">.</span>
+          </a>
+          <div class="footer__social" aria-label="Redes sociales">
+            <a href="#linkedin" class="footer__social-link" aria-label="LinkedIn">
+              <img src="/icons/transversal/linkedin.svg" alt="" width="40" height="40" aria-hidden="true" />
+            </a>
+            <a href="#youtube" class="footer__social-link" aria-label="YouTube">
+              <img src="/icons/transversal/youtube.svg" alt="" width="40" height="40" aria-hidden="true" />
+            </a>
+            <a href="#instagram" class="footer__social-link" aria-label="Instagram">
+              <img src="/icons/transversal/instagram.svg" alt="" width="40" height="40" aria-hidden="true" />
+            </a>
+          </div>
+        </div>
+        <div class="footer__col">
+          <span class="footer__col-title">Contacto</span>
+          <a href="https://wa.me/525541691994" class="footer__link footer__link--contact">
+            <img src="/icons/transversal/whatsapp.svg" alt="" class="footer__contact-icon" width="20" height="20" aria-hidden="true" />
+            +52 55 416 91994
+          </a>
+        </div>
+        <div class="footer__col">
+          <span class="footer__col-title">Sobre Luca</span>
+          <a href="#trabaja" class="footer__link">Trabaja con nosotros</a>
+        </div>
+        <div class="footer__col">
+          <span class="footer__col-title">Plataforma</span>
+          <a href="/programas/preescolar" class="footer__link">Preescolar</a>
+          <a href="/programas/primaria" class="footer__link">Primaria</a>
+          <a href="/programas/secundaria" class="footer__link">Secundaria</a>
+        </div>
+        <div class="footer__col footer__col--apps">
+          <span class="footer__col-title">Descarga nuestras App</span>
+          <div class="footer__stores">
+            <a href="#appstore" class="footer__store" aria-label="Descargar en App Store">
+              <img src="/logos/transversal/appstore.png" alt="App Store" width="120" height="40" />
+            </a>
+            <a href="#playstore" class="footer__store" aria-label="Descargar en Google Play">
+              <img src="/logos/transversal/googleplay.png" alt="Google Play" width="120" height="40" />
+            </a>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="footer__legal">
+      <div class="footer__legal-inner">
+        <span class="footer__copyright">© LUCA LEARNING SYSTEMS, SL Todos los derechos reservados</span>
+        <nav class="footer__legal-nav" aria-label="Legal">
+          <a href="#terminos" class="footer__legal-link">Términos y condiciones</a>
+          <a href="#privacidad" class="footer__legal-link">Aviso de privacidad</a>
+        </nav>
+      </div>
+    </div>
+  </footer>
+</div>
+
+<style>
+  .footer-wrap {
+    position: relative;
+    z-index: 1;
+    width: 100%;
+    background-color: #edf5ff;
+    /* Espacio para la tarjeta CTA que se superpone al bloque azul */
+    padding: clamp(3.5rem, 6vw, 5rem) var(--layout-padding-x, 20px) 0;
+  }
+
+  .footer {
+    position: relative;
+    max-width: 1400px;
+    margin: 0 auto;
+    background: var(--color-blue-secondary);
+    padding: 0;
+    border-radius: 200px 20px 20px 20px;
+    overflow: hidden;
+  }
+
+  .footer__deco {
+    position: absolute;
+    z-index: 0;
+    pointer-events: none;
+    object-fit: contain;
+  }
+
+  .footer__deco--tr {
+    top: 0;
+    right: 0;
+    max-width: 280px;
+    width: 100%;
+    height: auto;
+    object-position: top right;
+  }
+
+  .footer__deco--bl {
+    bottom: 0;
+    left: 0;
+    max-width: 220px;
+    width: 100%;
+    height: auto;
+    object-position: bottom left;
+  }
+
+  .footer__main-inner {
+    position: relative;
+    z-index: 1;
+    padding: 2.75rem var(--layout-padding-x, 1.25rem) 0.5rem;
+    box-sizing: border-box;
+  }
+
+  .footer__grid {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 2rem 2.5rem;
+  }
+
+  .footer__logo {
+    font-family: var(--font-family-base);
+    font-weight: 700;
+    font-size: clamp(1.75rem, 4vw, 4rem);
+    color: #ffffff;
+    text-decoration: none;
+    display: inline-block;
+    width: 200px;
+    margin-bottom: 1.25rem;
+    line-height: 1.1;
+  }
+
+  .footer__logo-dot {
+    color: var(--color-red);
+  }
+
+  .footer__social {
+    display: flex;
+    gap: 0.5rem;
+  }
+
+  .footer__social-link {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: opacity 0.2s ease;
+  }
+
+  .footer__social-link:hover {
+    opacity: 0.85;
+  }
+
+  .footer__social-link img {
+    width: 40px;
+    height: 40px;
+    display: block;
+    filter: brightness(0) invert(1);
+  }
+
+  .footer__col-title {
+    font-family: var(--font-family-base);
+    font-weight: 700;
+    font-size: var(--text-body-secondary-size);
+    color: #ffffff;
+    display: block;
+    margin-bottom: 0.75rem;
+  }
+
+  .footer__link {
+    display: block;
+    font-family: var(--font-family-base);
+    font-weight: 400;
+    font-size: var(--text-body-secondary-size);
+    color: rgba(255, 255, 255, 0.9);
+    text-decoration: none;
+    margin-bottom: 0.4rem;
+  }
+
+  .footer__link:hover {
+    color: #ffffff;
+  }
+
+  .footer__link--contact {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+  }
+
+  .footer__contact-icon {
+    flex-shrink: 0;
+    filter: brightness(0) invert(1);
+  }
+
+  .footer__stores {
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+  }
+
+  .footer__store {
+    display: inline-block;
+  }
+
+  .footer__store img {
+    display: block;
+    width: 120px;
+    height: auto;
+    border-radius: 6px;
+  }
+
+  .footer__legal {
+    position: relative;
+    z-index: 1;
+    margin-top: 2rem;
+    padding-top: 1.5rem;
+    border-top: 1px solid rgba(255, 255, 255, 0.25);
+  }
+
+  .footer__legal-inner {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: space-between;
+    gap: 1rem;
+  }
+
+  .footer__copyright {
+    font-family: var(--font-family-base);
+    font-weight: 400;
+    font-size: var(--text-micro-size);
+    color: rgba(255, 255, 255, 0.85);
+  }
+
+  .footer__legal-nav {
+    display: flex;
+    gap: 1.5rem;
+  }
+
+  .footer__legal-link {
+    font-family: var(--font-family-base);
+    font-weight: 400;
+    font-size: var(--text-micro-size);
+    color: rgba(255, 255, 255, 0.85);
+    text-decoration: none;
+  }
+
+  .footer__legal-link:hover {
+    color: #ffffff;
+  }
+
+  @media (min-width: 768px) and (max-width: 1023px) {
+    .footer {
+      padding: 2.75rem clamp(1rem, 3vw, 1.5rem) 1.75rem;
+      border-radius: clamp(100px, 18vw, 200px) 20px 20px 20px;
+    }
+
+    .footer__main-inner {
+      padding: 2.5rem clamp(1.25rem, 4vw, 2rem) 1rem;
+    }
+
+    .footer__grid {
+      grid-template-columns: 1fr 1fr;
+      gap: 1.75rem 1.5rem;
+    }
+
+    .footer__brand {
+      grid-column: 1 / -1;
+    }
+
+    .footer__col--apps {
+      grid-column: 1 / -1;
+    }
+
+    .footer__stores {
+      flex-direction: row;
+      flex-wrap: wrap;
+      gap: 0.75rem;
+    }
+
+    .footer__store img {
+      width: min(132px, 36vw);
+    }
+
+    .footer__legal-inner {
+      gap: 0.85rem;
+    }
+  }
+
+  @media (min-width: 1024px) {
+    .footer-wrap {
+      padding: 3rem 0 0;
+    }
+
+    .footer {
+      padding: 4rem 3rem 2.5rem;
+      border-radius: 200px 20px 20px 20px;
+    }
+
+    .footer__main-inner {
+      padding: 60px clamp(2rem, 8vw, 150px) 0.5rem;
+    }
+
+    .footer__grid {
+      grid-template-columns: 1.2fr repeat(4, 1fr);
+      gap: 2rem 2.2rem;
+    }
+
+    .footer__stores {
+      flex-direction: column;
+    }
+
+    .footer__store img {
+      width: 140px;
+    }
+
+    .footer__legal {
+      margin-top: 2.5rem;
+      padding-top: 1.75rem;
+    }
+  }
+
+  /* Mobile: una columna centrada, tiendas en fila, legal como en referencia */
+  @media (max-width: 767px) {
+    .footer {
+      border-radius: clamp(72px, 22vw, 160px) 24px 24px 24px;
+    }
+
+    .footer__main-inner {
+      padding: 2.75rem var(--layout-padding-x, 20px) 0.5rem;
+      text-align: center;
+    }
+
+    .footer__grid {
+      justify-items: center;
+      gap: 1.75rem;
+    }
+
+    .footer__brand {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      width: 100%;
+    }
+
+    .footer__logo {
+      width: auto;
+      margin-left: auto;
+      margin-right: auto;
+      margin-bottom: 1rem;
+    }
+
+    .footer__social {
+      justify-content: center;
+      gap: 0.65rem;
+    }
+
+    .footer__col {
+      width: 100%;
+      max-width: 22rem;
+      text-align: center;
+    }
+
+    .footer__col-title {
+      margin-bottom: 0.5rem;
+    }
+
+    .footer__link {
+      color: #ffffff;
+    }
+
+    .footer__link--contact {
+      justify-content: center;
+    }
+
+    .footer__col--apps {
+      max-width: 100%;
+    }
+
+    .footer__stores {
+      flex-direction: row;
+      flex-wrap: wrap;
+      justify-content: center;
+      gap: 0.75rem;
+    }
+
+    .footer__store img {
+      width: min(132px, 40vw);
+    }
+
+    .footer__legal {
+      margin-top: 1.5rem;
+      padding: 1.5rem var(--layout-padding-x, 20px) 2rem;
+      border-top: 1px solid rgba(255, 255, 255, 0.5);
+    }
+
+    .footer__legal-inner {
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+      gap: 1.25rem;
+    }
+
+    .footer__legal-nav {
+      flex-direction: column;
+      align-items: center;
+      gap: 0.65rem;
+      order: 1;
+    }
+
+    .footer__legal-link {
+      color: #ffffff;
+    }
+
+    .footer__copyright {
+      order: 2;
+      color: rgba(255, 255, 255, 0.92);
+      max-width: 17.5rem;
+      line-height: 1.45;
+    }
+  }
+</style>

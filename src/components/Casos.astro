@@ -1,0 +1,979 @@
+---
+/**
+ * Casos: testimonios en slider con carrusel horizontal y capas apiladas.
+ * Fondo blanco; contenido centrado con .layout-container.
+ */
+const cases = [
+  {
+    image: '/images/home/caso-1.jpg',
+    logo: '/logos/home/logo-caso-1.jpg',
+    quote:
+      'Lo que nos impulsó a trabajar con Luca fue la innovación de su plataforma, especialmente por su enfoque en inteligencia artificial. Es una solución actual, relevante y alineada con lo que hoy necesita la educación.',
+    authorName: 'Gabriel Paredes Dueñas',
+    authorRole: 'Director Académico, Instituto Educativo Marie Curie. Hidalgo, México',
+    youtubeId: 'aYZf02ILHwk',
+  },
+  {
+    image: '/images/home/caso-2.jpg',
+    logo: '/logos/home/logo-caso-2.jpg',
+    quote:
+      'Con Luca logramos una estructura mucho más clara para la planeación y dosificación de contenidos. Hoy nuestros maestros pueden organizar mejor su trabajo y dar seguimiento con mayor orden y claridad.',
+    authorName: 'Mónica Magaña Barajas',
+    authorRole: 'Subdirectora General, Centro de Estudios Lomas. Edo. de México, México',
+    youtubeId: 'CAM4TB1o5Ew',
+  },
+  {
+    image: '/images/home/caso-3.jpg',
+    logo: '/logos/home/logo-caso-3.jpg',
+    quote:
+      'Lo que más valoro de Luca es el acompañamiento cercano que nos han dado. No es solo una plataforma: hay un equipo involucrado que acompaña al colegio también en la parte administrativa y en la implementación.',
+    authorName: 'Jorge González',
+    authorRole: 'Director General, Colegio Lyno. Puebla, México',
+    youtubeId: '2x8MkY77aw4',
+  },
+];
+
+const caseCount = cases.length;
+---
+
+<section class="casos">
+  <img
+    class="casos__deco casos__deco--left"
+    src="/images/home/geometrico-8.png"
+    alt=""
+    width="250"
+    height="250"
+    aria-hidden="true"
+  />
+  <div class="casos__blob casos__blob--right" aria-hidden="true"></div>
+
+  <div class="casos__inner layout-container">
+    <h3 class="casos__title text-h3">
+      Colegios líderes en México ya evolucionaron con Luca<span class="casos__title-dot">.</span>
+    </h3>
+
+    <div
+      class="casos__carousel"
+      data-casos-count={caseCount}
+      role="region"
+      aria-roledescription="carrusel"
+      aria-label="Testimonios de colegios"
+    >
+      <div class="casos__stack-wrap">
+        <div class="casos__stack casos__stack--back" aria-hidden="true"></div>
+        <div class="casos__stack casos__stack--mid" aria-hidden="true"></div>
+        <div
+          class="casos__viewport"
+          style={`--casos-count: ${caseCount}`}
+        >
+          <div class="casos__track" data-casos-track>
+            {cases.map((c, i) => (
+              <article
+                class={`casos__slide ${i === 0 ? 'casos__slide--active' : i === 1 ? 'casos__slide--next' : 'casos__slide--stack'}`}
+                data-index={i}
+                aria-hidden={i !== 0}
+                id={`caso-slide-${i}`}
+              >
+                <div class="casos__card-inner">
+                  <div class="casos__card-media">
+                    <img
+                      src={c.image}
+                      alt=""
+                      class="casos__card-portrait"
+                      width="310"
+                      height="360"
+                      loading={i === 0 ? 'eager' : 'lazy'}
+                      decoding="async"
+                    />
+                  </div>
+                  <div class="casos__card-content">
+                    <img
+                      src={c.logo}
+                      alt=""
+                      class="casos__card-logo"
+                      width="168"
+                      height="67"
+                      loading="lazy"
+                    />
+                    <blockquote class="casos__quote">
+                      <span class="casos__quote-mark">“</span>
+                      {c.quote}
+                      <span class="casos__quote-mark">”</span>
+                    </blockquote>
+                    <hr class="casos__divider" />
+                    <div class="casos__footer">
+                      <div class="casos__author">
+                        <span class="casos__author-name">{c.authorName}</span>
+                        <span class="casos__author-role">{c.authorRole}</span>
+                      </div>
+                      <button type="button" class="btn-terciary" data-casos-youtube={c.youtubeId}>
+                        Ver testimonio
+                        <span class="btn-terciary-icon" aria-hidden="true"></span>
+                      </button>
+                    </div>
+                  </div>
+                </div>
+              </article>
+            ))}
+          </div>
+        </div>
+      </div>
+
+      <button type="button" class="casos__nav casos__nav--prev" aria-label="Testimonio anterior" data-casos-prev>
+        <span class="casos__nav-icon" aria-hidden="true">
+          <span class="casos__nav-icon-mask casos__nav-icon-mask--flip"></span>
+        </span>
+      </button>
+      <button type="button" class="casos__nav casos__nav--next" aria-label="Siguiente testimonio" data-casos-next>
+        <span class="casos__nav-icon" aria-hidden="true">
+          <span class="casos__nav-icon-mask"></span>
+        </span>
+      </button>
+    </div>
+  </div>
+
+  <div class="casos-video-modal" id="casos-video-modal" hidden aria-hidden="true">
+    <div class="casos-video-modal__backdrop" data-casos-video-close tabindex="-1"></div>
+    <div
+      class="casos-video-modal__panel"
+      role="dialog"
+      aria-modal="true"
+      aria-label="Video testimonial"
+    >
+      <button type="button" class="casos-video-modal__close" data-casos-video-close aria-label="Cerrar video">
+        <span class="casos-video-modal__close-x" aria-hidden="true">×</span>
+      </button>
+      <div class="casos-video-modal__embed-wrap">
+        <iframe
+          class="casos-video-modal__iframe"
+          data-casos-video-iframe
+          title="Testimonio en video"
+          allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+          allowfullscreen
+        ></iframe>
+      </div>
+    </div>
+  </div>
+</section>
+
+<script>
+  (function initCasosStack() {
+    let abort: AbortController | null = null;
+    let index = 0;
+    let isAnimating = false;
+
+    const TRANS_MS = 500;
+
+    function relFromIndex(j: number, active: number, total: number) {
+      return (j - active + total) % total;
+    }
+
+    function clearSlideClasses(slide: Element) {
+      slide.classList.remove(
+        'casos__slide--active',
+        'casos__slide--next',
+        'casos__slide--stack',
+        'casos__slide--exit',
+        'casos__slide--exit-prev'
+      );
+    }
+
+    function setup() {
+      abort?.abort();
+      abort = new AbortController();
+      const { signal } = abort;
+
+      const trackEl = document.querySelector('[data-casos-track]');
+      const carouselEl = document.querySelector('[data-casos-count]');
+      const prevBtn = document.querySelector('[data-casos-prev]');
+      const nextBtn = document.querySelector('[data-casos-next]');
+      const slides = document.querySelectorAll('.casos__slide');
+      if (!trackEl || !carouselEl || slides.length === 0) return;
+
+      const carousel = carouselEl;
+      const total = slides.length;
+      index = 0;
+
+      function applyStackState(activeIdx: number) {
+        slides.forEach((slide, j) => {
+          clearSlideClasses(slide);
+          const rel = relFromIndex(j, activeIdx, total);
+          if (rel === 0) slide.classList.add('casos__slide--active');
+          else if (rel === 1) slide.classList.add('casos__slide--next');
+          else slide.classList.add('casos__slide--stack');
+        });
+      }
+
+      function updateA11y(activeIdx: number) {
+        slides.forEach((slide, j) => {
+          const isActive = j === activeIdx;
+          slide.setAttribute('aria-hidden', isActive ? 'false' : 'true');
+          if (isActive) slide.removeAttribute('tabindex');
+          else slide.setAttribute('tabindex', '-1');
+        });
+      }
+
+      function finishExit() {
+        isAnimating = false;
+        carousel.classList.remove('casos__carousel--is-sliding');
+        applyStackState(index);
+      }
+
+      function goNext() {
+        if (isAnimating || total < 2) return;
+        isAnimating = true;
+        carousel.classList.add('casos__carousel--is-sliding');
+
+        const prev = index;
+        const outgoing = slides[prev] as HTMLElement;
+        index = (index + 1) % total;
+
+        slides.forEach((slide, j) => {
+          clearSlideClasses(slide);
+          if (j === prev) {
+            slide.classList.add('casos__slide--exit');
+            return;
+          }
+          const rel = relFromIndex(j, index, total);
+          if (rel === 0) slide.classList.add('casos__slide--active');
+          else if (rel === 1) slide.classList.add('casos__slide--next');
+          else slide.classList.add('casos__slide--stack');
+        });
+
+        updateA11y(index);
+
+        let settled = false;
+        const settle = () => {
+          if (settled) return;
+          settled = true;
+          finishExit();
+        };
+        const onEnd = (e: TransitionEvent) => {
+          if (e.target !== outgoing) return;
+          if (e.propertyName !== 'opacity' && e.propertyName !== 'transform') return;
+          outgoing.removeEventListener('transitionend', onEnd);
+          settle();
+        };
+        outgoing.addEventListener('transitionend', onEnd);
+        window.setTimeout(() => {
+          outgoing.removeEventListener('transitionend', onEnd);
+          if (outgoing.classList.contains('casos__slide--exit')) settle();
+        }, TRANS_MS + 120);
+      }
+
+      function goPrev() {
+        if (isAnimating || total < 2) return;
+        isAnimating = true;
+        carousel.classList.add('casos__carousel--is-sliding');
+
+        const prev = index;
+        const outgoing = slides[prev] as HTMLElement;
+        index = (index - 1 + total) % total;
+
+        slides.forEach((slide, j) => {
+          clearSlideClasses(slide);
+          if (j === prev) {
+            slide.classList.add('casos__slide--exit-prev');
+            return;
+          }
+          const rel = relFromIndex(j, index, total);
+          if (rel === 0) slide.classList.add('casos__slide--active');
+          else if (rel === 1) slide.classList.add('casos__slide--next');
+          else slide.classList.add('casos__slide--stack');
+        });
+
+        updateA11y(index);
+
+        let settled = false;
+        const settle = () => {
+          if (settled) return;
+          settled = true;
+          finishExit();
+        };
+        const onEnd = (e: TransitionEvent) => {
+          if (e.target !== outgoing) return;
+          if (e.propertyName !== 'opacity' && e.propertyName !== 'transform') return;
+          outgoing.removeEventListener('transitionend', onEnd);
+          settle();
+        };
+        outgoing.addEventListener('transitionend', onEnd);
+        window.setTimeout(() => {
+          outgoing.removeEventListener('transitionend', onEnd);
+          if (outgoing.classList.contains('casos__slide--exit-prev')) settle();
+        }, TRANS_MS + 120);
+      }
+
+      applyStackState(index);
+      updateA11y(index);
+
+      prevBtn?.addEventListener('click', goPrev, { signal });
+      nextBtn?.addEventListener('click', goNext, { signal });
+    }
+
+    setup();
+    document.addEventListener('astro:page-load', setup);
+  })();
+</script>
+
+<script>
+  (function initCasosVideoModal() {
+    let abort: AbortController | null = null;
+
+    function embedUrl(id: string) {
+      return `https://www.youtube.com/embed/${encodeURIComponent(id)}?autoplay=1&rel=0`;
+    }
+
+    function setup() {
+      abort?.abort();
+      abort = new AbortController();
+      const { signal } = abort;
+
+      const modal = document.getElementById('casos-video-modal');
+      const iframe = document.querySelector<HTMLIFrameElement>('[data-casos-video-iframe]');
+      if (!modal || !iframe) return;
+
+      const closeBtn = modal.querySelector<HTMLButtonElement>('.casos-video-modal__close');
+
+      function closeModal() {
+        iframe.src = '';
+        modal.hidden = true;
+        modal.setAttribute('aria-hidden', 'true');
+        document.body.style.overflow = '';
+      }
+
+      function openModal(id: string) {
+        if (!id) return;
+        iframe.src = embedUrl(id);
+        modal.hidden = false;
+        modal.setAttribute('aria-hidden', 'false');
+        document.body.style.overflow = 'hidden';
+        window.setTimeout(() => closeBtn?.focus(), 0);
+      }
+
+      document.querySelectorAll('[data-casos-youtube]').forEach((btn) => {
+        btn.addEventListener(
+          'click',
+          (e) => {
+            const id = (e.currentTarget as HTMLElement).getAttribute('data-casos-youtube');
+            if (id) openModal(id);
+          },
+          { signal }
+        );
+      });
+
+      modal.querySelectorAll('[data-casos-video-close]').forEach((el) => {
+        el.addEventListener('click', () => closeModal(), { signal });
+      });
+
+      document.addEventListener(
+        'keydown',
+        (e) => {
+          if (e.key === 'Escape' && !modal.hidden) {
+            e.preventDefault();
+            closeModal();
+          }
+        },
+        { signal }
+      );
+    }
+
+    setup();
+    document.addEventListener('astro:page-load', setup);
+  })();
+</script>
+
+<style>
+  .casos {
+    width: 100%;
+    background-color: #ffffff;
+    padding: 3rem 0;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .casos__deco--left {
+    position: absolute;
+    top: 0;
+    left: 0;
+    max-width: 250px;
+    width: 100%;
+    height: auto;
+    z-index: 0;
+    pointer-events: none;
+  }
+
+  @media (max-width: 767px) {
+    .casos__deco--left {
+      display: none;
+    }
+  }
+
+  .casos__blob {
+    position: absolute;
+    border-radius: 50%;
+    pointer-events: none;
+  }
+
+  .casos__blob--right {
+    width: min(280px, 50vw);
+    height: min(280px, 50vw);
+    bottom: -60px;
+    right: -60px;
+    background: var(--color-red);
+    opacity: 0.15;
+  }
+
+  .casos__inner {
+    position: relative;
+    z-index: 1;
+  }
+
+  .casos__title {
+    max-width: 650px;
+    margin-left: auto;
+    margin-right: auto;
+    color: var(--color-text-base);
+    text-align: center;
+    margin: 0 auto 2rem;
+  }
+
+  .casos__title-dot {
+    color: var(--color-red);
+  }
+
+  .casos__carousel {
+    position: relative;
+    max-width: 960px;
+    margin: 0 auto;
+    padding: 0 clamp(28px, 5vw, 48px);
+  }
+
+  /* Capas tipo “mazo” detrás del viewport */
+  .casos__stack-wrap {
+    position: relative;
+    width: 100%;
+  }
+
+  .casos__stack {
+    position: absolute;
+    border-radius: 28px;
+    pointer-events: none;
+    z-index: 0;
+    left: 50%;
+    transform: translateX(-50%);
+    width: calc(100% - 8px);
+    top: 0;
+    bottom: 0;
+    box-sizing: border-box;
+  }
+
+  .casos__stack--back {
+    width: calc(100% + 12px);
+    top: -14px;
+    height: calc(100% + 28px);
+  }
+
+  .casos__stack--mid {
+    width: calc(100% + 4px);
+    top: -7px;
+    height: calc(100% + 14px);
+    background: var(--color-bg-base);
+    border: 2px solid rgba(61, 78, 252, 0.14);
+    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.05);
+    z-index: 1;
+  }
+
+  .casos__viewport {
+    --casos-stack-duration: 0.5s;
+    --casos-stack-ease: cubic-bezier(0.25, 0.8, 0.25, 1);
+    position: relative;
+    z-index: 2;
+    width: 100%;
+    overflow: visible;
+    border-radius: 24px;
+  }
+
+  /* Pila: todas las slides en la misma celda (grid) */
+  .casos__track {
+    display: grid;
+    grid-template-columns: 1fr;
+    grid-template-rows: 1fr;
+    width: 100%;
+    margin: 0;
+    padding: 0;
+  }
+
+  .casos__slide {
+    grid-area: 1 / 1;
+    width: 100%;
+    min-width: 0;
+    box-sizing: border-box;
+    position: relative;
+    transform-origin: center center;
+    pointer-events: none;
+    transition:
+      transform var(--casos-stack-duration) var(--casos-stack-ease),
+      opacity var(--casos-stack-duration) var(--casos-stack-ease),
+      filter var(--casos-stack-duration) var(--casos-stack-ease);
+  }
+
+  /* Frente */
+  .casos__slide--active {
+    z-index: 30;
+    transform: translateX(0) scale(1);
+    opacity: 1;
+    pointer-events: auto;
+  }
+
+  /* Siguiente en la pila (detrás) */
+  .casos__slide--next {
+    z-index: 20;
+    transform: translateX(40px) scale(0.95);
+    opacity: 0.88;
+    filter: drop-shadow(0 8px 20px rgba(40, 48, 148, 0.12));
+  }
+
+  /* Resto de la cola */
+  .casos__slide--stack {
+    z-index: 10;
+    transform: translateX(56px) scale(0.9);
+    opacity: 0.68;
+    filter: drop-shadow(0 4px 14px rgba(0, 0, 0, 0.08));
+  }
+
+  /* Salida al avanzar */
+  .casos__slide--exit {
+    z-index: 35;
+    transform: translateX(-100px) scale(0.9);
+    opacity: 0;
+    pointer-events: none;
+  }
+
+  /* Salida al retroceder */
+  .casos__slide--exit-prev {
+    z-index: 35;
+    transform: translateX(100px) scale(0.9);
+    opacity: 0;
+    pointer-events: none;
+  }
+
+  .casos__carousel--is-sliding .casos__stack--back,
+  .casos__carousel--is-sliding .casos__stack--mid {
+    transition: transform 0.55s cubic-bezier(0.33, 1, 0.68, 1), opacity 0.35s ease;
+  }
+
+  .casos__carousel--is-sliding .casos__stack--back {
+    transform: translateX(-50%) translateY(-2px) scale(1.01);
+    opacity: 0.92;
+  }
+
+  .casos__carousel--is-sliding .casos__stack--mid {
+    transform: translateX(-50%) translateY(-1px) scale(1.005);
+  }
+
+  .casos__card-inner {
+    position: relative;
+    display: grid;
+    grid-template-columns: 1fr;
+    background: var(--color-bg-base);
+    border-radius: 24px;
+    border: 2px solid rgba(61, 78, 252, 0.2);
+    box-shadow: 0 16px 48px rgba(40, 48, 148, 0.12);
+    overflow: visible;
+  }
+
+  .casos__float-avatar {
+    position: absolute;
+    z-index: 3;
+    border-radius: 50%;
+    object-fit: cover;
+    border: 3px solid #fff;
+    box-shadow: 0 6px 20px rgba(0, 0, 0, 0.12);
+    pointer-events: none;
+  }
+
+  .casos__float-avatar--top {
+    width: 56px;
+    height: 56px;
+    top: -12px;
+    right: 18%;
+    z-index: 4;
+  }
+
+  .casos__float-avatar--bottom {
+    width: 64px;
+    height: 64px;
+    bottom: 22%;
+    right: -8px;
+    box-shadow: 0 0 0 3px rgba(61, 78, 252, 0.35), 0 8px 24px rgba(0, 0, 0, 0.15);
+  }
+
+  .casos__card-media {
+    width: 100%;
+    overflow: hidden;
+    border-radius: 22px 22px 0 0;
+    padding: 16px;
+    box-sizing: border-box;
+  }
+
+  .casos__card-portrait {
+    display: block;
+    width: 100%;
+    height: auto;
+    min-height: 240px;
+    object-fit: cover;
+  }
+
+  .casos__card-content {
+    padding: 1.5rem 1.25rem 1.75rem;
+  }
+
+  .casos__card-logo {
+    display: block;
+    max-width: 120px;
+    max-height: 60px;
+    width: auto;
+    height: auto;
+    object-fit: contain;
+    margin-bottom: 1.25rem;
+  }
+
+  .casos__quote {
+    font-family: var(--font-family-base);
+    font-weight: var(--text-body-primary-weight);
+    font-size: var(--text-body-secondary-size);
+    line-height: 1.55;
+    color: var(--color-text-base);
+    margin: 0 0 1.25rem;
+  }
+
+  .casos__quote-mark {
+    color: rgba(61, 78, 252, 0.35);
+    font-weight: 600;
+  }
+
+  .casos__divider {
+    border: none;
+    border-top: 1px solid #e5e7eb;
+    margin: 0 0 1.1rem;
+  }
+
+  .casos__footer {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: flex-end;
+    justify-content: space-between;
+    gap: 1rem;
+  }
+
+  .casos__author {
+    display: flex;
+    flex-direction: column;
+    gap: 0.35rem;
+    max-width: 100%;
+    flex: 1;
+    min-width: 0;
+  }
+
+  .casos__author-name {
+    font-family: var(--font-family-base);
+    font-weight: var(--text-body-primary-highlight-weight);
+    font-size: var(--text-body-secondary-size);
+    color: var(--color-text-base);
+  }
+
+  .casos__author-role {
+    font-family: var(--font-family-base);
+    font-weight: var(--text-body-secondary-weight);
+    font-size: var(--text-micro-size);
+    line-height: 1.45;
+    color: #666666;
+  }
+
+  .casos__footer .btn-terciary {
+    flex-shrink: 0;
+  }
+
+  @media (max-width: 767px) {
+    .casos__footer {
+      flex-direction: column;
+      align-items: flex-start;
+      justify-content: flex-start;
+      gap: 0.75rem;
+    }
+
+    .casos__author {
+      flex: none;
+      width: 100%;
+      text-align: left;
+    }
+
+    .casos__footer .btn-terciary {
+      align-self: flex-start;
+    }
+  }
+
+  .casos__nav {
+    position: absolute;
+    top: 50%;
+    min-width: 48px;
+    min-height: 48px;
+    padding: 4px;
+    border: none;
+    border-radius: 8px;
+    background: transparent;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: color 0.2s ease;
+    z-index: 10;
+  }
+
+  .casos__nav:focus-visible {
+    outline: 2px solid var(--color-blue-primary);
+    outline-offset: 2px;
+  }
+
+  .casos__nav--prev {
+    left: 0;
+    transform: translate(-40%, -50%);
+  }
+
+  .casos__nav--next {
+    right: 0;
+    transform: translate(40%, -50%);
+  }
+
+  .casos__nav:hover .casos__nav-icon-mask {
+    background-color: var(--color-blue-secondary);
+  }
+
+  .casos__nav--prev:hover .casos__nav-icon {
+    transform: translateX(-3px);
+  }
+
+  .casos__nav--next:hover .casos__nav-icon {
+    transform: translateX(3px);
+  }
+
+  .casos__nav-icon {
+    display: inline-flex;
+    width: 48px;
+    height: 48px;
+    transition: transform 0.2s ease;
+  }
+
+  /* Mismo asset que btn-terciary: array-right-icon.svg coloreado con primario */
+  .casos__nav-icon-mask {
+    display: block;
+    width: 48px;
+    height: 48px;
+    background-color: var(--color-blue-primary);
+    -webkit-mask-image: url("/icons/transversal/array-right-icon.svg");
+    mask-image: url("/icons/transversal/array-right-icon.svg");
+    -webkit-mask-repeat: no-repeat;
+    mask-repeat: no-repeat;
+    -webkit-mask-position: center;
+    mask-position: center;
+    -webkit-mask-size: contain;
+    mask-size: contain;
+    transition: background-color 0.2s ease;
+  }
+
+  .casos__nav-icon-mask--flip {
+    transform: scaleX(-1);
+  }
+
+  @media (min-width: 768px) {
+    .casos {
+      padding: 4rem 0;
+    }
+
+    .casos__card-inner {
+      grid-template-columns: minmax(260px, 310px) 1fr;
+      align-items: stretch;
+      overflow: hidden;
+    }
+
+    .casos__card-media {
+      border-radius: 22px 0 0 22px;
+      min-height: 100%;
+    }
+
+    .casos__card-portrait {
+      width: 100%;
+      height: 100%;
+      min-height: 320px;
+      object-fit: cover;
+    }
+
+    .casos__card-content {
+      padding: 2rem 2rem 2rem 1.75rem;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+    }
+
+    .casos__float-avatar--top {
+      right: 12%;
+      top: -14px;
+    }
+
+    .casos__float-avatar--bottom {
+      bottom: 18%;
+      right: 12px;
+    }
+
+  }
+
+  @media (min-width: 1024px) {
+    .casos {
+      padding: 5rem 0;
+    }
+
+    .casos__title {
+      margin-bottom: 2.5rem;
+    }
+
+    .casos__quote {
+      font-size: var(--text-body-primary-size);
+    }
+  }
+
+  @media (min-width: 768px) and (max-width: 1023px) {
+    .casos__carousel {
+      max-width: 100%;
+      padding: 0 clamp(16px, 3vw, 36px);
+    }
+
+    .casos__card-inner {
+      grid-template-columns: minmax(200px, 260px) 1fr;
+    }
+
+    .casos__card-content {
+      padding: 1.5rem 1.25rem 1.5rem 1.25rem;
+    }
+
+    .casos__card-portrait {
+      min-height: 280px;
+    }
+
+    .casos__nav--prev {
+      transform: translate(-22%, -50%);
+    }
+
+    .casos__nav--next {
+      transform: translate(22%, -50%);
+    }
+  }
+
+  @media (max-width: 767px) {
+    .casos__nav--prev {
+      transform: translate(-15%, -50%);
+    }
+
+    .casos__nav--next {
+      transform: translate(15%, -50%);
+    }
+
+    .casos__float-avatar--bottom {
+      bottom: 14%;
+      right: 6px;
+    }
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .casos__viewport {
+      --casos-stack-duration: 0.01ms;
+    }
+
+    .casos__carousel--is-sliding .casos__stack--back,
+    .casos__carousel--is-sliding .casos__stack--mid {
+      transition: none;
+    }
+  }
+
+  /* Modal video testimonio (YouTube) */
+  .casos-video-modal {
+    position: fixed;
+    inset: 0;
+    z-index: 10000;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 1rem;
+    box-sizing: border-box;
+  }
+
+  .casos-video-modal[hidden] {
+    display: none !important;
+  }
+
+  .casos-video-modal__backdrop {
+    position: absolute;
+    inset: 0;
+    background: rgba(15, 23, 42, 0.65);
+    cursor: pointer;
+  }
+
+  .casos-video-modal__panel {
+    position: relative;
+    z-index: 1;
+    width: min(960px, 100%);
+    max-width: 100%;
+    max-height: min(90vh, 100%);
+  }
+
+  .casos-video-modal__close {
+    position: absolute;
+    top: -0.25rem;
+    right: -0.25rem;
+    z-index: 2;
+    width: 44px;
+    height: 44px;
+    border: none;
+    border-radius: 50%;
+    background: var(--color-white);
+    color: var(--color-text-base);
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    box-shadow: 0 4px 16px rgba(0, 0, 0, 0.15);
+    transition: background-color 0.2s ease, transform 0.2s ease;
+  }
+
+  .casos-video-modal__close:hover {
+    background: #f3f4f6;
+  }
+
+  .casos-video-modal__close:focus-visible {
+    outline: 2px solid var(--color-blue-primary);
+    outline-offset: 2px;
+  }
+
+  .casos-video-modal__close-x {
+    font-size: 1.75rem;
+    line-height: 1;
+    font-weight: 300;
+  }
+
+  .casos-video-modal__embed-wrap {
+    position: relative;
+    width: 100%;
+    aspect-ratio: 16 / 9;
+    background: #000;
+    border-radius: 12px;
+    overflow: hidden;
+    box-shadow: 0 24px 48px rgba(0, 0, 0, 0.25);
+  }
+
+  .casos-video-modal__iframe {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    border: 0;
+  }
+</style>

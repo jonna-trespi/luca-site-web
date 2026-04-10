@@ -1,0 +1,212 @@
+---
+/**
+ * Docentes: grid de beneficios (¿Cómo ayuda Luca?) con fondo #EDF5FF y geos 3 / 4.
+ * GIFs: public/gif/perfiles/docentes/*.gif
+ */
+const baseImg = '/images/perfiles/docentes';
+const baseGif = '/gif/perfiles/docentes';
+
+const gifFiles = [
+  'gestion-academica-digital-para-docentes-herramientas-de-inteligencia-artificial.gif',
+  'gestion-academica-digital-para-docentes-generacion-de-examenes.gif',
+  'gestion-academica-digital-para-docentes-generador-de-proyectos.gif',
+  'gestion-academica-digital-para-docentes-orientaciones-didacticas-completas.gif',
+  'gestion-academica-digital-para-docentes-recursos-digitales.gif',
+  'gestion-academica-digital-para-docentes-ahorro-de-tiempo.gif',
+] as const;
+
+const itemTexts = [
+  'Herramientas de Inteligencia Artificial',
+  'Generador de exámenes',
+  'Generador de proyectos',
+  'Orientaciones didácticas completas',
+  'Recursos digitales listos para usar',
+  'Ahorro de hasta 80% del tiempo',
+] as const;
+
+const items = gifFiles.map((file, i) => ({
+  text: itemTexts[i],
+  gif: `${baseGif}/${file}`,
+}));
+---
+
+<section
+  class="perfil-docentes-ayuda-luca"
+  aria-labelledby="perfil-docentes-ayuda-luca-title"
+>
+  <div class="perfil-docentes-ayuda-luca__geo-tl" aria-hidden="true">
+    <img
+      src={`${baseImg}/geo-3.png`}
+      alt=""
+      width="130"
+      height="130"
+      loading="lazy"
+      decoding="async"
+      class="perfil-docentes-ayuda-luca__geo-tl-img"
+    />
+  </div>
+  <div class="perfil-docentes-ayuda-luca__geo-br" aria-hidden="true">
+    <img
+      src={`${baseImg}/geo-4.png`}
+      alt=""
+      width="300"
+      height="280"
+      loading="lazy"
+      decoding="async"
+      class="perfil-docentes-ayuda-luca__geo-br-img"
+    />
+  </div>
+
+  <div class="perfil-docentes-ayuda-luca__inner layout-container">
+    <h3 id="perfil-docentes-ayuda-luca-title" class="text-h3 perfil-docentes-ayuda-luca__title">
+      ¿Cómo ayuda Luca a los docentes?
+    </h3>
+
+    <ul class="perfil-docentes-ayuda-luca__grid">
+      {items.map((item) => (
+        <li class="perfil-docentes-ayuda-luca__card">
+          <div class="perfil-docentes-ayuda-luca__icon-wrap">
+            <img
+              class="perfil-docentes-ayuda-luca__icon"
+              src={item.gif}
+              alt=""
+              width="56"
+              height="56"
+              loading="lazy"
+              decoding="async"
+            />
+          </div>
+          <p class="text-subtitle-1 perfil-docentes-ayuda-luca__text">{item.text}</p>
+        </li>
+      ))}
+    </ul>
+  </div>
+</section>
+
+<style>
+  .perfil-docentes-ayuda-luca {
+    position: relative;
+    width: 100%;
+    background-color: #edf5ff;
+    padding: 85px;
+    overflow: hidden;
+    box-sizing: border-box;
+  }
+
+  .perfil-docentes-ayuda-luca__geo-tl {
+    position: absolute;
+    left: 0;
+    top: 0;
+    z-index: 0;
+    width: 130px;
+    max-width: 26vw;
+    pointer-events: none;
+    user-select: none;
+    transform: translate(-5%, -8%);
+  }
+
+  .perfil-docentes-ayuda-luca__geo-tl-img {
+    display: block;
+    width: 130px;
+    max-width: 100%;
+    height: auto;
+  }
+
+  .perfil-docentes-ayuda-luca__geo-br {
+    position: absolute;
+    right: 0;
+    bottom: 0;
+    z-index: 0;
+    width: 100%;
+    max-width: 300px;
+    pointer-events: none;
+    user-select: none;
+    line-height: 0;
+  }
+
+  .perfil-docentes-ayuda-luca__geo-br-img {
+    display: block;
+    width: 100%;
+    max-width: 300px;
+    height: auto;
+    margin-left: auto;
+    object-fit: contain;
+    object-position: right bottom;
+  }
+
+  .perfil-docentes-ayuda-luca__inner {
+    position: relative;
+    z-index: 1;
+  }
+
+  .perfil-docentes-ayuda-luca__title {
+    margin: 0 auto 65px;
+    max-width: 650px;
+    text-align: center;
+    color: var(--color-black);
+  }
+
+  .perfil-docentes-ayuda-luca__grid {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 1.25rem;
+  }
+
+  .perfil-docentes-ayuda-luca__card {
+    margin: 0;
+    background-color: var(--color-white);
+    border-radius: 24px;
+    padding: 48px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    box-sizing: border-box;
+  }
+
+  .perfil-docentes-ayuda-luca__icon-wrap {
+    width: 70px;
+    height: 70px;
+    flex-shrink: 0;
+    border-radius: 18px;
+    background-color: var(--color-red);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    overflow: hidden;
+    margin-bottom: 1.25rem;
+  }
+
+  .perfil-docentes-ayuda-luca__icon {
+    width: 48px;
+    height: 48px;
+    max-width: 100%;
+    max-height: 100%;
+    object-fit: contain;
+    display: block;
+  }
+
+  .perfil-docentes-ayuda-luca__text {
+    margin: 0;
+    color: var(--color-text-base);
+    max-width: 22rem;
+  }
+
+  @media (min-width: 640px) {
+    .perfil-docentes-ayuda-luca__grid {
+      grid-template-columns: repeat(2, 1fr);
+      gap: 1.5rem;
+    }
+  }
+
+  @media (min-width: 1024px) {
+    .perfil-docentes-ayuda-luca__grid {
+      grid-template-columns: repeat(3, 1fr);
+      gap: 1.75rem;
+    }
+  }
+
+</style>

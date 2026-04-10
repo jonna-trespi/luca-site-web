@@ -1,0 +1,319 @@
+---
+/**
+ * Somos Luca — Staff educativo: carrusel horizontal con tarjetas (hover: -10°, fondo y descripción).
+ */
+const team = [
+  {
+    image: '/images/somosLuca/equipo-1.webp',
+    alt: 'Diana Navarro',
+    role: 'Coordinadora de Ciencias',
+    name: 'Diana Navarro',
+    description:
+      'Trabaja para fomentar en los estudiantes habilidades científicas de observación, análisis, investigación y pensamiento crítico.',
+    hoverBg: '#FFF8E7',
+  },
+  {
+    image: '/images/somosLuca/equipo-2.webp',
+    alt: 'Lilia Villanueva',
+    role: 'Coordinadora de Lenguaje y Ciencias Sociales',
+    name: 'Lilia Villanueva',
+    description:
+      'Impulsa la comunicación, la lectura y la comprensión del entorno social con una mirada humanista y rigurosa.',
+    hoverBg: '#E8F0FF',
+  },
+  {
+    image: '/images/somosLuca/equipo-3.webp',
+    alt: 'Carlos Becerril',
+    role: 'Director Académico',
+    name: 'Carlos Becerril',
+    description:
+      'Lidera la visión pedagógica y la calidad académica para que cada programa cumpla con excelencia.',
+    hoverBg: '#E4F7F4',
+  },
+  {
+    image: '/images/somosLuca/equipo-4.webp',
+    alt: 'José Nava',
+    role: 'Coordinador de Inglés',
+    name: 'José Nava',
+    description:
+      'Fortalece el aprendizaje del idioma con rutas claras, práctica constante y estándares internacionales.',
+    hoverBg: '#FFE8EF',
+  },
+  {
+    image: '/images/somosLuca/equipo-5.webp',
+    alt: 'Azucena Elisa Tovar',
+    role: 'Coordinadora de Contenidos',
+    name: 'Azucena Elisa Tovar',
+    description:
+      'Asegura que los materiales y recursos digitales estén alineados al currículo y a la experiencia en aula.',
+    hoverBg: '#F0E8FF',
+  },
+];
+---
+
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link
+  href="https://fonts.googleapis.com/css2?family=Inter:wght@700&display=swap"
+  rel="stylesheet"
+/>
+
+<section class="somos-luca-equipo" aria-labelledby="somos-luca-equipo-heading">
+  <img
+    class="somos-luca-equipo__deco"
+    src="/images/somosLuca/geo-7.png"
+    alt=""
+    width="320"
+    height="320"
+    loading="lazy"
+    decoding="async"
+    aria-hidden="true"
+  />
+  <div class="somos-luca-equipo__inner layout-container">
+    <header class="somos-luca-equipo__header">
+      <p class="programas__label">
+        <span class="programas__label-dot" aria-hidden="true"></span>
+        Nuestro staff educativo
+      </p>
+      <h3 id="somos-luca-equipo-heading" class="text-h3 somos-luca-equipo__title">
+        Conoce al equipo que hace posible nuestra misión<span class="somos-luca-equipo__title-dot">.</span>
+      </h3>
+    </header>
+
+    <div class="somos-luca-equipo__carousel-wrap">
+      <ul class="somos-luca-equipo__track" role="list" aria-label="Miembros del equipo educativo">
+        {
+          team.map((member) => (
+            <li
+              class="somos-luca-equipo__card"
+              style={`--equipo-hover-bg: ${member.hoverBg}`}
+              tabindex="0"
+            >
+              <div class="somos-luca-equipo__card-inner">
+                <img
+                  class="somos-luca-equipo__photo"
+                  src={member.image}
+                  alt={member.alt}
+                  width="400"
+                  height="480"
+                  loading="lazy"
+                  decoding="async"
+                />
+                <p class="somos-luca-equipo__role">{member.role}</p>
+                <p class="somos-luca-equipo__name">{member.name}</p>
+                <p class="somos-luca-equipo__desc">{member.description}</p>
+              </div>
+            </li>
+          ))
+        }
+      </ul>
+    </div>
+  </div>
+</section>
+
+<style>
+  .somos-luca-equipo {
+    position: relative;
+    width: 100%;
+    padding: clamp(2.5rem, 5vw, 4rem) 0 clamp(2rem, 4vw, 3rem);
+    background-color: var(--color-white);
+    box-sizing: border-box;
+    overflow: hidden;
+  }
+
+  .somos-luca-equipo__deco {
+    position: absolute;
+    right: 0;
+    bottom: 10%;
+    max-width: min(280px, 42vw);
+    width: 100%;
+    height: auto;
+    object-fit: contain;
+    pointer-events: none;
+    user-select: none;
+    z-index: 0;
+    opacity: 0.85;
+  }
+
+  .somos-luca-equipo__inner {
+    position: relative;
+    z-index: 1;
+  }
+
+  .somos-luca-equipo__header {
+    text-align: center;
+    margin-bottom: clamp(1.75rem, 3vw, 2.5rem);
+  }
+
+  .somos-luca-equipo__header .programas__label {
+    justify-content: center;
+    margin-bottom: 1rem;
+  }
+
+  .somos-luca-equipo__title {
+    margin: 0 auto;
+    max-width: 720px;
+    color: var(--color-text-base);
+  }
+
+  .somos-luca-equipo__title-dot {
+    color: var(--color-red);
+  }
+
+  .somos-luca-equipo__carousel-wrap {
+    margin-left: calc(-1 * var(--layout-padding-x, 20px));
+    margin-right: calc(-1 * var(--layout-padding-x, 20px));
+    padding-left: var(--layout-padding-x, 20px);
+    padding-right: var(--layout-padding-x, 20px);
+    overflow-x: auto;
+    overflow-y: visible;
+    -webkit-overflow-scrolling: touch;
+    scroll-snap-type: x mandatory;
+    scrollbar-width: thin;
+    padding-bottom: 1.5rem;
+  }
+
+  .somos-luca-equipo__track {
+    list-style: none;
+    margin: 0;
+    padding: 0.5rem 0 1rem;
+    display: flex;
+    flex-direction: row;
+    align-items: stretch;
+    gap: clamp(1rem, 2.5vw, 1.5rem);
+    width: max-content;
+    min-width: 100%;
+    justify-content: flex-start;
+  }
+
+  .somos-luca-equipo__card {
+    flex: 0 0 auto;
+    width: min(260px, 82vw);
+    scroll-snap-align: center;
+    outline: none;
+    display: flex;
+    flex-direction: column;
+    align-self: stretch;
+  }
+
+  .somos-luca-equipo__card-inner {
+    flex: 1 1 auto;
+    display: flex;
+    flex-direction: column;
+    min-height: 0;
+    padding: 16px;
+    background-color: #ffffff;
+    border-radius: 20px;
+    box-shadow: 0 8px 28px rgba(0, 0, 0, 0.08);
+    box-sizing: border-box;
+    transition:
+      transform 0.4s cubic-bezier(0.34, 1.2, 0.52, 1),
+      background-color 0.35s ease,
+      box-shadow 0.35s ease;
+    transform-origin: center center;
+  }
+
+  .somos-luca-equipo__card:hover .somos-luca-equipo__card-inner,
+  .somos-luca-equipo__card:focus-within .somos-luca-equipo__card-inner {
+    transform: rotate(-10deg);
+    background-color: var(--equipo-hover-bg, #fff8e7);
+    box-shadow: 0 16px 40px rgba(40, 48, 148, 0.14);
+  }
+
+  .somos-luca-equipo__photo {
+    display: block;
+    width: 100%;
+    height: auto;
+    aspect-ratio: 4 / 5;
+    object-fit: cover;
+    object-position: center top;
+    border-radius: 14px;
+    margin-bottom: 0.75rem;
+  }
+
+  .somos-luca-equipo__role {
+    margin: 0;
+    font-size: 13px;
+    line-height: 1.35;
+    color: #7d7d7d;
+    text-align: center;
+  }
+
+  .somos-luca-equipo__name {
+    margin: 0.35rem 0 0;
+    font-family: 'Inter', var(--font-family-base);
+    font-size: 23px;
+    font-weight: 700;
+    line-height: 1.2;
+    color: #000000;
+    text-align: center;
+  }
+
+  .somos-luca-equipo__desc {
+    margin: 0;
+    font-size: 13px;
+    line-height: 1.45;
+    color: #000000;
+    text-align: center;
+    max-height: 0;
+    opacity: 0;
+    overflow: hidden;
+    transition:
+      max-height 0.45s ease,
+      opacity 0.35s ease,
+      margin-top 0.35s ease;
+  }
+
+  .somos-luca-equipo__card:hover .somos-luca-equipo__desc,
+  .somos-luca-equipo__card:focus-within .somos-luca-equipo__desc {
+    max-height: 7rem;
+    opacity: 1;
+    margin-top: 0.75rem;
+  }
+
+  .somos-luca-equipo__card:focus-visible .somos-luca-equipo__card-inner {
+    box-shadow: 0 0 0 3px rgba(56, 67, 208, 0.45), 0 8px 28px rgba(0, 0, 0, 0.08);
+  }
+
+  @media (max-width: 767px) {
+    .somos-luca-equipo__desc {
+      max-height: none;
+      opacity: 1;
+      margin-top: 0.75rem;
+      overflow: visible;
+      transition: none;
+    }
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .somos-luca-equipo__card-inner {
+      transition: background-color 0.2s ease, box-shadow 0.2s ease;
+    }
+
+    .somos-luca-equipo__card:hover .somos-luca-equipo__card-inner,
+    .somos-luca-equipo__card:focus-within .somos-luca-equipo__card-inner {
+      transform: none;
+    }
+
+    .somos-luca-equipo__desc {
+      transition: none;
+      max-height: none;
+      opacity: 1;
+      margin-top: 0.75rem;
+    }
+  }
+
+  @media (min-width: 1024px) {
+    .somos-luca-equipo__track {
+      justify-content: center;
+      flex-wrap: nowrap;
+      width: 100%;
+      min-width: unset;
+    }
+
+    .somos-luca-equipo__carousel-wrap {
+      overflow-x: visible;
+      scroll-snap-type: none;
+    }
+  }
+</style>

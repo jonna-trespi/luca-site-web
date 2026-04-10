@@ -1,0 +1,102 @@
+---
+/**
+ * Layout principal: metadatos SEO básicos (description, canonical, Open Graph, Twitter).
+ */
+import '../styles/global.css';
+import { SITE_NAME, DEFAULT_DESCRIPTION, DEFAULT_OG_IMAGE_PATH } from '../config/seo';
+
+interface Props {
+  title?: string;
+  description?: string;
+  /** Ruta canónica (ej. /blog). Por defecto: pathname actual. */
+  canonicalPath?: string;
+  /** Ruta absoluta en el sitio para og:image (ej. /images/...). */
+  image?: string;
+  /** Ej. "noindex, nofollow" para páginas internas o borradores. */
+  robots?: string;
+}
+
+const {
+  title = SITE_NAME,
+  description = DEFAULT_DESCRIPTION,
+  canonicalPath,
+  image = DEFAULT_OG_IMAGE_PATH,
+  robots = 'index, follow',
+} = Astro.props;
+
+const canonicalURL = Astro.site
+  ? new URL(canonicalPath ?? Astro.url.pathname, Astro.site)
+  : null;
+if (canonicalURL) {
+  canonicalURL.search = '';
+  canonicalURL.hash = '';
+}
+
+const ogImageUrl =
+  image?.startsWith('http://') || image?.startsWith('https://')
+    ? image
+    : Astro.site && image
+      ? new URL(image.startsWith('/') ? image : `/${image}`, Astro.site).href
+      : null;
+---
+
+<!DOCTYPE html>
+<html lang="es-MX">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="description" content={description} />
+    <meta name="robots" content={robots} />
+    <meta name="generator" content={Astro.generator} />
+    {canonicalURL && <link rel="canonical" href={canonicalURL.href} />}
+
+    <meta property="og:type" content="website" />
+    <meta property="og:site_name" content={SITE_NAME} />
+    <meta property="og:title" content={title} />
+    <meta property="og:description" content={description} />
+    <meta property="og:locale" content="es_MX" />
+    {canonicalURL && <meta property="og:url" content={canonicalURL.href} />}
+    {ogImageUrl && <meta property="og:image" content={ogImageUrl} />}
+
+    <meta name="twitter:card" content={ogImageUrl ? 'summary_large_image' : 'summary'} />
+    <meta name="twitter:title" content={title} />
+    <meta name="twitter:description" content={description} />
+    {ogImageUrl && <meta name="twitter:image" content={ogImageUrl} />}
+
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <title>{title}</title>
+  </head>
+  <body>
+    <div class="custom-cursor" id="custom-cursor" aria-hidden="true" hidden></div>
+    <slot />
+    <script is:inline>
+      (function () {
+        const el = document.getElementById('custom-cursor');
+        if (!el) return;
+        const reduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+        const touch = window.matchMedia('(hover: none), (pointer: coarse)').matches;
+        if (reduced || touch) return;
+        el.removeAttribute('hidden');
+        document.documentElement.classList.add('custom-cursor--active');
+
+        const interactive =
+          'a[href], button, input, textarea, select, [role="button"], [tabindex]:not([tabindex="-1"]), label[for]';
+
+        const onMove = function (e) {
+          el.style.left = e.clientX + 'px';
+          el.style.top = e.clientY + 'px';
+        };
+
+        const onOver = function (e) {
+          const t = e.target;
+          if (!(t instanceof Element)) return;
+          const hit = t.closest(interactive);
+          el.classList.toggle('custom-cursor--hover', Boolean(hit));
+        };
+
+        document.addEventListener('mousemove', onMove, { passive: true });
+        document.addEventListener('mouseover', onOver, { passive: true });
+      })();
+    </script>
+  </body>
+</html>

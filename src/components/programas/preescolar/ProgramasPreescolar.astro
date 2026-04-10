@@ -1,0 +1,481 @@
+---
+/**
+ * Programas (Preescolar): 3 áreas — Inglés, Matemáticas Internacionales, Lectoescritura.
+ * Imágenes de libro: sustituir en /public cuando haya arte por materia.
+ */
+const DEFAULT_TAB = 'ingles';
+
+const tabPanels = [
+  {
+    id: 'ingles',
+    label: 'Inglés',
+    book: {
+      src: '/images/programas/preescolar/book-1.webp',
+      alt: 'Libro de inglés — programa Preescolar Luca',
+      width: 794,
+      height: 736,
+    },
+    paragraphsHtml: [
+      'En Luca, el <strong class="text-body-primary text-body-primary--highlight">Inglés</strong> despierta la familiaridad y confianza con el idioma desde los primeros años.',
+      'A través del juego y una exposición natural alineada a <strong class="text-body-primary text-body-primary--highlight">CEFR Pre-A1</strong>, impulsa el reconocimiento auditivo y la adquisición de vocabulario de forma estimulante.',
+    ],
+  },
+  {
+    id: 'matematicasInternacionales',
+    label: 'Matemáticas Internacionales',
+    book: {
+      src: '/images/programas/preescolar/book-1.webp',
+      alt: 'Matemáticas 1 — Preescolar, método Singapur — NOVA Luca',
+      width: 892,
+      height: 822,
+    },
+    paragraphsHtml: [
+      'Las <strong class="text-body-primary text-body-primary--highlight">Matemáticas Internacionales</strong> en Luca hacen del aprendizaje una experiencia activa y tangible desde los primeros años.',
+      'La <strong class="text-body-primary text-body-primary--highlight">metodología Singapur</strong> integra libros y recursos manipulativos como dados, cubos, fichas contadoras, rekenrek, reloj y flashcards, para fortalecer la comprensión matemática.',
+    ],
+  },
+  {
+    id: 'lectoescritura',
+    label: 'Lectoescritura',
+    book: {
+      src: '/images/programas/preescolar/book-1.webp',
+      alt: 'Libro de lectoescritura — programa Preescolar Luca',
+      width: 904,
+      height: 806,
+    },
+    paragraphsHtml: [
+      'La <strong class="text-body-primary text-body-primary--highlight">Lectoescritura</strong> en Luca construye bases sólidas para leer, escribir y expresarse con confianza desde el inicio del proceso educativo.',
+      'Integra la <strong class="text-body-primary text-body-primary--highlight">Ciencia de la Lectura (SoR) y la NEM</strong>, con práctica fonética, reconocimiento de conceptos desde el modelo global, desarrollo socioemocional y dominio del trazo.',
+    ],
+  },
+];
+---
+
+<section class="programas-preescolar" data-programas-preescolar>
+  <div class="programas-preescolar__inner layout-container">
+    <header class="programas-preescolar__header">
+      <p class="programas__label">
+        <span class="programas__label-dot" aria-hidden="true"></span>
+        Programas de <strong class="programas-preescolar__label-age">3 a 5 años</strong>
+      </p>
+      <h3 class="programas-preescolar__title text-h3">
+        Innovación educativa para Preescolar<span class="programas-preescolar__title-dot">.</span>
+      </h3>
+      <p class="programas-preescolar__intro text-subtitle-2">
+        Todo lo que necesitas para hacer del <strong class="programas-preescolar__intro-strong">aprendizaje algo extraordinario</strong>, cubriendo todos los campos formativos.
+      </p>
+    </header>
+
+    <div class="programas-preescolar__tabs-wrap">
+      <nav class="programas-preescolar__tabs" role="tablist" aria-label="Áreas del programa de Preescolar">
+        {tabPanels.map((panel) => (
+          <button
+            type="button"
+            role="tab"
+            id={`programas-tab-${panel.id}`}
+            class={`btn-base btn-cta-animated programas-preescolar__tab ${panel.id === DEFAULT_TAB ? 'btn-primary programas-preescolar__tab--active' : ''}`}
+            data-tab={panel.id}
+            aria-selected={panel.id === DEFAULT_TAB}
+            aria-controls={`programas-panel-${panel.id}`}
+            tabindex={panel.id === DEFAULT_TAB ? 0 : -1}
+          >
+            <span>{panel.label}</span>
+          </button>
+        ))}
+      </nav>
+    </div>
+
+    <div class="programas-preescolar__panels">
+      {tabPanels.map((panel) => (
+        <div
+          class="programas-preescolar__cards programas-preescolar__panel"
+          id={`programas-panel-${panel.id}`}
+          data-panel={panel.id}
+          role="tabpanel"
+          aria-labelledby={`programas-tab-${panel.id}`}
+          hidden={panel.id !== DEFAULT_TAB}
+        >
+          <div class="programas-preescolar__card programas-preescolar__card--showcase">
+            <img
+              class="programas-preescolar__card-geo"
+              src="/images/programas/preescolar/geo-4.png"
+              alt=""
+              width="510"
+              height="456"
+              loading="lazy"
+              decoding="async"
+              aria-hidden="true"
+            />
+            <img
+              class="programas-preescolar__card-books"
+              src={panel.book.src}
+              alt={panel.book.alt}
+              width={panel.book.width}
+              height={panel.book.height}
+              loading={panel.id === DEFAULT_TAB ? 'eager' : 'lazy'}
+              decoding="async"
+            />
+            <img
+              class="programas-preescolar__card-mascot"
+              src="/images/programas/preescolar/bot-programas.png"
+              alt="Luca, asistente educativo"
+              width="410"
+              height="410"
+              loading="lazy"
+              decoding="async"
+            />
+          </div>
+          <div class="programas-preescolar__card programas-preescolar__card--materials">
+            {panel.paragraphsHtml.map((html) => (
+              <p class="text-body-primary programas-preescolar__card-text" set:html={html} />
+            ))}
+          </div>
+        </div>
+      ))}
+    </div>
+  </div>
+</section>
+
+<script is:inline>
+  (function () {
+    function activateTab(/** @type {HTMLElement} */ root, /** @type {string} */ tabId) {
+      root.querySelectorAll('[data-tab]').forEach((/** @type {Element} */ btn) => {
+        const el = /** @type {HTMLElement} */ (btn);
+        const isOn = el.dataset.tab === tabId;
+        el.classList.toggle('btn-primary', isOn);
+        el.classList.toggle('programas-preescolar__tab--active', isOn);
+        el.setAttribute('aria-selected', String(isOn));
+        el.tabIndex = isOn ? 0 : -1;
+      });
+
+      root.querySelectorAll('[data-panel]').forEach((/** @type {Element} */ panel) => {
+        const el = /** @type {HTMLElement} */ (panel);
+        const isOn = el.dataset.panel === tabId;
+        el.hidden = !isOn;
+      });
+    }
+
+    function init() {
+      const root = document.querySelector('[data-programas-preescolar]');
+      if (!(root instanceof HTMLElement)) return;
+      if (root.dataset.programasTabsBound === 'true') return;
+      root.dataset.programasTabsBound = 'true';
+
+      root.addEventListener('click', (e) => {
+        const t = e.target;
+        if (!(t instanceof Element)) return;
+        const btn = t.closest('[data-tab]');
+        if (!(btn instanceof HTMLElement) || !root.contains(btn)) return;
+        const id = btn.dataset.tab;
+        if (!id) return;
+        activateTab(root, id);
+      });
+    }
+
+    if (document.readyState === 'loading') {
+      document.addEventListener('DOMContentLoaded', init);
+    } else {
+      init();
+    }
+
+    document.addEventListener('astro:page-load', init);
+  })();
+</script>
+
+<style>
+  .programas-preescolar {
+    width: 100%;
+    background-color: var(--color-bg-base);
+    padding: 1.75rem 0 2rem;
+    overflow-x: clip;
+    box-sizing: border-box;
+  }
+
+  .programas-preescolar__inner {
+    width: 100%;
+    max-width: var(--layout-max-width);
+    margin-left: auto;
+    margin-right: auto;
+    padding-left: var(--layout-padding-x);
+    padding-right: var(--layout-padding-x);
+  }
+
+  .programas-preescolar__header {
+    margin-bottom: 0;
+    text-align: left;
+  }
+
+  /* global .programas__label: centrado; aquí alineado a la izquierda; 26px hasta el h3 */
+  .programas-preescolar__header .programas__label {
+    justify-content: flex-start;
+    margin-bottom: clamp(1rem, 3vw, 26px);
+  }
+
+  .programas-preescolar__label-age {
+    font-weight: var(--text-body-primary-highlight-weight, 600);
+  }
+
+  /* .text-h3 (global.css): 26px desde label, 36px hasta el subtítulo */
+  .programas-preescolar__title {
+    max-width: 550px;
+    margin: 0 0 clamp(1.25rem, 4vw, 36px);
+    color: var(--color-text-base);
+  }
+
+  .programas-preescolar__title-dot {
+    color: var(--color-red);
+  }
+
+  /* .text-subtitle-2 (global.css): 64px hasta las tabs */
+  .programas-preescolar__intro {
+    max-width: 550px;
+    margin: 0 0 clamp(2rem, 6vw, 64px);
+    color: var(--color-text-base);
+  }
+
+  .programas-preescolar__intro-strong {
+    font-weight: 700;
+  }
+
+  .programas-preescolar__tabs-wrap {
+    margin-bottom: 1.5rem;
+    overflow-x: auto;
+    -webkit-overflow-scrolling: touch;
+    padding-bottom: 0.5rem;
+    display: flex;
+    justify-content: center;
+  }
+
+  .programas-preescolar__tabs {
+    display: flex;
+    flex-wrap: nowrap;
+    gap: 11px;
+    min-width: min-content;
+    justify-content: center;
+  }
+
+  /*
+   * Mismo comportamiento que HeroPreescolar CTA: .btn-base.btn-primary.btn-cta-animated
+   * (gradiente barrido, sombra, lift, capas líquidas). Tab activa = primario; inactiva = #D2E6FF
+   * y en hover replica .btn-base.btn-primary:hover (global.css).
+   */
+  .programas-preescolar__tab.btn-base {
+    padding: clamp(12px, 2.5vw, 18px) clamp(14px, 3vw, 25px);
+    border-radius: 10px;
+    font-weight: var(--text-body-primary-weight);
+    font-size: var(--text-body-primary-size);
+    letter-spacing: var(--text-body-primary-spacing);
+    line-height: var(--text-body-primary-line);
+    white-space: nowrap;
+    border: 2px solid transparent;
+    gap: 0.5rem;
+  }
+
+  .programas-preescolar__tab.btn-base:not(.btn-primary) {
+    background-color: #d2e6ff;
+    color: var(--color-black);
+    background-image: none;
+  }
+
+  .programas-preescolar__tab.btn-base:not(.btn-primary):hover {
+    background-image: linear-gradient(to right, var(--color-blue-primary) 50%, var(--color-blue-secondary) 50%);
+    background-size: 200% 100%;
+    background-position: right bottom;
+    color: #ffffff;
+    box-shadow: 0 4px 12px rgba(40, 48, 148, 0.25);
+  }
+
+  .programas-preescolar__panels {
+    width: 100%;
+  }
+
+  /*
+   * El UA pone [hidden]{display:none}, pero .programas-preescolar__cards gana en especificidad
+   * y los paneles se apilan; solo uno visible a la vez.
+   */
+  .programas-preescolar__panel[hidden] {
+    display: none !important;
+  }
+
+  .programas-preescolar__cards {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 24px;
+    width: 100%;
+    max-width: 1100px;
+    margin-left: auto;
+    margin-right: auto;
+  }
+
+  .programas-preescolar__card {
+    border-radius: 24px;
+    padding: 1.5rem;
+    min-height: 200px;
+  }
+
+  .programas-preescolar__card--showcase {
+    position: relative;
+    background-color: #ebfaf8;
+    /* Mascota puede asomarse; la sección usa overflow-x: clip contra márgenes */
+    overflow: visible;
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+    min-height: 220px;
+  }
+
+  /* Decoración: esquina inferior derecha, como extensión del fondo */
+  .programas-preescolar__card-geo {
+    position: absolute;
+    right: 0;
+    bottom: 0;
+    max-width: 250px;
+    width: min(250px, 58vw);
+    height: auto;
+    display: block;
+    pointer-events: none;
+    user-select: none;
+    z-index: 0;
+  }
+
+  /* Imagen principal del libro (flujo a la izquierda, sobre el geo si solapa) */
+  .programas-preescolar__card-books {
+    position: relative;
+    z-index: 1;
+    width: 100%;
+    max-width: 220px;
+    height: auto;
+    display: block;
+    border-radius: 12px;
+    object-fit: contain;
+  }
+
+  /* Avatar: esquina inferior derecha, encima del geo; pies ligeramente fuera del card */
+  .programas-preescolar__card-mascot {
+    position: absolute;
+    right: max(-4%, -1rem);
+    bottom: max(-10%, -1.5rem);
+    max-width: 168px;
+    width: min(168px, 44vw);
+    height: auto;
+    display: block;
+    object-fit: contain;
+    z-index: 2;
+    pointer-events: none;
+  }
+
+  .programas-preescolar__card--materials {
+    max-width: 430px;
+    width: 100%;
+    background-color: #f2f4f6;
+  }
+
+  .programas-preescolar__card-text {
+    margin: 0;
+    color: var(--color-text-base);
+    text-align: left;
+  }
+
+  .programas-preescolar__card-text + .programas-preescolar__card-text {
+    margin-top: 1.25rem;
+  }
+
+  @media (max-width: 767px) {
+    .programas-preescolar__tabs-wrap {
+      overflow-x: visible;
+      padding-bottom: 0;
+      justify-content: stretch;
+      width: 100%;
+    }
+
+    .programas-preescolar__tabs {
+      flex-direction: column;
+      flex-wrap: nowrap;
+      align-items: stretch;
+      justify-content: flex-start;
+      width: 100%;
+      max-width: 100%;
+      min-width: 0;
+      gap: 10px;
+    }
+
+    .programas-preescolar__tab.btn-base {
+      width: 100%;
+      max-width: 100%;
+      white-space: normal;
+      text-align: center;
+      justify-content: center;
+    }
+  }
+
+  @media (min-width: 768px) {
+    .programas-preescolar {
+      padding: 2.5rem 0 2.75rem;
+    }
+
+    .programas-preescolar__tabs-wrap {
+      overflow-x: visible;
+      margin-bottom: 1.75rem;
+    }
+
+    .programas-preescolar__tabs {
+      flex-direction: row;
+      flex-wrap: wrap;
+      justify-content: flex-start;
+    }
+
+    .programas-preescolar__card {
+      padding: 1.75rem;
+      min-height: 220px;
+    }
+
+    .programas-preescolar__card--showcase {
+      min-height: 248px;
+    }
+
+    .programas-preescolar__card-mascot {
+      right: -5%;
+      bottom: -12%;
+    }
+  }
+
+  /* Dos columnas solo con ancho suficiente (evita compresión en tablet estrecha) */
+  @media (min-width: 900px) {
+    .programas-preescolar__cards {
+      grid-template-columns: minmax(0, 1fr) minmax(0, 430px);
+      gap: clamp(1rem, 2vw, 24px);
+    }
+
+    .programas-preescolar__card {
+      padding: 2rem;
+      min-height: 240px;
+    }
+
+    .programas-preescolar__card--showcase {
+      min-height: 260px;
+    }
+
+    .programas-preescolar__card-books {
+      max-width: 260px;
+    }
+
+    .programas-preescolar__card-mascot {
+      max-width: 200px;
+      width: min(200px, 36vw);
+    }
+  }
+
+  @media (min-width: 1024px) {
+    .programas-preescolar {
+      padding: 4rem 0;
+    }
+
+    .programas-preescolar__tabs-wrap {
+      margin-bottom: 2rem;
+    }
+
+    .programas-preescolar__tabs {
+      justify-content: center;
+    }
+  }
+</style>

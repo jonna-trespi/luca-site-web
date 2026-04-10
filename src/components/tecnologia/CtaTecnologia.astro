@@ -1,0 +1,197 @@
+---
+/**
+ * Tecnología — CTA: franja #3843D0, avatar footer-icon.gif, geos 6/7, demo modal.
+ */
+const avatarSrc = '/gif/home/footer-icon.gif';
+const geoBl = '/images/tecnologia/geo-6.png';
+const geoTr = '/images/tecnologia/geo-7.png';
+---
+
+<section class="cta-tech" aria-labelledby="cta-tech-title">
+  <div class="cta-tech__wrap layout-container">
+    <div class="cta-tech__shell">
+      <img
+        class="cta-tech__geo cta-tech__geo--tr"
+        src={geoBl}
+        alt=""
+        width="200"
+        height="200"
+        loading="lazy"
+        decoding="async"
+        aria-hidden="true"
+      />
+      <img
+        class="cta-tech__geo cta-tech__geo--bl"
+        src={geoTr}
+        alt=""
+        width="180"
+        height="180"
+        loading="lazy"
+        decoding="async"
+        aria-hidden="true"
+      />
+
+      <div class="cta-tech__avatar-wrap">
+        <img
+          class="cta-tech__avatar"
+          src={avatarSrc}
+          alt=""
+          width="200"
+          height="200"
+          loading="lazy"
+          decoding="async"
+          aria-hidden="true"
+        />
+      </div>
+
+      <div class="cta-tech__inner">
+        <h2 id="cta-tech-title" class="text-h2 cta-tech__title">
+          Cuando la inteligencia potencia a la escuela, el aprendizaje se transforma.
+        </h2>
+        <div class="cta-tech__ctas">
+          <a href="#" class="btn-base btn-primary btn-cta-animated" data-open-demo-modal>
+            <span>Solicita tu demo</span>
+            <span class="cta-tech__btn-icon icon-arrow" aria-hidden="true"></span>
+          </a>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<style>
+  .cta-tech {
+    width: 100%;
+    background-color: var(--color-bg-base);
+    padding: clamp(3.5rem, 8vw, 5.5rem) 0 clamp(3rem, 6vw, 5rem);
+    box-sizing: border-box;
+  }
+
+  .cta-tech__wrap {
+    position: relative;
+  }
+
+  .cta-tech__shell {
+    position: relative;
+    max-width: 1080px;
+    margin-left: auto;
+    margin-right: auto;
+    background-color: #3843d0;
+    border-radius: 20px;
+    overflow: visible;
+    padding: clamp(3.25rem, 7vw, 4.5rem) clamp(1.25rem, 4vw, 2.5rem) clamp(2.5rem, 5vw, 3.5rem);
+    box-sizing: border-box;
+  }
+
+  .cta-tech__geo {
+    position: absolute;
+    pointer-events: none;
+    user-select: none;
+    z-index: 0;
+    height: auto;
+    display: block;
+  }
+
+  /* geo-6: esquina superior derecha */
+  .cta-tech__geo--tr {
+    right: 0;
+    top: 0;
+    max-width: 200px;
+    width: min(200px, 42%);
+    object-fit: contain;
+    object-position: right top;
+  }
+
+  /* geo-7: esquina inferior izquierda */
+  .cta-tech__geo--bl {
+    left: 0;
+    bottom: 0;
+    max-width: 180px;
+    width: min(180px, 38%);
+    object-fit: contain;
+    object-position: left bottom;
+  }
+
+  .cta-tech__avatar-wrap {
+    position: absolute;
+    left: 50%;
+    top: 0;
+    transform: translate(-50%, -50%);
+    z-index: 2;
+    width: min(200px, 44vw);
+    max-width: 200px;
+    pointer-events: none;
+    line-height: 0;
+  }
+
+  .cta-tech__avatar {
+    width: 100%;
+    height: auto;
+    display: block;
+  }
+
+  .cta-tech__inner {
+    position: relative;
+    z-index: 1;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    gap: clamp(1.25rem, 3vw, 1.75rem);
+  }
+
+  .cta-tech__title {
+    margin: 0;
+    width: 100%;
+    max-width: 100%;
+    box-sizing: border-box;
+    align-self: stretch;
+    color: var(--color-white);
+  }
+
+  .cta-tech__ctas {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: center;
+    gap: 1rem;
+  }
+
+  /* Mismo criterio que Hero Docentes: primario blanco + texto azul sobre fondo azul */
+  .cta-tech__ctas .btn-base.btn-primary {
+    background-image: linear-gradient(
+      to right,
+      var(--color-white) 50%,
+      var(--color-blue-secondary) 50%
+    );
+    background-size: 200% 100%;
+    color: var(--color-blue-primary);
+    border: 2px solid transparent;
+  }
+
+  .cta-tech__ctas .btn-base.btn-primary:hover {
+    color: #ffffff;
+  }
+
+  .cta-tech__btn-icon {
+    display: block;
+    width: 1.25rem;
+    height: 1.25rem;
+    flex-shrink: 0;
+    background-color: currentColor;
+    -webkit-mask-image: url('/icons/transversal/array-right-icon.svg');
+    mask-image: url('/icons/transversal/array-right-icon.svg');
+    -webkit-mask-repeat: no-repeat;
+    mask-repeat: no-repeat;
+    -webkit-mask-position: center;
+    mask-position: center;
+    -webkit-mask-size: contain;
+    mask-size: contain;
+  }
+
+  @media (max-width: 479px) {
+    .cta-tech__avatar-wrap {
+      width: min(160px, 50vw);
+    }
+  }
+</style>

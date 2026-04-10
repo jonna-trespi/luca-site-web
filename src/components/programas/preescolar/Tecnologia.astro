@@ -1,0 +1,689 @@
+---
+/**
+ * Tecnología Preescolar: carrusel de slides (vídeo o imagen + título + texto) y CTA demo.
+ * Vídeos: public/videos/programas/preescolar/video-*.mp4; último slide: imagen screen-app.
+ * Figuras de fondo por slide: public/images/programas/preescolar/tech-*.png (máx. 300px).
+ * Slide 1: avatar tech-avatar.png sobre el vídeo (esquina inferior izquierda).
+ */
+const videoBase = '/videos/programas/preescolar';
+const slides = [
+  {
+    video: `${videoBase}/video-1.mp4`,
+    alt: 'Plataforma digital de contenidos Luca',
+    title: 'Plataforma digital de contenidos',
+    text: 'Utiliza herramientas para la creación de proyectos personalizados, rúbricas y planes de lección para optimizar la labor docente.',
+  },
+  {
+    video: `${videoBase}/video-2.mp4`,
+    alt: 'Videolecciones en la plataforma Luca',
+    title: 'Generador de canciones',
+    text: 'Crea canciones didácticas para aprender cantando y bailando, fortaleciendo motricidad, memoria y atención de forma natural.',
+  },
+  {
+    video: `${videoBase}/video-3.mp4`,
+    alt: 'Gamificación en Luca',
+    title: 'Generador de historias',
+    text: 'Crea historias narradas, elige la voz que prefieras y dale un propósito educativo a cada aventura.',
+  },
+  {
+    video: `${videoBase}/video-4.mp4`,
+    alt: 'Herramientas de generación de proyectos',
+    title: 'Videos',
+    text: 'Transforma el currículo en historias inmersivas con videos que conectan cada lección con la vida real.',
+  },
+  {
+    video: `${videoBase}/video-5.mp4`,
+    alt: 'Luca Bot, tutoría educativa',
+    title: 'Evaluación cualitativa',
+    text: 'Simplifica la evaluación con rúbricas automáticas, diario escolar, portafolios digitales y seguimiento del progreso con IA.',
+  },
+  {
+    image: '/images/programas/preescolar/screen-app.jpg',
+    alt: 'App Luca en dispositivos móviles',
+    title: 'App Luca',
+    text: 'Accede y asigna contenido en cualquier momento y desde cualquier lugar, incluso sin conexión a internet.',
+  },
+];
+
+const slideCount = slides.length;
+
+/** Figuras de fondo por slide (posición respecto a la tarjeta o al bloque de vídeo). */
+const slideDecos = [
+  { src: '/images/programas/preescolar/tech-1.png', placement: 'card-tl' as const },
+  { src: '/images/programas/preescolar/tech-2.png', placement: 'card-tr' as const },
+  { src: '/images/programas/preescolar/tech-3.png', placement: 'media-bl' as const },
+  { src: '/images/programas/preescolar/tech-4.png', placement: 'card-tl' as const },
+  { src: '/images/programas/preescolar/tech-5.png', placement: 'card-bl' as const },
+  { src: '/images/programas/preescolar/tech-5.png', placement: 'card-bl' as const },
+];
+---
+
+<section class="tecnologia">
+  <div class="tecnologia__inner layout-container">
+    <header class="tecnologia__header">
+      <p class="programas__label">
+        <span class="programas__label-dot" aria-hidden="true"></span>
+        Tecnología
+      </p>
+      <h3 class="tecnologia__title text-h3">
+        Ecosistema digital<span class="tecnologia__title-dot">.</span>
+      </h3>
+    </header>
+
+    <div
+      class="tecnologia__carousel tecnologia__carousel--fullbleed"
+      data-tecnologia-carousel
+      data-tecnologia-count={slideCount}
+      role="region"
+      aria-roledescription="carrusel"
+      aria-label="Funcionalidades del ecosistema digital"
+    >
+      <div class="tecnologia__viewport" style={`--tecnologia-count: ${slideCount}`}>
+        <button type="button" class="tecnologia__nav tecnologia__nav--prev" aria-label="Anterior" data-tecnologia-prev>
+          <span class="tecnologia__nav-icon" aria-hidden="true">
+            <span class="tecnologia__nav-icon-mask tecnologia__nav-icon-mask--flip"></span>
+          </span>
+        </button>
+
+        <div class="tecnologia__track" data-tecnologia-track>
+          {slides.map((slide, i) => {
+            const deco = slideDecos[i];
+            const screenEl =
+              'image' in slide && slide.image ? (
+                <img
+                  class="tecnologia__screen"
+                  src={slide.image}
+                  alt={slide.alt}
+                  width="1200"
+                  height="675"
+                  loading={i === 0 ? 'eager' : 'lazy'}
+                  decoding="async"
+                />
+              ) : (
+                <video
+                  class="tecnologia__screen"
+                  muted
+                  playsinline
+                  autoplay
+                  loop
+                  preload={i === 0 ? 'auto' : 'metadata'}
+                  aria-label={slide.alt}
+                >
+                  <source src={slide.video} type="video/mp4" />
+                </video>
+              );
+
+            return (
+              <div
+                class="tecnologia__slide"
+                data-index={i}
+                data-offset={i}
+                aria-hidden={i !== 0}
+                id={`tecnologia-slide-${i}`}
+                role="group"
+                aria-roledescription="diapositiva"
+                aria-label={`${i + 1} de ${slideCount}`}
+              >
+                <div class="tecnologia__card">
+                  {deco && deco.placement !== 'media-bl' && (
+                    <img
+                      class={`tecnologia__card-deco tecnologia__card-deco--${deco.placement.replace('card-', '')}`}
+                      src={deco.src}
+                      alt=""
+                      width="300"
+                      height="300"
+                      loading={i === 0 ? 'eager' : 'lazy'}
+                      decoding="async"
+                      aria-hidden="true"
+                    />
+                  )}
+                  {deco && deco.placement === 'media-bl' ? (
+                    <div class="tecnologia__media-wrap">
+                      <img
+                        class="tecnologia__card-deco tecnologia__card-deco--bl"
+                        src={deco.src}
+                        alt=""
+                        width="300"
+                        height="300"
+                        loading="lazy"
+                        decoding="async"
+                        aria-hidden="true"
+                      />
+                      {screenEl}
+                    </div>
+                  ) : i === 0 && !('image' in slide && slide.image) ? (
+                    <div class="tecnologia__media-wrap">
+                      {screenEl}
+                      <img
+                        class="tecnologia__video-avatar"
+                        src="/images/programas/preescolar/tech-avatar.png"
+                        alt=""
+                        width="140"
+                        height="140"
+                        loading="eager"
+                        decoding="async"
+                        aria-hidden="true"
+                      />
+                    </div>
+                  ) : (
+                    screenEl
+                  )}
+                  <h4 class="tecnologia__card-title text-h4">{slide.title}</h4>
+                  <p class="tecnologia__card-desc text-body-primary">{slide.text}</p>
+                </div>
+              </div>
+            );
+          })}
+        </div>
+
+        <button type="button" class="tecnologia__nav tecnologia__nav--next" aria-label="Siguiente" data-tecnologia-next>
+          <span class="tecnologia__nav-icon" aria-hidden="true">
+            <span class="tecnologia__nav-icon-mask"></span>
+          </span>
+        </button>
+      </div>
+    </div>
+
+    <div class="tecnologia__cta-wrap">
+      <a href="/tecnologia" class="btn-base btn-primary btn-cta-animated tecnologia__cta">
+        <span>Descubre más</span>
+        <span class="tecnologia__cta-icon" aria-hidden="true">
+          <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+            <path
+              fill-rule="evenodd"
+              clip-rule="evenodd"
+              d="M11.235 16.089C11.105 16.178 10.958 16.221 10.811 16.221C10.572 16.221 10.338 16.108 10.192 15.896C9.958 15.555 10.044 15.088 10.385 14.853C11.969 13.763 13.445 12.415 13.542 11.969C13.445 11.583 11.969 10.236 10.385 9.148C10.045 8.913 9.958 8.446 10.192 8.105C10.426 7.763 10.892 7.677 11.235 7.911C12.656 8.887 15.04 10.716 15.04 11.999C15.04 13.282 12.656 15.112 11.235 16.089ZM12.25 2.25C5.051 2.25 2.5 4.802 2.5 12C2.5 19.198 5.051 21.75 12.25 21.75C19.448 21.75 22 19.198 22 12C22 4.802 19.448 2.25 12.25 2.25Z"
+              fill="currentColor"></path>
+          </svg>
+        </span>
+      </a>
+    </div>
+  </div>
+</section>
+
+<script is:inline>
+  (function () {
+    function initTecnologiaCarousel() {
+      var track = document.querySelector('[data-tecnologia-track]');
+      var viewport = track && track.closest('.tecnologia__viewport');
+      var carousel = document.querySelector('[data-tecnologia-carousel]');
+      var prevBtn = document.querySelector('[data-tecnologia-prev]');
+      var nextBtn = document.querySelector('[data-tecnologia-next]');
+      var slides = document.querySelectorAll('.tecnologia__slide');
+      if (!track || !viewport || !carousel || slides.length === 0) return;
+      if (track.dataset.tecnologiaBound === '1') return;
+      track.dataset.tecnologiaBound = '1';
+
+      var total = slides.length;
+      var index = 0;
+      var resizeTimer;
+
+      function trackGapPx() {
+        var g = window.getComputedStyle(track).columnGap || window.getComputedStyle(track).gap;
+        var n = parseFloat(g);
+        return isNaN(n) ? 0 : n;
+      }
+
+      function setTransform() {
+        var slide = slides[index];
+        if (!slide) return;
+        var slideW = slide.offsetWidth;
+        var gap = trackGapPx();
+        var vpW = viewport.offsetWidth;
+        var offsetPx = index * (slideW + gap);
+        var centerPx = (vpW - slideW) / 2;
+        track.style.transform = 'translate3d(' + (centerPx - offsetPx) + 'px, 0, 0)';
+      }
+
+      function updateSlideOffsets() {
+        slides.forEach(function (slide, j) {
+          slide.setAttribute('data-offset', String(j - index));
+        });
+      }
+
+      function updateA11y() {
+        slides.forEach(function (slide, j) {
+          var isActive = j === index;
+          slide.setAttribute('aria-hidden', isActive ? 'false' : 'true');
+        });
+      }
+
+      function syncVideos() {
+        slides.forEach(function (slide, j) {
+          var v = slide.querySelector('video');
+          if (!v) return;
+          if (j === index) {
+            var p = v.play();
+            if (p && p.catch) p.catch(function () {});
+          } else {
+            v.pause();
+          }
+        });
+      }
+
+      function layout() {
+        setTransform();
+      }
+
+      function goTo(nextIndex) {
+        index = ((nextIndex % total) + total) % total;
+        carousel.classList.add('tecnologia__carousel--is-sliding');
+        updateSlideOffsets();
+        setTransform();
+        updateA11y();
+        syncVideos();
+        window.setTimeout(function () {
+          carousel.classList.remove('tecnologia__carousel--is-sliding');
+        }, 520);
+      }
+
+      function onResize() {
+        window.clearTimeout(resizeTimer);
+        resizeTimer = window.setTimeout(function () {
+          setTransform();
+        }, 100);
+      }
+
+      if (prevBtn) prevBtn.addEventListener('click', function () { goTo(index - 1); });
+      if (nextBtn) nextBtn.addEventListener('click', function () { goTo(index + 1); });
+      window.addEventListener('resize', onResize);
+
+      updateSlideOffsets();
+      window.requestAnimationFrame(function () {
+        layout();
+        window.requestAnimationFrame(layout);
+      });
+      updateA11y();
+      syncVideos();
+    }
+
+    if (document.readyState === 'loading') {
+      document.addEventListener('DOMContentLoaded', initTecnologiaCarousel);
+    } else {
+      initTecnologiaCarousel();
+    }
+    document.addEventListener('astro:page-load', initTecnologiaCarousel);
+  })();
+</script>
+
+<style>
+  .tecnologia {
+    width: 100%;
+    background-color: var(--color-bg-base);
+    padding: 2.5rem 0;
+    overflow-x: hidden;
+  }
+
+  .tecnologia__inner {
+    width: 100%;
+    max-width: var(--layout-max-width);
+    margin-left: auto;
+    margin-right: auto;
+    padding-left: var(--layout-padding-x);
+    padding-right: var(--layout-padding-x);
+  }
+
+  .tecnologia__header {
+    text-align: center;
+    margin: 0;
+  }
+
+  .tecnologia__header .programas__label {
+    justify-content: center;
+    margin-bottom: 20px;
+  }
+
+  .tecnologia__title {
+    margin: 0 0 64px;
+    color: var(--color-text-base);
+  }
+
+  .tecnologia__title-dot {
+    color: var(--color-red);
+  }
+
+  .tecnologia__carousel {
+    width: 100%;
+    margin-bottom: 2rem;
+  }
+
+  /* Rompe el max-width del layout: carrusel a ancho viewport */
+  .tecnologia__carousel--fullbleed {
+    width: 100vw;
+    max-width: 100vw;
+    margin-left: calc(50% - 50vw);
+    margin-right: calc(50% - 50vw);
+    position: relative;
+    box-sizing: border-box;
+  }
+
+  .tecnologia__viewport {
+    position: relative;
+    z-index: 1;
+    width: 100%;
+    min-width: 0;
+    overflow: hidden;
+    perspective: 1200px;
+    perspective-origin: 50% 45%;
+    padding: 0 clamp(0.5rem, 2vw, 1.25rem);
+    box-sizing: border-box;
+  }
+
+  .tecnologia__track {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: nowrap;
+    align-items: center;
+    gap: clamp(0.75rem, 2.5vw, 1.25rem);
+    width: max-content;
+    transform-style: preserve-3d;
+    transition: transform 0.55s cubic-bezier(0.33, 1, 0.68, 1);
+    will-change: transform;
+  }
+
+  .tecnologia__slide {
+    flex: 0 0 auto;
+    width: min(72vw, 56rem);
+    max-width: 100%;
+    box-sizing: border-box;
+    padding: 0 4px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    transform-style: preserve-3d;
+    transition:
+      transform 0.55s cubic-bezier(0.33, 1, 0.68, 1),
+      opacity 0.45s ease;
+    backface-visibility: hidden;
+  }
+
+  /* Cover flow: central plano; a la izquierda del activo rotateY(+), a la derecha rotateY(−) */
+  .tecnologia__slide[data-offset='0'] {
+    transform: rotateY(0deg) scale(1);
+    opacity: 1;
+    z-index: 3;
+  }
+
+  .tecnologia__slide[data-offset='-1'] {
+    transform: rotateY(26deg) scale(0.9) translateZ(-12px);
+    opacity: 0.96;
+    z-index: 2;
+  }
+
+  .tecnologia__slide[data-offset='1'] {
+    transform: rotateY(-26deg) scale(0.9) translateZ(-12px);
+    opacity: 0.96;
+    z-index: 2;
+  }
+
+  .tecnologia__slide[data-offset='-2'] {
+    transform: rotateY(34deg) scale(0.84) translateZ(-28px);
+    opacity: 0.9;
+    z-index: 1;
+  }
+
+  .tecnologia__slide[data-offset='2'] {
+    transform: rotateY(-34deg) scale(0.84) translateZ(-28px);
+    opacity: 0.9;
+    z-index: 1;
+  }
+
+  .tecnologia__slide[data-offset='-3'],
+  .tecnologia__slide[data-offset='-4'],
+  .tecnologia__slide[data-offset='-5'] {
+    transform: rotateY(40deg) scale(0.78) translateZ(-40px);
+    opacity: 0.82;
+    z-index: 0;
+  }
+
+  .tecnologia__slide[data-offset='3'],
+  .tecnologia__slide[data-offset='4'],
+  .tecnologia__slide[data-offset='5'] {
+    transform: rotateY(-40deg) scale(0.78) translateZ(-40px);
+    opacity: 0.82;
+    z-index: 0;
+  }
+
+  .tecnologia__card {
+    position: relative;
+    overflow: hidden;
+    width: 100%;
+    background-color: #2eb6ac;
+    border-radius: 40px;
+    padding: 1.5rem;
+    box-sizing: border-box;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+  }
+
+  /* Figuras PNG de fondo (máx. 300px) */
+  .tecnologia__card-deco {
+    position: absolute;
+    max-width: 300px;
+    width: min(300px, 72vw);
+    height: auto;
+    object-fit: contain;
+    pointer-events: none;
+    user-select: none;
+    z-index: 0;
+  }
+
+  .tecnologia__card-deco--tl {
+    top: 0;
+    left: 0;
+  }
+
+  .tecnologia__card-deco--tr {
+    top: 0;
+    right: 0;
+    left: auto;
+  }
+
+  .tecnologia__card-deco--bl {
+    bottom: 0;
+    left: 0;
+    top: auto;
+  }
+
+  /* Slide 3: figura detrás del vídeo, esquina inferior izquierda del bloque de media */
+  .tecnologia__media-wrap {
+    position: relative;
+    width: 100%;
+    max-width: min(720px, 100%);
+    margin: 0 0 1.5rem;
+    z-index: 1;
+  }
+
+  .tecnologia__media-wrap .tecnologia__card-deco {
+    z-index: 0;
+  }
+
+  .tecnologia__media-wrap .tecnologia__screen {
+    position: relative;
+    z-index: 1;
+    margin: 0;
+  }
+
+  .tecnologia__video-avatar {
+    position: absolute;
+    right: -10%;
+    bottom: -10%;
+    max-width: 180px;
+    width: min(180px, 38vw);
+    height: auto;
+    object-fit: contain;
+    pointer-events: none;
+    user-select: none;
+    z-index: 2;
+    transform: translate(-8%, 12%);
+    filter: drop-shadow(0 6px 16px rgba(0, 0, 0, 0.18));
+  }
+
+  @media (max-width: 767px) {
+    .tecnologia__video-avatar {
+      display: none;
+    }
+  }
+
+  .tecnologia__screen {
+    position: relative;
+    z-index: 1;
+    width: 100%;
+    max-width: min(720px, 100%);
+    aspect-ratio: 16 / 9;
+    height: auto;
+    display: block;
+    object-fit: cover;
+    border-radius: 16px;
+    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.15);
+    margin: 0 0 1.5rem;
+    background: #0f172a;
+  }
+
+  .tecnologia__card-title {
+    position: relative;
+    z-index: 1;
+    margin: 0 0 0.75rem;
+    color: #ffffff;
+  }
+
+  .tecnologia__card-desc {
+    position: relative;
+    z-index: 1;
+    margin: 0;
+    max-width: 42rem;
+    color: #ffffff;
+  }
+
+  /* Navegación: icono array-right-icon.svg (mismo asset que Casos) */
+  .tecnologia__nav {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    flex-shrink: 0;
+    min-width: 48px;
+    min-height: 48px;
+    padding: 4px;
+    border: none;
+    border-radius: 8px;
+    background: transparent;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: color 0.2s ease;
+    z-index: 4;
+  }
+
+  .tecnologia__nav--prev {
+    left: clamp(0.25rem, 2vw, 1rem);
+  }
+
+  .tecnologia__nav--next {
+    right: clamp(0.25rem, 2vw, 1rem);
+  }
+
+  .tecnologia__nav:focus-visible {
+    outline: 2px solid var(--color-blue-primary);
+    outline-offset: 2px;
+  }
+
+  .tecnologia__nav:hover .tecnologia__nav-icon-mask {
+    background-color: var(--color-blue-secondary);
+  }
+
+  .tecnologia__nav--prev:hover .tecnologia__nav-icon {
+    transform: translateX(-3px);
+  }
+
+  .tecnologia__nav--next:hover .tecnologia__nav-icon {
+    transform: translateX(3px);
+  }
+
+  .tecnologia__nav-icon {
+    display: inline-flex;
+    width: 48px;
+    height: 48px;
+    transition: transform 0.2s ease;
+  }
+
+  .tecnologia__nav-icon-mask {
+    display: block;
+    width: 48px;
+    height: 48px;
+    background-color: var(--color-blue-primary);
+    -webkit-mask-image: url('/icons/transversal/array-right-icon.svg');
+    mask-image: url('/icons/transversal/array-right-icon.svg');
+    -webkit-mask-repeat: no-repeat;
+    mask-repeat: no-repeat;
+    -webkit-mask-position: center;
+    mask-position: center;
+    -webkit-mask-size: contain;
+    mask-size: contain;
+    transition: background-color 0.2s ease;
+  }
+
+  .tecnologia__nav-icon-mask--flip {
+    transform: scaleX(-1);
+  }
+
+  .tecnologia__cta-wrap {
+    text-align: center;
+  }
+
+  .tecnologia__cta {
+    color: var(--color-white);
+  }
+
+  .tecnologia__cta .tecnologia__cta-icon {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    color: var(--color-white);
+  }
+
+  .tecnologia__cta .tecnologia__cta-icon svg {
+    width: 1.25rem;
+    height: 1.25rem;
+  }
+
+  @media (min-width: 600px) {
+    .tecnologia__card {
+      padding: 64px;
+    }
+  }
+
+  @media (min-width: 768px) {
+    .tecnologia {
+      padding: 3rem 0;
+    }
+
+    .tecnologia__carousel {
+      margin-bottom: 2.5rem;
+    }
+  }
+
+  @media (min-width: 1024px) {
+    .tecnologia {
+      padding: 4rem 0;
+    }
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .tecnologia__track {
+      transition-duration: 0.01ms;
+    }
+
+    .tecnologia__slide {
+      transition-duration: 0.01ms;
+    }
+
+    .tecnologia__slide[data-offset] {
+      transform: none;
+      opacity: 1;
+    }
+  }
+</style>

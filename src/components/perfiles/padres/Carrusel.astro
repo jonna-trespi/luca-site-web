@@ -1,0 +1,114 @@
+---
+/**
+ * Directores: carrusel horizontal infinito (mismo patrón que Hero Primaria).
+ * Assets: public/images/perfiles/padres/carrusel-*.webp
+ */
+const baseImg = '/images/perfiles/padres';
+
+const carouselMeta = [
+  { file: 'carrusel-1.webp', alt: 'Directora revisando información en tableta' },
+  { file: 'carrusel-2.webp', alt: 'Equipo directivo en entorno escolar' },
+  { file: 'carrusel-3.webp', alt: 'Director compartiendo datos y seguimiento docente' },
+  { file: 'carrusel-4.webp', alt: 'Directora en pasillos del colegio' },
+  { file: 'carrusel-5.webp', alt: 'Formación y reunión con docentes' },
+] as const;
+
+const carouselImages = carouselMeta.map((row) => ({
+  src: `${baseImg}/${row.file}`,
+  alt: row.alt,
+}));
+---
+
+<section class="perfil-padres-carrusel" aria-label="Galería de directores">
+  <div
+    class="perfil-padres-carrusel__carousel"
+    role="region"
+    aria-roledescription="carrusel"
+    aria-label="Imágenes de directores Luca"
+  >
+    <div class="perfil-padres-carrusel__viewport">
+      <div class="perfil-padres-carrusel__track">
+        {
+          [...carouselImages, ...carouselImages].map((img) => (
+            <img
+              class="perfil-padres-carrusel__img"
+              src={img.src}
+              alt={img.alt}
+              loading="lazy"
+              decoding="async"
+            />
+          ))
+        }
+      </div>
+    </div>
+  </div>
+</section>
+
+<style>
+  .perfil-padres-carrusel {
+    --carousel-img-h: 355px;
+    width: 100%;
+    background-color: var(--color-white);
+    padding: clamp(2rem, 5vw, 3.5rem) 0;
+    position: relative;
+    box-sizing: border-box;
+  }
+
+  .perfil-padres-carrusel__carousel {
+    width: 100%;
+    padding: 0;
+    box-sizing: border-box;
+  }
+
+  .perfil-padres-carrusel__viewport {
+    overflow: hidden;
+    width: 100%;
+    min-height: var(--carousel-img-h);
+  }
+
+  .perfil-padres-carrusel__track {
+    display: flex;
+    align-items: flex-end;
+    flex-wrap: nowrap;
+    gap: clamp(30px, calc(1.2vw + 20px), 36px);
+    width: max-content;
+    will-change: transform;
+    animation: perfil-padres-carrusel-marquee 45s linear infinite;
+  }
+
+  .perfil-padres-carrusel__carousel:hover .perfil-padres-carrusel__track {
+    animation-play-state: paused;
+  }
+
+  @keyframes perfil-padres-carrusel-marquee {
+    from {
+      transform: translateX(0);
+    }
+    to {
+      transform: translateX(-50%);
+    }
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .perfil-padres-carrusel__track {
+      animation: none;
+      transform: translateX(0);
+    }
+  }
+
+  /* Mismo criterio que Hero Primaria: altura fija, ancho natural del asset */
+  .perfil-padres-carrusel__img {
+    flex: 0 0 auto;
+    display: block;
+    height: var(--carousel-img-h);
+    width: auto;
+    max-width: none;
+    border-radius: 30px;
+  }
+
+  @media (max-width: 767px) {
+    .perfil-padres-carrusel {
+      --carousel-img-h: 260px;
+    }
+  }
+</style>

@@ -1,0 +1,178 @@
+---
+/**
+ * Campos formativos: tarjeta con etiqueta, título y grid de 4 campos (Preescolar).
+ */
+const items = [
+  { label: 'Lenguajes', icon: '/icons/programas/preescolar/icon-1.png' },
+  { label: 'Saberes y Pensamiento científico', icon: '/icons/programas/preescolar/icon-2.png' },
+  { label: 'De lo Humano y lo Comunitario', icon: '/icons/programas/preescolar/icon-3.png' },
+  { label: 'Ética, Naturaleza y Sociedades', icon: '/icons/programas/preescolar/icon-4.png' },
+];
+---
+
+<section class="campos">
+  <div class="campos__inner layout-container">
+    <div class="campos__card">
+      <div class="campos__grid">
+        <header class="campos__header">
+          <p class="programas__label">
+            <span class="programas__label-dot" aria-hidden="true"></span>
+            Campos formativos
+          </p>
+          <h4 class="campos__title text-h4">Transformamos el saber en experiencia</h4>
+        </header>
+        <ul class="campos__list">
+          {items.map((item) => (
+            <li class="campos__item">
+              <img class="campos__icon" src={item.icon} alt="" width="40" height="40" loading="lazy" decoding="async" />
+              <span class="campos__item-label">{item.label}</span>
+            </li>
+          ))}
+        </ul>
+      </div>
+      <img
+        class="campos__mascot"
+        src="/images/programas/preescolar/campos-img.png"
+        alt="Mascota Luca"
+        width="200"
+        height="200"
+        loading="lazy"
+        decoding="async"
+      />
+    </div>
+  </div>
+</section>
+
+<style>
+  .campos {
+    width: 100%;
+    background-color: transparent;
+    padding: 2rem 0;
+  }
+
+  .campos__inner {
+    width: 100%;
+    max-width: var(--layout-max-width);
+    margin-left: auto;
+    margin-right: auto;
+    padding-left: var(--layout-padding-x);
+    padding-right: var(--layout-padding-x);
+  }
+
+  .campos__card {
+    position: relative;
+    background-color: #faf8f3;
+    border: 2px solid var(--color-yellow);
+    border-radius: 24px;
+    padding: 2.5rem 1.75rem;
+    overflow: visible;
+  }
+
+  .campos__grid {
+    position: relative;
+    z-index: 2;
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 1.5rem;
+    /* Reserva espacio para la mascota (absoluta abajo-derecha) para que el texto no quede debajo */
+    padding-right: clamp(0.5rem, 8vw, 2rem);
+    padding-bottom: clamp(2.75rem, 22vw, 7rem);
+  }
+
+  .campos__header {
+    margin: 0;
+    text-align: left;
+  }
+
+  /* global .programas__label usa justify-content: center; aquí va a la izquierda */
+  .campos__header .programas__label {
+    justify-content: flex-start;
+  }
+
+  /* Tipografía: .text-h4 (global.css) */
+  .campos__title {
+    color: var(--color-text-base);
+    margin: 0;
+    text-align: left;
+  }
+
+  .campos__list {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 1rem;
+  }
+
+  .campos__item {
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+  }
+
+  .campos__icon {
+    width: 40px;
+    height: 40px;
+    flex-shrink: 0;
+    object-fit: contain;
+    display: block;
+  }
+
+  .campos__item-label {
+    font-family: var(--font-family-base);
+    font-weight: 500;
+    font-size: 0.9375rem;
+    color: var(--color-text-base);
+    line-height: 1.4;
+  }
+
+  /* Esquina inferior derecha del borde de la tarjeta; parte del asset sale fuera (superposición) */
+  .campos__mascot {
+    position: absolute;
+    right: 0;
+    bottom: 0;
+    max-width: 200px;
+    width: min(200px, 48vw);
+    height: auto;
+    display: block;
+    transform: translate(18%, 18%);
+    z-index: 1;
+    pointer-events: none;
+    user-select: none;
+  }
+
+  @media (min-width: 600px) {
+    .campos__list {
+      grid-template-columns: repeat(2, 1fr);
+    }
+  }
+
+  @media (min-width: 768px) {
+    .campos {
+      padding: 2.5rem 0;
+    }
+
+    .campos__card {
+      padding: 3rem 2.25rem;
+    }
+
+    .campos__grid {
+      grid-template-columns: 1fr 1fr;
+      gap: 2rem;
+      align-items: start;
+      padding-right: clamp(1rem, 12%, 10rem);
+      padding-bottom: clamp(2rem, 10vw, 5.5rem);
+    }
+  }
+
+  @media (min-width: 1024px) {
+    .campos {
+      padding: 3rem 0;
+    }
+
+    .campos__card {
+      padding: 3.5rem 3rem;
+    }
+  }
+</style>

@@ -1,0 +1,181 @@
+---
+/**
+ * Campos formativos: tarjeta con etiqueta, título y grid de campos (Secundaria).
+ * Orden del grid (2 cols): fila1 col1, fila1 col2, fila2 col1…
+ */
+const items = [
+  { label: '+ 4 500 páginas por libro', icon: '/icons/programas/secundaria/icon-1.png' },
+  { label: '+ 500 audios y podcasts educativos', icon: '/icons/programas/secundaria/icon-4.png' },
+  { label: '+ 700 videolecciones', icon: '/icons/programas/secundaria/icon-2.png' },
+  { label: '+ 500 lecturas científicas, históricas y de ficción', icon: '/icons/programas/secundaria/icon-5.png' },
+  { label: '+ 700 orientaciones didácticas', icon: '/icons/programas/secundaria/icon-3.png' },
+  { label: '+ 3 500 diapositivas editables', icon: '/icons/programas/secundaria/icon-6.png' },
+];
+---
+
+<section class="campos">
+  <div class="campos__inner layout-container">
+    <div class="campos__card">
+      <div class="campos__grid">
+        <header class="campos__header">
+          <p class="programas__label programas__label--align-start">
+            <span class="programas__label-dot" aria-hidden="true"></span>
+            Campos formativos
+          </p>
+          <h4 class="campos__title text-h4">Transformamos el saber en experiencia</h4>
+        </header>
+        <ul class="campos__list">
+          {items.map((item) => (
+            <li class="campos__item">
+              <img class="campos__icon" src={item.icon} alt="" width="48" height="48" loading="lazy" decoding="async" />
+              <span class="campos__item-label text-subtitle-2">{item.label}</span>
+            </li>
+          ))}
+        </ul>
+      </div>
+      <img
+        class="campos__mascot"
+        src="/images/programas/secundaria/campos-img.png"
+        alt="Mascota Luca"
+        width="200"
+        height="200"
+        loading="lazy"
+        decoding="async"
+      />
+    </div>
+  </div>
+</section>
+
+<style>
+  .campos {
+    width: 100%;
+    background-color: transparent;
+    padding: 2rem 0;
+  }
+
+  .campos__inner {
+    width: 100%;
+    max-width: var(--layout-max-width);
+    margin-left: auto;
+    margin-right: auto;
+    padding-left: var(--layout-padding-x);
+    padding-right: var(--layout-padding-x);
+  }
+
+  .campos__card {
+    position: relative;
+    background-color: #edf5ff;
+    border: 2px solid #7aa4e0;
+    border-radius: 24px;
+    padding: 45px;
+    overflow: visible;
+  }
+
+  .campos__grid {
+    position: relative;
+    z-index: 2;
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 1.5rem;
+  }
+
+  .campos__header {
+    margin: 0;
+    text-align: left;
+  }
+
+  /* Tipografía: .text-h4 (global.css) */
+  .campos__title {
+    color: var(--color-text-base);
+    margin: 0;
+    text-align: left;
+    max-width: 400px;
+  }
+
+  .campos__list {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    display: grid;
+    grid-template-columns: 1fr;
+    row-gap: 1rem;
+    column-gap: 0;
+  }
+
+  .campos__item {
+    display: flex;
+    align-items: center;
+    gap: 14px;
+  }
+
+  .campos__icon {
+    width: 48px;
+    height: 48px;
+    flex-shrink: 0;
+    object-fit: contain;
+    display: block;
+  }
+
+  .campos__item-label {
+    color: var(--color-text-base);
+  }
+
+  /* Desktop: esquina inferior derecha (~ -10% / -10%). Mobile: centrada abajo */
+  .campos__mascot {
+    position: absolute;
+    bottom: -10%;
+    right: -10%;
+    max-height: 300px;
+    width: auto;
+    height: auto;
+    display: block;
+    z-index: 1;
+    pointer-events: none;
+    user-select: none;
+  }
+
+  @media (max-width: 767px) {
+    .campos__mascot {
+      display: none;
+    }
+  }
+
+  @media (min-width: 768px) {
+    .campos {
+      padding: 2.5rem 0;
+    }
+
+    /* Más aire entre título y bloque de ítems; segunda columna un poco más ancha (referencia ~30 / ~50). */
+    .campos__grid {
+      grid-template-columns: minmax(0, 0.92fr) minmax(0, 1.18fr);
+      column-gap: clamp(2.25rem, 6.5vw, 4rem);
+      row-gap: 2rem;
+      align-items: center;
+    }
+
+    .campos__list {
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      column-gap: clamp(1.75rem, 4.5vw, 3rem);
+      row-gap: 1.25rem;
+    }
+
+    .campos__mascot {
+      transform: none;
+    }
+  }
+
+  @media (min-width: 1024px) {
+    .campos {
+      padding: 3rem 0;
+    }
+
+    .campos__grid {
+      column-gap: clamp(3rem, 8vw, 5.5rem);
+    }
+
+    .campos__list {
+      column-gap: clamp(2.25rem, 5vw, 4rem);
+      row-gap: 1.35rem;
+    }
+  }
+</style>

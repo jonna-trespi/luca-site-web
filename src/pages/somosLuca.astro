@@ -1,0 +1,37 @@
+---
+import Layout from '../layouts/Layout.astro';
+import Header from '../components/Header.astro';
+import Footer from '../components/Footer.astro';
+import SomosLucaHero from '../components/somosLuca/SomosLucaHero.astro';
+import SomosLucaVision from '../components/somosLuca/SomosLucaVision.astro';
+import SomosLucaImpacto from '../components/somosLuca/SomosLucaImpacto.astro';
+import SomosLucaMetricas from '../components/somosLuca/SomosLucaMetricas.astro';
+import SomosLucaQueNosDiferencia from '../components/somosLuca/SomosLucaQueNosDiferencia.astro';
+import SomosLucaUnete from '../components/somosLuca/SomosLucaUnete.astro';
+import SomosLucaPrefooterCta from '../components/somosLuca/SomosLucaPrefooterCta.astro';
+import SomosLucaSolicitudModal from '../components/somosLuca/SomosLucaSolicitudModal.astro';
+import SomosLucaCreemos from '../components/somosLuca/SomosLucaCreemos.astro';
+import SomosLucaEquipo from '../components/somosLuca/SomosLucaEquipo.astro';
+import SomosLucaCarrusel from '../components/somosLuca/SomosLucaCarrusel.astro';
+---
+
+<Layout
+  title="Somos Luca - Luca"
+  description="Conoce Luca: misión, visión y el equipo detrás de la plataforma educativa que acompaña a escuelas y familias en México con pedagogía y tecnología de calidad."
+>
+  <Header />
+  <main>
+    <SomosLucaHero />
+    <SomosLucaVision />
+    <SomosLucaImpacto />
+    <SomosLucaMetricas />
+    <SomosLucaQueNosDiferencia />
+    <SomosLucaCreemos />
+    <SomosLucaEquipo />
+    <SomosLucaCarrusel />
+    <SomosLucaUnete />
+    <SomosLucaPrefooterCta />
+  </main>
+  <SomosLucaSolicitudModal />
+  <Footer />
+</Layout>

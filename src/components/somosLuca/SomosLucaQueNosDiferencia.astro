@@ -1,0 +1,174 @@
+---
+/**
+ * Somos Luca — ¿Qué nos diferencia?: GIF + copy con lista.
+ */
+const gifSrc = '/gif/somosLuca/somosLuca.gif';
+
+const bullets = [
+  {
+    html: '<strong>Mejora continua basada en feedback,</strong> adaptando contenido y funcionalidades según el uso real y la retroalimentación.',
+  },
+  {
+    html: '<strong>Innovación educativa con IA</strong> que personaliza el aprendizaje y eleva la calidad del contenido digital.',
+  },
+  {
+    html: '<strong>Modelo híbrido:</strong> combinamos aprendizaje digital con recursos físicos y experiencias dinámicas.',
+  },
+  {
+    html: '<strong>Co-creamos soluciones</strong> con docentes y líderes educativos que generan impacto real en el aula.',
+  },
+  {
+    html: '<strong>Pensamos diferente para transformar la educación</strong> con tecnología avanzada y fundamentos pedagógicos sólidos.',
+  },
+] as const;
+---
+
+<section class="somos-luca-que" aria-labelledby="somos-luca-que-heading">
+  <div class="somos-luca-que__inner layout-container">
+    <div class="somos-luca-que__visual">
+      <div class="somos-luca-que__visual-panel">
+        <img
+          class="somos-luca-que__gif"
+          src={gifSrc}
+          alt="Ilustración de la experiencia educativa con Luca: libro, dispositivos y personajes."
+          width="560"
+          height="560"
+          loading="lazy"
+          decoding="async"
+        />
+      </div>
+    </div>
+    <div class="somos-luca-que__content">
+      <p class="programas__label programas__label--align-start somos-luca-que__label">
+        <span class="programas__label-dot" aria-hidden="true"></span>
+        ¿Qué nos diferencia?
+      </p>
+      <h3 id="somos-luca-que-heading" class="text-h3 somos-luca-que__title">
+        Más que una EdTech, somos tus aliados educativos<span class="somos-luca-que__title-dot">.</span>
+      </h3>
+      <ul class="somos-luca-que__list">
+        {bullets.map((item) => (
+          <li class="somos-luca-que__item">
+            <span class="somos-luca-que__check" aria-hidden="true">
+              <svg width="14" height="11" viewBox="0 0 14 11" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+                <path
+                  d="M1 5.5L5 9.5L13 1"
+                  stroke="currentColor"
+                  stroke-width="2"
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                />
+              </svg>
+            </span>
+            <span class="somos-luca-que__item-text text-body-primary" set:html={item.html} />
+          </li>
+        ))}
+      </ul>
+    </div>
+  </div>
+</section>
+
+<style>
+  .somos-luca-que {
+    width: 100%;
+    padding: clamp(3rem, 6vw, 5.5rem) 0;
+    background: #edf5ff;
+    box-sizing: border-box;
+  }
+
+  .somos-luca-que__inner {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: clamp(2rem, 4vw, 3.5rem);
+    align-items: center;
+  }
+
+  .somos-luca-que__visual-panel {
+    background-color: var(--color-blue-primary);
+    border-radius: 28px;
+    overflow: hidden;
+    padding: clamp(1rem, 2.5vw, 1.75rem);
+    box-shadow: 0 20px 48px rgba(40, 48, 148, 0.18);
+  }
+
+  .somos-luca-que__gif {
+    display: block;
+    width: 100%;
+    height: auto;
+    border-radius: 18px;
+    object-fit: contain;
+  }
+
+  .somos-luca-que__content {
+    min-width: 0;
+  }
+
+  .somos-luca-que__label {
+    margin-bottom: 1rem;
+  }
+
+  .programas__label--align-start {
+    justify-content: flex-start;
+  }
+
+  .somos-luca-que__title {
+    margin: 0 0 1.5rem;
+    max-width: 450px;
+    color: var(--color-text-base);
+  }
+
+  .somos-luca-que__title-dot {
+    color: var(--color-red);
+  }
+
+  .somos-luca-que__list {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    flex-direction: column;
+    gap: 1.125rem;
+    max-width: 36rem;
+  }
+
+  .somos-luca-que__item {
+    display: flex;
+    align-items: flex-start;
+    gap: 0.75rem;
+  }
+
+  .somos-luca-que__check {
+    flex-shrink: 0;
+    width: 22px;
+    height: 22px;
+    margin-top: 0.2em;
+    border-radius: 5px;
+    background-color: var(--color-blue-primary);
+    color: var(--color-white);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .somos-luca-que__check svg {
+    display: block;
+  }
+
+  .somos-luca-que__item-text {
+    margin: 0;
+    line-height: 1.45;
+    color: var(--color-text-base);
+  }
+
+  .somos-luca-que__item-text :global(strong) {
+    font-weight: var(--text-body-primary-highlight-weight);
+  }
+
+  @media (min-width: 900px) {
+    .somos-luca-que__inner {
+      grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
+      gap: clamp(2rem, 4vw, 4rem);
+      align-items: center;
+    }
+  }
+</style>
