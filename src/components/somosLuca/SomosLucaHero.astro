@@ -1,15 +1,15 @@
 ---
 /**
- * Somos Luca — Hero: fondo hero-bg, geo, copy + hero.gif sobre círculo var(--color-red).
+ * Somos Luca — Hero: fondo hero-bg, geo, copy + hero.webp sobre círculo var(--color-red).
  */
-const heroGifSrc = '/gif/somosLuca/hero.gif';
+const heroGifSrc = '/gif/somosLuca/hero.webp';
 ---
 
 <section class="somos-luca-hero" aria-labelledby="somos-luca-hero-title">
   <div class="somos-luca-hero__layer" aria-hidden="true"></div>
   <img
     class="somos-luca-hero__geo somos-luca-hero__geo--left"
-    src="/images/somosLuca/geo-1.png"
+    src="/images/somosLuca/geo-1.webp"
     alt=""
     width="150"
     height="400"
@@ -19,7 +19,7 @@ const heroGifSrc = '/gif/somosLuca/hero.gif';
   />
   <img
     class="somos-luca-hero__geo somos-luca-hero__geo--right"
-    src="/images/somosLuca/geo-2.png"
+    src="/images/somosLuca/geo-2.webp"
     alt=""
     width="150"
     height="400"
@@ -68,13 +68,13 @@ const heroGifSrc = '/gif/somosLuca/hero.gif';
     box-sizing: border-box;
   }
 
-  /* Solo hero-bg.png (sin color de relleno): cover + anclaje abajo */
+  /* Solo hero-bg.webp (sin color de relleno): cover + anclaje abajo */
   .somos-luca-hero__layer {
     position: absolute;
     inset: 0;
     z-index: 0;
     pointer-events: none;
-    background-image: url('/images/somosLuca/hero-bg.png');
+    background-image: url('/images/somosLuca/hero-bg.webp');
     background-repeat: no-repeat;
     background-position: center bottom;
     background-size: cover;

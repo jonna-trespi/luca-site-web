@@ -6,11 +6,16 @@
     "dev": "astro dev",
     "start": "astro dev",
     "build": "astro build",
-    "preview": "astro preview"
+    "preview": "astro preview",
+    "optimize:public": "node scripts/optimize-public-assets.mjs"
   },
   "dependencies": {
     "astro": "^4.16.0",
     "csv-parse": "^6.2.1",
     "sanitize-html": "^2.17.2"
+  },
+  "devDependencies": {
+    "ffmpeg-static": "^5.3.0",
+    "sharp": "^0.34.5"
   }
 }

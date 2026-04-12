@@ -1,8 +1,8 @@
 ---
 /**
  * Hero: sección principal con headline, subtítulo e imagen central.
- * Fondo hero-bg.jpg (degradado azul–púrpura), ola blanca inferior,
- * imagen de sujetos (hero-image.png) y geometrico-1 al borde izquierdo (solo desde tablet).
+ * Fondo hero-bg.webp (degradado azul–púrpura), ola blanca inferior,
+ * imagen de sujetos (hero-image.webp) y geometrico-1 al borde izquierdo (solo desde tablet).
  */
 ---
 
@@ -12,7 +12,7 @@
   <!-- Solo tablet/desktop: en móvil el copy va centrado y este recurso chocaba con el título -->
   <div class="hero__bg-geo" aria-hidden="true">
     <picture>
-      <source media="(min-width: 768px)" srcset="/images/home/geometrico-1.png" />
+      <source media="(min-width: 768px)" srcset="/images/home/geometrico-1.webp" />
       <img
         src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg'/%3E"
         alt=""
@@ -67,7 +67,7 @@
         aria-hidden="true"
       />
       <img
-        src="/images/home/hero-image.png"
+        src="/images/home/hero-image.webp"
         alt="Dos estudiantes: un joven con gafas y mochila sosteniendo libros, una niña con trenzas sosteniendo una tablet, sonriendo"
         width="800"
         height="600"
@@ -110,7 +110,7 @@
     right: 0;
     height: 76%;
     z-index: 0;
-    background-image: url('/images/home/hero-bg.jpg');
+    background-image: url('/images/home/hero-bg.webp');
     background-size: cover;
     background-position: center top;
     background-repeat: no-repeat;
