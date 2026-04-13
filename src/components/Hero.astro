@@ -1,13 +1,23 @@
 ---
 /**
  * Hero: sección principal con headline, subtítulo e imagen central.
- * Fondo hero-bg.webp (degradado azul–púrpura), ola blanca inferior,
+ * Fondo hero-bg.webp como <img> (LCP / fetchpriority), ola blanca inferior,
  * imagen de sujetos (hero-image.webp) y geometrico-1 al borde izquierdo (solo desde tablet).
  */
 ---
 
 <section class="hero">
-  <div class="hero__bg" aria-hidden="true"></div>
+  <div class="hero__bg" aria-hidden="true">
+    <img
+      class="hero__bg-img"
+      src="/images/home/hero-bg.webp"
+      alt=""
+      width="1920"
+      height="1080"
+      fetchpriority="high"
+      decoding="async"
+    />
+  </div>
   <!-- Decorativo: mismo anclaje horizontal que el fondo (borde izquierdo del hero) -->
   <!-- Solo tablet/desktop: en móvil el copy va centrado y este recurso chocaba con el título -->
   <div class="hero__bg-geo" aria-hidden="true">
@@ -110,10 +120,17 @@
     right: 0;
     height: 76%;
     z-index: 0;
-    background-image: url('/images/home/hero-bg.webp');
-    background-size: cover;
-    background-position: center top;
-    background-repeat: no-repeat;
+    overflow: hidden;
+    pointer-events: none;
+  }
+
+  .hero__bg-img {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    object-position: center top;
   }
 
   /* Geometrico: borde izquierdo + alineado al copy (solo ≥768px; en móvil oculto) */

@@ -2,8 +2,7 @@
    Variables y estilos globales - Luca Landing
    ========================================================================== */
 
-/* Importar tipografía */
-@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap');
+/* Tipografía: se carga desde <link> en Layout.astro (evita @import bloqueante). */
 
 /* --------------------------------------------------------------------------
    Variables CSS (paleta y layout)

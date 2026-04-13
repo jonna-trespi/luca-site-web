@@ -33,6 +33,8 @@ const stats = [
 ] as const;
 
 const demoVideoSrc = '/videos/demo-general.mp4';
+/** Poster hasta que el vídeo entre en vista (preload none). */
+const demoVideoPoster = '/images/home/edtech-2.webp';
 ---
 
 <section class="diferencia">
@@ -59,12 +61,13 @@ const demoVideoSrc = '/videos/demo-general.mp4';
       />
       <div class="diferencia__video-wrap">
         <video
+          id="diferencia-demo-video"
           class="diferencia__screen-video"
           muted
           playsinline
-          autoplay
           loop
-          preload="metadata"
+          preload="none"
+          poster={demoVideoPoster}
           aria-label="Demostración general de la plataforma Luca"
         >
           <source src={demoVideoSrc} type="video/mp4" />
@@ -132,8 +135,6 @@ const demoVideoSrc = '/videos/demo-general.mp4';
 </section>
 
 <style>
-  @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@600&display=swap');
-
   .diferencia {
     width: 100%;
     background-color: #ffffff;
@@ -488,5 +489,37 @@ const demoVideoSrc = '/videos/demo-general.mp4';
     );
 
     obs.observe(root);
+  })();
+
+  (function () {
+    const video = document.getElementById('diferencia-demo-video') as HTMLVideoElement | null;
+    if (!video) return;
+
+    if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+      return;
+    }
+
+    const tryPlay = () => {
+      video.play().catch(() => {});
+    };
+
+    if (!('IntersectionObserver' in window)) {
+      tryPlay();
+      return;
+    }
+
+    const io = new IntersectionObserver(
+      (entries) => {
+        for (const e of entries) {
+          if (!e.isIntersecting) continue;
+          io.disconnect();
+          tryPlay();
+          return;
+        }
+      },
+      { rootMargin: '120px', threshold: 0.12 }
+    );
+
+    io.observe(video);
   })();
 </script>

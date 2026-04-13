@@ -4,8 +4,6 @@
  */
 ---
 
-<script src="https://www.google.com/recaptcha/api.js" async defer></script>
-
 <div class="demo-modal" id="demo-modal" data-demo-modal hidden aria-hidden="true">
   <div class="demo-modal__backdrop" data-demo-modal-close tabindex="-1" aria-hidden="true"></div>
   <div
@@ -155,12 +153,7 @@
             <input id="luca-demo-interes" name="00NVs00000NhrnZ" type="text" placeholder="¿En qué podemos ayudarte?" />
           </div>
           <div class="form-group recaptcha-wrapper">
-            <div
-              class="g-recaptcha"
-              data-sitekey="6LeooTssAAAAAFQtKU81E09Gciz5jZDlgt9JS3cd"
-              data-callback="recaptchaCallback"
-            >
-            </div>
+            <div id="luca-demo-recaptcha-mount" class="g-recaptcha"></div>
           </div>
         </div>
       </form>
@@ -438,17 +431,81 @@
 
 <script>
   (function () {
+    const RECAPTCHA_SITEKEY = '6LeooTssAAAAAFQtKU81E09Gciz5jZDlgt9JS3cd';
+
     const root = document.getElementById('demo-modal');
     const panel = root?.querySelector<HTMLElement>('.demo-modal__panel');
     if (!root || !panel) return;
 
     let lastFocus: HTMLElement | null = null;
+    let recaptchaRendered = false;
+
+    function loadRecaptchaScript(): Promise<void> {
+      const w = window as Window & { grecaptcha?: { render: (el: HTMLElement | string, opts: object) => number } };
+      if (w.grecaptcha?.render) return Promise.resolve();
+
+      const existing = document.querySelector<HTMLScriptElement>('script[data-luca-recaptcha-api]');
+      if (existing) {
+        return new Promise((resolve, reject) => {
+          const finish = () => {
+            if (w.grecaptcha?.render) resolve();
+            else reject(new Error('grecaptcha missing'));
+          };
+          if (existing.dataset.loaded === '1') {
+            finish();
+            return;
+          }
+          existing.addEventListener('load', () => {
+            existing.dataset.loaded = '1';
+            finish();
+          });
+          existing.addEventListener('error', () => reject(new Error('recaptcha script')));
+        });
+      }
+
+      return new Promise((resolve, reject) => {
+        const s = document.createElement('script');
+        s.src = 'https://www.google.com/recaptcha/api.js?render=explicit';
+        s.async = true;
+        s.defer = true;
+        s.dataset.lucaRecaptchaApi = '';
+        s.onload = () => {
+          s.dataset.loaded = '1';
+          resolve();
+        };
+        s.onerror = () => reject(new Error('recaptcha script'));
+        document.head.appendChild(s);
+      });
+    }
+
+    function renderRecaptchaWidget() {
+      const w = window as Window & {
+        grecaptcha?: { render: (el: HTMLElement | string, opts: object) => number };
+        recaptchaCallback?: () => void;
+      };
+      const mount = document.getElementById('luca-demo-recaptcha-mount');
+      if (!mount || recaptchaRendered || !w.grecaptcha?.render) return;
+      w.grecaptcha.render(mount, {
+        sitekey: RECAPTCHA_SITEKEY,
+        callback: () => w.recaptchaCallback?.(),
+      });
+      recaptchaRendered = true;
+    }
+
+    function ensureRecaptcha() {
+      void loadRecaptchaScript()
+        .then(() => {
+          renderRecaptchaWidget();
+        })
+        .catch(() => {});
+    }
 
     const open = () => {
       lastFocus = document.activeElement as HTMLElement;
       root.hidden = false;
       root.setAttribute('aria-hidden', 'false');
       document.body.style.overflow = 'hidden';
+      ensureRecaptcha();
       const firstFocus =
         panel.querySelector<HTMLElement>('#luca-demo-multi-toggle, input, select, textarea, button') ||
         panel;
