@@ -4,6 +4,7 @@ import DemoModal from './DemoModal.astro';
  * Header: pill flotante sobre el hero, fixed para que no ocupe flujo.
  * Programas / Perfiles / Recursos + Login: hover en desktop; click en móvil.
  * Recursos: Blog → /blog, FAQ → /faqs; triggers mega siguen con # donde aplique.
+ * Icono mega: mismo trazo que public/icons/transversal/arrow-down-icon.svg (inline + currentColor).
  */
 ---
 
@@ -25,7 +26,25 @@ import DemoModal from './DemoModal.astro';
             id="mega-programas-btn"
           >
             Programas
-            <span class="header__nav-chevron" aria-hidden="true"></span>
+            <span class="header__nav-chevron" aria-hidden="true">
+              <svg
+                class="header__nav-chevron-svg"
+                width="24"
+                height="24"
+                viewBox="0 0 24 24"
+                fill="none"
+                xmlns="http://www.w3.org/2000/svg"
+                aria-hidden="true"
+              >
+                <path
+                  d="M19 8.5C19 8.5 14.856 15.5 12 15.5C9.145 15.5 5 8.5 5 8.5"
+                  stroke="currentColor"
+                  stroke-width="1.5"
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                />
+              </svg>
+            </span>
           </a>
           <div class="header__mega" id="mega-programas" role="region" aria-labelledby="mega-programas-btn">
             <ul class="header__mega-list">
@@ -61,7 +80,25 @@ import DemoModal from './DemoModal.astro';
             id="mega-perfiles-btn"
           >
             Perfiles
-            <span class="header__nav-chevron" aria-hidden="true"></span>
+            <span class="header__nav-chevron" aria-hidden="true">
+              <svg
+                class="header__nav-chevron-svg"
+                width="24"
+                height="24"
+                viewBox="0 0 24 24"
+                fill="none"
+                xmlns="http://www.w3.org/2000/svg"
+                aria-hidden="true"
+              >
+                <path
+                  d="M19 8.5C19 8.5 14.856 15.5 12 15.5C9.145 15.5 5 8.5 5 8.5"
+                  stroke="currentColor"
+                  stroke-width="1.5"
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                />
+              </svg>
+            </span>
           </a>
           <div class="header__mega" id="mega-perfiles" role="region" aria-labelledby="mega-perfiles-btn">
             <ul class="header__mega-list">
@@ -110,7 +147,25 @@ import DemoModal from './DemoModal.astro';
             id="mega-recursos-btn"
           >
             Recursos
-            <span class="header__nav-chevron" aria-hidden="true"></span>
+            <span class="header__nav-chevron" aria-hidden="true">
+              <svg
+                class="header__nav-chevron-svg"
+                width="24"
+                height="24"
+                viewBox="0 0 24 24"
+                fill="none"
+                xmlns="http://www.w3.org/2000/svg"
+                aria-hidden="true"
+              >
+                <path
+                  d="M19 8.5C19 8.5 14.856 15.5 12 15.5C9.145 15.5 5 8.5 5 8.5"
+                  stroke="currentColor"
+                  stroke-width="1.5"
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                />
+              </svg>
+            </span>
           </a>
           <div class="header__mega" id="mega-recursos" role="region" aria-labelledby="mega-recursos-btn">
             <ul class="header__mega-list">
@@ -399,21 +454,25 @@ import DemoModal from './DemoModal.astro';
       pointer-events: auto;
     }
 
-    .header__nav-item--mega:hover > .header__nav-link .header__nav-chevron {
-      transform: rotate(-135deg);
-      margin-bottom: -0.1em;
+    .header__nav-item--mega:hover > .header__nav-link .header__nav-chevron-svg {
+      transform: rotate(180deg);
     }
   }
 
   .header__nav-chevron {
-    width: 0.4em;
-    height: 0.4em;
-    border-right: 2px solid currentColor;
-    border-bottom: 2px solid currentColor;
-    transform: rotate(45deg);
-    margin-bottom: 0.15em;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
     flex-shrink: 0;
-    transition: transform 0.2s ease, margin-bottom 0.2s ease;
+    line-height: 0;
+  }
+
+  .header__nav-chevron-svg {
+    display: block;
+    width: 1.125rem;
+    height: 1.125rem;
+    transform: rotate(0deg);
+    transition: transform 0.2s ease;
   }
 
   /* Login button no tiene chevron en el diseño; el panel se abre con el mismo patrón */
@@ -706,9 +765,8 @@ import DemoModal from './DemoModal.astro';
       display: block;
     }
 
-    .header__nav-item--mega.header__nav-item--open > .header__nav-link .header__nav-chevron {
-      transform: rotate(-135deg);
-      margin-bottom: -0.1em;
+    .header__nav-item--mega.header__nav-item--open > .header__nav-link .header__nav-chevron-svg {
+      transform: rotate(180deg);
     }
 
     .header__mega--login {

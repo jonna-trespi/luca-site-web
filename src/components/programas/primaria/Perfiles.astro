@@ -19,8 +19,8 @@ const tabPanels = [
     image: {
       src: '/images/programas/primaria/per-image-1.webp',
       alt: 'Panel de reportes y métricas Luca en pantalla',
-      width: 1214,
-      height: 808,
+      width: 'auto',
+      height: 800,
     },
     geo: {
       src: '/images/programas/primaria/per-geo-1.webp',
@@ -330,12 +330,15 @@ const tabPanels = [
   .perfiles__tabs {
     display: flex;
     flex-wrap: nowrap;
-    align-items: stretch;
     gap: 12px;
     min-width: min-content;
     justify-content: center;
   }
 
+  /*
+   * Tabs (mismas medidas y espaciado que programas/preescolar/Perfiles.astro):
+   * 45px alto; gap 12px entre tabs; icono 22px y gap 14px respecto al texto.
+   */
   .perfiles__tab.btn-cta-animated::before,
   .perfiles__tab.btn-cta-animated::after {
     display: none;
@@ -347,32 +350,29 @@ const tabPanels = [
   }
 
   .perfiles__tab.btn-base {
-    box-sizing: border-box;
-    max-width: 200px;
-    min-width: 0;
-    flex: 0 1 auto;
+    width: min(280px, 100%);
+    max-width: 100%;
+    flex: 0 0 auto;
+    height: 45px;
     min-height: 45px;
-    height: auto;
-    padding: 8px 12px 8px 8px;
+    padding: 0 1rem 0 5px;
     border-radius: 10px;
     justify-content: flex-start;
-    align-items: center;
     font-family: var(--font-family-base);
     font-weight: var(--text-body-primary-weight);
     font-size: var(--text-body-primary-size);
     letter-spacing: var(--text-body-primary-spacing);
-    line-height: 1.25;
-    white-space: normal;
+    line-height: var(--text-body-primary-line);
     border: 2px solid transparent;
     gap: 0;
-    text-align: left;
+    box-sizing: border-box;
   }
 
   .perfiles__tab-inner {
     display: inline-flex;
     align-items: center;
     justify-content: flex-start;
-    gap: 10px;
+    gap: 14px;
     width: 100%;
     min-width: 0;
   }
@@ -388,9 +388,6 @@ const tabPanels = [
   .perfiles__tab-label {
     position: relative;
     z-index: 1;
-    flex: 1;
-    min-width: 0;
-    overflow-wrap: break-word;
   }
 
   .perfiles__tab.btn-primary {
@@ -553,8 +550,8 @@ const tabPanels = [
   .perfiles__panel-img {
     display: block;
     width: 100%;
-    max-width: 450px;
-    height: auto;
+    height: 100%;
+    max-height: 350px;
     margin-inline: auto;
     border-radius: 16px;
     object-fit: cover;
@@ -597,11 +594,6 @@ const tabPanels = [
 
     .perfiles__tab-inner {
       justify-content: center;
-      text-align: center;
-    }
-
-    .perfiles__tab-label {
-      text-align: center;
     }
   }
 
@@ -612,13 +604,11 @@ const tabPanels = [
 
     .perfiles__tabs-wrap {
       overflow-x: visible;
-      flex-wrap: wrap;
     }
 
     .perfiles__tabs {
       flex-direction: row;
-      flex-wrap: wrap;
-      justify-content: center;
+      flex-wrap: nowrap;
     }
 
     .perfiles__card-content {

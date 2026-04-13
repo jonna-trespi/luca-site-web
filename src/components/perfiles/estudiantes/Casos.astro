@@ -99,7 +99,15 @@ const caseCount = cases.length;
                       </div>
                       <button type="button" class="btn-terciary" data-casos-youtube={c.youtubeId}>
                         Ver testimonio
-                        <span class="btn-terciary-icon" aria-hidden="true"></span>
+                        <span class="btn-terciary-icon btn-terciary-icon--multimedia" aria-hidden="true">
+                          <img
+                            src="/icons/transversal/multimedia.svg"
+                            alt=""
+                            width="20"
+                            height="20"
+                            decoding="async"
+                          />
+                        </span>
                       </button>
                     </div>
                   </div>
@@ -683,6 +691,24 @@ const caseCount = cases.length;
 
   .casos__footer .btn-terciary {
     flex-shrink: 0;
+  }
+
+  .casos__footer .btn-terciary .btn-terciary-icon--multimedia {
+    background-color: transparent;
+    -webkit-mask-image: none;
+    mask-image: none;
+    width: 20px;
+    height: 20px;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    line-height: 0;
+  }
+
+  .casos__footer .btn-terciary .btn-terciary-icon--multimedia img {
+    display: block;
+    width: 20px;
+    height: 20px;
   }
 
   @media (max-width: 767px) {
