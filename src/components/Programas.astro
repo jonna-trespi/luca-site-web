@@ -884,7 +884,8 @@
 
   /* Tablet y móvil: 3 cards en columna (sin carrusel horizontal que se corta ~800px) */
   @media (max-width: 1023px) {
-    .programas {
+    /* overflow solo en la fila de programas: si está en .programas rompe sticky del bloque EdTech */
+    .programas__cards {
       overflow-x: hidden;
     }
 
@@ -968,18 +969,16 @@
       cursor: pointer;
     }
 
-    /* EdTech: sin sticky ni transform, lista simple */
+    /* EdTech: misma animación stacked que desktop (sticky + --stack en scroll) */
     .stacked-cards-wrapper {
-      padding-bottom: 0;
+      padding-bottom: 10vh;
     }
 
     .card-item {
-      position: static;
-      margin-bottom: 1.5rem;
+      margin-bottom: 2rem;
     }
 
     .card-item__inner {
-      transform: none;
       padding: 1.5rem;
       gap: 1.25rem;
     }
@@ -1115,14 +1114,12 @@
 
     const cards = Array.from(wrapper.querySelectorAll('.card-item[data-card]'));
     const stickyTopPx = () => window.innerHeight * 0.1;
-    const overlapRange = 250;
+    const overlapRange = () =>
+      window.innerWidth <= 1023 ? Math.min(250, Math.max(160, window.innerHeight * 0.32)) : 250;
 
     function updateStack() {
-      if (window.innerWidth <= 1023) {
-        cards.forEach((card) => (card as HTMLElement).style.setProperty('--stack', '0'));
-        return;
-      }
       const top = stickyTopPx();
+      const range = overlapRange();
       cards.forEach((card, i) => {
         const next = cards[i + 1];
         const el = card as HTMLElement;
@@ -1131,7 +1128,7 @@
           return;
         }
         const nextRect = next.getBoundingClientRect();
-        const progress = 1 - (nextRect.top - top) / overlapRange;
+        const progress = 1 - (nextRect.top - top) / range;
         const value = Math.max(0, Math.min(1, progress));
         el.style.setProperty('--stack', String(value));
       });

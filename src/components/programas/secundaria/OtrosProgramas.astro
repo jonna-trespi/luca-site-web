@@ -80,16 +80,15 @@
       var stickyTopPx = function () {
         return window.innerHeight * 0.1;
       };
-      var overlapRange = 250;
+      var overlapRange = function () {
+        return window.innerWidth <= 1023
+          ? Math.min(250, Math.max(160, window.innerHeight * 0.32))
+          : 250;
+      };
 
       function updateStack() {
-        if (window.innerWidth <= 1023) {
-          cards.forEach(function (card) {
-            card.style.setProperty('--stack', '0');
-          });
-          return;
-        }
         var top = stickyTopPx();
+        var range = overlapRange();
         cards.forEach(function (card, i) {
           var next = cards[i + 1];
           if (!next) {
@@ -97,7 +96,7 @@
             return;
           }
           var nextRect = next.getBoundingClientRect();
-          var progress = 1 - (nextRect.top - top) / overlapRange;
+          var progress = 1 - (nextRect.top - top) / range;
           var value = Math.max(0, Math.min(1, progress));
           card.style.setProperty('--stack', String(value));
         });
@@ -273,6 +272,8 @@
   @media (max-width: 1023px) {
     .card-item__inner {
       grid-template-columns: 1fr;
+      padding: 1.5rem;
+      gap: 1.25rem;
     }
 
     .card-item__media {
@@ -284,18 +285,11 @@
     }
 
     .stacked-cards-wrapper {
-      padding-bottom: 0;
+      padding-bottom: 10vh;
     }
 
     .card-item {
-      position: static;
-      margin-bottom: 1.5rem;
-    }
-
-    .card-item__inner {
-      transform: none;
-      padding: 1.5rem;
-      gap: 1.25rem;
+      margin-bottom: 2rem;
     }
 
     .card-item__image {
