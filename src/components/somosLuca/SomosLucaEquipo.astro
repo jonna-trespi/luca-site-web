@@ -1,6 +1,6 @@
 ---
 /**
- * Somos Luca — Staff educativo: carrusel horizontal con tarjetas (hover: -10°, fondo y descripción).
+ * Somos Luca — Staff educativo: carrusel horizontal con tarjetas (hover: fondo y descripción).
  */
 const team = [
   {
@@ -179,7 +179,8 @@ const team = [
     padding: 0.5rem 0 1rem;
     display: flex;
     flex-direction: row;
-    align-items: stretch;
+    /* flex-start: solo la tarjeta en hover crece con la descripción; no igualan altura todas */
+    align-items: flex-start;
     gap: clamp(1rem, 2.5vw, 1.5rem);
     width: max-content;
     min-width: 100%;
@@ -193,11 +194,11 @@ const team = [
     outline: none;
     display: flex;
     flex-direction: column;
-    align-self: stretch;
+    align-self: flex-start;
   }
 
   .somos-luca-equipo__card-inner {
-    flex: 1 1 auto;
+    flex: 0 1 auto;
     display: flex;
     flex-direction: column;
     min-height: 0;
@@ -207,15 +208,12 @@ const team = [
     box-shadow: 0 8px 28px rgba(0, 0, 0, 0.08);
     box-sizing: border-box;
     transition:
-      transform 0.4s cubic-bezier(0.34, 1.2, 0.52, 1),
       background-color 0.35s ease,
       box-shadow 0.35s ease;
-    transform-origin: center center;
   }
 
   .somos-luca-equipo__card:hover .somos-luca-equipo__card-inner,
   .somos-luca-equipo__card:focus-within .somos-luca-equipo__card-inner {
-    transform: rotate(-10deg);
     background-color: var(--equipo-hover-bg, #fff8e7);
     box-shadow: 0 16px 40px rgba(40, 48, 148, 0.14);
   }
@@ -288,11 +286,6 @@ const team = [
   @media (prefers-reduced-motion: reduce) {
     .somos-luca-equipo__card-inner {
       transition: background-color 0.2s ease, box-shadow 0.2s ease;
-    }
-
-    .somos-luca-equipo__card:hover .somos-luca-equipo__card-inner,
-    .somos-luca-equipo__card:focus-within .somos-luca-equipo__card-inner {
-      transform: none;
     }
 
     .somos-luca-equipo__desc {

@@ -3,6 +3,13 @@
  * Clientes: sección de logos de instituciones.
  * Fondo blanco full width; contenido centrado con .layout-container.
  */
+interface Props {
+  /** Por defecto coincide con el HOME. */
+  title?: string;
+}
+
+const { title = 'Elegida por instituciones que lideran la educación en México.' } = Astro.props;
+
 const logosColegios = [
   { file: "1_100px_Colegio Frances del Pedregal.webp", alt: "Colegio Francés del Pedregal" },
   { file: "2_100px_Colegio Loyola.webp", alt: "Colegio Loyola" },
@@ -29,9 +36,7 @@ const logosBasePath = "/logos/home/logos-colegios/";
 
 <section class="clientes">
   <div class="clientes__inner layout-container">
-    <p class="clientes__title">
-      Elegida por instituciones que lideran la educación en México.
-    </p>
+    <p class="clientes__title">{title}</p>
     <div class="clientes__carousel" aria-hidden="true">
       <div class="clientes__track">
         <ul class="clientes__list" aria-label="Instituciones que confían en Luca">

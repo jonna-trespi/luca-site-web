@@ -60,7 +60,7 @@ const heroImageSrc = '/images/perfiles/directores/image-hero.webp';
   }
 
   .perfil-directores-hero__strip {
-    width: 80%;
+    width: 85%;
     max-width: 100%;
     margin-left: auto;
     margin-right: auto;
@@ -71,7 +71,7 @@ const heroImageSrc = '/images/perfiles/directores/image-hero.webp';
     padding-bottom: clamp(2.5rem, 6vw, 4rem);
     padding-left: 0;
     padding-right: 0;
-    border-radius: 32px;
+    border-radius: 0 0 32px 32px;
     box-sizing: border-box;
   }
 
@@ -132,11 +132,8 @@ const heroImageSrc = '/images/perfiles/directores/image-hero.webp';
     gap: clamp(0.5rem, 2vw, 1rem);
     max-width: 100%;
     min-width: 0;
-    overflow-x: auto;
-    overflow-y: hidden;
-    padding-bottom: 2px;
-    scrollbar-width: thin;
-    -webkit-overflow-scrolling: touch;
+    overflow-x: visible;
+    overflow-y: visible;
   }
 
   .perfil-directores-hero__ctas .btn-base {
@@ -189,14 +186,17 @@ const heroImageSrc = '/images/perfiles/directores/image-hero.webp';
   }
 
   @media (min-width: 768px) {
-    .perfil-directores-hero__strip {
-      padding-top: calc(1.5rem + 80px + 128px);
+
+    /* Más aire para copy + CTAs en una sola fila; columna fija 420px para la imagen */
+    .perfil-directores-hero__row {
+      grid-template-columns: minmax(0, 1fr) 420px;
+      gap: clamp(1.25rem, 3vw, 2.25rem);
+      align-items: center;
     }
 
-    .perfil-directores-hero__row {
-      grid-template-columns: minmax(0, 52fr) minmax(0, 48fr);
-      gap: clamp(1.5rem, 4vw, 2.75rem);
-      align-items: center;
+    .perfil-directores-hero__content {
+      min-width: 0;
+      padding-right: 0;
     }
 
     .perfil-directores-hero__title {
@@ -207,14 +207,24 @@ const heroImageSrc = '/images/perfiles/directores/image-hero.webp';
       margin-bottom: clamp(1.25rem, 3.5vw, 2.25rem);
     }
 
-    .perfil-directores-hero__image {
-      max-height: clamp(320px, 42vw, 560px);
+    .perfil-directores-hero__ctas {
+      flex-wrap: nowrap;
+      overflow-x: visible;
     }
-  }
 
-  @media (min-width: 1025px) {
-    .perfil-directores-hero__strip {
-      padding-top: calc(2rem + 80px + 128px);
+    /* Imagen 420px al borde derecho del strip (entra en el padding lateral del layout-container) */
+    .perfil-directores-hero__media {
+      width: calc(100% + var(--layout-padding-x));
+      max-width: calc(420px + var(--layout-padding-x));
+      margin-right: calc(-1 * var(--layout-padding-x));
+      justify-content: flex-end;
+      align-items: flex-end;
+    }
+
+    .perfil-directores-hero__image {
+      width: 100%;
+      max-width: 420px;
+      max-height: clamp(320px, 42vw, 560px);
     }
   }
 
@@ -225,16 +235,29 @@ const heroImageSrc = '/images/perfiles/directores/image-hero.webp';
       margin-left: 0;
       margin-right: 0;
       border-radius: 0 0 28px 28px;
+      /* Pastilla fija (~0.5rem + 64px + 0.5rem) + ~80px hasta el label */
+      padding-top: calc(0.5rem + 64px + 0.5rem + 80px);
     }
 
     .perfil-directores-hero__inner.layout-container {
       max-width: none;
-      padding-left: clamp(1rem, 4vw, 1.25rem);
-      padding-right: clamp(1rem, 4vw, 1.25rem);
+      padding-left: 0;
+      padding-right: 0;
     }
 
     .perfil-directores-hero__row {
       align-items: start;
+    }
+
+    /* Copy + CTAs: 16px laterales (coincide con pedido de márgenes al texto) */
+    .perfil-directores-hero__content {
+      padding-left: 24px;
+      padding-right: 24px;
+    }
+
+    /* Menos aire entre etiqueta "Directores" y el H1 */
+    .perfil-directores-hero__content .programas__label {
+      margin-bottom: 0.5rem;
     }
 
     .perfil-directores-hero__title,
@@ -250,9 +273,47 @@ const heroImageSrc = '/images/perfiles/directores/image-hero.webp';
       margin-bottom: clamp(1rem, 3vw, 1.5rem);
     }
 
+    /* CTAs en columna, ancho del bloque de copy (respeta padding 16px del header) */
+    .perfil-directores-hero__ctas {
+      flex-direction: column;
+      align-items: stretch;
+      flex-wrap: nowrap;
+      width: 100%;
+      max-width: none;
+      margin-left: 0;
+      margin-right: 0;
+      overflow-x: visible;
+      gap: 0.75rem;
+      box-sizing: border-box;
+    }
+
+    .perfil-directores-hero__ctas .btn-base {
+      flex: 1 1 auto;
+      width: 100%;
+      max-width: none;
+      white-space: normal;
+      box-sizing: border-box;
+    }
+
+    /* Imagen a ancho de franja (inner sin padding lateral en móvil) */
     .perfil-directores-hero__media {
+      width: 100%;
+      max-width: none;
+      margin-left: 0;
+      margin-right: 0;
       justify-content: flex-end;
       align-items: flex-end;
+    }
+
+    .perfil-directores-hero__image {
+      width: 100%;
+      max-width: none;
+      height: auto;
+      max-height: clamp(300px, 92vw, 460px);
+      object-fit: contain;
+      object-position: right bottom;
+      margin-left: 0;
+      margin-right: 0;
     }
   }
 </style>

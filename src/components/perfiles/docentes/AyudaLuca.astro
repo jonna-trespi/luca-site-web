@@ -195,6 +195,26 @@ const items = gifFiles.map((file, i) => ({
     max-width: 22rem;
   }
 
+  @media (max-width: 767px) {
+    .perfil-docentes-ayuda-luca {
+      padding: 56px 0 64px;
+    }
+
+    .perfil-docentes-ayuda-luca__inner.layout-container {
+      max-width: none;
+      padding-left: 24px;
+      padding-right: 24px;
+    }
+
+    .perfil-docentes-ayuda-luca__title {
+      margin-bottom: 40px;
+    }
+
+    .perfil-docentes-ayuda-luca__card {
+      padding: 32px 24px;
+    }
+  }
+
   @media (min-width: 640px) {
     .perfil-docentes-ayuda-luca__grid {
       grid-template-columns: repeat(2, 1fr);

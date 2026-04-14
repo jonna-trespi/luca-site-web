@@ -8,9 +8,9 @@ const heroImageSrc = '/images/perfiles/estudiantes/image-hero.webp';
 
 <section class="perfil-estudiantes-hero">
   <div class="perfil-estudiantes-hero__strip">
-
-    <div class="perfil-estudiantes-hero__row">
-      <header class="perfil-estudiantes-hero__content">
+    <div class="perfil-estudiantes-hero__inner layout-container">
+      <div class="perfil-estudiantes-hero__row">
+        <header class="perfil-estudiantes-hero__content">
           <p class="programas__label programas__label--align-start">
             <span class="programas__label-dot" aria-hidden="true"></span>
             Estudiantes
@@ -24,11 +24,11 @@ const heroImageSrc = '/images/perfiles/estudiantes/image-hero.webp';
           <div class="perfil-estudiantes-hero__ctas">
             <a href="#" class="btn-base btn-primary btn-cta-animated" data-open-demo-modal>
               <span>Solicita tu demo</span>
-              <span class="perfil-estudiantes-hero__btn-icon icon-arrow" aria-hidden="true"></span>
+              <span class="perfil-estudiantes-hero__btn-icon" aria-hidden="true"></span>
             </a>
             <a href="#" class="btn-base btn-secondary btn-cta-animated">
               <span>Ingresa a la plataforma</span>
-              <span class="perfil-estudiantes-hero__btn-icon icon-arrow" aria-hidden="true"></span>
+              <span class="perfil-estudiantes-hero__btn-icon" aria-hidden="true"></span>
             </a>
           </div>
         </header>
@@ -43,6 +43,7 @@ const heroImageSrc = '/images/perfiles/estudiantes/image-hero.webp';
             decoding="async"
           />
         </div>
+      </div>
     </div>
   </div>
 </section>
@@ -53,49 +54,29 @@ const heroImageSrc = '/images/perfiles/estudiantes/image-hero.webp';
     background-color: #ffffff;
     padding: 0;
     position: relative;
+    overflow-x: hidden;
     box-sizing: border-box;
   }
 
   .perfil-estudiantes-hero__strip {
-    width: 80%;
+    width: 85%;
     max-width: 100%;
     margin-left: auto;
     margin-right: auto;
     background-color: #3843d0;
     position: relative;
     overflow: hidden;
-    padding-top: calc(1rem + 64px + 80px);
-    padding-bottom: clamp(2.5rem, 5vw, 4rem);
-    /* La imagen sigue al borde derecho; el aire del texto lo da la columna izquierda */
+    padding-top: calc(1rem + 64px + 128px);
+    padding-bottom: clamp(2.5rem, 6vw, 4rem);
     padding-left: 0;
     padding-right: 0;
-    border-radius: 0 0 50px 50px;
+    border-radius: 0 0 32px 32px;
     box-sizing: border-box;
   }
 
-  .perfil-estudiantes-hero__deco {
-    position: absolute;
-    display: block;
-    width: auto;
-    height: auto;
-    pointer-events: none;
-    user-select: none;
-    object-fit: contain;
-    z-index: 0;
-  }
-
-  .perfil-estudiantes-hero__deco--geo1 {
-    right: 0;
-    top: 0;
-    max-width: 380px;
-    width: min(380px, 92vw);
-  }
-
-  .perfil-estudiantes-hero__deco--geo2 {
-    left: 0;
-    bottom: 0;
-    max-width: 400px;
-    width: min(400px, 92vw);
+  .perfil-estudiantes-hero__inner {
+    position: relative;
+    z-index: 1;
   }
 
   .programas__label--align-start {
@@ -113,23 +94,23 @@ const heroImageSrc = '/images/perfiles/estudiantes/image-hero.webp';
     display: grid;
     grid-template-columns: 1fr;
     gap: 2rem;
-    align-items: start;
+    align-items: center;
     width: 100%;
     box-sizing: border-box;
   }
 
-  /* Inset generoso alineado con sensación de “layout-container”; separación hacia la imagen a la derecha */
   .perfil-estudiantes-hero__content {
     text-align: left;
     margin: 0;
     min-width: 0;
-    padding-left: clamp(1.75rem, 2rem + 4vw, 5.5rem);
-    padding-right: clamp(1.25rem, 2vw, 2.5rem);
+    padding-left: 0;
+    padding-right: 0;
     box-sizing: border-box;
   }
 
   .perfil-estudiantes-hero__title {
-    margin: 0 0 48px;
+    margin: 0 0 clamp(1rem, 3vw, 1.5rem);
+    max-width: 950px;
     color: #ffffff;
   }
 
@@ -138,20 +119,28 @@ const heroImageSrc = '/images/perfiles/estudiantes/image-hero.webp';
   }
 
   .perfil-estudiantes-hero__subtitle {
-    margin: 0 0 54px;
+    margin: 0 0 clamp(1.25rem, 4vw, 2.25rem);
+    max-width: 950px;
     color: #ffffff;
   }
 
   .perfil-estudiantes-hero__ctas {
     display: flex;
-    flex-wrap: wrap;
+    flex-wrap: nowrap;
     align-items: center;
-    gap: 1rem;
+    justify-content: flex-start;
+    gap: clamp(0.5rem, 2vw, 1rem);
+    max-width: 100%;
+    min-width: 0;
+    overflow-x: visible;
+    overflow-y: visible;
   }
 
-  /*
-   * CTAs alineados con HeroDocentes: base blanca / borde blanco, mismo gradiente 200% que global.css.
-   */
+  .perfil-estudiantes-hero__ctas .btn-base {
+    flex: 0 0 auto;
+    white-space: nowrap;
+  }
+
   .perfil-estudiantes-hero__ctas .btn-base.btn-primary {
     background-image: linear-gradient(
       to right,
@@ -183,10 +172,6 @@ const heroImageSrc = '/images/perfiles/estudiantes/image-hero.webp';
     border-color: var(--color-blue-secondary);
   }
 
-  /*
-   * Icono con máscara (sin círculo). Hover y animación: mismas reglas globales
-   * (.btn-primary / .btn-secondary / .btn-cta-animated + .icon-arrow).
-   */
   .perfil-estudiantes-hero__btn-icon {
     display: block;
     width: 1.25rem;
@@ -201,47 +186,159 @@ const heroImageSrc = '/images/perfiles/estudiantes/image-hero.webp';
     mask-position: center;
     -webkit-mask-size: contain;
     mask-size: contain;
+    transition: transform 0.2s ease;
+  }
+
+  .perfil-estudiantes-hero__ctas .btn-base:hover .perfil-estudiantes-hero__btn-icon {
+    transform: translateX(3px);
   }
 
   .perfil-estudiantes-hero__media {
     position: relative;
     z-index: 1;
     min-width: 0;
+    width: 100%;
     display: flex;
     justify-content: flex-end;
-    align-items: flex-start;
+    align-items: flex-end;
   }
 
   .perfil-estudiantes-hero__image {
-    width: 100%;
-    max-width: 500px;
+    width: auto;
+    max-width: min(500px, 100%);
     height: auto;
+    max-height: clamp(260px, 52vw, 560px);
     display: block;
     object-fit: contain;
+    object-position: right bottom;
+    margin-left: auto;
     margin-right: 0;
   }
 
   @media (min-width: 768px) {
+
+    .perfil-estudiantes-hero__row {
+      grid-template-columns: minmax(0, 1fr) 420px;
+      gap: clamp(1.25rem, 3vw, 2.25rem);
+      align-items: center;
+    }
+
+    .perfil-estudiantes-hero__content {
+      min-width: 0;
+      padding-right: 0;
+    }
+
+    .perfil-estudiantes-hero__title {
+      margin-bottom: clamp(1rem, 2.5vw, 1.5rem);
+    }
+
+    .perfil-estudiantes-hero__subtitle {
+      margin-bottom: clamp(1.25rem, 3.5vw, 2.25rem);
+    }
+
+    .perfil-estudiantes-hero__ctas {
+      flex-wrap: nowrap;
+      overflow-x: visible;
+    }
+
+    .perfil-estudiantes-hero__media {
+      width: calc(100% + var(--layout-padding-x));
+      max-width: calc(420px + var(--layout-padding-x));
+      margin-right: calc(-1 * var(--layout-padding-x));
+      justify-content: flex-end;
+      align-items: flex-end;
+    }
+
+    .perfil-estudiantes-hero__image {
+      width: 100%;
+      max-width: 420px;
+      max-height: clamp(320px, 42vw, 560px);
+    }
+  }
+
+
+
+  @media (max-width: 767px) {
     .perfil-estudiantes-hero__strip {
-      padding-top: calc(1.5rem + 80px + 80px);
+      width: 100%;
+      max-width: none;
+      margin-left: 0;
+      margin-right: 0;
+      border-radius: 0 0 28px 28px;
+      padding-top: calc(0.5rem + 64px + 0.5rem + 80px);
+    }
+
+    .perfil-estudiantes-hero__inner.layout-container {
+      max-width: none;
+      padding-left: 0;
+      padding-right: 0;
     }
 
     .perfil-estudiantes-hero__row {
-      /* 55% / 45% del ancho disponible (tras el gap); proporción 55fr : 45fr */
-      grid-template-columns: minmax(0, 55fr) minmax(0, 45fr);
-      gap: 2.5rem;
       align-items: start;
     }
 
     .perfil-estudiantes-hero__content {
-      padding-left: clamp(2.25rem, 2.5rem + 4.5vw, 6rem);
-      padding-right: clamp(1.5rem, 2vw, 2.75rem);
+      padding-left: 24px;
+      padding-right: 24px;
     }
-  }
 
-  @media (min-width: 1025px) {
-    .perfil-estudiantes-hero__strip {
-      padding-top: calc(2rem + 80px + 96px);
+    .perfil-estudiantes-hero__content .programas__label {
+      margin-bottom: 0.5rem;
+    }
+
+    .perfil-estudiantes-hero__title,
+    .perfil-estudiantes-hero__subtitle {
+      max-width: none;
+    }
+
+    .perfil-estudiantes-hero__title {
+      margin-bottom: clamp(1rem, 3vw, 1.25rem);
+    }
+
+    .perfil-estudiantes-hero__subtitle {
+      margin-bottom: clamp(1rem, 3vw, 1.5rem);
+    }
+
+    .perfil-estudiantes-hero__ctas {
+      flex-direction: column;
+      align-items: stretch;
+      flex-wrap: nowrap;
+      width: 100%;
+      max-width: none;
+      margin-left: 0;
+      margin-right: 0;
+      overflow-x: visible;
+      gap: 0.75rem;
+      box-sizing: border-box;
+    }
+
+    .perfil-estudiantes-hero__ctas .btn-base {
+      flex: 1 1 auto;
+      width: 100%;
+      max-width: none;
+      white-space: normal;
+      box-sizing: border-box;
+    }
+
+    .perfil-estudiantes-hero__media {
+      width: 100%;
+      max-width: none;
+      margin-left: 0;
+      margin-right: 0;
+      justify-content: flex-end;
+      align-items: flex-end;
+    }
+
+    .perfil-estudiantes-hero__image {
+      width: 100%;
+      max-width: none;
+      height: auto;
+      max-height: clamp(300px, 92vw, 460px);
+      object-fit: contain;
+      object-position: right bottom;
+      margin-left: 0;
+      margin-right: 0;
     }
   }
 </style>

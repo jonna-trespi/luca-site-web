@@ -84,13 +84,14 @@
   .somos-luca-vision {
     width: 100%;
     padding: clamp(3rem, 6vw, 5rem) 0 clamp(3.5rem, 7vw, 6rem);
+    padding-bottom: 0;
     background: var(--color-white);
     box-sizing: border-box;
   }
 
   .somos-luca-vision__header {
     text-align: center;
-    margin-bottom: clamp(2rem, 4vw, 3rem);
+    margin-bottom: 16px;
   }
 
   .somos-luca-vision__title {
@@ -303,7 +304,7 @@
 
     .somos-luca-vision__deck {
       flex-direction: column;
-      gap: 0;
+      gap: 1.25rem;
       align-items: center;
     }
 
@@ -316,17 +317,39 @@
 
     .somos-luca-vision__card--center {
       order: -1;
-      margin-bottom: -1.25rem !important;
       z-index: 2 !important;
     }
 
     .somos-luca-vision__card--left {
-      margin-bottom: -1.25rem !important;
       z-index: 1 !important;
     }
 
     .somos-luca-vision__card--right {
       z-index: 3 !important;
+    }
+
+    /* Altura al contenido; título y cuerpo con ~64px entre ellos (sin space-between) */
+    .somos-luca-vision__flip {
+      min-height: 0;
+    }
+
+    .somos-luca-vision__flip-inner {
+      min-height: 0;
+    }
+
+    .somos-luca-vision__flip-face {
+      position: relative;
+      inset: auto;
+      width: 100%;
+    }
+
+    .somos-luca-vision__flip-face--back {
+      display: none;
+    }
+
+    .somos-luca-vision__flip-face--front {
+      justify-content: flex-start;
+      gap: 64px;
     }
 
     .somos-luca-vision__card:hover,
@@ -348,11 +371,6 @@
     .somos-luca-vision__card:hover .somos-luca-vision__flip-face,
     .somos-luca-vision__card:focus-within .somos-luca-vision__flip-face {
       box-shadow: 0 18px 42px rgba(0, 0, 0, 0.16);
-    }
-
-    .somos-luca-vision__flip-face--back {
-      visibility: hidden;
-      pointer-events: none;
     }
 
     .somos-luca-vision__card {
