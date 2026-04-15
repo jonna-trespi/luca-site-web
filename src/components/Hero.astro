@@ -22,7 +22,7 @@
   <!-- Solo tablet/desktop: en móvil el copy va centrado y este recurso chocaba con el título -->
   <div class="hero__bg-geo" aria-hidden="true">
     <picture>
-      <source media="(min-width: 768px)" srcset="/images/home/geometrico-1.webp" />
+      <source media="(min-width: 1101px)" srcset="/images/home/geometrico-1.webp" />
       <img
         src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg'/%3E"
         alt=""
@@ -147,7 +147,7 @@
     line-height: 0;
   }
 
-  @media (min-width: 768px) {
+  @media (min-width: 1101px) {
     .hero__bg-geo {
       display: block;
     }
@@ -290,7 +290,7 @@
     display: block;
   }
 
-  @media (min-width: 768px) {
+  @media (min-width: 1101px) {
     .hero {
       min-height: 100vh;
       --hero-pad-top: calc(95px + 4.5rem);
@@ -311,7 +311,7 @@
   }
 
   /* Tablet (~800px): menos altura mínima, titular e imagen proporcionados al ancho */
-  @media (min-width: 768px) and (max-width: 1023px) {
+  @media (min-width: 1101px) and (max-width: 1199px) {
     .hero {
       --hero-pad-top: calc(88px + 2.25rem);
       --hero-geo-shift: clamp(1.65rem, 4.5vw, 3.25rem);
@@ -363,7 +363,7 @@
     }
   }
 
-  @media (min-width: 1024px) {
+  @media (min-width: 1101px) {
     .hero {
       --hero-pad-top: calc(95px + 5rem);
       --hero-geo-shift: clamp(2.75rem, 5vw, 5.25rem);
@@ -399,7 +399,7 @@
     }
   }
 
-  @media (max-width: 767px) {
+  @media (max-width: 1100px) {
     .hero {
       --hero-pad-top: calc(76px + 1.75rem);
     }

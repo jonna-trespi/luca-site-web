@@ -81,7 +81,7 @@
         return window.innerHeight * 0.1;
       };
       var overlapRange = function () {
-        return window.innerWidth <= 1023
+        return window.innerWidth <= 1100
           ? Math.min(250, Math.max(160, window.innerHeight * 0.32))
           : 250;
       };
@@ -253,7 +253,7 @@
     display: block;
   }
 
-  @media (min-width: 768px) {
+  @media (min-width: 1101px) {
     .otros-programas {
       padding: 2.5rem 0 0;
     }
@@ -263,13 +263,13 @@
     }
   }
 
-  @media (min-width: 1024px) {
+  @media (min-width: 1101px) {
     .otros-programas {
       padding: 3rem 0 0;
     }
   }
 
-  @media (max-width: 1023px) {
+  @media (max-width: 1100px) {
     .card-item__inner {
       grid-template-columns: 1fr;
       padding: 1.5rem;

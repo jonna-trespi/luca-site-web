@@ -770,7 +770,7 @@
     line-height: 0;
   }
 
-  @media (max-width: 767px) {
+  @media (max-width: 1100px) {
     .card-item__media-corner-gif {
       display: none;
     }
@@ -799,7 +799,7 @@
     }
   }
 
-  @media (min-width: 768px) {
+  @media (min-width: 1101px) {
     .programas {
       padding: 4rem 0;
     }
@@ -810,7 +810,7 @@
   }
 
   /* Habilidades: en tablet/móvil rejilla 2+1; en desktop fila con separadores */
-  @media (max-width: 1023px) {
+  @media (max-width: 1100px) {
     .programas__skills {
       display: grid;
       grid-template-columns: repeat(2, minmax(10.5rem, 1fr));
@@ -847,7 +847,7 @@
     }
   }
 
-  @media (min-width: 1024px) {
+  @media (min-width: 1101px) {
     .programas {
       padding: 5rem 0;
     }
@@ -862,7 +862,7 @@
     }
   }
 
-  @media (max-width: 1023px) {
+  @media (max-width: 1100px) {
     .card-item__inner {
       grid-template-columns: 1fr;
     }
@@ -883,7 +883,7 @@
   }
 
   /* Tablet y móvil: 3 cards en columna (sin carrusel horizontal que se corta ~800px) */
-  @media (max-width: 1023px) {
+  @media (max-width: 1100px) {
     /* overflow solo en la fila de programas: si está en .programas rompe sticky del bloque EdTech */
     .programas__cards {
       overflow-x: hidden;
@@ -989,7 +989,7 @@
   }
 
   /* Móvil (<768px): tarjetas a ancho completo, geométricos en esquina, texto uniforme, ilustración Secundaria acotada */
-  @media (max-width: 767px) {
+  @media (max-width: 1100px) {
     .programas__cards[data-active='kinder'] .programas__card--kinder,
     .programas__cards[data-active='primaria'] .programas__card--primaria,
     .programas__cards[data-active='secundaria'] .programas__card--secundaria {
@@ -1065,7 +1065,7 @@
       });
     };
 
-    const isMobile = () => window.matchMedia('(max-width: 1023px)').matches;
+    const isMobile = () => window.matchMedia('(max-width: 1100px)').matches;
 
     const programNav: Record<string, string> = {
       kinder: '/programas/preescolar',
@@ -1115,7 +1115,7 @@
     const cards = Array.from(wrapper.querySelectorAll('.card-item[data-card]'));
     const stickyTopPx = () => window.innerHeight * 0.1;
     const overlapRange = () =>
-      window.innerWidth <= 1023 ? Math.min(250, Math.max(160, window.innerHeight * 0.32)) : 250;
+      window.innerWidth <= 1100 ? Math.min(250, Math.max(160, window.innerHeight * 0.32)) : 250;
 
     function updateStack() {
       const top = stickyTopPx();

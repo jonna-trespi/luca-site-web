@@ -254,7 +254,7 @@ import DemoModal from './DemoModal.astro';
     const loginBtn = document.querySelector('#header-login-btn') as HTMLButtonElement | null;
     if (!header || !burger) return;
 
-    const isMobileNav = () => window.matchMedia('(max-width: 1023px)').matches;
+    const isMobileNav = () => window.matchMedia('(max-width: 1100px)').matches;
 
     const loginWrap = document.querySelector('[data-login-dropdown]');
 
@@ -447,7 +447,7 @@ import DemoModal from './DemoModal.astro';
     height: 16px;
   }
 
-  @media (min-width: 1024px) {
+  @media (min-width: 1101px) {
     .header__nav-item--mega:hover .header__mega {
       opacity: 1;
       visibility: visible;
@@ -504,7 +504,7 @@ import DemoModal from './DemoModal.astro';
     min-width: 220px;
   }
 
-  @media (min-width: 1024px) {
+  @media (min-width: 1101px) {
     .header__mega--login {
       opacity: 0;
       visibility: hidden;
@@ -714,7 +714,7 @@ import DemoModal from './DemoModal.astro';
     opacity: 1;
   }
 
-  @media (max-width: 1024px) {
+  @media (max-width: 1100px) {
     .header {
       padding: 0.75rem var(--layout-padding-x);
     }
@@ -748,7 +748,7 @@ import DemoModal from './DemoModal.astro';
     }
   }
 
-  @media (max-width: 1023px) {
+  @media (max-width: 1100px) {
     .header__nav-item--mega .header__mega {
       display: none;
       opacity: 1;
