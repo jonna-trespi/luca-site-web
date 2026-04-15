@@ -45,6 +45,9 @@ const ogImage = post.mainImage?.startsWith('http') ? post.mainImage : undefined;
                 {post.dateLabel}
               </time>
             ) : null}
+            {post.authorName ? (
+              <span class="blog-post__author text-body-primary">{post.authorName}</span>
+            ) : null}
           </div>
           <h2 class="blog-post__title text-h2">{post.name}</h2>
         </header>
@@ -129,6 +132,12 @@ const ogImage = post.mainImage?.startsWith('http') ? post.mainImage : undefined;
   .blog-post__date {
     margin: 0;
     color: var(--color-text-base);
+  }
+
+  .blog-post__author {
+    margin: 0;
+    color: #6b7280;
+    font-size: 0.95rem;
   }
 
   .blog-post__title.text-h2 {

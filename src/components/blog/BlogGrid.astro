@@ -7,6 +7,7 @@ interface Props {
 }
 
 const { posts } = Astro.props;
+const PAGE_SIZE = 24;
 ---
 
 <section class="blog-grid-section" aria-label="Artículos del blog">
@@ -14,7 +15,7 @@ const { posts } = Astro.props;
     <p class="blog-grid__count text-body-secondary" aria-live="polite">
       <span data-blog-result-count>{posts.length}</span> artículos
     </p>
-    <ul class="blog-grid" data-blog-grid>
+    <ul class="blog-grid" data-blog-grid data-blog-page-size={PAGE_SIZE} data-blog-current-page="1">
       {
         posts.map((post) => (
           <li class="blog-grid__item">
@@ -23,47 +24,206 @@ const { posts } = Astro.props;
         ))
       }
     </ul>
+    <nav
+      class="blog-pagination"
+      data-blog-pagination
+      aria-label="Paginación de artículos"
+      hidden
+    >
+      <button
+        type="button"
+        class="blog-pagination__btn blog-pagination__btn--icon"
+        data-blog-page-prev
+        disabled
+        aria-label="Página anterior"
+      >
+        <svg
+          class="blog-pagination__svg blog-pagination__svg--prev"
+          width="24"
+          height="24"
+          viewBox="0 0 24 24"
+          fill="none"
+          xmlns="http://www.w3.org/2000/svg"
+          aria-hidden="true"
+        >
+          <path
+            fill-rule="evenodd"
+            clip-rule="evenodd"
+            d="M11.235 16.089C11.105 16.178 10.958 16.221 10.811 16.221C10.572 16.221 10.338 16.108 10.192 15.896C9.958 15.555 10.044 15.088 10.385 14.853C11.969 13.763 13.445 12.415 13.542 11.969C13.445 11.583 11.969 10.236 10.385 9.148C10.045 8.913 9.958 8.446 10.192 8.105C10.426 7.763 10.892 7.677 11.235 7.911C12.656 8.887 15.04 10.716 15.04 11.999C15.04 13.282 12.656 15.112 11.235 16.089ZM12.25 2.25C5.051 2.25 2.5 4.802 2.5 12C2.5 19.198 5.051 21.75 12.25 21.75C19.448 21.75 22 19.198 22 12C22 4.802 19.448 2.25 12.25 2.25Z"
+            fill="currentColor"></path>
+        </svg>
+      </button>
+      <p class="blog-pagination__status text-body-secondary" data-blog-page-status></p>
+      <button
+        type="button"
+        class="blog-pagination__btn blog-pagination__btn--icon"
+        data-blog-page-next
+        disabled
+        aria-label="Página siguiente"
+      >
+        <svg
+          class="blog-pagination__svg"
+          width="24"
+          height="24"
+          viewBox="0 0 24 24"
+          fill="none"
+          xmlns="http://www.w3.org/2000/svg"
+          aria-hidden="true"
+        >
+          <path
+            fill-rule="evenodd"
+            clip-rule="evenodd"
+            d="M11.235 16.089C11.105 16.178 10.958 16.221 10.811 16.221C10.572 16.221 10.338 16.108 10.192 15.896C9.958 15.555 10.044 15.088 10.385 14.853C11.969 13.763 13.445 12.415 13.542 11.969C13.445 11.583 11.969 10.236 10.385 9.148C10.045 8.913 9.958 8.446 10.192 8.105C10.426 7.763 10.892 7.677 11.235 7.911C12.656 8.887 15.04 10.716 15.04 11.999C15.04 13.282 12.656 15.112 11.235 16.089ZM12.25 2.25C5.051 2.25 2.5 4.802 2.5 12C2.5 19.198 5.051 21.75 12.25 21.75C19.448 21.75 22 19.198 22 12C22 4.802 19.448 2.25 12.25 2.25Z"
+            fill="currentColor"></path>
+        </svg>
+      </button>
+    </nav>
   </div>
 </section>
 
 <script is:inline>
   (function () {
-    function applyFilters() {
-      var grid = document.querySelector('[data-blog-grid]');
-      var toolbar = document.querySelector('[data-blog-toolbar]');
-      if (!grid || !toolbar) return;
+    function getGrid() {
+      return document.querySelector('[data-blog-grid]');
+    }
 
+    function getPageSize(grid) {
+      var n = parseInt(grid.getAttribute('data-blog-page-size') || '24', 10);
+      return Number.isNaN(n) || n < 1 ? 24 : n;
+    }
+
+    function getCurrentPage(grid) {
+      var n = parseInt(grid.getAttribute('data-blog-current-page') || '1', 10);
+      return Number.isNaN(n) || n < 1 ? 1 : n;
+    }
+
+    function setCurrentPage(grid, n) {
+      grid.setAttribute('data-blog-current-page', String(Math.max(1, n)));
+    }
+
+    function cellMatchesFilter(cell, toolbar) {
+      var card = cell.querySelector('[data-blog-card]');
+      if (!card || !toolbar) return false;
       var searchEl = toolbar.querySelector('[data-blog-search]');
       var term = ((searchEl && searchEl.value) || '').toLowerCase().trim();
       var activeChip = toolbar.querySelector('.blog-toolbar__chip--active');
       var cat = activeChip ? activeChip.getAttribute('data-blog-category') || '__all__' : '__all__';
+      var cardCat = card.getAttribute('data-blog-category') || '';
+      var okCat = cat === '__all__' || cardCat === cat;
+      var titleEl = card.querySelector('[data-blog-card-title]');
+      var sumEl = card.querySelector('[data-blog-card-summary]');
+      var blob =
+        ((titleEl && titleEl.textContent) || '') + ' ' + ((sumEl && sumEl.textContent) || '');
+      var okSearch = !term || blob.toLowerCase().indexOf(term) !== -1;
+      return okCat && okSearch;
+    }
 
-      var visible = 0;
-      grid.querySelectorAll('[data-blog-card]').forEach(function (card) {
-        var cardCat = card.getAttribute('data-blog-category') || '';
-        var okCat = cat === '__all__' || cardCat === cat;
-        var titleEl = card.querySelector('[data-blog-card-title]');
-        var sumEl = card.querySelector('[data-blog-card-summary]');
-        var blob =
-          ((titleEl && titleEl.textContent) || '') + ' ' + ((sumEl && sumEl.textContent) || '');
-        var okSearch = !term || blob.toLowerCase().indexOf(term) !== -1;
-        var show = okCat && okSearch;
-        var cell = card.closest('.blog-grid__item');
-        if (cell) cell.hidden = !show;
-        else card.hidden = !show;
-        if (show) visible += 1;
+    function updatePaginationNav(grid, totalMatched, currentPage, pageSize) {
+      var nav = document.querySelector('[data-blog-pagination]');
+      if (!nav) return;
+      var totalPages = Math.max(1, Math.ceil(totalMatched / pageSize));
+      var prev = nav.querySelector('[data-blog-page-prev]');
+      var next = nav.querySelector('[data-blog-page-next]');
+      var status = nav.querySelector('[data-blog-page-status]');
+
+      if (totalMatched === 0) {
+        nav.hidden = true;
+        return;
+      }
+
+      if (totalPages <= 1) {
+        nav.hidden = true;
+        if (prev) prev.disabled = true;
+        if (next) next.disabled = true;
+        if (status) status.textContent = '';
+        return;
+      }
+
+      nav.hidden = false;
+      if (status) {
+        status.textContent = 'Página ' + currentPage + ' de ' + totalPages;
+      }
+      if (prev) prev.disabled = currentPage <= 1;
+      if (next) next.disabled = currentPage >= totalPages;
+    }
+
+    function applyFilters(resetPage) {
+      var grid = getGrid();
+      var toolbar = document.querySelector('[data-blog-toolbar]');
+      if (!grid || !toolbar) return;
+
+      var pageSize = getPageSize(grid);
+      if (resetPage) setCurrentPage(grid, 1);
+
+      var cells = Array.prototype.slice.call(grid.querySelectorAll(':scope > .blog-grid__item'));
+      var matched = cells.filter(function (cell) {
+        return cellMatchesFilter(cell, toolbar);
+      });
+
+      var totalMatched = matched.length;
+      var totalPages = Math.max(1, Math.ceil(totalMatched / pageSize) || 1);
+      var currentPage = getCurrentPage(grid);
+      if (currentPage > totalPages) {
+        currentPage = totalPages;
+        setCurrentPage(grid, currentPage);
+      }
+
+      var start = (currentPage - 1) * pageSize;
+      var onPage = matched.slice(start, start + pageSize);
+
+      cells.forEach(function (cell) {
+        var idx = onPage.indexOf(cell);
+        var matches = matched.indexOf(cell) !== -1;
+        cell.hidden = !matches || idx === -1;
       });
 
       var countEl = document.querySelector('[data-blog-result-count]');
-      if (countEl) countEl.textContent = String(visible);
+      if (countEl) countEl.textContent = String(totalMatched);
+
+      updatePaginationNav(grid, totalMatched, currentPage, pageSize);
+    }
+
+    function bindPagination() {
+      var nav = document.querySelector('[data-blog-pagination]');
+      var grid = getGrid();
+      if (!nav || !grid || nav.getAttribute('data-blog-pagination-bound') === '1') return;
+      nav.setAttribute('data-blog-pagination-bound', '1');
+
+      var prev = nav.querySelector('[data-blog-page-prev]');
+      var next = nav.querySelector('[data-blog-page-next]');
+
+      function scrollToGrid() {
+        var section = grid.closest('.blog-grid-section');
+        if (section) section.scrollIntoView({ behavior: 'smooth', block: 'start' });
+      }
+
+      if (prev) {
+        prev.addEventListener('click', function () {
+          var p = getCurrentPage(grid);
+          if (p <= 1) return;
+          setCurrentPage(grid, p - 1);
+          applyFilters(false);
+          scrollToGrid();
+        });
+      }
+      if (next) {
+        next.addEventListener('click', function () {
+          var p = getCurrentPage(grid);
+          setCurrentPage(grid, p + 1);
+          applyFilters(false);
+          scrollToGrid();
+        });
+      }
     }
 
     function bind() {
       var toolbar = document.querySelector('[data-blog-toolbar]');
-      var grid = document.querySelector('[data-blog-grid]');
+      var grid = getGrid();
       if (!toolbar || !grid) return;
       if (grid.getAttribute('data-blog-filters-bound') === '1') return;
       grid.setAttribute('data-blog-filters-bound', '1');
+
+      bindPagination();
 
       toolbar.querySelectorAll('[data-blog-category]').forEach(function (btn) {
         btn.addEventListener('click', function () {
@@ -72,16 +232,20 @@ const { posts } = Astro.props;
             b.classList.toggle('blog-toolbar__chip--active', on);
             b.setAttribute('aria-pressed', on ? 'true' : 'false');
           });
-          applyFilters();
+          applyFilters(true);
         });
       });
 
       var searchEl = toolbar.querySelector('[data-blog-search]');
       if (searchEl) {
-        searchEl.addEventListener('input', applyFilters);
-        searchEl.addEventListener('search', applyFilters);
+        searchEl.addEventListener('input', function () {
+          applyFilters(true);
+        });
+        searchEl.addEventListener('search', function () {
+          applyFilters(true);
+        });
       }
-      applyFilters();
+      applyFilters(false);
     }
 
     if (document.readyState === 'loading') document.addEventListener('DOMContentLoaded', bind);
@@ -140,5 +304,86 @@ const { posts } = Astro.props;
 
   .blog-grid__item {
     min-width: 0;
+  }
+
+  .blog-pagination {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: center;
+    gap: 1rem 1.5rem;
+    margin-top: clamp(2rem, 5vw, 3rem);
+    padding-top: clamp(1.5rem, 4vw, 2rem);
+    border-top: 1px solid #e5e7eb;
+  }
+
+  .blog-pagination__status {
+    margin: 0;
+    min-width: 10ch;
+    text-align: center;
+    color: var(--color-text-base);
+  }
+
+  .blog-pagination__btn {
+    font-family: var(--font-family-base);
+    font-size: var(--text-body-secondary-size, 0.9375rem);
+    font-weight: 600;
+    line-height: 1.2;
+    padding: 0.65rem 1.15rem;
+    border-radius: 999px;
+    border: 2px solid var(--color-blue-primary);
+    background: #ffffff;
+    color: var(--color-blue-primary);
+    cursor: pointer;
+    transition:
+      background-color 0.2s ease,
+      color 0.2s ease;
+  }
+
+  .blog-pagination__btn--icon {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: auto;
+    height: auto;
+    min-width: 2.5rem;
+    min-height: 2.5rem;
+    padding: 0.35rem;
+    border: none;
+    background: transparent;
+    border-radius: 0.375rem;
+    color: var(--color-blue-primary);
+  }
+
+  .blog-pagination__svg {
+    display: block;
+    width: 1.5rem;
+    height: 1.5rem;
+    flex-shrink: 0;
+  }
+
+  .blog-pagination__svg--prev {
+    transform: rotate(180deg);
+    transform-origin: center;
+  }
+
+  .blog-pagination__btn:hover:not(:disabled) {
+    background: var(--color-blue-primary);
+    color: #ffffff;
+  }
+
+  .blog-pagination__btn--icon:hover:not(:disabled) {
+    background: transparent;
+    color: var(--color-blue-secondary);
+  }
+
+  .blog-pagination__btn:disabled {
+    opacity: 0.4;
+    cursor: not-allowed;
+  }
+
+  .blog-pagination__btn:focus-visible {
+    outline: 2px solid var(--color-blue-primary);
+    outline-offset: 3px;
   }
 </style>
