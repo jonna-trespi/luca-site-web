@@ -1,6 +1,25 @@
 import { parse } from 'csv-parse/sync';
 import sanitizeHtml from 'sanitize-html';
-import rawCsv from '../data/Luca blog posts 1-50 - blog-posts.csv?raw';
+import rawBlogCsv1 from '../data/Luca blog posts 1-50 - blog-posts.csv?raw';
+import rawBlogCsv2 from '../data/Luca blog posts 51-100 - blog-posts.csv?raw';
+import rawBlogCsv3 from '../data/Luca blog posts 101-150 - blog-posts.csv?raw';
+import rawBlogCsv4 from '../data/Luca blog posts 151-200 - blog-posts.csv?raw';
+import rawBlogCsv5 from '../data/Luca blog posts 201-250 - blog-posts.csv?raw';
+import rawBlogCsv6 from '../data/Luca blog posts 251-300 - blog-posts.csv?raw';
+import rawBlogCsv7 from '../data/Luca blog posts 301-350 - blog-posts.csv?raw';
+import rawBlogCsv8 from '../data/Luca blog posts 351-425 - blog-posts.csv?raw';
+
+/** Exportaciones CSV en `src/data` (mismas columnas); se fusionan y se deduplica por slug. */
+const BLOG_CSV_RAW_SOURCES = [
+  rawBlogCsv1,
+  rawBlogCsv2,
+  rawBlogCsv3,
+  rawBlogCsv4,
+  rawBlogCsv5,
+  rawBlogCsv6,
+  rawBlogCsv7,
+  rawBlogCsv8,
+] as const;
 
 /** Quita BOM y espacios en nombres de columna del CSV. */
 function normalizeRow(row: Record<string, string>): Record<string, string> {
@@ -142,28 +161,36 @@ function rowToPost(row: Record<string, string>): BlogPost | null {
 
 let cached: BlogPost[] | null = null;
 
-function loadRawPosts(): BlogPost[] {
-  const records = parse(rawCsv, {
+function parseRecords(raw: string): Record<string, string>[] {
+  return parse(raw, {
     columns: true,
     skip_empty_lines: true,
     relax_column_count: true,
     trim: true,
     bom: true,
   }) as Record<string, string>[];
+}
 
-  const posts: BlogPost[] = [];
-  for (const raw of records) {
-    const row = normalizeRow(raw);
-    const p = rowToPost(row);
-    if (p) posts.push(p);
+function postTimestamp(p: BlogPost): number {
+  return p.publishedAt?.getTime() ?? 0;
+}
+
+function loadRawPosts(): BlogPost[] {
+  const bySlug = new Map<string, BlogPost>();
+
+  for (const raw of BLOG_CSV_RAW_SOURCES) {
+    for (const record of parseRecords(raw)) {
+      const p = rowToPost(normalizeRow(record));
+      if (!p) continue;
+      const prev = bySlug.get(p.slug);
+      if (!prev || postTimestamp(p) >= postTimestamp(prev)) {
+        bySlug.set(p.slug, p);
+      }
+    }
   }
 
-  posts.sort((a, b) => {
-    const ta = a.publishedAt?.getTime() ?? 0;
-    const tb = b.publishedAt?.getTime() ?? 0;
-    return tb - ta;
-  });
-
+  const posts = [...bySlug.values()];
+  posts.sort((a, b) => postTimestamp(b) - postTimestamp(a));
   return posts;
 }
 
