@@ -24,7 +24,7 @@ const tabPanels = [
     id: 'matematicasInternacionales',
     label: 'Matemáticas Internacionales',
     book: {
-      src: '/images/programas/preescolar/book-1.webp',
+      src: '/images/programas/preescolar/book-2.webp',
       alt: 'Matemáticas 1 — Preescolar, método Singapur — NOVA Luca',
       width: 892,
       height: 822,
@@ -38,7 +38,7 @@ const tabPanels = [
     id: 'lectoescritura',
     label: 'Lectoescritura',
     book: {
-      src: '/images/programas/preescolar/book-1.webp',
+      src: '/images/programas/preescolar/book-3.webp',
       alt: 'Libro de lectoescritura — programa Preescolar Luca',
       width: 904,
       height: 806,
@@ -133,6 +133,10 @@ const tabPanels = [
         </div>
       ))}
     </div>
+
+    <h4 class="programas-preescolar__nem text-h4">
+      Educación alineada con la Nueva Escuela Mexicana.
+    </h4>
   </div>
 </section>
 
@@ -287,6 +291,14 @@ const tabPanels = [
 
   .programas-preescolar__panels {
     width: 100%;
+  }
+
+  .programas-preescolar__nem {
+    margin: clamp(2rem, 5vw, 3.5rem) auto 0;
+    max-width: 42rem;
+    text-align: center;
+    color: var(--color-blue-primary);
+    font-weight: 600;
   }
 
   /*

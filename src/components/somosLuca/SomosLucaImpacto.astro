@@ -4,7 +4,8 @@
  */
 const cards = [
   {
-    title: '#1 en LATAM Top 3 del mundo.',
+    title: '#1 en LATAM',
+    titleSecondLine: 'Top 3 del mundo.',
     body: 'Reconocida por Google como una de las EdTech más innovadora.',
     visualSrc: '/images/somosLuca/impacto-1.webp',
     visualW: 437,
@@ -18,7 +19,7 @@ const cards = [
     visualH: 142,
   },
   {
-    title: 'Equipo clase mundial.',
+    title: 'Equipo clase internacional.',
     body: 'Talento proveniente de Rappi, Uber, Crehana y Netflix.',
     visualSrc: '/images/somosLuca/impacto-3.webp',
     visualW: 466,
@@ -59,7 +60,16 @@ const cards = [
       {cards.map((card, i) => (
         <li class="somos-luca-impacto__item">
           <article class="somos-luca-impacto__card">
-            <h3 class="somos-luca-impacto__card-title">{card.title}</h3>
+            <h3 class="somos-luca-impacto__card-title">
+              {'titleSecondLine' in card && card.titleSecondLine ? (
+                <>
+                  <span class="somos-luca-impacto__card-title-line">{card.title}</span>
+                  <span class="somos-luca-impacto__card-title-line">{card.titleSecondLine}</span>
+                </>
+              ) : (
+                card.title
+              )}
+            </h3>
             <p class="somos-luca-impacto__card-body">{card.body}</p>
             <div class="somos-luca-impacto__card-visual">
               <img
@@ -191,6 +201,14 @@ const cards = [
     line-height: 1.25;
     letter-spacing: 0;
     color: inherit;
+  }
+
+  .somos-luca-impacto__card-title-line {
+    display: block;
+  }
+
+  .somos-luca-impacto__card-title-line + .somos-luca-impacto__card-title-line {
+    margin-top: 0.12em;
   }
 
   .somos-luca-impacto__card-body {
