@@ -605,7 +605,7 @@ const storePlay = '/logos/transversal/googleplay.webp';
     .herramientas-tech__card--app {
       flex-direction: column;
       align-items: stretch;
-      gap: 20px;
+      gap: 32px;
     }
 
     .herramientas-tech__app-media {
@@ -615,6 +615,23 @@ const storePlay = '/logos/transversal/googleplay.webp';
 
     .herramientas-tech__app-aside {
       align-items: flex-start;
+    }
+
+    /* Texto ↔ vídeo: 32px (margin-top:auto se anula cuando la tarjeta crece solo con el contenido) */
+    .herramientas-tech__card--stack .herramientas-tech__media {
+      margin-top: 32px;
+    }
+
+    .herramientas-tech__card--invert .herramientas-tech__copy {
+      padding-top: 32px;
+    }
+
+    .herramientas-tech__card--bot .herramientas-tech__media--badge {
+      margin-top: 32px;
+    }
+
+    .herramientas-tech__card--story .herramientas-tech__media--wide {
+      margin-top: 32px;
     }
   }
 </style>
