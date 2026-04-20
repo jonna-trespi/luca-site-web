@@ -1,8 +1,8 @@
 ---
 /**
- * Tecnología — CTA: franja #3843D0, avatar footer-icon.webp, geos 6/7, demo modal.
+ * Tecnología — CTA: franja #3843D0, avatar footer-avatar.gif + círculo marca, geos 6/7, demo modal.
  */
-const avatarSrc = '/gif/home/footer-icon.webp';
+const avatarSrc = '/gif/home/footer-avatar.gif';
 const geoBl = '/images/tecnologia/geo-6.webp';
 const geoTr = '/images/tecnologia/geo-7.webp';
 ---
@@ -31,13 +31,14 @@ const geoTr = '/images/tecnologia/geo-7.webp';
         aria-hidden="true"
       />
 
-      <div class="cta-tech__avatar-wrap">
+      <div class="cta-tech__avatar-wrap" aria-hidden="true">
+        <span class="cta-tech__avatar-circle"></span>
         <img
           class="cta-tech__avatar"
           src={avatarSrc}
           alt=""
           width="200"
-          height="200"
+          height="220"
           loading="lazy"
           decoding="async"
           aria-hidden="true"
@@ -126,7 +127,23 @@ const geoTr = '/images/tecnologia/geo-7.webp';
     line-height: 0;
   }
 
+  /* Mismo criterio que PrefooterCta: halo salmón bajo la mascota */
+  .cta-tech__avatar-circle {
+    position: absolute;
+    left: 50%;
+    bottom: -6px;
+    z-index: 0;
+    width: 120px;
+    height: 120px;
+    border-radius: 50%;
+    background-color: var(--color-red);
+    transform: translateX(-50%);
+    pointer-events: none;
+  }
+
   .cta-tech__avatar {
+    position: relative;
+    z-index: 1;
     width: 100%;
     height: auto;
     display: block;

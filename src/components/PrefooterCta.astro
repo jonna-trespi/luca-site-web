@@ -1,6 +1,6 @@
 ---
 /**
- * CTA previo al footer: tarjeta blanca con mascota (GIF) y botón primario,
+ * CTA previo al footer: tarjeta blanca con mascota (GIF + círculo marca) y botón primario,
  * sobrepuesta ~64px sobre el footer (z-index + margen inferior negativo).
  */
 ---
@@ -26,12 +26,13 @@
         </a>
       </div>
       <div class="prefooter-cta__mascot-wrap" aria-hidden="true">
+        <span class="prefooter-cta__mascot-circle"></span>
         <img
           class="prefooter-cta__mascot"
-          src="/gif/home/footer-icon.webp"
+          src="/gif/home/footer-avatar.gif"
           alt=""
-          width="150"
-          height="161"
+          width="200"
+          height="220"
           loading="lazy"
           decoding="async"
         />
@@ -114,7 +115,23 @@
     line-height: 0;
   }
 
+  /* Halo salmón bajo la base de la mascota (~120px) */
+  .prefooter-cta__mascot-circle {
+    position: absolute;
+    left: 50%;
+    bottom: -6px;
+    z-index: 0;
+    width: 120px;
+    height: 120px;
+    border-radius: 50%;
+    background-color: var(--color-red);
+    transform: translateX(-50%);
+    pointer-events: none;
+  }
+
   .prefooter-cta__mascot {
+    position: relative;
+    z-index: 1;
     display: block;
     max-width: 120px;
     width: auto;
