@@ -92,14 +92,27 @@ const faqs = [
 
 <script>
   function initFaqPrimaria() {
-    document.querySelectorAll('#faq-primaria .blog-faqs__faq-trigger').forEach((btn) => {
+    const faqRoot = document.querySelector('#faq-primaria .blog-faqs__grid--faq');
+    faqRoot?.querySelectorAll('.blog-faqs__faq-trigger').forEach((btn) => {
       if ((btn as HTMLButtonElement).dataset.faqBound === '1') return;
       (btn as HTMLButtonElement).dataset.faqBound = '1';
       btn.addEventListener('click', () => {
         const card = btn.closest('.blog-faqs__faq-card');
-        const expanded = btn.getAttribute('aria-expanded') === 'true';
-        btn.setAttribute('aria-expanded', String(!expanded));
-        card?.classList.toggle('blog-faqs__faq-card--expanded', !expanded);
+        if (!card || !faqRoot) return;
+        const wasOpen = btn.getAttribute('aria-expanded') === 'true';
+
+        if (!wasOpen) {
+          faqRoot.querySelectorAll('.blog-faqs__faq-card--expanded').forEach((other) => {
+            if (other !== card) {
+              other.classList.remove('blog-faqs__faq-card--expanded');
+              other.querySelector('.blog-faqs__faq-trigger')?.setAttribute('aria-expanded', 'false');
+            }
+          });
+        }
+
+        const nowOpen = !wasOpen;
+        btn.setAttribute('aria-expanded', String(nowOpen));
+        card.classList.toggle('blog-faqs__faq-card--expanded', nowOpen);
       });
     });
   }

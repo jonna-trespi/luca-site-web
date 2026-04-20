@@ -675,6 +675,11 @@ html.custom-cursor--active * {
   cursor: none !important;
 }
 
+/* Embeds de terceros: el * de arriba aplica al iframe; sin esto no hay cursor nativo sobre el vídeo */
+html.custom-cursor--active iframe {
+  cursor: auto !important;
+}
+
 /* Cursor nativo en zonas clicables (gana al * de arriba) + contenido interno */
 html.custom-cursor--active :is(
     a[href],
@@ -744,6 +749,12 @@ html.custom-cursor--active .custom-cursor {
 /* Sobre enlaces/botones/etc.: ocultar la bolita y dejar ver el cursor nativo (mano / texto) */
 html.custom-cursor--active .custom-cursor.custom-cursor--hover {
   opacity: 0;
+  transform: translate(-50%, -50%) scale(1);
+}
+
+/* Dentro de iframe el padre no recibe mousemove: ocultar bolita para que no quede en el borde */
+html.custom-cursor--active.custom-cursor--iframe-hover .custom-cursor {
+  opacity: 0 !important;
   transform: translate(-50%, -50%) scale(1);
 }
 

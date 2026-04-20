@@ -102,6 +102,32 @@ const ogImageUrl =
 
         document.addEventListener('mousemove', onMove, { passive: true });
         document.addEventListener('mouseover', onOver, { passive: true });
+
+        /* iframes (p. ej. YouTube): el padre no recibe mousemove dentro del embed → la bolita queda
+           congelada en el borde. Al entrar/salir ocultamos la bolita y el CSS devuelve cursor nativo. */
+        const iframeHoverClass = 'custom-cursor--iframe-hover';
+        const bindIframeCursor = function () {
+          document.querySelectorAll('iframe').forEach(function (node) {
+            if (!(node instanceof HTMLIFrameElement) || node.dataset.cursorIframeBound === '1') return;
+            node.dataset.cursorIframeBound = '1';
+            node.addEventListener(
+              'mouseenter',
+              function () {
+                document.documentElement.classList.add(iframeHoverClass);
+              },
+              { passive: true }
+            );
+            node.addEventListener(
+              'mouseleave',
+              function () {
+                document.documentElement.classList.remove(iframeHoverClass);
+              },
+              { passive: true }
+            );
+          });
+        };
+        bindIframeCursor();
+        new MutationObserver(bindIframeCursor).observe(document.body, { childList: true, subtree: true });
       })();
     </script>
   </body>

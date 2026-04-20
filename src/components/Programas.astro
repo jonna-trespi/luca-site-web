@@ -149,7 +149,7 @@
         EdTech
       </p>
       <h3 class="programas__title programas__title--edtech">
-        Convierte la curiosidad en aprendizaje efectivo y resultados medibles.
+        Convierte la curiosidad en aprendizaje efectivo y resultados medibles<span class="programas__title-dot">.</span>
       </h3>
     </header>
 
@@ -205,11 +205,49 @@
               Plataforma compatible con <span class="card-item__heading--accent">múltiples dispositivos.</span>
             </h3>
             <p class="card-item__desc">Sistema educativo interactivo.</p>
-            <!-- <a href="#plataforma" class="card-item__link btn-terciary">
+            <!-- <a
+              href="https://app.lucaedu.com/"
+              class="card-item__link btn-terciary"
+              target="_blank"
+              rel="noopener noreferrer"
+            >
               Ingresa a la plataforma
               <span class="btn-terciary-icon" aria-hidden="true"></span>
             </a> -->
-            <img src="/logos/home/plataformas.webp" alt="App Store y Google Play" class="card-item__plataformas" width="220" height="80" loading="lazy" />
+            <div class="card-item__stores">
+              <a
+                href="https://apps.apple.com/mx/app/lucaedu/id6618111905"
+                class="card-item__store"
+                aria-label="Descargar en App Store"
+                target="_blank"
+                rel="noopener noreferrer"
+              >
+                <img
+                  src="/logos/transversal/appstore.webp"
+                  alt=""
+                  width="100"
+                  height="34"
+                  loading="lazy"
+                  decoding="async"
+                />
+              </a>
+              <a
+                href="https://play.google.com/store/apps/details?id=com.lucaedu.app&pcampaignid=web_share"
+                class="card-item__store"
+                aria-label="Descargar en Google Play"
+                target="_blank"
+                rel="noopener noreferrer"
+              >
+                <img
+                  src="/logos/transversal/googleplay.webp"
+                  alt=""
+                  width="100"
+                  height="34"
+                  loading="lazy"
+                  decoding="async"
+                />
+              </a>
+            </div>
           </div>
           <div class="card-item__media">
             <img src="/images/home/edtech-3.webp" alt="Aula con pantalla y tablets" class="card-item__image" width="600" height="400" loading="lazy" />
@@ -745,11 +783,39 @@
     background-color: var(--color-blue-secondary);
   }
 
-  .card-item__plataformas {
-    display: block;
-    max-width: 220px;
-    height: auto;
+  .card-item__stores {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 12px 16px;
     margin-top: 32px;
+  }
+
+  .card-item__store {
+    display: inline-flex;
+    line-height: 0;
+    border-radius: 0.35rem;
+    transition:
+      opacity 0.2s ease,
+      transform 0.2s ease;
+  }
+
+  .card-item__store:hover {
+    opacity: 0.92;
+    transform: translateY(-1px);
+  }
+
+  .card-item__store:focus-visible {
+    outline: 2px solid var(--color-blue-primary);
+    outline-offset: 3px;
+  }
+
+  .card-item__store img {
+    display: block;
+    width: 100px;
+    height: auto;
+    max-width: 100px;
+    object-fit: contain;
   }
 
   .card-item__media {
