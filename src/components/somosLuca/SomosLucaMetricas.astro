@@ -1,7 +1,7 @@
 ---
 /**
- * Somos Luca — Métricas + video YouTube; contadores al estilo Diferencia.
- * Decoración tras el video: geo-4 (Somos Luca), max-width 250px.
+ * Somos Luca — Métricas + Luca Day (label + título, patrón SomosLucaImpacto) + video YouTube.
+ * Contadores al estilo Diferencia. Decoración tras el video: geo-4, max-width 250px.
  */
 const youtubeId = 'Lcnl41Xy5Qg';
 const youtubeEmbedUrl = `https://www.youtube.com/embed/${youtubeId}?rel=0`;
@@ -58,6 +58,16 @@ const stats = [
         </li>
       ))}
     </ul>
+
+    <header class="somos-luca-metricas__video-header">
+      <p class="programas__label">
+        <span class="programas__label-dot" aria-hidden="true"></span>
+        Luca Day
+      </p>
+      <h2 id="somos-luca-metricas-video-heading" class="text-h4 somos-luca-metricas__video-title">
+        Un día para conectar, inspirarnos y construir juntos el futuro de la educación<span class="somos-luca-metricas__title-dot" aria-hidden="true">.</span>
+      </h2>
+    </header>
 
     <div class="somos-luca-metricas__video-block">
       <img
@@ -219,9 +229,25 @@ const stats = [
     text-align: center;
   }
 
+  .somos-luca-metricas__video-header {
+    text-align: center;
+    margin-top: calc(64px + clamp(2.5rem, 5vw, 4rem));
+    margin-bottom: clamp(2rem, 4vw, 3rem);
+  }
+
+  .somos-luca-metricas__video-title {
+    margin: 0 auto;
+    max-width: min(42rem, 92vw);
+    color: #1d1d1d;
+  }
+
+  .somos-luca-metricas__title-dot {
+    color: var(--color-red);
+  }
+
   .somos-luca-metricas__video-block {
     position: relative;
-    margin: clamp(2.5rem, 5vw, 4rem) auto 0;
+    margin: 0 auto;
     max-width: min(920px, 100%);
     padding: 0;
   }

@@ -1,9 +1,8 @@
 ---
 /**
- * Tecnología Preescolar: carrusel de slides (vídeo o imagen + título + texto) y CTA demo.
+ * Tecnología Preescolar: misma estructura y estilos que Primaria.
  * Vídeos: public/videos/programas/preescolar/video-*.mp4; último slide: imagen screen-app.
- * Figuras de fondo por slide: public/images/programas/preescolar/tech-*.png (máx. 300px).
- * Slide 1: avatar tech-avatar.png sobre el vídeo (esquina inferior izquierda).
+ * Figuras por slide: public/images/programas/preescolar/tech-*.webp; slide 1: tech-avatar sobre el vídeo.
  */
 const videoBase = '/videos/programas/preescolar';
 const slides = [
@@ -395,14 +394,11 @@ const slideDecos = [
   }
 
   .tecnologia__viewport {
-    --tecnologia-slide-width: min(72vw, 56rem);
     position: relative;
     z-index: 1;
     width: 100%;
     min-width: 0;
-    /* visible en X: los nav quedan a los lados de la tarjeta y pueden asomar fuera del clip vertical */
-    overflow-x: visible;
-    overflow-y: hidden;
+    overflow: hidden;
     perspective: 1200px;
     perspective-origin: 50% 45%;
     padding: 0 clamp(0.5rem, 2vw, 1.25rem);
@@ -423,7 +419,7 @@ const slideDecos = [
 
   .tecnologia__slide {
     flex: 0 0 auto;
-    width: var(--tecnologia-slide-width);
+    width: min(72vw, 56rem);
     max-width: 100%;
     box-sizing: border-box;
     padding: 0 4px;
@@ -642,9 +638,10 @@ const slideDecos = [
   .tecnologia__nav {
     position: absolute;
     top: 50%;
+    transform: translateY(-50%);
     flex-shrink: 0;
-    min-width: 56px;
-    min-height: 56px;
+    min-width: 48px;
+    min-height: 48px;
     padding: 4px;
     border: none;
     border-radius: 8px;
@@ -657,15 +654,12 @@ const slideDecos = [
     z-index: 4;
   }
 
-  /* Alineados al borde horizontal de la tarjeta central (slide activa centrada en el viewport) */
   .tecnologia__nav--prev {
-    left: calc(50% - var(--tecnologia-slide-width) / 2);
-    transform: translate(-100%, -50%);
+    left: clamp(0.25rem, 2vw, 1rem);
   }
 
   .tecnologia__nav--next {
-    left: calc(50% + var(--tecnologia-slide-width) / 2);
-    transform: translate(0, -50%);
+    right: clamp(0.25rem, 2vw, 1rem);
   }
 
   .tecnologia__nav:focus-visible {
@@ -687,15 +681,15 @@ const slideDecos = [
 
   .tecnologia__nav-icon {
     display: inline-flex;
-    width: 56px;
-    height: 56px;
+    width: 48px;
+    height: 48px;
     transition: transform 0.2s ease;
   }
 
   .tecnologia__nav-icon-mask {
     display: block;
-    width: 56px;
-    height: 56px;
+    width: 48px;
+    height: 48px;
     background-color: var(--color-blue-primary);
     -webkit-mask-image: url('/icons/transversal/array-right-icon.svg');
     mask-image: url('/icons/transversal/array-right-icon.svg');
