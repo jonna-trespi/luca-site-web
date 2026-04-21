@@ -96,6 +96,11 @@ const ogImageUrl =
         const onOver = function (e) {
           const t = e.target;
           if (!(t instanceof Element)) return;
+          /* Tarjetas staff: solo hover visual con tabindex; no son CTA — mantener la bolita (no “interactive” para el cursor) */
+          if (t.closest('.somos-luca-equipo__card')) {
+            el.classList.remove('custom-cursor--hover');
+            return;
+          }
           const hit = t.closest(interactive);
           el.classList.toggle('custom-cursor--hover', Boolean(hit));
         };

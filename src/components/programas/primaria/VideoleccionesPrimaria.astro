@@ -1,6 +1,6 @@
 ---
 /**
- * Videolecciones: título, vídeo embebido (autoplay, sin controles) y figuras geo-7 / geo-8.
+ * Videolecciones: título, subtítulo 1, vídeo embebido (autoplay, sin controles) y figuras geo-7 / geo-8.
  */
 const VIDEO_ID = 'O5pA-K5gvhc';
 const embedSrc = `https://www.youtube.com/embed/${VIDEO_ID}?autoplay=1&mute=1&loop=1&playlist=${VIDEO_ID}&controls=0&modestbranding=1&rel=0`;
@@ -12,8 +12,12 @@ const embedSrc = `https://www.youtube.com/embed/${VIDEO_ID}?autoplay=1&mute=1&lo
 
   <div class="videolecciones-primaria__inner layout-container">
     <h3 class="text-h3 videolecciones-primaria__title">
-      Videolecciones creadas por expertos de Netflix<span class="videolecciones-primaria__title-dot" aria-hidden="true">.</span>
+      Videolecciones<span class="videolecciones-primaria__title-dot">.</span>
     </h3>
+    <p class="videolecciones-primaria__subtitle text-subtitle-1">
+      Creadas por expertos de las plataformas y televisoras más reconocidas como Netflix, Prime Video, Sony, CBS, entre
+      otras.
+    </p>
 
     <div class="videolecciones-primaria__media">
       <div class="videolecciones-primaria__geo8" aria-hidden="true">
@@ -70,13 +74,20 @@ const embedSrc = `https://www.youtube.com/embed/${VIDEO_ID}?autoplay=1&mute=1&lo
 
   .videolecciones-primaria__title {
     max-width: 650px;
-    margin: 0 auto 56px;
+    margin: 0 auto;
     text-align: center;
     color: var(--color-text-base);
   }
 
   .videolecciones-primaria__title-dot {
     color: var(--color-red);
+  }
+
+  .videolecciones-primaria__subtitle {
+    max-width: 650px;
+    margin: 24px auto 54px;
+    text-align: center;
+    color: var(--color-text-base);
   }
 
   .videolecciones-primaria__media {

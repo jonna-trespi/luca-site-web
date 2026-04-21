@@ -34,8 +34,8 @@ const slides = [
   {
     video: `${videoBase}/video-5.mp4`,
     alt: 'Luca Bot, tutoría educativa',
-    title: 'Evaluación cualitativa',
-    text: 'Simplifica la evaluación con rúbricas automáticas, diario escolar, portafolios digitales y seguimiento del progreso con IA.',
+    title: 'Diario del alumno',
+    text: 'Centraliza y simplifica el seguimiento del aprendizaje con rúbricas automáticas, portafolios digitales y monitoreo del progreso con IA.',
   },
   {
     image: '/images/programas/preescolar/screen-app.webp',
@@ -395,11 +395,14 @@ const slideDecos = [
   }
 
   .tecnologia__viewport {
+    --tecnologia-slide-width: min(72vw, 56rem);
     position: relative;
     z-index: 1;
     width: 100%;
     min-width: 0;
-    overflow: hidden;
+    /* visible en X: los nav quedan a los lados de la tarjeta y pueden asomar fuera del clip vertical */
+    overflow-x: visible;
+    overflow-y: hidden;
     perspective: 1200px;
     perspective-origin: 50% 45%;
     padding: 0 clamp(0.5rem, 2vw, 1.25rem);
@@ -420,7 +423,7 @@ const slideDecos = [
 
   .tecnologia__slide {
     flex: 0 0 auto;
-    width: min(72vw, 56rem);
+    width: var(--tecnologia-slide-width);
     max-width: 100%;
     box-sizing: border-box;
     padding: 0 4px;
@@ -639,10 +642,9 @@ const slideDecos = [
   .tecnologia__nav {
     position: absolute;
     top: 50%;
-    transform: translateY(-50%);
     flex-shrink: 0;
-    min-width: 48px;
-    min-height: 48px;
+    min-width: 56px;
+    min-height: 56px;
     padding: 4px;
     border: none;
     border-radius: 8px;
@@ -655,12 +657,15 @@ const slideDecos = [
     z-index: 4;
   }
 
+  /* Alineados al borde horizontal de la tarjeta central (slide activa centrada en el viewport) */
   .tecnologia__nav--prev {
-    left: clamp(0.25rem, 2vw, 1rem);
+    left: calc(50% - var(--tecnologia-slide-width) / 2);
+    transform: translate(-100%, -50%);
   }
 
   .tecnologia__nav--next {
-    right: clamp(0.25rem, 2vw, 1rem);
+    left: calc(50% + var(--tecnologia-slide-width) / 2);
+    transform: translate(0, -50%);
   }
 
   .tecnologia__nav:focus-visible {
@@ -682,15 +687,15 @@ const slideDecos = [
 
   .tecnologia__nav-icon {
     display: inline-flex;
-    width: 48px;
-    height: 48px;
+    width: 56px;
+    height: 56px;
     transition: transform 0.2s ease;
   }
 
   .tecnologia__nav-icon-mask {
     display: block;
-    width: 48px;
-    height: 48px;
+    width: 56px;
+    height: 56px;
     background-color: var(--color-blue-primary);
     -webkit-mask-image: url('/icons/transversal/array-right-icon.svg');
     mask-image: url('/icons/transversal/array-right-icon.svg');
