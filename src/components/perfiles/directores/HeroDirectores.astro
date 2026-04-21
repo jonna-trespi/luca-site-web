@@ -1,6 +1,6 @@
 ---
 /**
- * Hero Directores: franja 80% (#D2E6FF), dos columnas (copy + imagen), CTAs primario/secundario.
+ * Hero Directores: franja 80% (#D2E6FF), dos columnas (copy + imagen), CTA demo + plataforma (menú 3 niveles, patrón Header).
  * Estructura / diagramación / responsive alineados a HeroPreescolar (sin carrusel).
  * Imagen: public/images/perfiles/directores/image-hero.webp
  */
@@ -27,10 +27,50 @@ const heroImageSrc = '/images/perfiles/directores/image-hero.webp';
               <span>Solicita tu demo</span>
               <span class="perfil-directores-hero__btn-icon" aria-hidden="true"></span>
             </a>
-            <a href="https://app.lucaedu.com/" target="_blank" class="btn-base btn-secondary btn-cta-animated">
-              <span>Ingresa a la plataforma</span>
-              <span class="perfil-directores-hero__btn-icon" aria-hidden="true"></span>
-            </a>
+            <div class="perfil-directores-hero__plataforma-wrap" data-perfil-hero-plataforma-wrap>
+              <button
+                type="button"
+                class="btn-base btn-secondary btn-cta-animated perfil-directores-hero__plataforma-btn"
+                data-perfil-hero-plataforma-btn
+                aria-expanded="false"
+                aria-haspopup="true"
+                aria-controls="perfil-directores-plataforma-panel"
+                id="perfil-directores-plataforma-btn"
+              >
+                <span>Ingresa a la plataforma</span>
+                <span class="perfil-directores-hero__btn-icon perfil-directores-hero__btn-icon--person" aria-hidden="true"></span>
+              </button>
+              <div
+                class="perfil-directores-hero__mega"
+                id="perfil-directores-plataforma-panel"
+                role="region"
+                aria-labelledby="perfil-directores-plataforma-btn"
+              >
+                <ul class="perfil-directores-hero__mega-list">
+                  <!-- <li>
+                    <a
+                      class="perfil-directores-hero__mega-link"
+                      href=""
+                      target="_blank"
+                      rel="noopener noreferrer">Preescolar</a>
+                  </li> -->
+                  <li>
+                    <a
+                      class="perfil-directores-hero__mega-link"
+                      href="https://app.lucaedu.com/"
+                      target="_blank"
+                      rel="noopener noreferrer">Primaria</a>
+                  </li>
+                  <li>
+                    <a
+                      class="perfil-directores-hero__mega-link"
+                      href="https://hs.app.lucaedu.com/"
+                      target="_blank"
+                      rel="noopener noreferrer">Secundaria</a>
+                  </li>
+                </ul>
+              </div>
+            </div>
           </div>
         </header>
         <div class="perfil-directores-hero__media">
@@ -49,6 +89,67 @@ const heroImageSrc = '/images/perfiles/directores/image-hero.webp';
   </div>
 </section>
 
+<script is:inline>
+  (function () {
+    function closeAllPerfilHeroPlataforma() {
+      document.querySelectorAll('[data-perfil-hero-plataforma-wrap]').forEach(function (w) {
+        w.classList.remove('is-open');
+        var b = w.querySelector('[data-perfil-hero-plataforma-btn]');
+        if (b) b.setAttribute('aria-expanded', 'false');
+      });
+    }
+
+    function initPerfilHeroPlataforma() {
+      document.querySelectorAll('[data-perfil-hero-plataforma-wrap]').forEach(function (wrap) {
+        if (wrap.dataset.perfilHeroPlataformaBound === 'true') return;
+        wrap.dataset.perfilHeroPlataformaBound = 'true';
+        var btn = wrap.querySelector('[data-perfil-hero-plataforma-btn]');
+        if (!(btn instanceof HTMLButtonElement)) return;
+
+        var isMobile = function () {
+          return window.matchMedia('(max-width: 1100px)').matches;
+        };
+
+        btn.addEventListener('click', function (e) {
+          e.stopPropagation();
+          if (!isMobile()) return;
+          var willOpen = !wrap.classList.contains('is-open');
+          closeAllPerfilHeroPlataforma();
+          if (willOpen) {
+            wrap.classList.add('is-open');
+            btn.setAttribute('aria-expanded', 'true');
+          }
+        });
+      });
+
+      if (!window.__lucaPerfilHeroPlataformaDoc) {
+        window.__lucaPerfilHeroPlataformaDoc = true;
+        document.addEventListener('click', function (e) {
+          var t = e.target;
+          if (!(t instanceof Node)) return;
+          document.querySelectorAll('[data-perfil-hero-plataforma-wrap]').forEach(function (w) {
+            if (!w.contains(t)) {
+              w.classList.remove('is-open');
+              var b = w.querySelector('[data-perfil-hero-plataforma-btn]');
+              if (b) b.setAttribute('aria-expanded', 'false');
+            }
+          });
+        });
+        document.addEventListener('keydown', function (e) {
+          if (e.key === 'Escape') closeAllPerfilHeroPlataforma();
+        });
+      }
+    }
+
+    if (document.readyState === 'loading') {
+      document.addEventListener('DOMContentLoaded', initPerfilHeroPlataforma);
+    } else {
+      initPerfilHeroPlataforma();
+    }
+    document.addEventListener('astro:page-load', initPerfilHeroPlataforma);
+  })();
+</script>
+
 <style>
   .perfil-directores-hero {
     width: 100%;
@@ -66,7 +167,8 @@ const heroImageSrc = '/images/perfiles/directores/image-hero.webp';
     margin-right: auto;
     background-color: #d2e6ff;
     position: relative;
-    overflow: hidden;
+    overflow-x: hidden;
+    overflow-y: visible;
     padding-top: calc(1rem + 64px + 128px);
     padding-bottom: clamp(2.5rem, 6vw, 4rem);
     padding-left: 0;
@@ -141,6 +243,107 @@ const heroImageSrc = '/images/perfiles/directores/image-hero.webp';
     white-space: nowrap;
   }
 
+  /* Mismo patrón que Header login: hover/focus panel con 3 plataformas */
+  .perfil-directores-hero__plataforma-wrap {
+    position: relative;
+    display: inline-flex;
+    align-items: center;
+    flex: 0 0 auto;
+  }
+
+  .perfil-directores-hero__mega {
+    position: absolute;
+    bottom: calc(100% + 12px);
+    top: auto;
+    left: auto;
+    right: 0;
+    transform: none;
+    min-width: 220px;
+    padding: 1rem 0;
+    background-color: #edf5ff;
+    border-radius: 16px;
+    box-shadow: 0 8px 32px rgba(40, 48, 148, 0.12);
+    z-index: 20;
+  }
+
+  .perfil-directores-hero__mega-list {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+  }
+
+  .perfil-directores-hero__mega-list li {
+    margin: 0;
+    padding: 0;
+  }
+
+  .perfil-directores-hero__mega-link {
+    font-family: var(--font-family-base);
+    font-weight: var(--text-body-primary-weight);
+    font-size: var(--text-body-primary-size);
+    letter-spacing: var(--text-body-primary-spacing);
+    line-height: var(--text-body-primary-line);
+    color: var(--color-blue);
+    text-decoration: none;
+    display: block;
+    padding: 0.75rem 1.25rem;
+    transition:
+      color 0.2s ease,
+      font-weight 0.2s ease,
+      background-color 0.2s ease;
+  }
+
+  .perfil-directores-hero__mega-link:hover,
+  .perfil-directores-hero__mega-link:focus {
+    color: var(--color-blue-secondary);
+    font-weight: var(--text-body-primary-highlight-weight);
+    background-color: rgba(56, 67, 208, 0.06);
+  }
+
+  @media (min-width: 1101px) {
+    .perfil-directores-hero__mega {
+      opacity: 0;
+      visibility: hidden;
+      pointer-events: none;
+      transition: opacity 0.2s ease, visibility 0.2s ease;
+    }
+
+    .perfil-directores-hero__plataforma-wrap:hover .perfil-directores-hero__mega,
+    .perfil-directores-hero__plataforma-wrap:focus-within .perfil-directores-hero__mega {
+      opacity: 1;
+      visibility: visible;
+      pointer-events: auto;
+    }
+
+    /* Puente invisible hacia el botón (panel arriba del CTA) */
+    .perfil-directores-hero__mega::before {
+      content: '';
+      position: absolute;
+      top: 100%;
+      left: 0;
+      right: 0;
+      height: 16px;
+    }
+  }
+
+  @media (max-width: 1100px) {
+    .perfil-directores-hero__mega {
+      display: none;
+      opacity: 1;
+      visibility: visible;
+      pointer-events: auto;
+      transition: none;
+    }
+
+    .perfil-directores-hero__mega::before {
+      display: none;
+    }
+
+    .perfil-directores-hero__plataforma-wrap.is-open .perfil-directores-hero__mega {
+      display: block;
+    }
+  }
+
   /* Mismo asset que .btn-terciary / Tecnología: sin círculo extra */
   .perfil-directores-hero__btn-icon {
     display: block;
@@ -161,6 +364,16 @@ const heroImageSrc = '/images/perfiles/directores/image-hero.webp';
 
   .perfil-directores-hero__ctas .btn-base:hover .perfil-directores-hero__btn-icon {
     transform: translateX(3px);
+  }
+
+  /* Icono persona (mismo criterio que Header login) */
+  .perfil-directores-hero__plataforma-btn .perfil-directores-hero__btn-icon--person {
+    -webkit-mask-image: url('/icons/transversal/person-icon.svg');
+    mask-image: url('/icons/transversal/person-icon.svg');
+  }
+
+  .perfil-directores-hero__plataforma-btn:hover .perfil-directores-hero__btn-icon--person {
+    transform: none;
   }
 
   .perfil-directores-hero__media {

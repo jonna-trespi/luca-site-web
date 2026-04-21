@@ -1,6 +1,6 @@
 ---
 /**
- * Hero Padres / Familias: franja 80%, fondo #1F2572, dos columnas (copy + imagen), CTAs primario/secundario.
+ * Hero Padres / Familias: franja 80%, fondo #1F2572, dos columnas (copy + imagen), CTA demo + plataforma (menú 3 niveles).
  * Imagen: public/images/perfiles/padres/image-hero.webp
  */
 const heroImageSrc = '/images/perfiles/padres/image-hero.webp';
@@ -26,10 +26,50 @@ const heroImageSrc = '/images/perfiles/padres/image-hero.webp';
               <span>Solicita tu demo</span>
               <span class="perfil-padres-hero__btn-icon" aria-hidden="true"></span>
             </a>
-            <a href="https://app.lucaedu.com/" target="_blank" class="btn-base btn-secondary btn-cta-animated">
-              <span>Ingresa a la plataforma</span>
-              <span class="perfil-padres-hero__btn-icon" aria-hidden="true"></span>
-            </a>
+            <div class="perfil-padres-hero__plataforma-wrap" data-perfil-hero-plataforma-wrap>
+              <button
+                type="button"
+                class="btn-base btn-secondary btn-cta-animated perfil-padres-hero__plataforma-btn"
+                data-perfil-hero-plataforma-btn
+                aria-expanded="false"
+                aria-haspopup="true"
+                aria-controls="perfil-padres-plataforma-panel"
+                id="perfil-padres-plataforma-btn"
+              >
+                <span>Ingresa a la plataforma</span>
+                <span class="perfil-padres-hero__btn-icon perfil-padres-hero__btn-icon--person" aria-hidden="true"></span>
+              </button>
+              <div
+                class="perfil-padres-hero__mega"
+                id="perfil-padres-plataforma-panel"
+                role="region"
+                aria-labelledby="perfil-padres-plataforma-btn"
+              >
+                <ul class="perfil-padres-hero__mega-list">
+                  <!-- <li>
+                    <a
+                      class="perfil-padres-hero__mega-link"
+                      href=""
+                      target="_blank"
+                      rel="noopener noreferrer">Preescolar</a>
+                  </li> -->
+                  <li>
+                    <a
+                      class="perfil-padres-hero__mega-link"
+                      href="https://app.lucaedu.com/"
+                      target="_blank"
+                      rel="noopener noreferrer">Primaria</a>
+                  </li>
+                  <li>
+                    <a
+                      class="perfil-padres-hero__mega-link"
+                      href="https://hs.app.lucaedu.com/"
+                      target="_blank"
+                      rel="noopener noreferrer">Secundaria</a>
+                  </li>
+                </ul>
+              </div>
+            </div>
           </div>
         </header>
         <div class="perfil-padres-hero__media">
@@ -48,6 +88,67 @@ const heroImageSrc = '/images/perfiles/padres/image-hero.webp';
   </div>
 </section>
 
+<script is:inline>
+  (function () {
+    function closeAllPerfilHeroPlataforma() {
+      document.querySelectorAll('[data-perfil-hero-plataforma-wrap]').forEach(function (w) {
+        w.classList.remove('is-open');
+        var b = w.querySelector('[data-perfil-hero-plataforma-btn]');
+        if (b) b.setAttribute('aria-expanded', 'false');
+      });
+    }
+
+    function initPerfilHeroPlataforma() {
+      document.querySelectorAll('[data-perfil-hero-plataforma-wrap]').forEach(function (wrap) {
+        if (wrap.dataset.perfilHeroPlataformaBound === 'true') return;
+        wrap.dataset.perfilHeroPlataformaBound = 'true';
+        var btn = wrap.querySelector('[data-perfil-hero-plataforma-btn]');
+        if (!(btn instanceof HTMLButtonElement)) return;
+
+        var isMobile = function () {
+          return window.matchMedia('(max-width: 1100px)').matches;
+        };
+
+        btn.addEventListener('click', function (e) {
+          e.stopPropagation();
+          if (!isMobile()) return;
+          var willOpen = !wrap.classList.contains('is-open');
+          closeAllPerfilHeroPlataforma();
+          if (willOpen) {
+            wrap.classList.add('is-open');
+            btn.setAttribute('aria-expanded', 'true');
+          }
+        });
+      });
+
+      if (!window.__lucaPerfilHeroPlataformaDoc) {
+        window.__lucaPerfilHeroPlataformaDoc = true;
+        document.addEventListener('click', function (e) {
+          var t = e.target;
+          if (!(t instanceof Node)) return;
+          document.querySelectorAll('[data-perfil-hero-plataforma-wrap]').forEach(function (w) {
+            if (!w.contains(t)) {
+              w.classList.remove('is-open');
+              var b = w.querySelector('[data-perfil-hero-plataforma-btn]');
+              if (b) b.setAttribute('aria-expanded', 'false');
+            }
+          });
+        });
+        document.addEventListener('keydown', function (e) {
+          if (e.key === 'Escape') closeAllPerfilHeroPlataforma();
+        });
+      }
+    }
+
+    if (document.readyState === 'loading') {
+      document.addEventListener('DOMContentLoaded', initPerfilHeroPlataforma);
+    } else {
+      initPerfilHeroPlataforma();
+    }
+    document.addEventListener('astro:page-load', initPerfilHeroPlataforma);
+  })();
+</script>
+
 <style>
   .perfil-padres-hero {
     width: 100%;
@@ -65,7 +166,8 @@ const heroImageSrc = '/images/perfiles/padres/image-hero.webp';
     margin-right: auto;
     background-color: #1f2572;
     position: relative;
-    overflow: hidden;
+    overflow-x: hidden;
+    overflow-y: visible;
     padding-top: calc(1rem + 64px + 128px);
     padding-bottom: clamp(2.5rem, 6vw, 4rem);
     padding-left: 0;
@@ -172,6 +274,105 @@ const heroImageSrc = '/images/perfiles/padres/image-hero.webp';
     border-color: var(--color-blue-secondary);
   }
 
+  .perfil-padres-hero__plataforma-wrap {
+    position: relative;
+    display: inline-flex;
+    align-items: center;
+    flex: 0 0 auto;
+  }
+
+  .perfil-padres-hero__mega {
+    position: absolute;
+    bottom: calc(100% + 12px);
+    top: auto;
+    left: auto;
+    right: 0;
+    transform: none;
+    min-width: 220px;
+    padding: 1rem 0;
+    background-color: #edf5ff;
+    border-radius: 16px;
+    box-shadow: 0 8px 32px rgba(40, 48, 148, 0.12);
+    z-index: 20;
+  }
+
+  .perfil-padres-hero__mega-list {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+  }
+
+  .perfil-padres-hero__mega-list li {
+    margin: 0;
+    padding: 0;
+  }
+
+  .perfil-padres-hero__mega-link {
+    font-family: var(--font-family-base);
+    font-weight: var(--text-body-primary-weight);
+    font-size: var(--text-body-primary-size);
+    letter-spacing: var(--text-body-primary-spacing);
+    line-height: var(--text-body-primary-line);
+    color: var(--color-blue);
+    text-decoration: none;
+    display: block;
+    padding: 0.75rem 1.25rem;
+    transition:
+      color 0.2s ease,
+      font-weight 0.2s ease,
+      background-color 0.2s ease;
+  }
+
+  .perfil-padres-hero__mega-link:hover,
+  .perfil-padres-hero__mega-link:focus {
+    color: var(--color-blue-secondary);
+    font-weight: var(--text-body-primary-highlight-weight);
+    background-color: rgba(56, 67, 208, 0.06);
+  }
+
+  @media (min-width: 1101px) {
+    .perfil-padres-hero__mega {
+      opacity: 0;
+      visibility: hidden;
+      pointer-events: none;
+      transition: opacity 0.2s ease, visibility 0.2s ease;
+    }
+
+    .perfil-padres-hero__plataforma-wrap:hover .perfil-padres-hero__mega,
+    .perfil-padres-hero__plataforma-wrap:focus-within .perfil-padres-hero__mega {
+      opacity: 1;
+      visibility: visible;
+      pointer-events: auto;
+    }
+
+    .perfil-padres-hero__mega::before {
+      content: '';
+      position: absolute;
+      top: 100%;
+      left: 0;
+      right: 0;
+      height: 16px;
+    }
+  }
+
+  @media (max-width: 1100px) {
+    .perfil-padres-hero__mega {
+      display: none;
+      opacity: 1;
+      visibility: visible;
+      pointer-events: auto;
+      transition: none;
+    }
+
+    .perfil-padres-hero__mega::before {
+      display: none;
+    }
+
+    .perfil-padres-hero__plataforma-wrap.is-open .perfil-padres-hero__mega {
+      display: block;
+    }
+  }
+
   .perfil-padres-hero__btn-icon {
     display: block;
     width: 1.25rem;
@@ -191,6 +392,15 @@ const heroImageSrc = '/images/perfiles/padres/image-hero.webp';
 
   .perfil-padres-hero__ctas .btn-base:hover .perfil-padres-hero__btn-icon {
     transform: translateX(3px);
+  }
+
+  .perfil-padres-hero__plataforma-btn .perfil-padres-hero__btn-icon--person {
+    -webkit-mask-image: url('/icons/transversal/person-icon.svg');
+    mask-image: url('/icons/transversal/person-icon.svg');
+  }
+
+  .perfil-padres-hero__plataforma-btn:hover .perfil-padres-hero__btn-icon--person {
+    transform: none;
   }
 
   .perfil-padres-hero__media {
