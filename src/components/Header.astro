@@ -231,10 +231,10 @@ import DemoModal from './DemoModal.astro';
         Solicita tu demo
       </a>
       <button type="button" class="header__burger" aria-label="Abrir menú" aria-expanded="false" aria-controls="header-inner-scope">
-        <span class="header__burger-dots" aria-hidden="true">
-          <span class="header__burger-dot"></span>
-          <span class="header__burger-dot"></span>
-          <span class="header__burger-dot"></span>
+        <span class="header__burger-lines" aria-hidden="true">
+          <span class="header__burger-line"></span>
+          <span class="header__burger-line"></span>
+          <span class="header__burger-line"></span>
         </span>
         <span class="header__burger-x" aria-hidden="true">
           <span class="header__burger-x-line"></span>
@@ -632,7 +632,7 @@ import DemoModal from './DemoModal.astro';
     }
   }
 
-  /* Menú móvil: tres puntos en círculo (cerrado) → aspa (abierto) */
+  /* Menú móvil: hamburguesa (cerrado) → aspa (abierto) */
   .header__burger {
     display: none;
     position: relative;
@@ -659,21 +659,22 @@ import DemoModal from './DemoModal.astro';
     outline-offset: 2px;
   }
 
-  .header__burger-dots {
+  .header__burger-lines {
     position: absolute;
     inset: 0;
     display: flex;
+    flex-direction: column;
     align-items: center;
     justify-content: center;
     gap: 4px;
     transition: opacity 0.2s ease;
   }
 
-  .header__burger-dot {
+  .header__burger-line {
     display: block;
-    width: 4px;
-    height: 4px;
-    border-radius: 50%;
+    width: 18px;
+    height: 2px;
+    border-radius: 1px;
     background-color: currentColor;
     flex-shrink: 0;
   }
@@ -705,7 +706,7 @@ import DemoModal from './DemoModal.astro';
     transform: rotate(-45deg);
   }
 
-  .header--menu-open .header__burger-dots {
+  .header--menu-open .header__burger-lines {
     opacity: 0;
     pointer-events: none;
   }
