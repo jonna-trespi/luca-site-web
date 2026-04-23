@@ -1,6 +1,6 @@
 ---
 /**
- * Clientes: sección de logos de instituciones.
+ * Clientes: sección de logos de instituciones (carrusel con desvanecido lateral vía mask).
  * Fondo blanco full width; contenido centrado con .layout-container.
  */
 interface Props {
@@ -103,6 +103,26 @@ const logosBasePath = "/logos/home/logos-colegios/";
     width: 100%;
     overflow: hidden;
     margin: 0 -var(--layout-padding-x);
+    /* Desvanecido lateral: los logos no se cortan en seco al borde del contenedor */
+    -webkit-mask-image: linear-gradient(
+      to right,
+      rgba(0, 0, 0, 0) 0%,
+      rgba(0, 0, 0, 1) clamp(2rem, 8vw, 4.5rem),
+      rgba(0, 0, 0, 1) calc(100% - clamp(2rem, 8vw, 4.5rem)),
+      rgba(0, 0, 0, 0) 100%
+    );
+    mask-image: linear-gradient(
+      to right,
+      rgba(0, 0, 0, 0) 0%,
+      rgba(0, 0, 0, 1) clamp(2rem, 8vw, 4.5rem),
+      rgba(0, 0, 0, 1) calc(100% - clamp(2rem, 8vw, 4.5rem)),
+      rgba(0, 0, 0, 0) 100%
+    );
+    mask-mode: alpha;
+    -webkit-mask-repeat: no-repeat;
+    mask-repeat: no-repeat;
+    -webkit-mask-size: 100% 100%;
+    mask-size: 100% 100%;
   }
 
   .clientes__track {

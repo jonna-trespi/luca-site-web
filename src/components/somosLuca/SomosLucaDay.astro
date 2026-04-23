@@ -1,0 +1,116 @@
+---
+/**
+ * Somos Luca — Luca Day: encabezado (patrón Impacto) + video YouTube + decoración geo-4.
+ */
+const youtubeId = 'Lcnl41Xy5Qg';
+const youtubeEmbedUrl = `https://www.youtube.com/embed/${youtubeId}?rel=0`;
+---
+
+<section class="somos-luca-day" aria-labelledby="somos-luca-day-heading">
+  <div class="somos-luca-day__inner layout-container">
+    <header class="somos-luca-day__header">
+      <p class="programas__label">
+        <span class="programas__label-dot" aria-hidden="true"></span>
+        Luca Day
+      </p>
+      <h2 id="somos-luca-day-heading" class="text-h4 somos-luca-day__title">
+        Un día para conectar, inspirarnos y construir juntos el futuro de la educación<span class="somos-luca-day__title-dot" aria-hidden="true">.</span>
+      </h2>
+    </header>
+
+    <div class="somos-luca-day__video-block">
+      <img
+        class="somos-luca-day__video-deco"
+        src="/images/somosLuca/geo-4.webp"
+        alt=""
+        width="530"
+        height="480"
+        loading="lazy"
+        decoding="async"
+        aria-hidden="true"
+      />
+      <div class="somos-luca-day__video-shell">
+        <iframe
+          class="somos-luca-day__iframe"
+          src={youtubeEmbedUrl}
+          title="Video Luca en YouTube"
+          allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+          allowfullscreen
+          loading="lazy"
+        ></iframe>
+      </div>
+    </div>
+  </div>
+</section>
+
+<style>
+  .somos-luca-day {
+    width: 100%;
+    padding: clamp(2.5rem, 5vw, 4rem) 0 clamp(3rem, 6vw, 5rem);
+    background: var(--color-white);
+    box-sizing: border-box;
+  }
+
+  .somos-luca-day__header {
+    text-align: center;
+    margin-bottom: clamp(2rem, 4vw, 3rem);
+  }
+
+  .somos-luca-day__title {
+    margin: 0 auto;
+    max-width: min(42rem, 92vw);
+    color: #1d1d1d;
+  }
+
+  .somos-luca-day__title-dot {
+    color: var(--color-red);
+  }
+
+  .somos-luca-day__video-block {
+    position: relative;
+    margin: 0 auto;
+    max-width: min(920px, 100%);
+    padding: 0;
+  }
+
+  .somos-luca-day__video-deco {
+    position: absolute;
+    right: -4%;
+    bottom: -8%;
+    width: min(250px, 42vw);
+    max-width: 250px;
+    height: auto;
+    z-index: 0;
+    pointer-events: none;
+    object-fit: contain;
+    opacity: 0.95;
+  }
+
+  .somos-luca-day__video-shell {
+    position: relative;
+    z-index: 1;
+    border-radius: 24px;
+    overflow: hidden;
+    box-shadow: 0 20px 48px rgba(40, 48, 148, 0.15);
+    aspect-ratio: 16 / 9;
+    background: #1a1a2e;
+  }
+
+  .somos-luca-day__iframe {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    border: none;
+  }
+
+  @media (max-width: 639px) {
+    .somos-luca-day__video-deco {
+      right: -6%;
+      bottom: -6%;
+      width: min(250px, 48vw);
+      max-width: 250px;
+      opacity: 0.85;
+    }
+  }
+</style>

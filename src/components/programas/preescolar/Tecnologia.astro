@@ -394,6 +394,7 @@ const slideDecos = [
   }
 
   .tecnologia__viewport {
+    --tecnologia-slide-width: min(72vw, 56rem);
     position: relative;
     z-index: 1;
     width: 100%;
@@ -419,7 +420,7 @@ const slideDecos = [
 
   .tecnologia__slide {
     flex: 0 0 auto;
-    width: min(72vw, 56rem);
+    width: var(--tecnologia-slide-width);
     max-width: 100%;
     box-sizing: border-box;
     padding: 0 4px;
@@ -638,7 +639,6 @@ const slideDecos = [
   .tecnologia__nav {
     position: absolute;
     top: 50%;
-    transform: translateY(-50%);
     flex-shrink: 0;
     min-width: 48px;
     min-height: 48px;
@@ -654,12 +654,17 @@ const slideDecos = [
     z-index: 4;
   }
 
+  /* Borde tarjeta (padding slide 4px) + fino a la derecha por alineación visual */
   .tecnologia__nav--prev {
-    left: clamp(0.25rem, 2vw, 1rem);
+    left: calc(50% - var(--tecnologia-slide-width) / 2 + 4px + 6px);
+    transform: translate(-50%, -50%);
   }
 
+  /* Un poco más a la derecha que la izquierda: evita que el círculo se vea encima del borde de la tarjeta */
   .tecnologia__nav--next {
-    right: clamp(0.25rem, 2vw, 1rem);
+    left: calc(50% + var(--tecnologia-slide-width) / 2 - 4px + 6px + 10px);
+    right: auto;
+    transform: translate(-50%, -50%);
   }
 
   .tecnologia__nav:focus-visible {

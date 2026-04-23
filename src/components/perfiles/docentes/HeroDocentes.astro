@@ -243,7 +243,13 @@ const heroImageSrc = '/images/perfiles/docentes/image-hero.webp';
     white-space: nowrap;
   }
 
-  .perfil-docentes-hero__ctas .btn-base.btn-primary {
+  /*
+   * CTA primario blanco: las capas ::before/::after globales de .btn-cta-animated
+   * son rectángulos enormes + animación liquidLight (rotación). Con overflow:hidden
+   * y border-radius en píldora generan artefactos en los extremos; aquí no las usamos.
+   */
+  .perfil-docentes-hero__ctas .btn-base.btn-primary.btn-cta-animated {
+    background-color: var(--color-white);
     background-image: linear-gradient(
       to right,
       var(--color-white) 50%,
@@ -252,9 +258,16 @@ const heroImageSrc = '/images/perfiles/docentes/image-hero.webp';
     background-size: 200% 100%;
     color: var(--color-blue-primary);
     border: 2px solid transparent;
+    overflow: visible;
   }
 
-  .perfil-docentes-hero__ctas .btn-base.btn-primary:hover {
+  .perfil-docentes-hero__ctas .btn-base.btn-primary.btn-cta-animated::before,
+  .perfil-docentes-hero__ctas .btn-base.btn-primary.btn-cta-animated::after {
+    display: none;
+  }
+
+  .perfil-docentes-hero__ctas .btn-base.btn-primary.btn-cta-animated:hover {
+    background-color: var(--color-blue-secondary);
     color: #ffffff;
   }
 

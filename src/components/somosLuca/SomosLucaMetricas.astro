@@ -1,11 +1,7 @@
 ---
 /**
- * Somos Luca — Métricas + Luca Day (label + título, patrón SomosLucaImpacto) + video YouTube.
- * Contadores al estilo Diferencia. Decoración tras el video: geo-4, max-width 250px.
+ * Somos Luca — Métricas (contadores al estilo Diferencia). Luca Day vive en SomosLucaDay.astro.
  */
-const youtubeId = 'Lcnl41Xy5Qg';
-const youtubeEmbedUrl = `https://www.youtube.com/embed/${youtubeId}?rel=0`;
-
 const stats = [
   {
     target: 8000,
@@ -31,7 +27,7 @@ const stats = [
 ] as const;
 ---
 
-<section class="somos-luca-metricas" aria-label="Métricas y video">
+<section class="somos-luca-metricas" aria-label="Métricas">
   <div class="somos-luca-metricas__inner layout-container">
     <ul class="somos-luca-metricas__stats" id="somos-luca-metricas-stats">
       {stats.map((stat) => (
@@ -58,40 +54,6 @@ const stats = [
         </li>
       ))}
     </ul>
-
-    <header class="somos-luca-metricas__video-header">
-      <p class="programas__label">
-        <span class="programas__label-dot" aria-hidden="true"></span>
-        Luca Day
-      </p>
-      <h2 id="somos-luca-metricas-video-heading" class="text-h4 somos-luca-metricas__video-title">
-        Un día para conectar, inspirarnos y construir juntos el futuro de la educación<span class="somos-luca-metricas__title-dot" aria-hidden="true">.</span>
-      </h2>
-    </header>
-
-    <div class="somos-luca-metricas__video-block">
-      <img
-        class="somos-luca-metricas__video-deco"
-        src="/images/somosLuca/geo-4.webp"
-        alt=""
-        width="530"
-        height="480"
-        loading="lazy"
-        decoding="async"
-        aria-hidden="true"
-        data-somos-metricas-deco
-      />
-      <div class="somos-luca-metricas__video-shell">
-        <iframe
-          class="somos-luca-metricas__iframe"
-          src={youtubeEmbedUrl}
-          title="Video Luca en YouTube"
-          allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
-          allowfullscreen
-          loading="lazy"
-        ></iframe>
-      </div>
-    </div>
   </div>
 </section>
 
@@ -168,8 +130,6 @@ const stats = [
 </script>
 
 <style>
-  @import url('https://fonts.googleapis.com/css2?family=Roboto:wght@600&display=swap');
-
   .somos-luca-metricas {
     width: 100%;
     padding: clamp(2.5rem, 5vw, 4rem) 0 clamp(3rem, 6vw, 5rem);
@@ -192,7 +152,7 @@ const stats = [
 
   .somos-luca-metricas__stat-value {
     display: block;
-    font-family: 'Roboto', sans-serif;
+    font-family: var(--font-family-base);
     font-weight: 600;
     font-size: clamp(2.75rem, 10vw, 5.5rem);
     line-height: 1;
@@ -229,60 +189,6 @@ const stats = [
     text-align: center;
   }
 
-  .somos-luca-metricas__video-header {
-    text-align: center;
-    margin-top: calc(64px + clamp(2.5rem, 5vw, 4rem));
-    margin-bottom: clamp(2rem, 4vw, 3rem);
-  }
-
-  .somos-luca-metricas__video-title {
-    margin: 0 auto;
-    max-width: min(42rem, 92vw);
-    color: #1d1d1d;
-  }
-
-  .somos-luca-metricas__title-dot {
-    color: var(--color-red);
-  }
-
-  .somos-luca-metricas__video-block {
-    position: relative;
-    margin: 0 auto;
-    max-width: min(920px, 100%);
-    padding: 0;
-  }
-
-  .somos-luca-metricas__video-deco {
-    position: absolute;
-    right: -4%;
-    bottom: -8%;
-    width: min(250px, 42vw);
-    max-width: 250px;
-    height: auto;
-    z-index: 0;
-    pointer-events: none;
-    object-fit: contain;
-    opacity: 0.95;
-  }
-
-  .somos-luca-metricas__video-shell {
-    position: relative;
-    z-index: 1;
-    border-radius: 24px;
-    overflow: hidden;
-    box-shadow: 0 20px 48px rgba(40, 48, 148, 0.15);
-    aspect-ratio: 16 / 9;
-    background: #1a1a2e;
-  }
-
-  .somos-luca-metricas__iframe {
-    position: absolute;
-    inset: 0;
-    width: 100%;
-    height: 100%;
-    border: none;
-  }
-
   @media (min-width: 640px) {
     .somos-luca-metricas__stats {
       grid-template-columns: repeat(3, 1fr);
@@ -290,13 +196,4 @@ const stats = [
     }
   }
 
-  @media (max-width: 639px) {
-    .somos-luca-metricas__video-deco {
-      right: -6%;
-      bottom: -6%;
-      width: min(250px, 48vw);
-      max-width: 250px;
-      opacity: 0.85;
-    }
-  }
 </style>

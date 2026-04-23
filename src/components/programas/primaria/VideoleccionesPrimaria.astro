@@ -1,9 +1,9 @@
 ---
 /**
- * Videolecciones: título, subtítulo 1, vídeo embebido (autoplay, sin controles) y figuras geo-7 / geo-8.
+ * Videolecciones: título, subtítulo 1, vídeo embebido (autoplay en silencio, controles para audio) y figuras geo-7 / geo-8.
  */
 const VIDEO_ID = 'O5pA-K5gvhc';
-const embedSrc = `https://www.youtube.com/embed/${VIDEO_ID}?autoplay=1&mute=1&loop=1&playlist=${VIDEO_ID}&controls=0&modestbranding=1&rel=0`;
+const embedSrc = `https://www.youtube.com/embed/${VIDEO_ID}?autoplay=1&mute=1&loop=1&playlist=${VIDEO_ID}&controls=1&modestbranding=1&rel=0&playsinline=1`;
 ---
 <section class="videolecciones-primaria">
   <div class="videolecciones-primaria__geo7" aria-hidden="true">
@@ -28,7 +28,7 @@ const embedSrc = `https://www.youtube.com/embed/${VIDEO_ID}?autoplay=1&mute=1&lo
           class="videolecciones-primaria__iframe"
           src={embedSrc}
           title="Videolecciones Luca"
-          allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+          allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
           allowfullscreen
         ></iframe>
       </div>
