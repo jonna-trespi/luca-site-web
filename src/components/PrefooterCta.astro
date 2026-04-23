@@ -114,25 +114,25 @@
     height: 1.25rem;
   }
 
-  /* Mascota: esquina inferior izquierda, fuera del flujo */
+  /* Mascota: esquina inferior izquierda (móvil: compacta, sin solapar el CTA) */
   .prefooter-cta__mascot-wrap {
     position: absolute;
     z-index: 2;
-    left: clamp(-20px, -3vw, -8px);
-    bottom: clamp(-36px, -6vw, -20px);
+    left: clamp(-10px, -1.5vw, -4px);
+    bottom: clamp(-18px, -3.5vw, -10px);
+    top: auto;
     pointer-events: none;
-    top: 80%;
     line-height: 0;
   }
 
-  /* Halo salmón bajo la base de la mascota (~120px) */
+  /* Halo salmón bajo la mascota */
   .prefooter-cta__mascot-circle {
     position: absolute;
     left: 50%;
-    bottom: -6px;
+    bottom: -4px;
     z-index: 0;
-    width: 120px;
-    height: 120px;
+    width: 76px;
+    height: 76px;
     border-radius: 50%;
     background-color: var(--color-red);
     transform: translateX(-50%);
@@ -143,14 +143,30 @@
     position: relative;
     z-index: 1;
     display: block;
-    max-width: 120px;
+    max-width: 88px;
     width: auto;
     height: auto;
     object-fit: contain;
   }
 
+  @media (max-width: 1100px) {
+    .prefooter-cta__card {
+      /* Espacio bajo el botón para la mascota sin tapar el texto del CTA */
+      padding-bottom: clamp(3.75rem, 14vw, 5rem);
+    }
+
+    .prefooter-cta__content {
+      gap: 1.5rem;
+    }
+
+    .prefooter-cta__cta {
+      position: relative;
+      z-index: 3;
+    }
+  }
+
   .prefooter-cta__marquee {
-    margin-top: 64px;
+    margin-top: 128px;
     width: 100vw;
     max-width: 100vw;
     margin-left: calc(50% - 50vw);
@@ -183,6 +199,12 @@
     line-height: 1.05;
     color: var(--color-blue-secondary);
     white-space: nowrap;
+  }
+
+  @media (max-width: 1100px) {
+    .prefooter-cta__marquee-text {
+      font-size: 60px;
+    }
   }
 
   @keyframes prefooter-cta-marquee {
@@ -218,6 +240,12 @@
       left: clamp(-28px, -3.5vw, -12px);
       bottom: clamp(-40px, -5vw, -24px);
       top: 50%;
+    }
+
+    .prefooter-cta__mascot-circle {
+      width: 120px;
+      height: 120px;
+      bottom: -6px;
     }
 
     .prefooter-cta__mascot {
