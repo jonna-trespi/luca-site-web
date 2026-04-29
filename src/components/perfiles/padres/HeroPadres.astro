@@ -244,34 +244,36 @@ const heroImageSrc = '/images/perfiles/padres/image-hero.webp';
   }
 
   .perfil-padres-hero__ctas .btn-base.btn-primary {
+    background-color: var(--color-white);
     background-image: linear-gradient(
       to right,
       var(--color-white) 50%,
       var(--color-blue-secondary) 50%
     );
     background-size: 200% 100%;
+    background-position: left bottom;
     color: var(--color-blue-primary);
     border: 2px solid transparent;
   }
 
   .perfil-padres-hero__ctas .btn-base.btn-primary:hover {
+    background-position: right bottom;
     color: #ffffff;
   }
 
   .perfil-padres-hero__ctas .btn-base.btn-secondary {
-    background-image: linear-gradient(
-      to right,
-      transparent 50%,
-      var(--color-blue-secondary) 50%
-    );
-    background-size: 200% 100%;
     background-color: transparent;
+    background-image: linear-gradient(to right, transparent 50%, var(--color-blue-secondary) 50%);
+    background-size: 200% 100%;
+    background-position: left bottom;
     color: #ffffff;
     border: 2px solid #ffffff;
   }
 
   .perfil-padres-hero__ctas .btn-base.btn-secondary:hover {
+    background-position: right bottom;
     border-color: var(--color-blue-secondary);
+    color: #ffffff;
   }
 
   .perfil-padres-hero__plataforma-wrap {

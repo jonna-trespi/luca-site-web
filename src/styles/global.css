@@ -23,12 +23,6 @@
   --color-white: #ffffff;
   --color-black: #000000;
 
-  /* Paleta para animación de flujo iridiscente (~15% opacidad) */
-  --color-flow-blue: rgba(56, 67, 208, 0.15);
-  --color-flow-red: rgba(255, 130, 131, 0.15);
-  --color-flow-yellow: rgba(255, 186, 49, 0.15);
-  --color-flow-green: rgba(50, 203, 189, 0.15);
-
   /* Botones */
   --border-radius-button: 100px;
   --btn-padding-y: 16px;
@@ -353,24 +347,6 @@ input:disabled {
    ========================================================================== */
 
 /* --------------------------------------------------------------------------
-   Animación "flujo de luz líquida" (liquidLight) para .btn-cta-animated
-   -------------------------------------------------------------------------- */
-@keyframes liquidLight {
-  0% {
-    transform: translate(0, 0) rotate(0deg) scale(1);
-  }
-  33% {
-    transform: translate(5%, -10%) rotate(45deg) scale(1.1);
-  }
-  66% {
-    transform: translate(-10%, 5%) rotate(-20deg) scale(0.9);
-  }
-  100% {
-    transform: translate(0, 0) rotate(360deg) scale(1);
-  }
-}
-
-/* --------------------------------------------------------------------------
    Base para botones tipo "botón" (primario y secundario)
    -------------------------------------------------------------------------- */
 .btn-base {
@@ -389,7 +365,13 @@ input:disabled {
   gap: 0.5rem;
   position: relative;
   overflow: hidden;
-  transition: background-position 0.4s cubic-bezier(0.25, 1, 0.5, 1), color 0.3s ease, box-shadow 0.4s ease, transform 0.2s ease;
+  transition:
+    background-color 0.25s ease,
+    background-position 0.4s cubic-bezier(0.25, 1, 0.5, 1),
+    color 0.3s ease,
+    border-color 0.25s ease,
+    box-shadow 0.25s ease,
+    transform 0.2s ease;
 }
 
 .btn-base svg,
@@ -410,98 +392,35 @@ input:disabled {
   transition: transform 0.2s ease;
 }
 
-/* Para que el flujo líquido sea visible, el contenido del botón va por encima */
+/* Contenido por encima del fondo del botón */
 .btn-cta-animated > * {
   position: relative;
   z-index: 1;
 }
 
-/* --------------------------------------------------------------------------
-   .btn-cta-animated: preparación y capas de luz (flujo líquido iridiscente)
-   -------------------------------------------------------------------------- */
 .btn-cta-animated {
   position: relative;
   overflow: hidden;
   z-index: 1;
-  transition: all 0.4s cubic-bezier(0.25, 1, 0.5, 1);
+  transition:
+    background-color 0.25s ease,
+    background-position 0.4s cubic-bezier(0.25, 1, 0.5, 1),
+    color 0.3s ease,
+    border-color 0.25s ease,
+    box-shadow 0.25s ease,
+    transform 0.2s ease;
 }
 
-/* Movimiento del contenido: elevación del botón y flecha a la derecha */
 .btn-cta-animated:hover .icon-circle,
 .btn-cta-animated:hover .icon-arrow {
   transform: translateX(4px);
 }
 
-/* Capas de luz: z-index 0 para verse sobre el fondo del botón; contenido con z-index 1 */
-.btn-cta-animated::before,
-.btn-cta-animated::after {
-  content: '';
-  position: absolute;
-  z-index: 0;
-  pointer-events: none;
-  opacity: 0;
-  transition: opacity 0.4s ease;
-  width: 200%;
-  height: 200%;
-  top: -50%;
-  left: -50%;
-}
-
-/* ::before: azul + verde hacia transparente (descentrado) */
-.btn-cta-animated::before {
-  background: radial-gradient(
-    ellipse 120% 120% at 30% 25%,
-    var(--color-blue) 0%,
-    transparent 55%
-  ),
-  radial-gradient(
-    ellipse 100% 100% at 70% 75%,
-    var(--color-green) 0%,
-    transparent 50%
-  );
-}
-
-/* ::after: rojo + amarillo hacia transparente (posición distinta) */
-.btn-cta-animated::after {
-  background: radial-gradient(
-    ellipse 110% 110% at 75% 30%,
-    var(--color-red) 0%,
-    transparent 52%
-  ),
-  radial-gradient(
-    ellipse 95% 95% at 25% 65%,
-    var(--color-yellow) 0%,
-    transparent 48%
-  );
-}
-
-/* Hover: elevación del botón, capas visibles y animación líquida (sombra en .btn-primary/:hover y .btn-secondary:hover) */
-.btn-cta-animated:hover {
-  transform: translateY(-2px);
-}
-
-.btn-cta-animated.btn-primary:hover,
-.btn-cta-animated.btn-secondary:hover {
-  box-shadow: 0 4px 12px rgba(40, 48, 148, 0.25);
-}
-
-.btn-cta-animated:hover::before,
-.btn-cta-animated:hover::after {
-  opacity: 0.15;
-}
-
-.btn-cta-animated:hover::before {
-  animation: liquidLight 8s linear infinite;
-}
-
-.btn-cta-animated:hover::after {
-  animation: liquidLight 12s linear infinite reverse;
-}
-
 /* --------------------------------------------------------------------------
-   Variante: Primario (gradiente sobredimensionado para hover barrido)
+   Variante: Primario (barrido horizontal: mitad clara → mitad oscura; sin capas “prisma”)
    -------------------------------------------------------------------------- */
 .btn-base.btn-primary {
+  background-color: var(--color-blue-primary);
   background-image: linear-gradient(to right, var(--color-blue-primary) 50%, var(--color-blue-secondary) 50%);
   background-size: 200% 100%;
   background-position: left bottom;
@@ -531,13 +450,13 @@ input:disabled {
 }
 
 /* --------------------------------------------------------------------------
-   Variante: Secundario (gradiente sobredimensionado para hover barrido)
+   Variante: Secundario (transparente → barrido a relleno oscuro)
    -------------------------------------------------------------------------- */
 .btn-base.btn-secondary {
+  background-color: transparent;
   background-image: linear-gradient(to right, transparent 50%, var(--color-blue-secondary) 50%);
   background-size: 200% 100%;
   background-position: left bottom;
-  background-color: transparent;
   color: var(--color-blue-primary);
   border: 2px solid var(--color-blue-primary);
 }
@@ -565,7 +484,7 @@ input:disabled {
 }
 
 /* --------------------------------------------------------------------------
-   Variante: Terciario (tipo link, sin animación de flujo)
+   Variante: Terciario (tipo link)
    -------------------------------------------------------------------------- */
 .btn-terciary {
   font-family: var(--font-family-base);

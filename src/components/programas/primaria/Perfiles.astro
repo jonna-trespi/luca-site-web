@@ -336,19 +336,9 @@ const tabPanels = [
   }
 
   /*
-   * Tabs (mismas medidas y espaciado que programas/preescolar/Perfiles.astro):
+   * Tabs (mismas medidas que programas/preescolar/Perfiles.astro):
    * 45px alto; gap 12px entre tabs; icono 22px y gap 14px respecto al texto.
    */
-  .perfiles__tab.btn-cta-animated::before,
-  .perfiles__tab.btn-cta-animated::after {
-    display: none;
-  }
-
-  .perfiles__tab.btn-cta-animated:hover {
-    transform: none;
-    box-shadow: none;
-  }
-
   .perfiles__tab.btn-base {
     width: min(280px, 100%);
     max-width: 100%;
@@ -392,50 +382,39 @@ const tabPanels = [
 
   .perfiles__tab.btn-primary {
     background-color: var(--color-blue-primary);
-    background-image: linear-gradient(
-      to right,
-      var(--color-blue-secondary) 0%,
-      var(--color-blue-secondary) 100%
-    );
-    background-size: 0% 100%;
-    background-repeat: no-repeat;
-    background-position: right center;
+    background-image: linear-gradient(to right, var(--color-blue-primary) 50%, var(--color-blue-secondary) 50%);
+    background-size: 200% 100%;
+    background-position: left bottom;
     color: #ffffff;
     border-color: transparent;
     transition:
-      background-size 0.5s cubic-bezier(0.25, 1, 0.5, 1),
-      color 0.35s ease;
+      background-position 0.4s cubic-bezier(0.25, 1, 0.5, 1),
+      color 0.3s ease;
   }
 
   .perfiles__tab.btn-primary:hover {
-    background-size: 100% 100%;
+    background-position: right bottom;
     color: #ffffff;
     box-shadow: none;
-    background-position: right center;
   }
 
   .perfiles__tab.btn-base:not(.btn-primary) {
     background-color: #ffffff;
-    background-image: linear-gradient(
-      to right,
-      var(--color-blue-secondary) 0%,
-      var(--color-blue-secondary) 100%
-    );
-    background-size: 0% 100%;
-    background-repeat: no-repeat;
-    background-position: right center;
+    background-image: linear-gradient(to right, #ffffff 50%, var(--color-blue-secondary) 50%);
+    background-size: 200% 100%;
+    background-position: left bottom;
     color: var(--color-black);
     border: 1px solid rgba(56, 67, 208, 0.18);
     box-shadow: 0 1px 2px rgba(0, 0, 0, 0.04);
     transition:
-      background-size 0.5s cubic-bezier(0.25, 1, 0.5, 1),
-      color 0.35s ease,
+      background-position 0.4s cubic-bezier(0.25, 1, 0.5, 1),
+      color 0.25s ease,
       border-color 0.3s ease,
       box-shadow 0.3s ease;
   }
 
   .perfiles__tab.btn-base:not(.btn-primary):hover {
-    background-size: 100% 100%;
+    background-position: right bottom;
     color: #ffffff;
     border-color: transparent;
     box-shadow: none;

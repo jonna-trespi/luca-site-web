@@ -1,7 +1,7 @@
 ---
 /**
  * Página de ejemplo: guía de estilos para botones CTA globales.
- * Muestra Primario, Secundario y Terciario con la animación de flujo.
+ * Primario/Secundario: barrido horizontal en hover (gradiente); sin capas “prisma”.
  * Ruta: /ejemplo-botones-cta
  */
 import Layout from '../layouts/Layout.astro';
@@ -18,7 +18,7 @@ import Layout from '../layouts/Layout.astro';
     <!-- Fondo oscuro para que primario y secundario (texto blanco) se vean -->
     <section class="ejemplo-cta-bar">
       <div class="layout-container ejemplo-cta-bar__inner">
-      <!-- Primario: botón sólido con flujo en hover -->
+      <!-- Primario: barrido claro → oscuro en hover -->
       <button type="button" class="btn-base btn-cta-animated btn-primary">
         Button
         <span class="icon-circle" aria-hidden="true">
@@ -28,7 +28,7 @@ import Layout from '../layouts/Layout.astro';
         </span>
       </button>
 
-      <!-- Secundario: borde + flujo en hover -->
+      <!-- Secundario: borde; hover barrido a relleno oscuro -->
       <a href="#" class="btn-base btn-cta-animated btn-secondary">
         Button
         <span class="icon-circle icon-outline" aria-hidden="true">
@@ -38,7 +38,7 @@ import Layout from '../layouts/Layout.astro';
         </span>
       </a>
 
-      <!-- Terciario: tipo link, sin flujo; flecha en color primario (sin círculo) -->
+      <!-- Terciario: tipo link; flecha en color primario (sin círculo) -->
       <a href="#" class="btn-terciary">
         Button
         <span class="btn-terciary-icon" aria-hidden="true"></span>
@@ -47,8 +47,9 @@ import Layout from '../layouts/Layout.astro';
     </section>
 
     <p class="text-body-secondary ejemplo-cta-page__desc">
-      Primario y secundario usan <code>.btn-base .btn-cta-animated</code> + <code>.btn-primary</code> o <code>.btn-secondary</code>.
-      Terciario usa solo <code>.btn-terciary</code> y <code>.btn-terciary-icon</code> para la flecha (sin animación de flujo).
+      Primario y secundario usan <code>.btn-base .btn-cta-animated</code> + <code>.btn-primary</code> o <code>.btn-secondary</code>
+      (hover: gradiente desplazado con <code>background-position</code>; sin animación tipo prisma).
+      Terciario usa solo <code>.btn-terciary</code> y <code>.btn-terciary-icon</code> para la flecha.
     </p>
   </main>
 </Layout>

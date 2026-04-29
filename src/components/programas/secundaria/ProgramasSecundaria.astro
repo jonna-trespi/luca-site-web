@@ -307,10 +307,7 @@ const tabPanels = [
     justify-content: center;
   }
 
-  /*
-   * Mismo comportamiento que Hero CTA: .btn-base.btn-primary.btn-cta-animated
-   * Tab activa = primario; inactiva = #D2E6FF
-   */
+  /* Tab activa = primario; inactiva = #D2E6FF; hover = barrido horizontal como CTA global. */
   .programas-secundaria__tab.btn-base {
     box-sizing: border-box;
     max-width: 200px;
@@ -338,13 +335,13 @@ const tabPanels = [
 
   .programas-secundaria__tab.btn-base:not(.btn-primary) {
     background-color: #d2e6ff;
+    background-image: linear-gradient(to right, #d2e6ff 50%, var(--color-blue-secondary) 50%);
+    background-size: 200% 100%;
+    background-position: left bottom;
     color: var(--color-black);
-    background-image: none;
   }
 
   .programas-secundaria__tab.btn-base:not(.btn-primary):hover {
-    background-image: linear-gradient(to right, var(--color-blue-primary) 50%, var(--color-blue-secondary) 50%);
-    background-size: 200% 100%;
     background-position: right bottom;
     color: #ffffff;
     box-shadow: 0 4px 12px rgba(40, 48, 148, 0.25);

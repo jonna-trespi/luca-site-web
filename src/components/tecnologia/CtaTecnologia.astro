@@ -180,19 +180,22 @@ const geoTr = '/images/tecnologia/geo-7.webp';
     gap: 1rem;
   }
 
-  /* Mismo criterio que Hero Docentes: primario blanco + texto azul sobre fondo azul */
+  /* Mismo criterio que Hero Docentes: barrido blanco → azul oscuro */
   .cta-tech__ctas .btn-base.btn-primary {
+    background-color: var(--color-white);
     background-image: linear-gradient(
       to right,
       var(--color-white) 50%,
       var(--color-blue-secondary) 50%
     );
     background-size: 200% 100%;
+    background-position: left bottom;
     color: var(--color-blue-primary);
     border: 2px solid transparent;
   }
 
   .cta-tech__ctas .btn-base.btn-primary:hover {
+    background-position: right bottom;
     color: #ffffff;
   }
 
