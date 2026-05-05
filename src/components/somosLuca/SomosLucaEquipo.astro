@@ -1,6 +1,7 @@
 ---
 /**
- * Somos Luca — Staff educativo: carrusel horizontal con tarjetas (hover: fondo y descripción).
+ * Somos Luca — Staff educativo: carrusel horizontal manual con tarjetas (hover: fondo y descripción).
+ * Desvanecido lateral vía mask-image (mismo criterio que Clientes.astro).
  */
 const team = [
   {
@@ -48,6 +49,15 @@ const team = [
       'Asegura que los materiales y recursos digitales estén alineados al currículo y a la experiencia en aula.',
     hoverBg: '#F0E8FF',
   },
+  {
+    image: '/images/somosLuca/equipo-6.webp',
+    alt: 'Dalibor Trnka',
+    role: 'Coordinador de Matemáticas',
+    name: 'Dalibor Trnka',
+    description:
+      'crea materiales matemáticos que hacen accesible y significativo el pensamiento lógico para los estudiantes.',
+    hoverBg: '#FFF8E7',
+  }
 ];
 ---
 
@@ -171,6 +181,26 @@ const team = [
     scroll-snap-type: x mandatory;
     scrollbar-width: thin;
     padding-bottom: 1.5rem;
+    /* Desvanecido lateral muy suave (banda estrecha, casi opaco en el borde) */
+    -webkit-mask-image: linear-gradient(
+      to right,
+      rgba(0, 0, 0, 0.97) 0%,
+      rgba(0, 0, 0, 1) clamp(0.35rem, 1.5vw, 0.85rem),
+      rgba(0, 0, 0, 1) calc(100% - clamp(0.35rem, 1.5vw, 0.85rem)),
+      rgba(0, 0, 0, 0.99) 100%
+    );
+    mask-image: linear-gradient(
+      to right,
+      rgba(0, 0, 0, 0.97) 0%,
+      rgba(0, 0, 0, 1) clamp(0.35rem, 1.5vw, 0.85rem),
+      rgba(0, 0, 0, 1) calc(100% - clamp(0.35rem, 1.5vw, 0.85rem)),
+      rgba(0, 0, 0, 0.99) 100%
+    );
+    mask-mode: alpha;
+    -webkit-mask-repeat: no-repeat;
+    mask-repeat: no-repeat;
+    -webkit-mask-size: 100% 100%;
+    mask-size: 100% 100%;
   }
 
   .somos-luca-equipo__track {
@@ -189,7 +219,7 @@ const team = [
   .somos-luca-equipo__card {
     flex: 0 0 auto;
     width: min(260px, 82vw);
-    scroll-snap-align: center;
+    scroll-snap-align: start;
     outline: none;
     display: flex;
     flex-direction: column;
@@ -296,17 +326,4 @@ const team = [
     }
   }
 
-  @media (min-width: 1101px) {
-    .somos-luca-equipo__track {
-      justify-content: center;
-      flex-wrap: nowrap;
-      width: 100%;
-      min-width: unset;
-    }
-
-    .somos-luca-equipo__carousel-wrap {
-      overflow-x: visible;
-      scroll-snap-type: none;
-    }
-  }
 </style>
