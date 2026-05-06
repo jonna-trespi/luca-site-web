@@ -3,77 +3,110 @@ import Layout from '../../layouts/Layout.astro';
 import Header from '../../components/Header.astro';
 import Footer from '../../components/Footer.astro';
 import BlogRelated from '../../components/blog/BlogRelated.astro';
-import { getAllPosts, getPostBySlug, getRelatedPosts } from '../../lib/blog';
+import BlogIndexPage from '../../components/blog/BlogIndexPage.astro';
+import {
+  getAllPosts,
+  getPostBySlug,
+  getRelatedPosts,
+  getCategoryList,
+  getCategoryLabelFromSlug,
+  slugifyBlogCategory,
+} from '../../lib/blog';
 
 export function getStaticPaths() {
-  return getAllPosts().map((post) => ({
+  const posts = getAllPosts();
+  const postSlugSet = new Set(posts.map((p) => p.slug));
+  const paths: { params: { slug: string } }[] = posts.map((post) => ({
     params: { slug: post.slug },
   }));
+  for (const label of getCategoryList()) {
+    const s = slugifyBlogCategory(label);
+    if (!s || postSlugSet.has(s)) continue;
+    paths.push({ params: { slug: s } });
+  }
+  return paths;
 }
 
-const slug = Astro.params.slug;
-const post = slug ? getPostBySlug(slug) : undefined;
-if (!post) {
-  throw new Error(`Entrada de blog no encontrada: ${slug}`);
+const slug = Astro.params.slug ?? '';
+const post = getPostBySlug(slug);
+const categoryLabel = post ? null : getCategoryLabelFromSlug(slug);
+
+if (!post && !categoryLabel) {
+  return Astro.redirect('/blog/');
 }
 
-const related = getRelatedPosts(post.slug, post.category, 3);
-const canonicalPath = `/blog/${post.slug}/`;
-const ogImage = post.mainImage?.startsWith('http') ? post.mainImage : undefined;
+const posts = getAllPosts();
+const categories = getCategoryList();
 ---
 
-<Layout
-  title={`${post.name} - Blog Luca`}
-  description={post.summary || post.name}
-  canonicalPath={canonicalPath}
-  image={ogImage}
->
-  <Header />
-  <main class="blog-post-page">
-    <article class="blog-post">
-      <div class="blog-post__shell layout-container">
-        <header class="blog-post__head">
-          <div class="blog-post__meta-row">
-            {post.category ? (
-              <span class="blog-post__category-chip">{post.category}</span>
+{
+  post ? (
+    <Layout
+      title={`${post.name} - Blog Luca`}
+      description={post.summary || post.name}
+      canonicalPath={`/blog/${post.slug}/`}
+      image={post.mainImage?.startsWith('http') ? post.mainImage : undefined}
+    >
+      <Header />
+      <main class="blog-post-page">
+        <article class="blog-post">
+          <div class="blog-post__shell layout-container">
+            <header class="blog-post__head">
+              <div class="blog-post__meta-row">
+                {post.category ? (
+                  <a class="blog-post__category-chip" href={`/blog/${slugifyBlogCategory(post.category)}/`}>
+                    {post.category}
+                  </a>
+                ) : null}
+                {post.dateLabel ? (
+                  <time
+                    class="blog-post__date text-body-primary"
+                    datetime={post.publishedAt ? post.publishedAt.toISOString() : undefined}
+                  >
+                    {post.dateLabel}
+                  </time>
+                ) : null}
+                {post.authorName ? (
+                  <span class="blog-post__author text-body-primary">{post.authorName}</span>
+                ) : null}
+              </div>
+              <h2 class="blog-post__title text-h2">{post.name}</h2>
+            </header>
+
+            {post.mainImage ? (
+              <div class="blog-post__featured">
+                <img
+                  class="blog-post__featured-img"
+                  src={post.mainImage}
+                  alt={post.mainImageAlt || ''}
+                  width="1200"
+                  height="675"
+                  loading="eager"
+                  decoding="async"
+                />
+              </div>
             ) : null}
-            {post.dateLabel ? (
-              <time
-                class="blog-post__date text-body-primary"
-                datetime={post.publishedAt ? post.publishedAt.toISOString() : undefined}
-              >
-                {post.dateLabel}
-              </time>
-            ) : null}
-            {post.authorName ? (
-              <span class="blog-post__author text-body-primary">{post.authorName}</span>
-            ) : null}
+
+            <div class="blog-post__body blog-prose text-body-primary" set:html={post.bodyHtml} />
           </div>
-          <h2 class="blog-post__title text-h2">{post.name}</h2>
-        </header>
+        </article>
 
-        {post.mainImage ? (
-          <div class="blog-post__featured">
-            <img
-              class="blog-post__featured-img"
-              src={post.mainImage}
-              alt={post.mainImageAlt || ''}
-              width="1200"
-              height="675"
-              loading="eager"
-              decoding="async"
-            />
-          </div>
-        ) : null}
-
-        <div class="blog-post__body blog-prose text-body-primary" set:html={post.bodyHtml} />
-      </div>
-    </article>
-
-    <BlogRelated posts={related} />
-  </main>
-  <Footer />
-</Layout>
+        <BlogRelated posts={getRelatedPosts(post.slug, post.category, 3)} />
+      </main>
+      <Footer />
+    </Layout>
+  ) : (
+    <Layout
+      title={`${categoryLabel} - Blog Luca`}
+      description={`Artículos del blog Luca en la categoría «${categoryLabel}».`}
+      canonicalPath={`/blog/${slug}/`}
+    >
+      <Header />
+      <BlogIndexPage posts={posts} categories={categories} activeCategorySlug={slug} />
+      <Footer />
+    </Layout>
+  )
+}
 
 <style>
   .blog-post-page {
@@ -114,7 +147,6 @@ const ogImage = post.mainImage?.startsWith('http') ? post.mainImage : undefined;
     gap: 0.75rem 1.25rem;
   }
 
-  /* Chip tipo píldora (no interactivo) */
   .blog-post__category-chip {
     display: inline-flex;
     align-items: center;
@@ -127,6 +159,17 @@ const ogImage = post.mainImage?.startsWith('http') ? post.mainImage : undefined;
     background-color: var(--color-blue-secondary);
     color: #ffffff;
     max-width: 100%;
+    text-decoration: none;
+    box-sizing: border-box;
+  }
+
+  .blog-post__category-chip:hover {
+    filter: brightness(1.06);
+  }
+
+  .blog-post__category-chip:focus-visible {
+    outline: 2px solid var(--color-blue-primary);
+    outline-offset: 2px;
   }
 
   .blog-post__date {
@@ -146,7 +189,6 @@ const ogImage = post.mainImage?.startsWith('http') ? post.mainImage : undefined;
     color: var(--color-text-base);
   }
 
-  /* 64px solo cuando sigue la imagen destacada */
   .blog-post__head:has(+ .blog-post__featured) .blog-post__title.text-h2 {
     margin-bottom: 64px;
   }

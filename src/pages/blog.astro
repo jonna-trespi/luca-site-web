@@ -2,9 +2,7 @@
 import Layout from '../layouts/Layout.astro';
 import Header from '../components/Header.astro';
 import Footer from '../components/Footer.astro';
-import BlogHero from '../components/blog/BlogHero.astro';
-import BlogToolbar from '../components/blog/BlogToolbar.astro';
-import BlogGrid from '../components/blog/BlogGrid.astro';
+import BlogIndexPage from '../components/blog/BlogIndexPage.astro';
 import { getAllPosts, getCategoryList } from '../lib/blog';
 
 const posts = getAllPosts();
@@ -17,10 +15,6 @@ const categories = getCategoryList();
   canonicalPath="/blog/"
 >
   <Header />
-  <main>
-    <BlogHero />
-    <BlogToolbar categories={categories} />
-    <BlogGrid posts={posts} />
-  </main>
+  <BlogIndexPage posts={posts} categories={categories} activeCategorySlug={null} />
   <Footer />
 </Layout>

@@ -1,0 +1,21 @@
+---
+import type { BlogPost } from '../../lib/blog';
+import BlogHero from './BlogHero.astro';
+import BlogToolbar from './BlogToolbar.astro';
+import BlogGrid from './BlogGrid.astro';
+
+interface Props {
+  posts: BlogPost[];
+  categories: string[];
+  /** Slug de URL de la categoría activa; `null` = Todas (`/blog/`). */
+  activeCategorySlug?: string | null;
+}
+
+const { posts, categories, activeCategorySlug = null } = Astro.props;
+---
+
+<main>
+  <BlogHero />
+  <BlogToolbar categories={categories} activeCategorySlug={activeCategorySlug} />
+  <BlogGrid posts={posts} />
+</main>

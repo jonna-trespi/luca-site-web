@@ -225,17 +225,6 @@ const PAGE_SIZE = 24;
 
       bindPagination();
 
-      toolbar.querySelectorAll('[data-blog-category]').forEach(function (btn) {
-        btn.addEventListener('click', function () {
-          toolbar.querySelectorAll('[data-blog-category]').forEach(function (b) {
-            var on = b === btn;
-            b.classList.toggle('blog-toolbar__chip--active', on);
-            b.setAttribute('aria-pressed', on ? 'true' : 'false');
-          });
-          applyFilters(true);
-        });
-      });
-
       var searchEl = toolbar.querySelector('[data-blog-search]');
       if (searchEl) {
         searchEl.addEventListener('input', function () {

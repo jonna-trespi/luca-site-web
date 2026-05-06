@@ -1,12 +1,17 @@
 ---
 /**
  * Blog: buscador y chips de categoría (datos desde CSV vía getCategoryList).
+ * Cada categoría enlaza a `/blog/{slug}/` (mismo slug que `slugifyBlogCategory`).
  */
+import { slugifyBlogCategory } from '../../lib/blog';
+
 interface Props {
   categories: string[];
+  /** Slug de la categoría en la URL; `null` = vista «Todas» (`/blog/`). */
+  activeCategorySlug?: string | null;
 }
 
-const { categories } = Astro.props;
+const { categories, activeCategorySlug = null } = Astro.props;
 const chips = ['Todas', ...categories];
 ---
 
@@ -39,18 +44,25 @@ const chips = ['Todas', ...categories];
     <div class="blog-toolbar__categories" role="group" aria-label="Categorías">
       <ul class="blog-toolbar__chips">
         {
-          chips.map((label, i) => (
-            <li class="blog-toolbar__chips-item">
-              <button
-                type="button"
-                class:list={['blog-toolbar__chip', i === 0 && 'blog-toolbar__chip--active']}
-                data-blog-category={label === 'Todas' ? '__all__' : label}
-                aria-pressed={i === 0 ? 'true' : 'false'}
-              >
-                {label}
-              </button>
-            </li>
-          ))
+          chips.map((label) => {
+            const isTodas = label === 'Todas';
+            const catSlug = isTodas ? '' : slugifyBlogCategory(label);
+            const href = isTodas ? '/blog/' : `/blog/${catSlug}/`;
+            const isActive = isTodas ? !activeCategorySlug : catSlug === activeCategorySlug;
+            return (
+              <li class="blog-toolbar__chips-item">
+                <a
+                  href={href}
+                  class:list={['blog-toolbar__chip', isActive && 'blog-toolbar__chip--active']}
+                  data-blog-category={isTodas ? '__all__' : label}
+                  data-blog-category-slug={catSlug}
+                  aria-current={isActive ? 'page' : undefined}
+                >
+                  {label}
+                </a>
+              </li>
+            );
+          })
         }
       </ul>
     </div>
@@ -158,6 +170,8 @@ const chips = ['Todas', ...categories];
     border: none;
     border-radius: 999px;
     cursor: pointer;
+    text-decoration: none;
+    box-sizing: border-box;
     font-family: var(--font-family-base);
     font-size: var(--text-body-secondary-size);
     font-weight: 500;

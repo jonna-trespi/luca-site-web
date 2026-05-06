@@ -211,6 +211,25 @@ export function getCategoryList(): string[] {
   return [...set].sort((a, b) => a.localeCompare(b, 'es'));
 }
 
+/** Slug estable para URL de categoría (ej. «Luca Lives» → `luca-lives`). */
+export function slugifyBlogCategory(name: string): string {
+  return name
+    .normalize('NFD')
+    .replace(/[\u0300-\u036f]/g, '')
+    .toLowerCase()
+    .trim()
+    .replace(/[^a-z0-9]+/g, '-')
+    .replace(/^-+|-+$/g, '');
+}
+
+/** Resuelve el slug de ruta al nombre de categoría del CSV, o `null`. */
+export function getCategoryLabelFromSlug(slug: string): string | null {
+  for (const cat of getCategoryList()) {
+    if (slugifyBlogCategory(cat) === slug) return cat;
+  }
+  return null;
+}
+
 /** Solo misma categoría que el artículo actual (excluye el slug dado). */
 export function getRelatedPosts(slug: string, category: string, limit = 3): BlogPost[] {
   if (!category) return [];
