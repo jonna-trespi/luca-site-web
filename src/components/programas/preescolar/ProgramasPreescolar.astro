@@ -278,11 +278,14 @@ const tabPanels = [
     background-image: linear-gradient(to right, #d2e6ff 50%, var(--color-blue-secondary) 50%);
     background-size: 200% 100%;
     background-position: left bottom;
+    background-clip: padding-box;
+    border-color: #d2e6ff;
     color: var(--color-black);
   }
 
   .programas-preescolar__tab.btn-base:not(.btn-primary):hover {
     background-position: right bottom;
+    border-color: var(--color-blue-secondary);
     color: #ffffff;
     box-shadow: 0 4px 12px rgba(40, 48, 148, 0.25);
   }

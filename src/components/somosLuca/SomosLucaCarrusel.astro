@@ -21,7 +21,7 @@ const slides = [
         {slides.map((slide) => (
           <div
             class="somos-luca-carrusel__slide"
-            style={`--slide-ar: ${slide.width} / ${slide.height}`}
+            style={`--slide-w: ${slide.width}; --slide-h: ${slide.height};`}
           >
             <img
               class="somos-luca-carrusel__img"
@@ -39,7 +39,7 @@ const slides = [
         {slides.map((slide) => (
           <div
             class="somos-luca-carrusel__slide"
-            style={`--slide-ar: ${slide.width} / ${slide.height}`}
+            style={`--slide-w: ${slide.width}; --slide-h: ${slide.height};`}
           >
             <img
               class="somos-luca-carrusel__img"
@@ -90,10 +90,14 @@ const slides = [
   }
 
   .somos-luca-carrusel__slide {
+    --slide-h-display: clamp(200px, 28vw, 300px);
     flex-shrink: 0;
-    height: clamp(200px, 28vw, 300px);
-    aspect-ratio: var(--slide-ar);
-    max-width: min(480px, 78vw);
+    /* Altura uniforme; ancho por proporción (max-width ya no encoge la altura como con aspect-ratio). */
+    height: var(--slide-h-display);
+    width: min(
+      calc(var(--slide-h-display) * var(--slide-w) / var(--slide-h)),
+      min(480px, 78vw)
+    );
     border-radius: 28px;
     overflow: hidden;
   }
