@@ -8,6 +8,7 @@ import rawBlogCsv5 from '../data/Luca blog posts 201-250 - blog-posts.csv?raw';
 import rawBlogCsv6 from '../data/Luca blog posts 251-300 - blog-posts.csv?raw';
 import rawBlogCsv7 from '../data/Luca blog posts 301-350 - blog-posts.csv?raw';
 import rawBlogCsv8 from '../data/Luca blog posts 351-425 - blog-posts.csv?raw';
+import rawBlogCsvCorrected from '../data/Luca_Blog_Posts_corregidos.csv?raw';
 
 /** Exportaciones CSV en `src/data` (mismas columnas); se fusionan y se deduplica por slug. */
 const BLOG_CSV_RAW_SOURCES = [
@@ -20,6 +21,9 @@ const BLOG_CSV_RAW_SOURCES = [
   rawBlogCsv7,
   rawBlogCsv8,
 ] as const;
+
+/** Correcciones editoriales de body para posts ya existentes. */
+const BLOG_CSV_CORRECTIONS_RAW_SOURCE = rawBlogCsvCorrected;
 
 /** Quita BOM y espacios en nombres de columna del CSV. */
 function normalizeRow(row: Record<string, string>): Record<string, string> {
@@ -88,6 +92,19 @@ const sanitizeOptions: sanitizeHtml.IOptions = {
 function sanitizeBody(html: string): string {
   if (!html) return '';
   return sanitizeHtml(html, sanitizeOptions);
+}
+
+function normalizeSlugKey(value: string): string {
+  return String(value || '').trim().toLowerCase();
+}
+
+function normalizeNameKey(value: string): string {
+  return String(value || '')
+    .normalize('NFD')
+    .replace(/[\u0300-\u036f]/g, '')
+    .toLowerCase()
+    .trim()
+    .replace(/\s+/g, ' ');
 }
 
 export interface BlogPost {
@@ -190,8 +207,39 @@ function loadRawPosts(): BlogPost[] {
   }
 
   const posts = [...bySlug.values()];
+  applyPostBodyCorrections(posts);
   posts.sort((a, b) => postTimestamp(b) - postTimestamp(a));
   return posts;
+}
+
+/**
+ * Aplica correcciones al body usando el CSV corregido.
+ * Matching: 1) slug, 2) name (normalizado) cuando el slug no coincide.
+ */
+function applyPostBodyCorrections(posts: BlogPost[]): void {
+  const bySlug = new Map<string, BlogPost>();
+  const byName = new Map<string, BlogPost>();
+
+  for (const post of posts) {
+    bySlug.set(normalizeSlugKey(post.slug), post);
+    byName.set(normalizeNameKey(post.name), post);
+  }
+
+  for (const record of parseRecords(BLOG_CSV_CORRECTIONS_RAW_SOURCE)) {
+    const row = normalizeRow(record);
+    const slug = pick(row, 'Slug');
+    const name = pick(row, 'Name');
+    const correctedBody = pick(row, 'Post Body Updated', 'Post Body', 'Post body');
+    if (!correctedBody) continue;
+
+    const target =
+      (slug && bySlug.get(normalizeSlugKey(slug))) ||
+      (name && byName.get(normalizeNameKey(name))) ||
+      null;
+    if (!target) continue;
+
+    target.bodyHtml = sanitizeBody(correctedBody);
+  }
 }
 
 export function getAllPosts(): BlogPost[] {
