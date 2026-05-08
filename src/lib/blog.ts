@@ -278,6 +278,17 @@ export function getCategoryLabelFromSlug(slug: string): string | null {
   return null;
 }
 
+/** Primer segmento de URL para un post: categoría slugificada o `general` si viene vacío. */
+export function getBlogCategoryPathSegment(post: BlogPost): string {
+  const seg = post.category?.trim() ? slugifyBlogCategory(post.category) : '';
+  return seg || 'general';
+}
+
+/** URL canónica del artículo: `/blog/{categoría}/{slug}/`. */
+export function getBlogPostPath(post: BlogPost): string {
+  return `/blog/${getBlogCategoryPathSegment(post)}/${post.slug}/`;
+}
+
 /** Solo misma categoría que el artículo actual (excluye el slug dado). */
 export function getRelatedPosts(slug: string, category: string, limit = 3): BlogPost[] {
   if (!category) return [];
